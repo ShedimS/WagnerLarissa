@@ -2,282 +2,243 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#6f4b8b">
-  <meta name="description" content="Casamento de Milena e Guilherme — informações, presentes e confirmações.">
-  <title>Milena & Guilherme | 15 de agosto de 2027</title>
+  <title>Larissa & Wagner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #fbf9f7; color: #4a4238; }
+    .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
+    .bg-casar-header { background-color: #f5efe9; }
+    .bg-casar-card { background-color: #ffffff; }
+    .btn-casar { background-color: #a38573; color: #ffffff; }
+    .btn-casar:hover { background-color: #8c6e5c; }
+    .text-casar-primary { color: #8c6e5c; }
+    .border-casar { border-color: #e8ded5; }
+  </style>
 </head>
-<body>
-  <div class="petals" aria-hidden="true"></div>
+<body class="antialiased">
 
-  <header class="hero" id="inicio">
-    <nav class="topbar">
-      <a class="brand" href="#inicio">M & G</a>
-      <button class="menu-button" aria-label="Abrir menu" aria-expanded="false">☰</button>
-      <div class="menu">
-        <a href="#cerimonia">Cerimônia</a>
-        <a href="#presentes">Presentes</a>
-        <a href="#comunhao">Santa Missa</a>
-        <a href="#traje">Traje</a>
-        <a href="#novena">Novena</a>
-        <a href="#recados">Recados</a>
-      </div>
-    </nav>
-
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="eyebrow">Com a graça de Deus e a proteção de Nossa Senhora</p>
-      <h1>Milena <span>&</span> Guilherme</h1>
-      <p class="date">15 de agosto de 2027 • 9h30</p>
-      <p class="hero-note">Paróquia Sagrado Coração de Jesus — Colônia Murici</p>
-
-      <div class="countdown-wrap">
-        <p>Faltam</p>
-        <div class="countdown" data-countdown="wedding">
-          <div><strong id="days">0</strong><span>dias</span></div>
-          <div><strong id="hours">0</strong><span>horas</span></div>
-          <div><strong id="minutes">0</strong><span>minutos</span></div>
-          <div><strong id="seconds">0</strong><span>segundos</span></div>
-        </div>
-      </div>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="https://sites.wedy.com/casamento-milena-e-guilherme-flmt" target="_blank" rel="noopener">Confirmar presença</a>
-        <a class="btn btn-light" href="#presentes">Ver lista de presentes</a>
+  <!-- MENU / NAVEGAÇÃO SUPERIOR -->
+  <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center text-xs tracking-widest uppercase text-stone-600">
+      <span class="font-serif-custom text-xl font-semibold text-stone-800 tracking-normal capitalize">L & W</span>
+      <div class="space-x-4 md:space-x-8">
+        <a href="#home" class="hover:text-casar-primary transition">Início</a>
+        <a href="#historia" class="hover:text-casar-primary transition">História</a>
+        <a href="#local" class="hover:text-casar-primary transition">Local</a>
+        <a href="#presentes" class="hover:text-casar-primary transition">Presentes</a>
+        <a href="#rsvp" class="hover:text-casar-primary transition font-semibold text-casar-primary">RSVP</a>
       </div>
     </div>
-    <div class="butterfly b1">🦋</div>
-    <div class="butterfly b2">🦋</div>
+  </nav>
+
+  <!-- CAPA PRINCIPAL (HERO) -->
+  <header id="home" class="bg-casar-header py-16 md:py-24 px-4 text-center border-b border-casar">
+    <div class="max-w-2xl mx-auto">
+      <p class="text-xs uppercase tracking-[0.3em] text-stone-500 mb-4">Convidamos você para celebrar conosco</p>
+      <h1 class="font-serif-custom text-5xl md:text-7xl font-normal text-stone-800 mb-2">Larissa & Wagner</h1>
+      <p class="font-serif-custom italic text-2xl text-casar-primary mb-8">11 de Dezembro de 2026</p>
+
+      <!-- FOTO CENTRAL -->
+      <div class="my-8 overflow-hidden rounded-2xl shadow-lg border-4 border-white max-w-lg mx-auto">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" alt="Larissa e Wagner" class="w-full h-80 object-cover">
+      </div>
+
+      <!-- CONTAGEM REGRESSIVA ESTILO CASAR.COM -->
+      <div class="mt-10 bg-white/80 p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
+        <p class="text-xs uppercase tracking-widest text-stone-500 mb-4">Faltam apenas</p>
+        <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
+          <div>
+            <span id="days" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
+            <span class="text-[10px] uppercase text-stone-500">Dias</span>
+          </div>
+          <div>
+            <span id="hours" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
+            <span class="text-[10px] uppercase text-stone-500">Horas</span>
+          </div>
+          <div>
+            <span id="minutes" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
+            <span class="text-[10px] uppercase text-stone-500">Min</span>
+          </div>
+          <div>
+            <span id="seconds" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
+            <span class="text-[10px] uppercase text-stone-500">Seg</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section class="scripture section narrow">
-      <blockquote>
-        “Eu os conduzirei ao meu monte santo e os cumularei de alegria na minha casa de oração; seus holocaustos e sacrifícios serão aceitos sobre meu altar, pois minha casa chamar-se-á Casa de Orações para todos os povos.”
-      </blockquote>
-      <cite>Isaías 56,7</cite>
-    </section>
+  <!-- MENSAGEM / HISTÓRIA -->
+  <section id="historia" class="py-16 px-4 max-w-2xl mx-auto text-center">
+    <h2 class="font-serif-custom text-3xl text-stone-800 mb-4">Boas-vindas ao nosso site!</h2>
+    <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
+    <p class="text-stone-600 leading-relaxed font-light text-sm md:text-base">
+      Criamos este site para compartilhar com vocês cada detalhe da organização do nosso grande dia. Estamos muito felizes e a contagem regressiva já começou! Contamos com a sua presença para tornar essa data ainda mais inesquecível.
+    </p>
+  </section>
 
-    <section class="section" id="cerimonia">
-      <div class="section-heading">
-        <span>O grande dia</span>
-        <h2>Cerimônia e Santa Missa</h2>
-        <p>Pedimos que todos estejam na igreja às <strong>9h30</strong>, para acolhimento e organização antes do início da celebração.</p>
-      </div>
+  <!-- LOCAL DO EVENTO -->
+  <section id="local" class="py-16 bg-white border-y border-casar px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Cerimônia e Recepção</h2>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Informações sobre o dia</p>
 
-      <div class="location-grid">
-        <article class="image-card">
-          <img src="igreja-hero.jpg" alt="Ilustração da Paróquia Sagrado Coração de Jesus, local da cerimônia">
-        </article>
-        <article class="info-card">
-                    <h3>Paróquia Sagrado Coração de Jesus</h3>
-          <p>R. Dr. Murici, 8907 — Colônia Murici<br>São José dos Pinhais — PR</p>
-          <p><strong>Chegada dos convidados:</strong> 9h30</p>
-          <div class="button-stack">
-            <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia%20Sagrado%20Cora%C3%A7%C3%A3o%20de%20Jesus%2C%20R.%20Dr.%20Murici%2C%208907%2C%20S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20PR" target="_blank" rel="noopener">Abrir no Google Maps</a>
-            <button class="btn btn-outline" type="button" id="addWeddingCalendar">Adicionar à agenda</button>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section soft" id="galeria">
-      <div class="section-heading">
-        <span>Nossa história</span>
-        <h2>Milena & Guilherme</h2>
-        <p>Um espaço preparado para receber as fotografias do casal.</p>
-      </div>
-
-      <div class="carousel" aria-label="Galeria dos noivos">
-        <button class="carousel-btn prev" aria-label="Foto anterior">‹</button>
-        <div class="slides">
-          <figure class="slide active">
-            <img src="convite-original.jpg" alt="Convite do casamento de Milena e Guilherme">
-            <figcaption>O convite do nosso grande dia</figcaption>
-          </figure>
-          <figure class="slide placeholder-slide">
-            <div class="photo-placeholder">Adicione aqui uma foto dos noivos</div>
-            <figcaption>Nossa caminhada</figcaption>
-          </figure>
-          <figure class="slide placeholder-slide">
-            <div class="photo-placeholder">Adicione aqui outra foto dos noivos</div>
-            <figcaption>Um amor entregue a Deus</figcaption>
-          </figure>
+      <div class="grid md:grid-cols-2 gap-6 text-left">
+        <div class="p-6 bg-stone-50 rounded-xl border border-casar">
+          <h3 class="font-serif-custom text-xl text-stone-800 font-semibold mb-2">Horário e Traje</h3>
+          <p class="text-sm text-stone-600 mb-1"><strong>Data:</strong> 11/12/2026 às 18:00h</p>
+          <p class="text-sm text-stone-600"><strong>Traje:</strong> Passeio Completo / Esporte Fino</p>
         </div>
-        <button class="carousel-btn next" aria-label="Próxima foto">›</button>
-        <div class="dots" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <section class="section" id="presentes">
-      <div class="section-heading">
-        <span>Com carinho</span>
-        <h2>Lista de presentes</h2>
-        <p>Sua presença e suas orações já são um grande presente. Caso deseje colaborar com a construção do nosso lar, escolha uma das opções abaixo.</p>
-      </div>
-
-      <div class="gift-tools">
-        <div class="category-tabs" id="categoryTabs">
-          <button class="tab active" data-category="todos">Todos</button>
-          <button class="tab" data-category="tradicionais">Tradicionais</button>
-          <button class="tab" data-category="especiais">Cotas especiais</button>
-          <button class="tab" data-category="carismaticas">Cotas carismáticas</button>
-          <button class="tab" data-category="engracados">Bem-humorados</button>
+        <div class="p-6 bg-stone-50 rounded-xl border border-casar">
+          <h3 class="font-serif-custom text-xl text-stone-800 font-semibold mb-2">Endereço</h3>
+          <p class="text-sm text-stone-600 mb-1">Espaço das Palmeiras</p>
+          <p class="text-sm text-stone-500">Rua dos Noivos, 1000 - São Paulo/SP</p>
         </div>
-        <label class="search-box">
-          <span>⌕</span>
-          <input id="giftSearch" type="search" placeholder="Buscar presente">
-        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTA DE PRESENTES VIRTUAIS (COTAS) -->
+  <section id="presentes" class="py-16 px-4 max-w-3xl mx-auto text-center">
+    <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Lista de Presentes</h2>
+    <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Sua contribuição ajudará na nossa Lua de Mel</p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white p-5 rounded-xl border border-casar shadow-sm text-center">
+        <div class="text-3xl mb-2">🍸</div>
+        <h3 class="font-serif-custom text-lg text-stone-800 font-semibold">Drinks na Praia</h3>
+        <p class="text-xs text-stone-500 my-2">Cota para um brinde no pôr do sol</p>
+        <span class="inline-block bg-stone-100 px-3 py-1 rounded-full text-xs font-semibold text-casar-primary">R$ 100,00</span>
       </div>
 
-      <div class="gift-grid" id="giftGrid"></div>
+      <div class="bg-white p-5 rounded-xl border border-casar shadow-sm text-center">
+        <div class="text-3xl mb-2">🍽️</div>
+        <h3 class="font-serif-custom text-lg text-stone-800 font-semibold">Jantar Romântico</h3>
+        <p class="text-xs text-stone-500 my-2">Jantar especial para os recém-casados</p>
+        <span class="inline-block bg-stone-100 px-3 py-1 rounded-full text-xs font-semibold text-casar-primary">R$ 250,00</span>
+      </div>
 
-      <div class="payment-note">
-        <span>🔐</span>
+      <div class="bg-white p-5 rounded-xl border border-casar shadow-sm text-center">
+        <div class="text-3xl mb-2">✈️</div>
+        <h3 class="font-serif-custom text-lg text-stone-800 font-semibold">Passeio de Barco</h3>
+        <p class="text-xs text-stone-500 my-2">Passeio inesquecível de catamarã</p>
+        <span class="inline-block bg-stone-100 px-3 py-1 rounded-full text-xs font-semibold text-casar-primary">R$ 500,00</span>
+      </div>
+    </div>
+
+    <!-- CAIXA PIX -->
+    <div class="bg-casar-header p-6 rounded-xl border border-casar max-w-md mx-auto">
+      <p class="text-xs uppercase font-semibold text-stone-600 mb-2">Presentear via PIX</p>
+      <p class="text-xs text-stone-500 mb-4">Copie a chave abaixo ou use a opção de transferência no seu banco:</p>
+      <code class="bg-white px-4 py-2 rounded border border-casar text-stone-800 font-mono text-xs block mb-2 select-all">pix@larissaewagner2026.com.br</code>
+      <p class="text-[10px] text-stone-400 uppercase">Titular: Larissa e Wagner</p>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO RSVP -->
+  <section id="rsvp" class="py-16 bg-white border-t border-casar px-4">
+    <div class="max-w-md mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Confirmação de Presença</h2>
+        <p class="text-xs uppercase tracking-widest text-stone-500">Por favor, confirme até 11/11/2026</p>
+      </div>
+
+      <form id="rsvpForm" onsubmit="enviarRSVP(event)" class="space-y-4 text-xs font-medium uppercase tracking-wider text-stone-600">
         <div>
-          <h3>Pagamento seguro</h3>
-          <p>Ao escolher um presente, o convidado será direcionado ao checkout seguro da InfinitePay para pagar por Pix ou cartão. Nenhum dado de pagamento será armazenado neste site.</p>
+          <label class="block mb-1">Nome Completo *</label>
+          <input type="text" id="nome" required class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none focus:border-stone-500">
         </div>
-      </div>
-    </section>
 
-    <section class="section mass-section" id="comunhao">
-      <div class="mass-card">
-        <div class="mass-icon">☧</div>
         <div>
-          <span class="section-kicker">Celebração com Santa Missa</span>
-          <h2>Confirmação para a Sagrada Comunhão</h2>
-          <p>Para auxiliar a paróquia na preparação da celebração, pedimos aos convidados católicos que indiquem, na confirmação, se pretendem receber a Sagrada Comunhão.</p>
-          <p class="gentle-alert"><strong>Um lembrete fraterno:</strong> aproxime-se da Comunhão apenas estando devidamente preparado segundo a fé e a disciplina da Igreja. Jesus estará nos esperando no altar; por isso, a resposta consciente ajudará a estimar com respeito a quantidade necessária para a celebração.</p>
-          <div class="button-stack horizontal">
-            <a class="btn btn-primary disabled-link" href="#" data-placeholder="communion">Informar intenção de comungar</a>
-            <small>O formulário específico será conectado aqui.</small>
-          </div>
+          <label class="block mb-1">Você irá comparecer? *</label>
+          <select id="confirmacao" required class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none focus:border-stone-500">
+            <option value="Sim, estarei presente">Sim, estarei presente!</option>
+            <option value="Infelizmente não poderei ir">Infelizmente não poderei ir</option>
+          </select>
         </div>
-      </div>
-    </section>
 
-    <section class="section soft" id="traje">
-      <div class="section-heading">
-        <span>Para celebrarmos em harmonia</span>
-        <h2>Traje e modéstia</h2>
-        <p>O traje geral será <strong>esporte fino</strong>. Como a cerimônia acontecerá durante a Santa Missa, pedimos escolhas elegantes, discretas e adequadas ao ambiente sagrado.</p>
-      </div>
-
-      <div class="dress-grid">
-        <article class="dress-card">
-          <div class="dress-icon">👗</div>
-          <h3>Mulheres</h3>
-          <p>Recomendamos vestidos longos ou mídi. Pedimos que sejam evitados vestidos curtos, decotes profundos e fendas muito abertas.</p>
-          <p><strong>Cores que não devem ser utilizadas:</strong> lilás, dourado e branco.</p>
-          <p class="reserved-colors-note">Essas tonalidades foram reservadas para elementos especiais da celebração. Pedimos, com carinho, que as convidadas escolham outras cores.</p>
-        </article>
-        <article class="dress-card">
-          <div class="dress-icon">🤵</div>
-          <h3>Homens</h3>
-          <p>Camisa, calça e sapato em composição esporte fino.</p>
-          <p><strong>Pedimos que não sejam usadas:</strong> camisa preta ou bermuda.</p>
-        </article>
-      </div>
-      <p class="dress-footer">Agradecemos a compreensão e o carinho em colaborar com a beleza e a solenidade deste momento.</p>
-    </section>
-
-    <section class="section novena" id="novena">
-      <div class="novena-content">
-        <span class="section-kicker">6 a 14 de agosto de 2027</span>
-        <h2>Novena pelo nosso casamento</h2>
-        <p class="novena-phrase">9 dias entregando o nosso casamento ao coração de Deus pelas mãos de Nossa Senhora.</p>
-        <div class="novena-countdown">
-          <p id="novenaLabel">Contagem regressiva para o início da novena</p>
-          <div class="countdown compact">
-            <div><strong id="novenaDays">0</strong><span>dias</span></div>
-            <div><strong id="novenaHours">0</strong><span>horas</span></div>
-            <div><strong id="novenaMinutes">0</strong><span>minutos</span></div>
-          </div>
+        <div>
+          <label class="block mb-1">Acompanhantes (Quantidade)</label>
+          <input type="number" id="acompanhantes" min="0" value="0" class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none focus:border-stone-500">
         </div>
-        <a class="btn btn-light disabled-link" href="#" data-placeholder="novena">Inscrever-se na novena</a>
-        <small>O link do Google Forms será inserido aqui.</small>
-      </div>
-    </section>
 
-    <section class="section" id="recados">
-      <div class="section-heading">
-        <span>Palavras que ficam</span>
-        <h2>Deixe um recado para os noivos</h2>
-        <p>Escreva uma mensagem, oração ou lembrança especial para Milena e Guilherme.</p>
-      </div>
-
-      <div class="message-layout">
-        <form class="message-form" id="messageForm">
-          <label>
-            Seu nome
-            <input type="text" id="guestName" maxlength="80" required>
-          </label>
-          <label>
-            Sua mensagem
-            <textarea id="guestMessage" rows="5" maxlength="500" required></textarea>
-          </label>
-          <button class="btn btn-primary" type="submit">Deixar recado</button>
-          <p class="form-note">Nesta versão local, os recados ficam salvos apenas neste navegador. Na publicação, conectaremos o formulário a um serviço online.</p>
-        </form>
-        <div class="messages" id="messagesList">
-          <article class="message">
-            <p>“Que o lar de vocês seja sempre um lugar de oração, acolhimento e alegria.”</p>
-            <strong>Com carinho, família e amigos</strong>
-          </article>
+        <div>
+          <label class="block mb-1">Recado para os noivos</label>
+          <textarea id="mensagem" rows="3" class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none focus:border-stone-500 lowercase normal-case text-sm"></textarea>
         </div>
-      </div>
-    </section>
 
-    <section class="section soft" id="eventos">
-      <div class="section-heading">
-        <span>Agenda do casamento</span>
-        <h2>Próximos eventos</h2>
-        <p>Este espaço poderá receber chá de panelas, encontros e outras celebrações.</p>
-      </div>
-      <div class="events-grid">
-        <article class="event-card featured">
-          <span class="event-date">15 AGO 2027</span>
-          <h3>Casamento de Milena & Guilherme</h3>
-          <p>Santa Missa às 9h30, na Paróquia Sagrado Coração de Jesus.</p>
-          <button class="text-button" id="addWeddingCalendar2">Adicionar à agenda →</button>
-        </article>
-        <article class="event-card">
-          <span class="event-date">EM BREVE</span>
-          <h3>Chá de panelas</h3>
-          <p>Data, horário e endereço poderão ser inseridos posteriormente.</p>
-          <span class="status">Aguardando informações</span>
-        </article>
-        <article class="event-card">
-          <span class="event-date">NOVO EVENTO</span>
-          <h3>Adicionar outra celebração</h3>
-          <p>O site já está preparado para receber novos eventos e atalhos de agenda.</p>
-          <span class="status">Área reservada</span>
-        </article>
-      </div>
-    </section>
+        <button type="submit" id="btnSubmit" class="w-full btn-casar py-4 rounded-lg font-semibold tracking-widest uppercase transition text-xs shadow-sm">
+          Confirmar Presença
+        </button>
+      </form>
 
-    <section class="section confirm-banner">
-      <div>
-        <span>Já confirmou sua presença?</span>
-        <h2>Esperamos você com grande alegria.</h2>
-      </div>
-      <a class="btn btn-light" href="https://sites.wedy.com/casamento-milena-e-guilherme-flmt" target="_blank" rel="noopener">Confirmar no site oficial</a>
-    </section>
-  </main>
+      <div id="statusMsg" class="hidden mt-4 p-4 rounded-lg text-center text-xs font-normal capitalize"></div>
+    </div>
+  </section>
 
-  <footer>
-    <div class="footer-cross">✝</div>
-    <p class="signature">Milena & Guilherme</p>
-    <p>15 de agosto de 2027</p>
-    <a href="#inicio">Voltar ao início ↑</a>
+  <!-- RODAPÉ -->
+  <footer class="py-8 bg-stone-100 text-center text-xs text-stone-400 border-t border-casar">
+    <p class="font-serif-custom text-lg text-stone-600">Larissa & Wagner</p>
+    <p class="mt-1">11.12.2026</p>
   </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="script.js"></script>
+  <!-- JAVASCRIPT -->
+  <script>
+    // Contagem Regressiva
+    const targetDate = new Date("2026-12-11T18:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff > 0) {
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Envio do RSVP
+    function enviarRSVP(event) {
+      event.preventDefault();
+      const btn = document.getElementById("btnSubmit");
+      const status = document.getElementById("statusMsg");
+      btn.disabled = true;
+      btn.innerText = "ENVIANDO...";
+
+      const dados = {
+        nome: document.getElementById("nome").value,
+        confirmacao: document.getElementById("confirmacao").value,
+        acompanhantes: document.getElementById("acompanhantes").value,
+        mensagem: document.getElementById("mensagem").value
+      };
+
+      google.script.run
+        .withSuccessHandler(function(res) {
+          status.className = res.sucesso 
+            ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200" 
+            : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
+          status.innerText = res.mensagem;
+          status.classList.remove("hidden");
+          btn.disabled = false;
+          btn.innerText = "CONFIRMAR PRESENÇA";
+          if (res.sucesso) document.getElementById("rsvpForm").reset();
+        })
+        .withFailureHandler(function() {
+          status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
+          status.innerText = "Erro ao enviar a confirmação. Tente novamente.";
+          status.classList.remove("hidden");
+          btn.disabled = false;
+          btn.innerText = "CONFIRMAR PRESENÇA";
+        })
+        .salvarRSVP(dados);
+    }
+  </script>
 </body>
 </html>
