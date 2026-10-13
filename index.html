@@ -46,7 +46,7 @@
         <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" alt="Larissa e Wagner" class="w-full h-80 object-cover">
       </div>
 
-      <!-- CONTAGEM REGRESSIVA ESTILO CASAR.COM -->
+      <!-- CONTAGEM REGRESSIVA -->
       <div class="mt-10 bg-white/80 p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
         <p class="text-xs uppercase tracking-widest text-stone-500 mb-4">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
@@ -167,7 +167,7 @@
 
   <!-- JAVASCRIPT DO SITE -->
   <script>
-    // URL do seu Google Apps Script
+    // URL de Implantação Oficial do Google Apps Script
     const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
 
     // 1. Contagem Regressiva
@@ -187,7 +187,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 2. Envio do RSVP via JSONP (Bypassa CORS completamente)
+    // 2. Envio do RSVP via JSONP (Suporte Total Cross-Origin)
     function enviarRSVP(event) {
       event.preventDefault();
       const btn = document.getElementById("btnSubmit");
@@ -200,13 +200,13 @@
       const telefone = encodeURIComponent(document.getElementById("telefone").value);
       const confirmacao = encodeURIComponent(document.getElementById("confirmacao").value);
 
-      // Nome único de callback
-      const callbackName = "rsvp_callback_" + Math.round(100000 * Math.random());
+      const callbackName = "rsvp_cb_" + Math.floor(Math.random() * 1000000);
 
-      // Função global de callback para ler a resposta do Google
       window[callbackName] = function(res) {
         delete window[callbackName];
-        if (script.parentNode) script.parentNode.removeChild(script);
+        if (scriptElement && scriptElement.parentNode) {
+          scriptElement.parentNode.removeChild(scriptElement);
+        }
 
         status.className = res.sucesso 
           ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200" 
@@ -222,21 +222,22 @@
         }
       };
 
-      // Injeta a tag script dinamicamente
-      const script = document.createElement("script");
-      script.src = `${API_URL}?nome=${nome}&telefone=${telefone}&confirmacao=${confirmacao}&callback=${callbackName}`;
+      const scriptElement = document.createElement("script");
+      scriptElement.src = `${API_URL}?nome=${nome}&telefone=${telefone}&confirmacao=${confirmacao}&callback=${callbackName}`;
       
-      script.onerror = function() {
+      scriptElement.onerror = function() {
         delete window[callbackName];
-        if (script.parentNode) script.parentNode.removeChild(script);
+        if (scriptElement && scriptElement.parentNode) {
+          scriptElement.parentNode.removeChild(scriptElement);
+        }
         status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
-        status.innerText = "Erro ao conectar ao servidor. Tente novamente.";
+        status.innerText = "Erro ao conectar ao servidor. Verifique o número digitado e tente novamente.";
         status.classList.remove("hidden");
         btn.disabled = false;
         btn.innerText = "CONFIRMAR PRESENÇA";
       };
 
-      document.body.appendChild(script);
+      document.body.appendChild(scriptElement);
     }
   </script>
 </body>
