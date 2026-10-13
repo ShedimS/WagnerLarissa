@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <title>Wagner & Larissa - 11/12/2026</title>
@@ -9,6 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    html {
+      /* Compensação da altura do menu superior para enquadramento perfeito */
+      scroll-padding-top: 65px;
+    }
     body { font-family: 'Montserrat', sans-serif; background-color: #fbf9f7; color: #4a4238; }
     .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
     .font-cursive { font-family: 'Great Vibes', cursive; }
@@ -22,10 +26,10 @@
 <body class="antialiased">
 
   <!-- MENU SUPERIOR -->
-  <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm">
-    <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center text-xs tracking-widest uppercase text-stone-600">
+  <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm h-[60px] flex items-center">
+    <div class="max-w-4xl mx-auto px-4 w-full flex justify-between items-center text-xs tracking-widest uppercase text-stone-600">
       <span class="font-serif-custom text-xl font-semibold text-stone-800 tracking-normal capitalize">W & L</span>
-      <div class="space-x-4 md:space-x-8">
+      <div class="space-x-3 md:space-x-8 text-[11px] md:text-xs">
         <a href="#home" class="hover:text-casar-primary transition">Início</a>
         <a href="#historia" class="hover:text-casar-primary transition">Mensagem</a>
         <a href="#local" class="hover:text-casar-primary transition">Locais</a>
