@@ -1,244 +1,270 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Larissa & Wagner - 11/12/2026</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Montserrat', sans-serif; background-color: #fbf9f7; color: #4a4238; }
-    .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
-    .bg-casar-header { background-color: #f5efe9; }
-    .btn-casar { background-color: #a38573; color: #ffffff; }
-    .btn-casar:hover { background-color: #8c6e5c; }
-    .text-casar-primary { color: #8c6e5c; }
-    .border-casar { border-color: #e8ded5; }
-  </style>
-</head>
-<body class="antialiased">
-
-  <!-- MENU / NAVEGAÇÃO SUPERIOR -->
-  <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm">
-    <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center text-xs tracking-widest uppercase text-stone-600">
-      <span class="font-serif-custom text-xl font-semibold text-stone-800 tracking-normal capitalize">L & W</span>
-      <div class="space-x-4 md:space-x-8">
-        <a href="#home" class="hover:text-casar-primary transition">Início</a>
-        <a href="#historia" class="hover:text-casar-primary transition">História</a>
-        <a href="#local" class="hover:text-casar-primary transition">Local</a>
-        <a href="#presentes" class="hover:text-casar-primary transition">Presentes</a>
-        <a href="#rsvp" class="hover:text-casar-primary transition font-semibold text-casar-primary">RSVP</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- CAPA PRINCIPAL (HERO) -->
-  <header id="home" class="bg-casar-header py-16 md:py-24 px-4 text-center border-b border-casar">
-    <div class="max-w-2xl mx-auto">
-      <p class="text-xs uppercase tracking-[0.3em] text-stone-500 mb-4">Convidamos você para celebrar conosco</p>
-      <h1 class="font-serif-custom text-5xl md:text-7xl font-normal text-stone-800 mb-2">Larissa & Wagner</h1>
-      <p class="font-serif-custom italic text-2xl text-casar-primary mb-8">11 de Dezembro de 2026</p>
-
-      <!-- FOTO CENTRAL -->
-      <div class="my-8 overflow-hidden rounded-2xl shadow-lg border-4 border-white max-w-lg mx-auto">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" alt="Larissa e Wagner" class="w-full h-80 object-cover">
-      </div>
-
-      <!-- CONTAGEM REGRESSIVA -->
-      <div class="mt-10 bg-white/80 p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
-        <p class="text-xs uppercase tracking-widest text-stone-500 mb-4">Faltam apenas</p>
-        <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
-          <div>
-            <span id="days" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Dias</span>
-          </div>
-          <div>
-            <span id="hours" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Horas</span>
-          </div>
-          <div>
-            <span id="minutes" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Min</span>
-          </div>
-          <div>
-            <span id="seconds" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Seg</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- MENSAGEM / HISTÓRIA -->
-  <section id="historia" class="py-16 px-4 max-w-2xl mx-auto text-center">
-    <h2 class="font-serif-custom text-3xl text-stone-800 mb-4">Boas-vindas ao nosso site!</h2>
-    <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
-    <p class="text-stone-600 leading-relaxed font-light text-sm md:text-base">
-      Criamos este site para compartilhar com vocês cada detalhe da organização do nosso grande dia. Estamos muito felizes e a contagem regressiva já começou! Contamos com a sua presença para tornar essa data ainda mais inesquecível.
-    </p>
-  </section>
-
-  <!-- LOCAL DO EVENTO -->
-  <section id="local" class="py-16 bg-white border-y border-casar px-4">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Cerimônia e Recepção</h2>
-      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Informações sobre o dia</p>
-
-      <div class="grid md:grid-cols-2 gap-6 text-left">
-        <div class="p-6 bg-stone-50 rounded-xl border border-casar">
-          <h3 class="font-serif-custom text-xl text-stone-800 font-semibold mb-2">Horário e Traje</h3>
-          <p class="text-sm text-stone-600 mb-1"><strong>Data:</strong> 11/12/2026 às 18:00h</p>
-          <p class="text-sm text-stone-600"><strong>Traje:</strong> Passeio Completo / Esporte Fino</p>
-        </div>
-        <div class="p-6 bg-stone-50 rounded-xl border border-casar">
-          <h3 class="font-serif-custom text-xl text-stone-800 font-semibold mb-2">Endereço</h3>
-          <p class="text-sm text-stone-600 mb-1">Espaço das Palmeiras</p>
-          <p class="text-sm text-stone-500">Rua dos Noivos, 1000 - São Paulo/SP</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEÇÃO DE PRESENTES -->
-  <section id="presentes" class="py-16 px-4 max-w-3xl mx-auto text-center">
-    <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Lista de Presentes</h2>
-    <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Sua contribuição ajudará na nossa Lua de Mel</p>
-
-    <div class="bg-white p-8 rounded-2xl border border-casar shadow-sm max-w-lg mx-auto">
-      <div class="text-4xl mb-3">🎁</div>
-      <h3 class="font-serif-custom text-2xl text-stone-800 font-semibold mb-3">Nossa Loja Virtual</h3>
-      <p class="text-stone-600 text-sm mb-6 leading-relaxed">
-        Sua presença é o nosso maior presente! Se desejar nos presentear, acesse nossa loja oficial abaixo para escolher uma cota ou contribuição via PIX ou Cartão de Crédito.
-      </p>
-
-      <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" 
-         class="inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white py-4 px-8 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-md gap-2">
-        <span>💳 Acessar Lista de Presentes (InfinitePay)</span>
-      </a>
-
-      <p class="text-[10px] text-stone-400 uppercase mt-4">Pagamento 100% seguro via PIX ou Cartão de Crédito</p>
-    </div>
-  </section>
-
-  <!-- FORMULÁRIO RSVP DIRETO NO SITE -->
+<!-- SEÇÃO RSVP FAMILIAR -->
   <section id="rsvp" class="py-16 bg-white border-t border-casar px-4">
-    <div class="max-w-md mx-auto">
+    <div class="max-w-xl mx-auto">
       <div class="text-center mb-8">
         <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Confirmação de Presença</h2>
-        <p class="text-xs uppercase tracking-widest text-stone-500">Por favor, confirme até 11/11/2026</p>
+        <p class="text-xs uppercase tracking-widest text-stone-500">Localize seu convite por qualquer nome da família</p>
       </div>
 
-      <form id="rsvpForm" onsubmit="enviarRSVP(event)" class="space-y-4 text-xs font-medium uppercase tracking-wider text-stone-600">
+      <!-- PASSO 1: BÚSCA PELO NOME -->
+      <div id="stepBusca" class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
         <div>
-          <label class="block mb-1">Nome Completo *</label>
-          <input type="text" id="nome" required class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none focus:border-stone-500">
+          <label class="block mb-2 text-xs font-semibold uppercase text-stone-600">Digite seu Nome ou Sobrenome:</label>
+          <div class="flex gap-2">
+            <input type="text" id="inputBusca" placeholder="Ex: Mariana ou Paczkowski" class="w-full p-3 bg-white border border-casar rounded-lg text-sm focus:outline-none focus:border-stone-500">
+            <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-6 rounded-lg text-xs font-semibold uppercase tracking-wider">Buscar</button>
+          </div>
+        </div>
+        <p class="text-[11px] text-stone-400 leading-relaxed">* Você pode pesquisar apenas o primeiro nome ou sobrenome. Nosso sistema localizará seu convite familiar.</p>
+      </div>
+
+      <!-- PASSO 2: SELEÇÃO INDIVIDUAL DOS INTEGRANTES -->
+      <div id="stepSelecao" class="hidden bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-6">
+        <div class="border-b border-casar pb-4">
+          <span class="text-[10px] uppercase tracking-widest text-casar-primary font-bold">Convite Familiar Encontrado</span>
+          <h3 id="txtResponsavel" class="font-serif-custom text-2xl text-stone-800 font-semibold mt-1"></h3>
+          <p id="txtTelefone" class="text-xs text-stone-500 mt-1"></p>
         </div>
 
-        <div>
-          <label class="block mb-1">Telefone / WhatsApp (Com DDD) *</label>
-          <input type="tel" id="telefone" placeholder="(41) 99999-8888" required class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none focus:border-stone-500">
-          <p class="text-[10px] text-stone-400 mt-1 lowercase font-normal">* Informe o mesmo número cadastrado no convite.</p>
-        </div>
+        <form id="formMembros" onsubmit="salvarConfirmacoes(event)" class="space-y-4">
+          <div id="containerMembros" class="space-y-3">
+            <!-- Gerado Dinamicamente -->
+          </div>
 
-        <div>
-          <label class="block mb-1">Você irá comparecer? *</label>
-          <select id="confirmacao" required class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none focus:border-stone-500">
-            <option value="Sim, estarei presente">Sim, estarei presente!</option>
-            <option value="Infelizmente não poderei ir">Infelizmente não poderei ir</option>
-          </select>
-        </div>       
+          <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-4 rounded-xl font-semibold tracking-widest uppercase transition text-xs shadow-sm mt-4">
+            Enviar Confirmações da Família
+          </button>
+        </form>
+      </div>
 
-        <button type="submit" id="btnSubmit" class="w-full btn-casar py-4 rounded-lg font-semibold tracking-widest uppercase transition text-xs shadow-sm">
-          Confirmar Presença
-        </button>
-      </form>
-
-      <div id="statusMsg" class="hidden mt-4 p-4 rounded-lg text-center text-xs font-normal"></div>
+      <div id="statusMsgRSVP" class="hidden mt-4 p-4 rounded-lg text-center text-xs"></div>
     </div>
   </section>
 
-  <!-- RODAPÉ -->
-  <footer class="py-8 bg-stone-100 text-center text-xs text-stone-400 border-t border-casar">
-    <p class="font-serif-custom text-lg text-stone-600">Larissa & Wagner</p>
-    <p class="mt-1">11.12.2026</p>
-  </footer>
+  <!-- BOTÃO FLUTUANTE DE ACESSO AO PAINEL ADM (PARA OS NOIVOS) -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <button onclick="abrirModalAdmin()" class="bg-stone-800 hover:bg-stone-900 text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2">
+      ⚙️ Painel Noivos
+    </button>
+  </div>
 
-  <!-- JAVASCRIPT DO SITE -->
+  <!-- MODAL PAINEL ADMINISTRATIVO -->
+  <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
+      <button onclick="fecharModalAdmin()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-xl font-bold">&times;</button>
+      
+      <h2 class="font-serif-custom text-2xl text-stone-800 mb-2">Painel Administrativo de Convidados</h2>
+      <p class="text-xs text-stone-500 mb-6">Gerencie a lista de convidados e atualizações com preservação de histórico.</p>
+
+      <!-- FORMULÁRIO DE CADASTRO/EDIÇÃO -->
+      <div class="bg-stone-50 p-4 rounded-xl border border-casar mb-6 text-xs space-y-3">
+        <h3 class="font-semibold text-stone-700">Adicionar / Editar Convidado</h3>
+        <input type="hidden" id="adminLinha">
+        <div class="grid md:grid-cols-4 gap-3">
+          <input type="text" id="adminResp" placeholder="Convite / Responsável" class="p-2 border rounded">
+          <input type="text" id="adminNome" placeholder="Nome do Integrante" class="p-2 border rounded">
+          <select id="adminTipo" class="p-2 border rounded">
+            <option value="Adulto">Adulto</option>
+            <option value="Criança">Criança</option>
+          </select>
+          <input type="text" id="adminContato" placeholder="Telefone (Contato)" class="p-2 border rounded">
+        </div>
+        <button onclick="adminSalvar()" class="btn-casar py-2 px-4 rounded text-xs font-semibold uppercase">Salvar Convidado</button>
+      </div>
+
+      <!-- TABELA DE CONVIDADOS -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-stone-100 border-b border-casar text-stone-600">
+              <th class="p-3">Responsável</th>
+              <th class="p-3">Nome</th>
+              <th class="p-3">Tipo</th>
+              <th class="p-3">Contato</th>
+              <th class="p-3">Status</th>
+              <th class="p-3">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaAdminBody">
+            <!-- Gerado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE COMUNICAÇÃO -->
   <script>
-    // URL de Implantação Oficial do Google Apps Script
     const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
+    let familiaAtual = null;
 
-    // 1. Contagem Regressiva
-    const targetDate = new Date("2026-12-11T18:00:00").getTime();
+    // Busca de Convites
+    function buscarConvite() {
+      const termo = document.getElementById("inputBusca").value;
+      const btn = document.getElementById("btnBuscar");
+      const status = document.getElementById("statusMsgRSVP");
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
+      if(!termo) return;
+      btn.disabled = true;
+      btn.innerText = "BUSCANDO...";
 
-      if (diff > 0) {
-        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-      }
+      executarJSONP({ action: "buscarConvite", termo: termo }, function(res) {
+        btn.disabled = false;
+        btn.innerText = "BUSCAR";
+
+        if(res.sucesso) {
+          familiaAtual = res;
+          document.getElementById("stepBusca").classList.add("hidden");
+          document.getElementById("stepSelecao").classList.remove("hidden");
+          document.getElementById("txtResponsavel").innerText = "Convite: " + res.responsavel;
+          document.getElementById("txtTelefone").innerText = "Telefone cadastrado: " + res.telefoneMascarado;
+
+          const container = document.getElementById("containerMembros");
+          container.innerHTML = "";
+
+          res.membros.forEach((m, idx) => {
+            container.innerHTML += `
+              <div class="p-4 bg-white border border-casar rounded-xl flex items-center justify-between gap-4">
+                <div>
+                  <p class="font-semibold text-stone-800 text-sm">${m.nome}</p>
+                  <span class="text-[10px] uppercase text-stone-400">${m.tipo}</span>
+                </div>
+                <select id="membro_${idx}" data-nome="${m.nome}" class="p-2 border border-casar rounded-lg text-xs bg-stone-50">
+                  <option value="Sim, estarei presente">Sim, estarei presente</option>
+                  <option value="Infelizmente não poderei ir">Não poderei ir</option>
+                </select>
+              </div>
+            `;
+          });
+        } else {
+          status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
+          status.innerText = res.mensagem;
+          status.classList.remove("hidden");
+        }
+      });
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
 
-    // 2. Envio do RSVP via JSONP (Suporte Total Cross-Origin)
-    function enviarRSVP(event) {
+    // Gravar confirmações
+    function salvarConfirmacoes(event) {
       event.preventDefault();
-      const btn = document.getElementById("btnSubmit");
-      const status = document.getElementById("statusMsg");
+      const btn = document.getElementById("btnSalvarRSVP");
+      const status = document.getElementById("statusMsgRSVP");
 
       btn.disabled = true;
       btn.innerText = "ENVIANDO...";
 
-      const nome = encodeURIComponent(document.getElementById("nome").value);
-      const telefone = encodeURIComponent(document.getElementById("telefone").value);
-      const confirmacao = encodeURIComponent(document.getElementById("confirmacao").value);
+      const payload = [];
+      familiaAtual.membros.forEach((m, idx) => {
+        const select = document.getElementById(`membro_${idx}`);
+        payload.push({
+          nome: select.getAttribute("data-nome"),
+          status: select.value
+        });
+      });
 
-      const callbackName = "rsvp_cb_" + Math.floor(Math.random() * 1000000);
-
-      window[callbackName] = function(res) {
-        delete window[callbackName];
-        if (scriptElement && scriptElement.parentNode) {
-          scriptElement.parentNode.removeChild(scriptElement);
-        }
+      executarJSONP({
+        action: "confirmarPresenca",
+        responsavel: familiaAtual.responsavel,
+        telefone: familiaAtual.telefoneMascarado,
+        payload: JSON.stringify(payload)
+      }, function(res) {
+        btn.disabled = false;
+        btn.innerText = "ENVIAR CONFIRMAÇÕES DA FAMÍLIA";
 
         status.className = res.sucesso 
-          ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200" 
+          ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200"
           : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
         status.innerText = res.mensagem;
         status.classList.remove("hidden");
-        
-        btn.disabled = false;
-        btn.innerText = "CONFIRMAR PRESENÇA";
-        
-        if (res.sucesso) {
-          document.getElementById("rsvpForm").reset();
-        }
-      };
+      });
+    }
 
-      const scriptElement = document.createElement("script");
-      scriptElement.src = `${API_URL}?nome=${nome}&telefone=${telefone}&confirmacao=${confirmacao}&callback=${callbackName}`;
-      
-      scriptElement.onerror = function() {
+    // --- MÉTODOS ADMINISTRATIVOS ---
+    function abrirModalAdmin() {
+      document.getElementById("modalAdmin").classList.remove("hidden");
+      carregarAdminLista();
+    }
+
+    function fecharModalAdmin() {
+      document.getElementById("modalAdmin").classList.add("hidden");
+    }
+
+    function carregarAdminLista() {
+      executarJSONP({ action: "adminListar" }, function(res) {
+        if(res.sucesso) {
+          const tbody = document.getElementById("tabelaAdminBody");
+          tbody.innerHTML = "";
+          res.convidados.forEach(c => {
+            tbody.innerHTML += `
+              <tr class="border-b border-stone-100 ${c.ativo ? '' : 'opacity-40 bg-stone-50'}">
+                <td class="p-3">${c.responsavel}</td>
+                <td class="p-3">${c.nome}</td>
+                <td class="p-3">${c.tipo}</td>
+                <td class="p-3">${c.contato}</td>
+                <td class="p-3">${c.ativo ? '✅ Ativo' : '❌ Desativado'}</td>
+                <td class="p-3 space-x-2">
+                  <button onclick="prepararEdicao(${c.linha}, '${c.responsavel}', '${c.nome}', '${c.tipo}', '${c.contato}')" class="text-blue-600 hover:underline">Editar</button>
+                  ${c.ativo ? `<button onclick="adminDesativar(${c.linha})" class="text-rose-600 hover:underline">Desativar</button>` : ''}
+                </td>
+              </tr>
+            `;
+          });
+        }
+      });
+    }
+
+    function adminSalvar() {
+      const linha = document.getElementById("adminLinha").value;
+      const responsavel = document.getElementById("adminResp").value;
+      const nome = document.getElementById("adminNome").value;
+      const tipo = document.getElementById("adminTipo").value;
+      const contato = document.getElementById("adminContato").value;
+
+      executarJSONP({
+        action: "adminSalvar",
+        linha: linha,
+        responsavel: responsavel,
+        nome: nome,
+        tipo: tipo,
+        contato: contato
+      }, function(res) {
+        alert(res.mensagem);
+        document.getElementById("adminLinha").value = "";
+        carregarAdminLista();
+      });
+    }
+
+    function prepararEdicao(linha, resp, nome, tipo, contato) {
+      document.getElementById("adminLinha").value = linha;
+      document.getElementById("adminResp").value = resp;
+      document.getElementById("adminNome").value = nome;
+      document.getElementById("adminTipo").value = tipo;
+      document.getElementById("adminContato").value = contato;
+    }
+
+    function adminDesativar(linha) {
+      if(confirm("Deseja desativar este convidado? O histórico de presença será mantido na planilha.")) {
+        executarJSONP({ action: "adminDesativar", linha: linha }, function(res) {
+          carregarAdminLista();
+        });
+      }
+    }
+
+    // Utilitário genérico para JSONP
+    function executarJSONP(params, callbackSuccess) {
+      const callbackName = "cb_" + Math.floor(Math.random() * 1000000);
+      window[callbackName] = function(res) {
         delete window[callbackName];
-        if (scriptElement && scriptElement.parentNode) {
-          scriptElement.parentNode.removeChild(scriptElement);
-        }
-        status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
-        status.innerText = "Erro ao conectar ao servidor. Verifique o número digitado e tente novamente.";
-        status.classList.remove("hidden");
-        btn.disabled = false;
-        btn.innerText = "CONFIRMAR PRESENÇA";
+        if (script.parentNode) script.parentNode.removeChild(script);
+        callbackSuccess(res);
       };
 
-      document.body.appendChild(scriptElement);
+      const query = Object.keys(params)
+        .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+        .join("&");
+
+      const script = document.createElement("script");
+      script.src = `${API_URL}?${query}&callback=${callbackName}`;
+      document.body.appendChild(script);
     }
   </script>
-</body>
-</html>
