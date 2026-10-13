@@ -26,11 +26,12 @@
 
   <!-- MENU SUPERIOR -->
   <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm h-[60px] flex items-center">
-    <div class="max-w-4xl mx-auto px-4 w-full flex justify-between items-center text-xs tracking-widest uppercase text-stone-600">
+    <div class="max-w-5xl mx-auto px-4 w-full flex justify-between items-center text-xs tracking-widest uppercase text-stone-600">
       <span class="font-serif-custom text-xl font-semibold text-stone-800 tracking-normal capitalize">W & L</span>
-      <div class="space-x-3 md:space-x-8 text-[11px] md:text-xs">
+      <div class="space-x-2 md:space-x-6 text-[10px] md:text-xs overflow-x-auto whitespace-nowrap py-2">
         <a href="#home" class="hover:text-casar-primary transition">Início</a>
         <a href="#historia" class="hover:text-casar-primary transition">Mensagem</a>
+        <a href="#trajes" class="hover:text-casar-primary transition font-medium text-amber-900">Trajes</a>
         <a href="#local" class="hover:text-casar-primary transition">Locais</a>
         <a href="#presentes" class="hover:text-casar-primary transition">Presentes</a>
         <a href="#galeria" class="hover:text-casar-primary transition">Fotos</a>
@@ -92,15 +93,62 @@
     </div>
   </section>
 
+  <!-- NOVA SEÇÃO: GUIA DE TRAJES -->
+  <section id="trajes" class="py-16 bg-white border-t border-casar px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Guia de Trajes</h2>
+      <p class="text-xs uppercase tracking-widest text-casar-primary font-semibold mb-4">Traje: Social</p>
+      
+      <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-8"></div>
+
+      <p class="max-w-2xl mx-auto text-stone-600 text-sm leading-relaxed mb-10 font-light">
+        Para celebrar este momento especial, sugerimos <strong>Traje Social</strong>. Preparamos algumas orientações carinhosas para ajudar você a escolher o seu visual.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8 text-left mb-10">
+        <!-- PARA ELAS -->
+        <div class="p-6 bg-stone-50 rounded-2xl border border-casar shadow-sm space-y-3">
+          <div class="text-3xl mb-1 text-amber-800">👗</div>
+          <h3 class="font-serif-custom text-2xl text-stone-800 font-semibold">Para as Mulheres</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Sugerimos <strong>vestidos midi ou longos</strong>, tecidos fluídos e elegantes para compor uma noite inesquecível.
+          </p>
+        </div>
+
+        <!-- PARA ELES -->
+        <div class="p-6 bg-stone-50 rounded-2xl border border-casar shadow-sm space-y-3">
+          <div class="text-3xl mb-1 text-amber-800">👔</div>
+          <h3 class="font-serif-custom text-2xl text-stone-800 font-semibold">Para os Homens</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Podem optar por <strong>terno e gravata</strong> ou, se preferirem, <strong>calça social com camisa social</strong> (sem necessidade de gravata ou paletó).
+          </p>
+        </div>
+      </div>
+
+      <!-- OBSERVAÇÃO IMPORTANTE SOBRE CORES E ESTILO -->
+      <div class="max-w-2xl mx-auto p-6 bg-rose-50/70 border border-rose-200 rounded-2xl text-stone-700 text-xs space-y-3 text-left">
+        <div class="flex items-center gap-2 font-semibold text-rose-900 uppercase text-[11px] tracking-wider">
+          <span>⚠️</span> Lembretes Importantes:
+        </div>
+        <ul class="list-disc list-inside space-y-2 text-stone-600 text-xs leading-relaxed">
+          <li>Pedimos gentilmente que <strong>evitem roupas excessivamente informais</strong> (como jeans, camisetas e tênis esportivos).</li>
+          <li>Por respeito à noiva, pedimos atenção especial para <strong>NÃO utilizar peças nas cores:</strong>
+            <span class="block mt-1 font-semibold text-stone-800">❌ Branco, Off-white, Azul Bebê ou tons muito próximos ao vestido da noiva.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- PROGRAMAÇÃO DO DIA -->
-  <section id="local" class="py-16 bg-white border-y border-casar px-4">
+  <section id="local" class="py-16 bg-stone-50 border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Programação do Dia</h2>
       <p class="text-xs uppercase tracking-widest text-stone-500 mb-10">Cerimônia e Recepção</p>
 
       <div class="grid md:grid-cols-2 gap-8 text-left">
         <!-- CERIMÔNIA -->
-        <div class="p-8 bg-stone-50 rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
+        <div class="p-8 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3 text-stone-700">⛪</div>
             <h3 class="font-serif-custom text-2xl text-stone-800 font-semibold mb-2">A Cerimônia</h3>
@@ -117,7 +165,7 @@
         </div>
 
         <!-- RECEPÇÃO -->
-        <div class="p-8 bg-stone-50 rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
+        <div class="p-8 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3 text-stone-700">🥂</div>
             <h3 class="font-serif-custom text-2xl text-stone-800 font-semibold mb-2">Recepção (A Festa)</h3>
@@ -154,24 +202,32 @@
     </div>
   </section>
 
-  <!-- FOTOS E UPLOAD ANÔNIMO COM BARRA DE PROGRESSO -->
+  <!-- FOTOS - UPLOAD MÚLTIPLO E NOME OPCIONAL -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Mural de Fotos</h2>
-      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Envie suas fotos da festa anonimamente para o álbum dos noivos!</p>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Envie suas fotos da festa direto para o álbum dos noivos!</p>
 
-      <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm text-left">
-        <label class="block text-xs font-semibold uppercase text-stone-600 mb-2">Escolha uma foto da galeria ou tire uma foto agora (Envio Anônimo):</label>
-        <input type="file" id="fotoInput" accept="image/*" class="w-full p-3 bg-white border border-casar rounded-xl text-xs text-stone-700 mb-4 focus:outline-none">
+      <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm text-left space-y-4">
+        
+        <div>
+          <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Seu Nome (Opcional):</label>
+          <input type="text" id="nomeUsuarioInput" placeholder="Ex: Ricardo Paczkowski (ou deixe em branco p/ anônimo)" class="w-full p-2.5 bg-white border border-casar rounded-xl text-xs text-stone-800 focus:outline-none focus:border-stone-500">
+          <p class="text-[10px] text-stone-400 mt-1">* Se preenchido, os arquivos serão salvos com o seu nome no arquivo.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase text-stone-600 mb-1">Escolha uma ou várias fotos:</label>
+          <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2.5 bg-white border border-casar rounded-xl text-xs text-stone-700 focus:outline-none">
+        </div>
         
         <button onclick="enviarFoto()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-semibold text-xs uppercase tracking-widest shadow-sm">
-          📸 Salvar Foto no Álbum dos Noivos
+          📸 Salvar Fotos no Álbum dos Noivos
         </button>
 
-        <!-- BARRA DE PROGRESSO DO UPLOAD -->
         <div id="containerProgresso" class="hidden mt-4 space-y-1">
           <div class="flex justify-between text-[11px] font-semibold text-stone-600">
-            <span id="txtStatusProgresso">Enviando foto...</span>
+            <span id="txtStatusProgresso">Preparando envio...</span>
             <span id="pctProgresso">0%</span>
           </div>
           <div class="w-full bg-stone-200 rounded-full h-2.5 overflow-hidden">
@@ -179,7 +235,7 @@
           </div>
         </div>
 
-        <p id="statusFoto" class="hidden mt-3 text-center text-xs p-2 rounded"></p>
+        <p id="statusFoto" class="hidden text-center text-xs p-2 rounded"></p>
       </div>
 
       <!-- CARROSSEL DE FOTOS -->
@@ -297,14 +353,14 @@
     <p class="mt-1">11.12.2026</p>
   </footer>
 
-  <!-- PAINEL ADM FLUTUANTE -->
+  <!-- PAINEL ADM FLUTUANTE PROTEGIDO -->
   <div class="fixed bottom-4 right-4 z-50">
-    <button onclick="abrirModalAdmin()" class="bg-stone-800 hover:bg-stone-900 text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2">
-      ⚙️ Painel Noivos
+    <button onclick="abrirModalAdmin()" class="bg-stone-800 hover:bg-stone-900 text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2 transition hover:scale-105">
+      🔒 Painel Noivos
     </button>
   </div>
 
-  <!-- MODAL ADMIN -->
+  <!-- MODAL ADMIN PROTEGIDO -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden">
       
@@ -412,6 +468,11 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
+    
+    // CONFIGURAÇÃO DE SEGURANÇA DA SENHA DO ADMIN
+    const SENHA_ADMIN = "1234"; // Altere aqui se quiser uma senha diferente
+    let adminAutenticado = false;
+
     let familiaAtual = null;
     let convidadosCache = [];
     let ordemCampo = 'responsavel';
@@ -432,7 +493,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // FOTOS
+    // FOTOS & CARROSSEL
     let idxFoto = 0;
 
     function atualizarCarrossel() {
@@ -487,9 +548,10 @@
       });
     }
 
-    // UPLOAD ANÔNIMO DE FOTO COM BARRA DE PROGRESSO
+    // UPLOAD MÚLTIPLO DE FOTOS
     async function enviarFoto() {
       const input = document.getElementById("fotoInput");
+      const nomeInput = document.getElementById("nomeUsuarioInput").value.trim();
       const btn = document.getElementById("btnUploadFoto");
       const status = document.getElementById("statusFoto");
       const boxProgresso = document.getElementById("containerProgresso");
@@ -498,53 +560,39 @@
       const pctTxt = document.getElementById("pctProgresso");
 
       if (!input.files || input.files.length === 0) {
-        alert("Por favor, selecione uma foto primeiro.");
+        alert("Por favor, selecione ao menos uma foto.");
         return;
       }
 
-      const file = input.files[0];
+      const arquivos = Array.from(input.files);
+      const totalArquivos = arquivos.length;
+      
       btn.disabled = true;
-      btn.innerText = "ENVIANDO FOTO...";
       status.classList.add("hidden");
-
       boxProgresso.classList.remove("hidden");
-      barra.style.width = "10%";
-      pctTxt.innerText = "10%";
-      txtStatus.innerText = "Lendo arquivo...";
+      barra.style.width = "0%";
+      pctTxt.innerText = "0%";
 
-      const reader = new FileReader();
+      let enviadosSucesso = 0;
 
-      reader.onprogress = function(e) {
-        if (e.lengthComputable) {
-          const p = Math.round((e.loaded / e.total) * 40);
-          barra.style.width = p + "%";
-          pctTxt.innerText = p + "%";
-        }
-      };
+      for (let i = 0; i < totalArquivos; i++) {
+        const file = arquivos[i];
+        const numFoto = i + 1;
 
-      reader.onload = async function(e) {
-        txtStatus.innerText = "Processando e otimizando imagem...";
-        barra.style.width = "50%";
-        pctTxt.innerText = "50%";
+        txtStatus.innerText = `Enviando foto ${numFoto} de ${totalArquivos}...`;
 
-        const base64Data = e.target.result.split(',')[1];
+        const base64Data = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target.result.split(',')[1]);
+          reader.readAsDataURL(file);
+        });
+
         const payload = {
           action: "uploadFoto",
           base64: base64Data,
           mimeType: file.type,
-          nomeArquivo: file.name
+          nomeUsuario: nomeInput
         };
-
-        txtStatus.innerText = "Enviando para o Google Drive...";
-        
-        let simProgresso = 50;
-        const interval = setInterval(() => {
-          if (simProgresso < 90) {
-            simProgresso += 5;
-            barra.style.width = simProgresso + "%";
-            pctTxt.innerText = simProgresso + "%";
-          }
-        }, 200);
 
         try {
           const res = await fetch(API_URL, {
@@ -552,48 +600,47 @@
             headers: { "Content-Type": "text/plain;charset=utf-8" },
             body: JSON.stringify(payload)
           });
+          
           const resultado = await res.json();
-          clearInterval(interval);
 
-          barra.style.width = "100%";
-          pctTxt.innerText = "100%";
-          txtStatus.innerText = "Concluído!";
-
-          setTimeout(() => {
-            boxProgresso.classList.add("hidden");
-            status.className = resultado.sucesso 
-              ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800 font-semibold" 
-              : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
-            status.innerText = resultado.mensagem;
-            status.classList.remove("hidden");
-
-            if (resultado.sucesso) {
-              input.value = "";
-              if (resultado.url) {
-                const carrossel = document.getElementById("carrosselFotos");
-                const novoSlide = document.createElement("div");
-                novoSlide.className = "min-w-full";
-                novoSlide.innerHTML = `<img src="${resultado.url}" class="w-full h-80 md:h-96 object-cover">`;
-                carrossel.prepend(novoSlide);
-                idxFoto = 0;
-                atualizarCarrossel();
-              }
+          if (resultado.sucesso) {
+            enviadosSucesso++;
+            if (resultado.url) {
+              const carrossel = document.getElementById("carrosselFotos");
+              const novoSlide = document.createElement("div");
+              novoSlide.className = "min-w-full";
+              novoSlide.innerHTML = `<img src="${resultado.url}" class="w-full h-80 md:h-96 object-cover">`;
+              carrossel.prepend(novoSlide);
             }
-          }, 400);
-
+          }
         } catch (err) {
-          clearInterval(interval);
-          boxProgresso.classList.add("hidden");
-          status.className = "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
-          status.innerText = "Erro ao enviar a foto. Tente novamente.";
-          status.classList.remove("hidden");
-        } finally {
-          btn.disabled = false;
-          btn.innerText = "📸 Salvar Foto no Álbum dos Noivos";
+          console.error(`Erro ao enviar foto ${numFoto}:`, err);
         }
-      };
 
-      reader.readAsDataURL(file);
+        const pct = Math.round((numFoto / totalArquivos) * 100);
+        barra.style.width = pct + "%";
+        pctTxt.innerText = pct + "%";
+      }
+
+      setTimeout(() => {
+        boxProgresso.classList.add("hidden");
+        status.className = enviadosSucesso > 0 
+          ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800 font-semibold" 
+          : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
+        
+        status.innerText = enviadosSucesso === totalArquivos
+          ? `Sucesso! ${enviadosSucesso} foto(s) enviada(s) para o álbum.`
+          : `Foram enviadas ${enviadosSucesso} de ${totalArquivos} foto(s).`;
+        
+        status.classList.remove("hidden");
+
+        input.value = "";
+        idxFoto = 0;
+        atualizarCarrossel();
+
+        btn.disabled = false;
+        btn.innerText = "📸 Salvar Fotos no Álbum dos Noivos";
+      }, 500);
     }
 
     // RECADOS
@@ -758,8 +805,20 @@
       });
     }
 
-    // ADMIN
+    // ADMIN COM PROTEÇÃO DE SENHA
     function abrirModalAdmin() {
+      if (!adminAutenticado) {
+        const senhaDigitada = prompt("🔒 Área restrita para os Noivos.\nPor favor, digite a senha de acesso:");
+        if (senhaDigitada === null) return; // Cancelou
+        
+        if (senhaDigitada === SENHA_ADMIN) {
+          adminAutenticado = true;
+        } else {
+          alert("❌ Senha incorreta! Acesso negado.");
+          return;
+        }
+      }
+
       document.getElementById("modalAdmin").classList.remove("hidden");
       carregarAdminLista();
     }
