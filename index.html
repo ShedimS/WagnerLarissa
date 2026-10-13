@@ -89,7 +89,7 @@
     </div>
   </section>
 
-  <!-- LOCAIS DO EVENTO -->
+  <!-- PROGRAMAÇÃO DO DIA (CERIMÔNIA & RECEPÇÃO) -->
   <section id="local" class="py-16 bg-white border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Programação do Dia</h2>
@@ -151,13 +151,12 @@
     </div>
   </section>
 
-  <!-- UPLOAD DIRETO DE FOTOS DA FESTA -->
+  <!-- FOTOS E UPLOAD DIRETO DA FESTA -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Mural de Fotos</h2>
       <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Envie suas fotos da festa direto para o nosso álbum do Google Drive!</p>
 
-      <!-- FORMULÁRIO DE UPLOAD DIRETO -->
       <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm text-left">
         <label class="block text-xs font-semibold uppercase text-stone-600 mb-2">Escolha uma foto da galeria ou tire uma foto agora:</label>
         <input type="file" id="fotoInput" accept="image/*" class="w-full p-3 bg-white border border-casar rounded-xl text-xs text-stone-700 mb-4 focus:outline-none">
@@ -179,7 +178,7 @@
     </div>
   </section>
 
-  <!-- MURAL DE RECADOS -->
+  <!-- MURAL DE RECADOS DOS CONVIDADOS -->
   <section id="recados" class="py-16 bg-stone-50 border-t border-casar px-4">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Deixe seu Recado</h2>
@@ -252,7 +251,7 @@
     <p class="mt-1">11.12.2026</p>
   </footer>
 
-  <!-- PAINEL ADM -->
+  <!-- PAINEL ADM (BOTÃO FLUTUANTE) -->
   <div class="fixed bottom-4 right-4 z-50">
     <button onclick="abrirModalAdmin()" class="bg-stone-800 hover:bg-stone-900 text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2">
       ⚙️ Painel Noivos
@@ -317,18 +316,19 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Carrossel Fotos
+    // Carrossel de Fotos
     let idxFoto = 0;
     function rodarCarrosselFotos() {
       const container = document.getElementById("carrosselFotos");
       if (!container) return;
       const total = container.children.length;
+      if (total === 0) return;
       idxFoto = (idxFoto + 1) % total;
       container.style.transform = `translateX(-${idxFoto * 100}%)`;
     }
     setInterval(rodarCarrosselFotos, 3500);
 
-    // Upload Direto de Fotos em Base64
+    // Upload de Foto com Injeção Automática no Carrossel
     async function enviarFoto() {
       const input = document.getElementById("fotoInput");
       const btn = document.getElementById("btnUploadFoto");
@@ -361,10 +361,24 @@
           });
           const resultado = await res.json();
 
-          status.className = resultado.sucesso ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800" : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
+          status.className = resultado.sucesso 
+            ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800" 
+            : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
           status.innerText = resultado.mensagem;
           status.classList.remove("hidden");
-          if (resultado.sucesso) input.value = "";
+
+          if (resultado.sucesso) {
+            input.value = "";
+            if (resultado.url) {
+              const carrossel = document.getElementById("carrosselFotos");
+              const novoSlide = document.createElement("div");
+              novoSlide.className = "min-w-full";
+              novoSlide.innerHTML = `<img src="${resultado.url}" class="w-full h-80 md:h-96 object-cover">`;
+              carrossel.prepend(novoSlide);
+              idxFoto = 0;
+              carrossel.style.transform = `translateX(0%)`;
+            }
+          }
         } catch (err) {
           status.className = "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
           status.innerText = "Erro ao enviar a foto. Tente novamente.";
@@ -377,7 +391,7 @@
       reader.readAsDataURL(file);
     }
 
-    // Carrossel Recados
+    // Carrossel e Mural de Recados
     let listaRecadosGlobal = [];
     let idxRecado = 0;
 
