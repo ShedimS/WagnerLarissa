@@ -130,17 +130,21 @@
         <p class="text-xs uppercase tracking-widest text-stone-500">Localize seu convite por qualquer nome da família</p>
       </div>
 
-      <!-- PASSO 1: BUSCA PELO NOME -->
-      <div id="stepBusca" class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
-        <div>
-          <label class="block mb-2 text-xs font-semibold uppercase text-stone-600">Digite seu Nome ou Sobrenome:</label>
-          <div class="flex gap-2">
-            <input type="text" id="inputBusca" placeholder="Ex: Mariana ou Paczkowski" class="w-full p-3 bg-white border border-casar rounded-lg text-sm focus:outline-none focus:border-stone-500">
-            <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-6 rounded-lg text-xs font-semibold uppercase tracking-wider">Buscar</button>
-          </div>
-        </div>
-        <p class="text-[11px] text-stone-400 leading-relaxed">* Você pode pesquisar apenas o primeiro nome ou sobrenome. Nosso sistema localizará seu convite familiar.</p>
-      </div>
+      <!-- PASSO 1: BUSCA AMPLIADA POR NOME OU TELEFONE -->
+<div id="stepBusca" class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
+  <div>
+    <label class="block mb-2 text-xs font-semibold uppercase text-stone-600">
+      Localize seu convite por Nome, Sobrenome ou Telefone:
+    </label>
+    <div class="flex gap-2">
+      <input type="text" id="inputBusca" placeholder="Ex: Rodrigo, Paczkowski ou (41) 99509-7841" class="w-full p-3 bg-white border border-casar rounded-lg text-sm focus:outline-none focus:border-stone-500">
+      <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-6 rounded-lg text-xs font-semibold uppercase tracking-wider">Buscar</button>
+    </div>
+  </div>
+  <p class="text-[11px] text-stone-400 leading-relaxed">
+    * Você pode digitar o seu primeiro nome, o nome do responsável do convite ou o número do WhatsApp cadastrado. O sistema trará toda a sua família automaticamente.
+  </p>
+</div>
 
       <!-- PASSO 2: SELEÇÃO INDIVIDUAL DOS INTEGRANTES -->
       <div id="stepSelecao" class="hidden bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-6">
