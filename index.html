@@ -89,7 +89,7 @@
     </div>
   </section>
 
-  <!-- PROGRAMAÇÃO DO DIA (CERIMÔNIA & RECEPÇÃO) -->
+  <!-- LOCAIS DO EVENTO -->
   <section id="local" class="py-16 bg-white border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Programação do Dia</h2>
@@ -151,21 +151,24 @@
     </div>
   </section>
 
-  <!-- FOTOS E ÁLBUM COMPARTILHADO -->
+  <!-- UPLOAD DIRETO DE FOTOS DA FESTA -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Mural de Fotos</h2>
-      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Compartilhe seus cliques da festa conosco!</p>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Envie suas fotos da festa direto para o nosso álbum do Google Drive!</p>
 
-      <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm">
-        <p class="text-xs text-stone-600 mb-4">
-          Tirou uma foto linda no casamento? Clique no botão abaixo para enviar direto para a nossa pasta no Google Drive/Fotos!
-        </p>
-        <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full btn-casar py-4 px-6 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-md gap-2">
-          📸 Enviar Foto no Álbum dos Noivos
-        </a>
+      <!-- FORMULÁRIO DE UPLOAD DIRETO -->
+      <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm text-left">
+        <label class="block text-xs font-semibold uppercase text-stone-600 mb-2">Escolha uma foto da galeria ou tire uma foto agora:</label>
+        <input type="file" id="fotoInput" accept="image/*" class="w-full p-3 bg-white border border-casar rounded-xl text-xs text-stone-700 mb-4 focus:outline-none">
+        
+        <button onclick="enviarFoto()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-semibold text-xs uppercase tracking-widest shadow-sm">
+          📸 Salvar Foto no Álbum dos Noivos
+        </button>
+        <p id="statusFoto" class="hidden mt-3 text-center text-xs p-2 rounded"></p>
       </div>
 
+      <!-- CARROSSEL DE FOTOS -->
       <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm">
         <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
           <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
@@ -176,7 +179,7 @@
     </div>
   </section>
 
-  <!-- MURAL DE RECADOS DOS CONVIDADOS -->
+  <!-- MURAL DE RECADOS -->
   <section id="recados" class="py-16 bg-stone-50 border-t border-casar px-4">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Deixe seu Recado</h2>
@@ -249,7 +252,7 @@
     <p class="mt-1">11.12.2026</p>
   </footer>
 
-  <!-- PAINEL ADM (BOTÃO FLUTUANTE) -->
+  <!-- PAINEL ADM -->
   <div class="fixed bottom-4 right-4 z-50">
     <button onclick="abrirModalAdmin()" class="bg-stone-800 hover:bg-stone-900 text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2">
       ⚙️ Painel Noivos
@@ -299,7 +302,7 @@
     const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
     let familiaAtual = null;
 
-    // Timer
+    // Contagem Regressiva
     const targetDate = new Date("2026-12-11T16:00:00").getTime();
     function updateCountdown() {
       const now = new Date().getTime();
@@ -314,7 +317,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Carrossel de Fotos
+    // Carrossel Fotos
     let idxFoto = 0;
     function rodarCarrosselFotos() {
       const container = document.getElementById("carrosselFotos");
@@ -325,7 +328,56 @@
     }
     setInterval(rodarCarrosselFotos, 3500);
 
-    // Carrossel e Mural de Recados
+    // Upload Direto de Fotos em Base64
+    async function enviarFoto() {
+      const input = document.getElementById("fotoInput");
+      const btn = document.getElementById("btnUploadFoto");
+      const status = document.getElementById("statusFoto");
+
+      if (!input.files || input.files.length === 0) {
+        alert("Por favor, selecione uma foto primeiro.");
+        return;
+      }
+
+      const file = input.files[0];
+      btn.disabled = true;
+      btn.innerText = "ENVIANDO FOTO...";
+
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const base64Data = e.target.result.split(',')[1];
+        const payload = {
+          action: "uploadFoto",
+          base64: base64Data,
+          mimeType: file.type,
+          nomeArquivo: file.name
+        };
+
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload)
+          });
+          const resultado = await res.json();
+
+          status.className = resultado.sucesso ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800" : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
+          status.innerText = resultado.mensagem;
+          status.classList.remove("hidden");
+          if (resultado.sucesso) input.value = "";
+        } catch (err) {
+          status.className = "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
+          status.innerText = "Erro ao enviar a foto. Tente novamente.";
+          status.classList.remove("hidden");
+        } finally {
+          btn.disabled = false;
+          btn.innerText = "📸 Salvar Foto no Álbum dos Noivos";
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Carrossel Recados
     let listaRecadosGlobal = [];
     let idxRecado = 0;
 
