@@ -167,7 +167,7 @@
         <p id="statusFoto" class="hidden mt-3 text-center text-xs p-2 rounded"></p>
       </div>
 
-      <!-- CARROSSEL DE FOTOS COM NAVEGAÇÃO COMPLETA -->
+      <!-- CARROSSEL DE FOTOS -->
       <div class="max-w-xl mx-auto">
         <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm">
           <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
@@ -176,7 +176,7 @@
             <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
           </div>
 
-          <!-- SETAS FLUTUANTES DENTRO DA FOTO -->
+          <!-- SETAS LATERAIS NA FOTO -->
           <button onclick="fotoAnterior()" type="button" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">
             &#10094;
           </button>
@@ -185,7 +185,7 @@
           </button>
         </div>
 
-        <!-- BOTÕES INFERIORES DE ANTERIOR / PRÓXIMO PARA FOTOS -->
+        <!-- BOTÕES INFERIORES DE FOTO -->
         <div class="flex justify-between items-center mt-4">
           <button onclick="fotoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
             &#10094; Anterior
@@ -229,7 +229,7 @@
           </div>
         </div>
 
-        <!-- BOTÕES INFERIORES DE ANTERIOR / PRÓXIMO PARA RECADOS -->
+        <!-- BOTÕES INFERIORES DE ANTERIOR E PRÓXIMO PARA MENSAGENS -->
         <div class="flex justify-between items-center mt-4">
           <button onclick="recadoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
             &#10094; Anterior
@@ -351,7 +351,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // LÓGICA DO CARROSSEL DE FOTOS (COM SETAS E BOTÕES)
+    // FOTOS
     let idxFoto = 0;
 
     function atualizarCarrossel() {
@@ -387,7 +387,6 @@
 
     setInterval(proximaFoto, 4000);
 
-    // Carregar Fotos do Google Drive
     function carregarFotosDrive() {
       executarJSONP({ action: "listarFotos" }, function(res) {
         if (res.sucesso && res.fotos && res.fotos.length > 0) {
@@ -407,7 +406,6 @@
       });
     }
 
-    // Upload de Foto
     async function enviarFoto() {
       const input = document.getElementById("fotoInput");
       const btn = document.getElementById("btnUploadFoto");
@@ -470,7 +468,7 @@
       reader.readAsDataURL(file);
     }
 
-    // LÓGICA DO CARROSSEL DE RECADOS (COM ANTERIOR / PRÓXIMO)
+    // RECADOS
     let listaRecadosGlobal = [];
     let idxRecado = 0;
 
@@ -483,6 +481,7 @@
           document.getElementById("containerRecados").innerHTML = `
             <p class="text-xs text-stone-400 italic">Seja o primeiro a deixar uma mensagem de carinho aos noivos!</p>
           `;
+          document.getElementById("contadorRecados").innerText = "";
         }
       });
     }
