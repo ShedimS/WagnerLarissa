@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Larissa & Wagner - 11/12/2026</title>
+  <title>Wagner & Larissa - 11/12/2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,15 +21,17 @@
 </head>
 <body class="antialiased">
 
-  <!-- MENU / NAVEGAÇÃO SUPERIOR -->
+  <!-- MENU SUPERIOR -->
   <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm">
     <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center text-xs tracking-widest uppercase text-stone-600">
-      <span class="font-serif-custom text-xl font-semibold text-stone-800 tracking-normal capitalize">L & W</span>
+      <span class="font-serif-custom text-xl font-semibold text-stone-800 tracking-normal capitalize">W & L</span>
       <div class="space-x-4 md:space-x-8">
         <a href="#home" class="hover:text-casar-primary transition">Início</a>
         <a href="#historia" class="hover:text-casar-primary transition">Mensagem</a>
         <a href="#local" class="hover:text-casar-primary transition">Locais</a>
         <a href="#presentes" class="hover:text-casar-primary transition">Presentes</a>
+        <a href="#galeria" class="hover:text-casar-primary transition">Fotos</a>
+        <a href="#recados" class="hover:text-casar-primary transition">Recados</a>
         <a href="#rsvp" class="hover:text-casar-primary transition font-semibold text-casar-primary">RSVP</a>
       </div>
     </div>
@@ -42,7 +44,6 @@
       <h1 class="font-serif-custom text-5xl md:text-7xl font-normal text-stone-800 mb-2">Wagner & Larissa</h1>
       <p class="font-serif-custom italic text-2xl text-casar-primary mb-8">Sexta-feira, 11 de Dezembro de 2026</p>
 
-      <!-- FOTO CENTRAL -->
       <div class="my-8 overflow-hidden rounded-2xl shadow-lg border-4 border-white max-w-lg mx-auto">
         <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" alt="Wagner e Larissa" class="w-full h-80 object-cover">
       </div>
@@ -51,28 +52,16 @@
       <div class="mt-10 bg-white/80 p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
         <p class="text-xs uppercase tracking-widest text-stone-500 mb-4">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
-          <div>
-            <span id="days" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Dias</span>
-          </div>
-          <div>
-            <span id="hours" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Horas</span>
-          </div>
-          <div>
-            <span id="minutes" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Min</span>
-          </div>
-          <div>
-            <span id="seconds" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span>
-            <span class="text-[10px] uppercase text-stone-500">Seg</span>
-          </div>
+          <div><span id="days" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span><span class="text-[10px] uppercase text-stone-500">Dias</span></div>
+          <div><span id="hours" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span><span class="text-[10px] uppercase text-stone-500">Horas</span></div>
+          <div><span id="minutes" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span><span class="text-[10px] uppercase text-stone-500">Min</span></div>
+          <div><span id="seconds" class="block font-serif-custom text-3xl font-semibold text-stone-800">00</span><span class="text-[10px] uppercase text-stone-500">Seg</span></div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- BOAS-VINDAS / MENSAGEM DO CASAL -->
+  <!-- MENSAGEM DO CASAL -->
   <section id="historia" class="py-16 px-4 max-w-3xl mx-auto text-center">
     <h2 class="font-serif-custom text-3xl text-stone-800 mb-4">Bem-vindos ao nosso site!</h2>
     <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
@@ -82,13 +71,11 @@
         Criamos esse espaço com muito carinho para compartilhar com vocês todos os detalhes do nosso casamento. 
         Estamos muito felizes e contamos com a presença de cada um de vocês no nosso grande dia — <strong>11 de Dezembro de 2026</strong>!
       </p>
-      <p>
-        Aqui vocês vão encontrar todas as informações importantes: cerimônia, recepção e estacionamento no local.
-      </p>
+      <p>Aqui vocês vão encontrar todas as informações importantes: cerimônia, recepção e estacionamento no local.</p>
       
       <div class="bg-stone-50 p-6 rounded-2xl border border-casar text-left space-y-3 my-6">
         <p class="font-semibold text-stone-800 text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
-        <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "RSVP / Confirme sua Presença" e preencha os dados.</p>
+        <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "RSVP" e preencha os dados.</p>
         <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade! Você pode escolher um item da nossa Lista de Casamento, nos sites ou lojas físicas, ou contribuir com a opção de cotas.</p>
       </div>
 
@@ -102,15 +89,14 @@
     </div>
   </section>
 
-  <!-- LOCAIS DO EVENTO (CERIMÔNIA & RECEPÇÃO) -->
+  <!-- PROGRAMAÇÃO DO DIA (CERIMÔNIA & RECEPÇÃO) -->
   <section id="local" class="py-16 bg-white border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Programação do Dia</h2>
       <p class="text-xs uppercase tracking-widest text-stone-500 mb-10">Cerimônia e Recepção</p>
 
       <div class="grid md:grid-cols-2 gap-8 text-left">
-        
-        <!-- CARD CERIMÔNIA -->
+        <!-- CERIMÔNIA -->
         <div class="p-8 bg-stone-50 rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3 text-stone-700">⛪</div>
@@ -118,20 +104,16 @@
             <p class="text-xs text-stone-500 italic mb-4">
               "Gostaríamos muito de contar com a sua presença no momento em que nossa união será abençoada diante de Deus."
             </p>
-            
             <p class="text-xs text-stone-700 mb-1"><strong>Data e Horário:</strong> Sexta-feira, 11/12/2026 às 16h00</p>
             <p class="text-xs text-stone-700 mb-1"><strong>Local:</strong> Paróquia Nossa Senhora Rainha da Paz (Borda do Campo)</p>
             <p class="text-xs text-stone-500">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
           </div>
-
-          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz+Rua+Joana+Percegona+Zen+78+Borda+do+Campo+São+José+dos+Pinhais+PR" 
-             target="_blank" rel="noopener noreferrer" 
-             class="mt-6 inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
+          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz+Rua+Joana+Percegona+Zen+78+Borda+do+Campo+São+José+dos+Pinhais+PR" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
             📍 Ver no Google Maps (Cerimônia)
           </a>
         </div>
 
-        <!-- CARD RECEPÇÃO -->
+        <!-- RECEPÇÃO -->
         <div class="p-8 bg-stone-50 rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3 text-stone-700">🥂</div>
@@ -139,24 +121,19 @@
             <p class="text-xs text-stone-500 italic mb-4">
               "Contamos com você para compartilhar esse dia maravilhoso conosco! O casal convida para recepção a partir de 17h30. Não vai perder, né?"
             </p>
-            
             <p class="text-xs text-stone-700 mb-1"><strong>Data e Horário:</strong> Sexta-feira, 11/12/2026 a partir das 17h30</p>
             <p class="text-xs text-stone-700 mb-1"><strong>Local:</strong> Chácara Luz da Mata</p>
             <p class="text-xs text-stone-500">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
           </div>
-
-          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata+Planta+Laranjeiras+Piraquara+PR" 
-             target="_blank" rel="noopener noreferrer" 
-             class="mt-6 inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
+          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata+Planta+Laranjeiras+Piraquara+PR" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
             📍 Ver no Google Maps (Recepção)
           </a>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- SEÇÃO DE PRESENTES -->
+  <!-- LISTA DE PRESENTES -->
   <section id="presentes" class="py-16 px-4 max-w-3xl mx-auto text-center">
     <h2 class="font-serif-custom text-3xl text-stone-800 mb-2">Lista de Presentes</h2>
     <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Sua contribuição ajudará na nossa caminhada</p>
@@ -167,13 +144,65 @@
       <p class="text-stone-600 text-sm mb-6 leading-relaxed">
         Se desejar nos presentear, fique à vontade! Acesse nossa lista online para escolher uma cota ou contribuição via PIX ou Cartão de Crédito.
       </p>
-
-      <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" 
-         class="inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white py-4 px-8 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-md gap-2">
+      <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white py-4 px-8 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-md gap-2">
         <span>💳 Acessar Lista de Presentes (InfinitePay)</span>
       </a>
-
       <p class="text-[10px] text-stone-400 uppercase mt-4">Pagamento 100% seguro via PIX ou Cartão de Crédito</p>
+    </div>
+  </section>
+
+  <!-- FOTOS E ÁLBUM COMPARTILHADO -->
+  <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Mural de Fotos</h2>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Compartilhe seus cliques da festa conosco!</p>
+
+      <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm">
+        <p class="text-xs text-stone-600 mb-4">
+          Tirou uma foto linda no casamento? Clique no botão abaixo para enviar direto para a nossa pasta no Google Drive/Fotos!
+        </p>
+        <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full btn-casar py-4 px-6 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-md gap-2">
+          📸 Enviar Foto no Álbum dos Noivos
+        </a>
+      </div>
+
+      <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm">
+        <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
+          <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+          <div class="min-w-full"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+          <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MURAL DE RECADOS DOS CONVIDADOS -->
+  <section id="recados" class="py-16 bg-stone-50 border-t border-casar px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Deixe seu Recado</h2>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Escreva uma carinhosa mensagem para Wagner & Larissa</p>
+
+      <form onsubmit="enviarRecado(event)" class="bg-white p-6 rounded-2xl border border-casar shadow-sm max-w-lg mx-auto space-y-4 text-left text-xs mb-12">
+        <div>
+          <label class="block mb-1 font-semibold uppercase text-stone-600">Seu Nome *</label>
+          <input type="text" id="recadoNome" required class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none">
+        </div>
+        <div>
+          <label class="block mb-1 font-semibold uppercase text-stone-600">Sua Mensagem / Recado *</label>
+          <textarea id="recadoTexto" rows="3" required placeholder="Deseje felicidades aos noivos..." class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-800 focus:outline-none"></textarea>
+        </div>
+        <button type="submit" id="btnRecado" class="w-full btn-casar py-3 rounded-xl font-semibold uppercase tracking-widest text-xs">
+          Publicar Recado
+        </button>
+        <p id="msgStatusRecado" class="hidden text-center text-xs p-2 rounded"></p>
+      </form>
+
+      <h3 class="font-serif-custom text-2xl text-stone-800 mb-4">Mensagens Recebidas 💌</h3>
+      <div class="relative overflow-hidden w-full max-w-lg mx-auto min-h-[160px] bg-white p-6 rounded-2xl border border-casar shadow-sm flex items-center justify-center">
+        <div id="containerRecados" class="w-full transition-opacity duration-500">
+          <p class="text-xs text-stone-400 italic">Carregando recados...</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -182,10 +211,9 @@
     <div class="max-w-xl mx-auto">
       <div class="text-center mb-8">
         <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Confirmação de Presença</h2>
-        <p class="text-xs uppercase tracking-widest text-stone-500">Localize seu convite por qualquer Nome, Sobrenome ou Telefone</p>
+        <p class="text-xs uppercase tracking-widest text-stone-500">Localize seu convite por Nome, Sobrenome ou Telefone</p>
       </div>
 
-      <!-- BUSCA TRIDIMENSIONAL -->
       <div id="stepBusca" class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
         <div>
           <label class="block mb-2 text-xs font-semibold uppercase text-stone-600">Localize seu Convite:</label>
@@ -197,7 +225,6 @@
         <p class="text-[11px] text-stone-400 leading-relaxed">* Digite o seu primeiro nome, o nome do responsável ou o telefone cadastrado. Nosso sistema trará toda a sua família automaticamente.</p>
       </div>
 
-      <!-- SELEÇÃO INDIVIDUAL DA FAMÍLIA -->
       <div id="stepSelecao" class="hidden bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-6">
         <div class="border-b border-casar pb-4">
           <span class="text-[10px] uppercase tracking-widest text-casar-primary font-bold">Convite Familiar Encontrado</span>
@@ -206,10 +233,7 @@
         </div>
 
         <form id="formMembros" onsubmit="salvarConfirmacoes(event)" class="space-y-4">
-          <div id="containerMembros" class="space-y-3">
-            <!-- Gerado via JavaScript -->
-          </div>
-
+          <div id="containerMembros" class="space-y-3"></div>
           <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-4 rounded-xl font-semibold tracking-widest uppercase transition text-xs shadow-sm mt-4">
             Enviar Confirmações da Família
           </button>
@@ -220,28 +244,24 @@
     </div>
   </section>
 
-  <!-- RODAPÉ -->
   <footer class="py-8 bg-stone-100 text-center text-xs text-stone-400 border-t border-casar">
     <p class="font-serif-custom text-lg text-stone-600">Wagner & Larissa</p>
     <p class="mt-1">11.12.2026</p>
   </footer>
 
-  <!-- BOTÃO FLUTUANTE DE ACESSO AO PAINEL NOIVOS -->
+  <!-- PAINEL ADM (BOTÃO FLUTUANTE) -->
   <div class="fixed bottom-4 right-4 z-50">
     <button onclick="abrirModalAdmin()" class="bg-stone-800 hover:bg-stone-900 text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2">
       ⚙️ Painel Noivos
     </button>
   </div>
 
-  <!-- MODAL PAINEL ADMINISTRATIVO -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
       <button onclick="fecharModalAdmin()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-xl font-bold">&times;</button>
-      
       <h2 class="font-serif-custom text-2xl text-stone-800 mb-2">Painel Administrativo de Convidados</h2>
-      <p class="text-xs text-stone-500 mb-6">Gerencie a lista de convidados e atualizações com preservação de histórico.</p>
+      <p class="text-xs text-stone-500 mb-6">Gerencie a lista de convidados com preservação de histórico.</p>
 
-      <!-- FORMULÁRIO ADM -->
       <div class="bg-stone-50 p-4 rounded-xl border border-casar mb-6 text-xs space-y-3">
         <h3 class="font-semibold text-stone-700">Adicionar / Editar Convidado</h3>
         <input type="hidden" id="adminLinha">
@@ -257,7 +277,6 @@
         <button onclick="adminSalvar()" class="btn-casar py-2 px-4 rounded text-xs font-semibold uppercase">Salvar Convidado</button>
       </div>
 
-      <!-- TABELA ADM -->
       <div class="overflow-x-auto">
         <table class="w-full text-left text-xs border-collapse">
           <thead>
@@ -270,26 +289,21 @@
               <th class="p-3">Ações</th>
             </tr>
           </thead>
-          <tbody id="tabelaAdminBody">
-            <!-- Gerado via JS -->
-          </tbody>
+          <tbody id="tabelaAdminBody"></tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT PRINCIPAL -->
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
     let familiaAtual = null;
 
-    // Contagem Regressiva para 11/12/2026 16:00
+    // Timer
     const targetDate = new Date("2026-12-11T16:00:00").getTime();
-
     function updateCountdown() {
       const now = new Date().getTime();
       const diff = targetDate - now;
-
       if (diff > 0) {
         document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
         document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
@@ -300,7 +314,87 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Busca de Convites (3 vias)
+    // Carrossel de Fotos
+    let idxFoto = 0;
+    function rodarCarrosselFotos() {
+      const container = document.getElementById("carrosselFotos");
+      if (!container) return;
+      const total = container.children.length;
+      idxFoto = (idxFoto + 1) % total;
+      container.style.transform = `translateX(-${idxFoto * 100}%)`;
+    }
+    setInterval(rodarCarrosselFotos, 3500);
+
+    // Carrossel e Mural de Recados
+    let listaRecadosGlobal = [];
+    let idxRecado = 0;
+
+    function carregarRecados() {
+      executarJSONP({ action: "listarRecados" }, function(res) {
+        if (res.sucesso && res.recados && res.recados.length > 0) {
+          listaRecadosGlobal = res.recados;
+          exibirRecadoAtual();
+        } else {
+          document.getElementById("containerRecados").innerHTML = `
+            <p class="text-xs text-stone-400 italic">Seja o primeiro a deixar uma mensagem de carinho aos noivos!</p>
+          `;
+        }
+      });
+    }
+
+    function exibirRecadoAtual() {
+      if (listaRecadosGlobal.length === 0) return;
+      const container = document.getElementById("containerRecados");
+      const r = listaRecadosGlobal[idxRecado];
+
+      container.style.opacity = 0;
+      setTimeout(() => {
+        container.innerHTML = `
+          <p class="font-serif-custom italic text-lg text-stone-700 mb-3">"${r.mensagem}"</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-casar-primary">— ${r.nome}</p>
+        `;
+        container.style.opacity = 1;
+      }, 300);
+    }
+
+    function proximoRecado() {
+      if (listaRecadosGlobal.length > 1) {
+        idxRecado = (idxRecado + 1) % listaRecadosGlobal.length;
+        exibirRecadoAtual();
+      }
+    }
+    setInterval(proximoRecado, 5000);
+
+    function enviarRecado(event) {
+      event.preventDefault();
+      const btn = document.getElementById("btnRecado");
+      const status = document.getElementById("msgStatusRecado");
+      const nome = document.getElementById("recadoNome").value;
+      const mensagem = document.getElementById("recadoTexto").value;
+
+      btn.disabled = true;
+      btn.innerText = "ENVIANDO...";
+
+      executarJSONP({
+        action: "salvarRecado",
+        nome: nome,
+        mensagem: mensagem
+      }, function(res) {
+        btn.disabled = false;
+        btn.innerText = "PUBLICAR RECADO";
+        status.className = res.sucesso ? "text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800" : "text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
+        status.innerText = res.mensagem;
+        status.classList.remove("hidden");
+
+        if (res.sucesso) {
+          document.getElementById("recadoNome").value = "";
+          document.getElementById("recadoTexto").value = "";
+          carregarRecados();
+        }
+      });
+    }
+
+    // RSVP
     function buscarConvite() {
       const termo = document.getElementById("inputBusca").value;
       const btn = document.getElementById("btnBuscar");
@@ -346,7 +440,6 @@
       });
     }
 
-    // Gravar Confirmações
     function salvarConfirmacoes(event) {
       event.preventDefault();
       const btn = document.getElementById("btnSalvarRSVP");
@@ -381,7 +474,7 @@
       });
     }
 
-    // Ações do Painel Admin
+    // Admin
     function abrirModalAdmin() {
       document.getElementById("modalAdmin").classList.remove("hidden");
       carregarAdminLista();
@@ -452,7 +545,7 @@
       }
     }
 
-    // Utilitário para chamadas via JSONP
+    // JSONP Helper
     function executarJSONP(params, callbackSuccess) {
       const callbackName = "cb_" + Math.floor(Math.random() * 1000000);
       window[callbackName] = function(res) {
@@ -469,6 +562,8 @@
       script.src = `${API_URL}?${query}&callback=${callbackName}`;
       document.body.appendChild(script);
     }
+
+    window.addEventListener("DOMContentLoaded", carregarRecados);
   </script>
 </body>
 </html>
