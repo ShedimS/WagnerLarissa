@@ -151,64 +151,50 @@
   </footer>
 
   <script>
-    // URL do Web App do Apps Script
-    const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
 
-    // Contagem Regressiva
-    const targetDate = new Date("2026-12-11T18:00:00").getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-      if (diff > 0) {
-        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-      }
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+async function enviarRSVP(event) {
+  event.preventDefault();
+  const btn = document.getElementById("btnSubmit");
+  const status = document.getElementById("statusMsg");
 
-    // Envio do RSVP via fetch API
-    async function enviarRSVP(event) {
-      event.preventDefault();
-      const btn = document.getElementById("btnSubmit");
-      const status = document.getElementById("statusMsg");
+  btn.disabled = true;
+  btn.innerText = "ENVIANDO...";
 
-      btn.disabled = true;
-      btn.innerText = "ENVIANDO...";
+  const payload = {
+    nome: document.getElementById("nome").value,
+    telefone: document.getElementById("telefone").value,
+    confirmacao: document.getElementById("confirmacao").value
+  };
 
-      const payload = {
-        nome: document.getElementById("nome").value,
-        telefone: document.getElementById("telefone").value,
-        confirmacao: document.getElementById("confirmacao").value
-      };
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
 
-      try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          body: JSON.stringify(payload)
-        });
+    const res = await response.json();
 
-        const res = await response.json();
+    status.className = res.sucesso 
+      ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200" 
+      : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
+    status.innerText = res.mensagem;
+    status.classList.remove("hidden");
+    
+    if (res.sucesso) document.getElementById("rsvpForm").reset();
 
-        status.className = res.sucesso 
-          ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200" 
-          : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
-        status.innerText = res.mensagem;
-        status.classList.remove("hidden");
-        
-        if (res.sucesso) document.getElementById("rsvpForm").reset();
-
-      } catch (err) {
-        status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
-        status.innerText = "Erro ao conectar ao servidor. Tente novamente.";
-        status.classList.remove("hidden");
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "CONFIRMAR PRESENÇA";
-      }
-    }
+  } catch (err) {
+    status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
+    status.innerText = "Erro ao conectar ao servidor. Tente novamente.";
+    status.classList.remove("hidden");
+  } finally {
+    btn.disabled = false;
+    btn.innerText = "CONFIRMAR PRESENÇA";
+  }
+}
   </script>
 </body>
 </html>
