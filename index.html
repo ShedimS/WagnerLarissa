@@ -153,48 +153,49 @@
   <script>
   const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
 
-async function enviarRSVP(event) {
-  event.preventDefault();
-  const btn = document.getElementById("btnSubmit");
-  const status = document.getElementById("statusMsg");
+    async function enviarRSVP(event) {
+      event.preventDefault();
+      const btn = document.getElementById("btnSubmit");
+      const status = document.getElementById("statusMsg");
 
-  btn.disabled = true;
-  btn.innerText = "ENVIANDO...";
+      btn.disabled = true;
+      btn.innerText = "ENVIANDO...";
 
-  const payload = {
-    nome: document.getElementById("nome").value,
-    telefone: document.getElementById("telefone").value,
-    confirmacao: document.getElementById("confirmacao").value
-  };
+      const payload = {
+        nome: document.getElementById("nome").value,
+        telefone: document.getElementById("telefone").value,
+        confirmacao: document.getElementById("confirmacao").value
+      };
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(payload)
-    });
+      try {
+        // Enviar como text/plain evita que o navegador dispare a verificação prévia de CORS (preflight)
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        });
 
-    const res = await response.json();
+        const res = await response.json();
 
-    status.className = res.sucesso 
-      ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200" 
-      : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
-    status.innerText = res.mensagem;
-    status.classList.remove("hidden");
-    
-    if (res.sucesso) document.getElementById("rsvpForm").reset();
+        status.className = res.sucesso 
+          ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-800 border border-emerald-200" 
+          : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
+        status.innerText = res.mensagem;
+        status.classList.remove("hidden");
+        
+        if (res.sucesso) document.getElementById("rsvpForm").reset();
 
-  } catch (err) {
-    status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
-    status.innerText = "Erro ao conectar ao servidor. Tente novamente.";
-    status.classList.remove("hidden");
-  } finally {
-    btn.disabled = false;
-    btn.innerText = "CONFIRMAR PRESENÇA";
-  }
-}
+      } catch (err) {
+        status.className = "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-800 border border-rose-200";
+        status.innerText = "Erro ao conectar ao servidor. Tente novamente.";
+        status.classList.remove("hidden");
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "CONFIRMAR PRESENÇA";
+      }
+    }
   </script>
 </body>
 </html>
