@@ -251,7 +251,7 @@
     <p class="mt-1">11.12.2026</p>
   </footer>
 
-  <!-- PAINEL ADM (BOTÃO FLUTUANTE) -->
+  <!-- PAINEL ADM -->
   <div class="fixed bottom-4 right-4 z-50">
     <button onclick="abrirModalAdmin()" class="bg-stone-800 hover:bg-stone-900 text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2">
       ⚙️ Painel Noivos
@@ -327,6 +327,26 @@
       container.style.transform = `translateX(-${idxFoto * 100}%)`;
     }
     setInterval(rodarCarrosselFotos, 3500);
+
+    // Carregar Fotos da Pasta do Google Drive via API
+    function carregarFotosDrive() {
+      executarJSONP({ action: "listarFotos" }, function(res) {
+        if (res.sucesso && res.fotos && res.fotos.length > 0) {
+          const carrossel = document.getElementById("carrosselFotos");
+          carrossel.innerHTML = "";
+          
+          res.fotos.forEach(url => {
+            const slide = document.createElement("div");
+            slide.className = "min-w-full";
+            slide.innerHTML = `<img src="${url}" class="w-full h-80 md:h-96 object-cover" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80'">`;
+            carrossel.appendChild(slide);
+          });
+          
+          idxFoto = 0;
+          carrossel.style.transform = `translateX(0%)`;
+        }
+      });
+    }
 
     // Upload de Foto com Injeção Automática no Carrossel
     async function enviarFoto() {
@@ -629,7 +649,11 @@
       document.body.appendChild(script);
     }
 
-    window.addEventListener("DOMContentLoaded", carregarRecados);
+    // Inicialização ao carregar a página
+    window.addEventListener("DOMContentLoaded", function() {
+      carregarRecados();
+      carregarFotosDrive();
+    });
   </script>
 </body>
 </html>
