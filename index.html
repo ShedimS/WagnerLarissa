@@ -167,13 +167,21 @@
         <p id="statusFoto" class="hidden mt-3 text-center text-xs p-2 rounded"></p>
       </div>
 
-      <!-- CARROSSEL DE FOTOS -->
-      <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm">
+      <!-- CARROSSEL DE FOTOS COM SETAS -->
+      <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm group">
         <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
           <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
           <div class="min-w-full"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
           <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
         </div>
+
+        <!-- SETAS DE NAVEGAÇÃO -->
+        <button onclick="fotoAnterior()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none backdrop-blur-sm">
+          ❮
+        </button>
+        <button onclick="proximaFoto()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none backdrop-blur-sm">
+          ❯
+        </button>
       </div>
     </div>
   </section>
@@ -316,17 +324,34 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Carrossel de Fotos
+    // Carrossel de Fotos com Setas e Troca Automática
     let idxFoto = 0;
-    function rodarCarrosselFotos() {
+
+    function atualizarCarrossel() {
+      const container = document.getElementById("carrosselFotos");
+      if (!container) return;
+      container.style.transform = `translateX(-${idxFoto * 100}%)`;
+    }
+
+    function proximaFoto() {
       const container = document.getElementById("carrosselFotos");
       if (!container) return;
       const total = container.children.length;
       if (total === 0) return;
       idxFoto = (idxFoto + 1) % total;
-      container.style.transform = `translateX(-${idxFoto * 100}%)`;
+      atualizarCarrossel();
     }
-    setInterval(rodarCarrosselFotos, 3500);
+
+    function fotoAnterior() {
+      const container = document.getElementById("carrosselFotos");
+      if (!container) return;
+      const total = container.children.length;
+      if (total === 0) return;
+      idxFoto = (idxFoto - 1 + total) % total;
+      atualizarCarrossel();
+    }
+
+    setInterval(proximaFoto, 4000);
 
     // Carregar Fotos da Pasta do Google Drive via API
     function carregarFotosDrive() {
@@ -343,7 +368,7 @@
           });
           
           idxFoto = 0;
-          carrossel.style.transform = `translateX(0%)`;
+          atualizarCarrossel();
         }
       });
     }
@@ -396,7 +421,7 @@
               novoSlide.innerHTML = `<img src="${resultado.url}" class="w-full h-80 md:h-96 object-cover">`;
               carrossel.prepend(novoSlide);
               idxFoto = 0;
-              carrossel.style.transform = `translateX(0%)`;
+              atualizarCarrossel();
             }
           }
         } catch (err) {
