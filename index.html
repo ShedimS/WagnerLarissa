@@ -167,21 +167,34 @@
         <p id="statusFoto" class="hidden mt-3 text-center text-xs p-2 rounded"></p>
       </div>
 
-      <!-- CARROSSEL DE FOTOS COM SETAS -->
-      <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm group">
-        <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
-          <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
-          <div class="min-w-full"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
-          <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+      <!-- CARROSSEL DE FOTOS COM NAVEGAÇÃO COMPLETA -->
+      <div class="max-w-xl mx-auto">
+        <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm">
+          <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
+            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+          </div>
+
+          <!-- SETAS FLUTUANTES DENTRO DA FOTO -->
+          <button onclick="fotoAnterior()" type="button" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">
+            &#10094;
+          </button>
+          <button onclick="proximaFoto()" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">
+            &#10095;
+          </button>
         </div>
 
-        <!-- SETAS DE NAVEGAÇÃO -->
-        <button onclick="fotoAnterior()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none backdrop-blur-sm">
-          ❮
-        </button>
-        <button onclick="proximaFoto()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none backdrop-blur-sm">
-          ❯
-        </button>
+        <!-- BOTÕES INFERIORES DE ANTERIOR / PRÓXIMO PARA FOTOS -->
+        <div class="flex justify-between items-center mt-4">
+          <button onclick="fotoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+            &#10094; Anterior
+          </button>
+          <span id="contadorFotos" class="text-xs text-stone-500 font-medium">Foto 1</span>
+          <button onclick="proximaFoto()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+            Próxima &#10095;
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -207,10 +220,24 @@
         <p id="msgStatusRecado" class="hidden text-center text-xs p-2 rounded"></p>
       </form>
 
+      <!-- CARROSSEL DE RECADOS COM BOTÕES DE NAVEGAÇÃO -->
       <h3 class="font-serif-custom text-2xl text-stone-800 mb-4">Mensagens Recebidas 💌</h3>
-      <div class="relative overflow-hidden w-full max-w-lg mx-auto min-h-[160px] bg-white p-6 rounded-2xl border border-casar shadow-sm flex items-center justify-center">
-        <div id="containerRecados" class="w-full transition-opacity duration-500">
-          <p class="text-xs text-stone-400 italic">Carregando recados...</p>
+      <div class="max-w-lg mx-auto">
+        <div class="relative overflow-hidden w-full min-h-[160px] bg-white p-6 rounded-2xl border border-casar shadow-sm flex items-center justify-center">
+          <div id="containerRecados" class="w-full transition-opacity duration-500">
+            <p class="text-xs text-stone-400 italic">Carregando recados...</p>
+          </div>
+        </div>
+
+        <!-- BOTÕES INFERIORES DE ANTERIOR / PRÓXIMO PARA RECADOS -->
+        <div class="flex justify-between items-center mt-4">
+          <button onclick="recadoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+            &#10094; Anterior
+          </button>
+          <span id="contadorRecados" class="text-xs text-stone-500 font-medium"></span>
+          <button onclick="proximoRecado()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+            Próxima &#10095;
+          </button>
         </div>
       </div>
     </div>
@@ -324,13 +351,20 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Carrossel de Fotos com Setas e Troca Automática
+    // LÓGICA DO CARROSSEL DE FOTOS (COM SETAS E BOTÕES)
     let idxFoto = 0;
 
     function atualizarCarrossel() {
       const container = document.getElementById("carrosselFotos");
+      const contador = document.getElementById("contadorFotos");
       if (!container) return;
+      const total = container.children.length;
+      if (total === 0) return;
+      
       container.style.transform = `translateX(-${idxFoto * 100}%)`;
+      if (contador) {
+        contador.innerText = `Foto ${idxFoto + 1} de ${total}`;
+      }
     }
 
     function proximaFoto() {
@@ -353,7 +387,7 @@
 
     setInterval(proximaFoto, 4000);
 
-    // Carregar Fotos da Pasta do Google Drive via API
+    // Carregar Fotos do Google Drive
     function carregarFotosDrive() {
       executarJSONP({ action: "listarFotos" }, function(res) {
         if (res.sucesso && res.fotos && res.fotos.length > 0) {
@@ -373,7 +407,7 @@
       });
     }
 
-    // Upload de Foto com Injeção Automática no Carrossel
+    // Upload de Foto
     async function enviarFoto() {
       const input = document.getElementById("fotoInput");
       const btn = document.getElementById("btnUploadFoto");
@@ -436,7 +470,7 @@
       reader.readAsDataURL(file);
     }
 
-    // Carrossel e Mural de Recados
+    // LÓGICA DO CARROSSEL DE RECADOS (COM ANTERIOR / PRÓXIMO)
     let listaRecadosGlobal = [];
     let idxRecado = 0;
 
@@ -456,6 +490,7 @@
     function exibirRecadoAtual() {
       if (listaRecadosGlobal.length === 0) return;
       const container = document.getElementById("containerRecados");
+      const contador = document.getElementById("contadorRecados");
       const r = listaRecadosGlobal[idxRecado];
 
       container.style.opacity = 0;
@@ -465,6 +500,9 @@
           <p class="text-xs font-semibold uppercase tracking-wider text-casar-primary">— ${r.nome}</p>
         `;
         container.style.opacity = 1;
+        if (contador) {
+          contador.innerText = `Mensagem ${idxRecado + 1} de ${listaRecadosGlobal.length}`;
+        }
       }, 300);
     }
 
@@ -474,7 +512,15 @@
         exibirRecadoAtual();
       }
     }
-    setInterval(proximoRecado, 5000);
+
+    function recadoAnterior() {
+      if (listaRecadosGlobal.length > 1) {
+        idxRecado = (idxRecado - 1 + listaRecadosGlobal.length) % listaRecadosGlobal.length;
+        exibirRecadoAtual();
+      }
+    }
+
+    setInterval(proximoRecado, 6000);
 
     function enviarRecado(event) {
       event.preventDefault();
@@ -585,7 +631,7 @@
       });
     }
 
-    // Admin
+    // ADMIN
     function abrirModalAdmin() {
       document.getElementById("modalAdmin").classList.remove("hidden");
       carregarAdminLista();
