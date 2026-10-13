@@ -154,19 +154,31 @@
     </div>
   </section>
 
-  <!-- FOTOS -->
+  <!-- FOTOS E UPLOAD ANÔNIMO COM BARRA DE PROGRESSO -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-800 mb-1">Mural de Fotos</h2>
-      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Envie suas fotos da festa direto para o nosso álbum do Google Drive!</p>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-8">Envie suas fotos da festa anonimamente para o álbum dos noivos!</p>
 
       <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm text-left">
-        <label class="block text-xs font-semibold uppercase text-stone-600 mb-2">Escolha uma foto da galeria ou tire uma foto agora:</label>
+        <label class="block text-xs font-semibold uppercase text-stone-600 mb-2">Escolha uma foto da galeria ou tire uma foto agora (Envio Anônimo):</label>
         <input type="file" id="fotoInput" accept="image/*" class="w-full p-3 bg-white border border-casar rounded-xl text-xs text-stone-700 mb-4 focus:outline-none">
         
         <button onclick="enviarFoto()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-semibold text-xs uppercase tracking-widest shadow-sm">
           📸 Salvar Foto no Álbum dos Noivos
         </button>
+
+        <!-- BARRA DE PROGRESSO DO UPLOAD -->
+        <div id="containerProgresso" class="hidden mt-4 space-y-1">
+          <div class="flex justify-between text-[11px] font-semibold text-stone-600">
+            <span id="txtStatusProgresso">Enviando foto...</span>
+            <span id="pctProgresso">0%</span>
+          </div>
+          <div class="w-full bg-stone-200 rounded-full h-2.5 overflow-hidden">
+            <div id="barraProgresso" class="bg-amber-600 h-2.5 rounded-full transition-all duration-300 w-0"></div>
+          </div>
+        </div>
+
         <p id="statusFoto" class="hidden mt-3 text-center text-xs p-2 rounded"></p>
       </div>
 
@@ -296,7 +308,7 @@
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden">
       
-      <!-- Cabeçalho Fixo com Botão Fechar Alinhado -->
+      <!-- Cabeçalho Fixo -->
       <div class="p-4 border-b border-casar flex justify-between items-center bg-stone-50">
         <div>
           <h2 class="font-serif-custom text-2xl text-stone-800 font-semibold">Painel Administrativo de Convidados</h2>
@@ -335,9 +347,8 @@
         </div>
       </div>
 
-      <!-- ÁREA DE PESQUISA E INCLUSÃO DE CONVIDADOS -->
+      <!-- ÁREA DE PESQUISA E INCLUSÃO -->
       <div class="p-4 bg-stone-100 border-b border-casar text-xs space-y-3">
-        <!-- BUSCA DINÂMICA AUTO-PREENCHIDA -->
         <div class="flex flex-col md:flex-row gap-2 items-center justify-between">
           <div class="w-full md:w-1/2 relative">
             <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome, Responsável ou Telefone..." class="w-full p-2.5 pl-3 border border-casar rounded-lg bg-white text-xs text-stone-800 focus:outline-none focus:border-stone-500 shadow-sm">
@@ -345,7 +356,6 @@
           <span id="txtResultadosFiltro" class="text-[11px] text-stone-500 italic">Exibindo todos os registros</span>
         </div>
 
-        <!-- FORMULÁRIO RÁPIDO DE INCLUSÃO -->
         <div class="pt-2 border-t border-stone-200">
           <h3 class="font-semibold text-stone-700 mb-2 uppercase tracking-wider text-[10px]">➕ Adicionar Novo Convidado à Lista</h3>
           <div class="grid md:grid-cols-4 gap-2">
@@ -365,7 +375,7 @@
         </div>
       </div>
 
-      <!-- TABELA COM CONTAINER DE ROLAGEM INDEPENDENTE -->
+      <!-- TABELA -->
       <div id="containerTabelaAdmin" class="p-4 overflow-y-auto flex-1 scroll-smooth">
         <table class="w-full text-left text-xs border-collapse">
           <thead>
@@ -389,7 +399,7 @@
         </table>
       </div>
 
-      <!-- Rodapé Fixo do Modal -->
+      <!-- Rodapé Fixo -->
       <div class="p-3 bg-stone-50 border-t border-casar flex justify-between items-center text-xs">
         <span class="text-stone-400 text-[10px]">Pressione ESC ou clique em Sair para fechar</span>
         <button onclick="fecharModalAdmin()" class="bg-stone-600 hover:bg-stone-700 text-white px-5 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider">
@@ -477,10 +487,15 @@
       });
     }
 
+    // UPLOAD ANÔNIMO DE FOTO COM BARRA DE PROGRESSO
     async function enviarFoto() {
       const input = document.getElementById("fotoInput");
       const btn = document.getElementById("btnUploadFoto");
       const status = document.getElementById("statusFoto");
+      const boxProgresso = document.getElementById("containerProgresso");
+      const barra = document.getElementById("barraProgresso");
+      const txtStatus = document.getElementById("txtStatusProgresso");
+      const pctTxt = document.getElementById("pctProgresso");
 
       if (!input.files || input.files.length === 0) {
         alert("Por favor, selecione uma foto primeiro.");
@@ -490,9 +505,28 @@
       const file = input.files[0];
       btn.disabled = true;
       btn.innerText = "ENVIANDO FOTO...";
+      status.classList.add("hidden");
+
+      boxProgresso.classList.remove("hidden");
+      barra.style.width = "10%";
+      pctTxt.innerText = "10%";
+      txtStatus.innerText = "Lendo arquivo...";
 
       const reader = new FileReader();
+
+      reader.onprogress = function(e) {
+        if (e.lengthComputable) {
+          const p = Math.round((e.loaded / e.total) * 40);
+          barra.style.width = p + "%";
+          pctTxt.innerText = p + "%";
+        }
+      };
+
       reader.onload = async function(e) {
+        txtStatus.innerText = "Processando e otimizando imagem...";
+        barra.style.width = "50%";
+        pctTxt.innerText = "50%";
+
         const base64Data = e.target.result.split(',')[1];
         const payload = {
           action: "uploadFoto",
@@ -501,6 +535,17 @@
           nomeArquivo: file.name
         };
 
+        txtStatus.innerText = "Enviando para o Google Drive...";
+        
+        let simProgresso = 50;
+        const interval = setInterval(() => {
+          if (simProgresso < 90) {
+            simProgresso += 5;
+            barra.style.width = simProgresso + "%";
+            pctTxt.innerText = simProgresso + "%";
+          }
+        }, 200);
+
         try {
           const res = await fetch(API_URL, {
             method: "POST",
@@ -508,26 +553,37 @@
             body: JSON.stringify(payload)
           });
           const resultado = await res.json();
+          clearInterval(interval);
 
-          status.className = resultado.sucesso 
-            ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800" 
-            : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
-          status.innerText = resultado.mensagem;
-          status.classList.remove("hidden");
+          barra.style.width = "100%";
+          pctTxt.innerText = "100%";
+          txtStatus.innerText = "Concluído!";
 
-          if (resultado.sucesso) {
-            input.value = "";
-            if (resultado.url) {
-              const carrossel = document.getElementById("carrosselFotos");
-              const novoSlide = document.createElement("div");
-              novoSlide.className = "min-w-full";
-              novoSlide.innerHTML = `<img src="${resultado.url}" class="w-full h-80 md:h-96 object-cover">`;
-              carrossel.prepend(novoSlide);
-              idxFoto = 0;
-              atualizarCarrossel();
+          setTimeout(() => {
+            boxProgresso.classList.add("hidden");
+            status.className = resultado.sucesso 
+              ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-800 font-semibold" 
+              : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
+            status.innerText = resultado.mensagem;
+            status.classList.remove("hidden");
+
+            if (resultado.sucesso) {
+              input.value = "";
+              if (resultado.url) {
+                const carrossel = document.getElementById("carrosselFotos");
+                const novoSlide = document.createElement("div");
+                novoSlide.className = "min-w-full";
+                novoSlide.innerHTML = `<img src="${resultado.url}" class="w-full h-80 md:h-96 object-cover">`;
+                carrossel.prepend(novoSlide);
+                idxFoto = 0;
+                atualizarCarrossel();
+              }
             }
-          }
+          }, 400);
+
         } catch (err) {
+          clearInterval(interval);
+          boxProgresso.classList.add("hidden");
           status.className = "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-800";
           status.innerText = "Erro ao enviar a foto. Tente novamente.";
           status.classList.remove("hidden");
@@ -536,6 +592,7 @@
           btn.innerText = "📸 Salvar Foto no Álbum dos Noivos";
         }
       };
+
       reader.readAsDataURL(file);
     }
 
@@ -701,7 +758,7 @@
       });
     }
 
-    // ADMIN - PESQUISA DINÂMICA, ORDENAÇÃO, FOCO AUTOMÁTICO E CONTAGEM
+    // ADMIN
     function abrirModalAdmin() {
       document.getElementById("modalAdmin").classList.remove("hidden");
       carregarAdminLista();
@@ -782,7 +839,6 @@
         return resp.indexOf(termo) !== -1 || nome.indexOf(termo) !== -1 || cont.indexOf(termo) !== -1;
       });
 
-      // Ordenação
       filtrados.sort((a, b) => {
         let valA = normalizar(a[ordemCampo]);
         let valB = normalizar(b[ordemCampo]);
@@ -839,14 +895,11 @@
       });
     }
 
-    // EDICAO COM ROLAGEM E HIGHLIGHT VISUAL DE FOCO
     function ativarEdicaoLinha(linha) {
       const c = convidadosCache.find(item => item.linha === linha);
       if (!c) return;
 
       const tr = document.getElementById(`linha_${linha}`);
-      
-      // Aplica estilo de destaque (Highlight)
       tr.className = "border-2 border-amber-400 bg-amber-50/90 shadow-md transition-all duration-300";
 
       tr.innerHTML = `
@@ -867,10 +920,8 @@
         </td>
       `;
 
-      // Centraliza a linha suavemente na área visível da tabela
       tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      
-      // Coloca o foco no primeiro campo
+
       setTimeout(() => {
         const inputFoco = document.getElementById(`editResp_${linha}`);
         if (inputFoco) inputFoco.focus();
