@@ -8,19 +8,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    html {
-      scroll-padding-top: 65px;
-    }
-    body { font-family: 'Montserrat', sans-serif; background-color: #fbf9f7; color: #4a4238; }
-    .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
-    .font-cursive { font-family: 'Great Vibes', cursive; }
-    .bg-casar-header { background-color: #f5efe9; }
-    .btn-casar { background-color: #a38573; color: #ffffff; }
-    .btn-casar:hover { background-color: #8c6e5c; }
-    .text-casar-primary { color: #8c6e5c; }
-    .border-casar { border-color: #e8ded5; }
-  </style>
+ <style>
+  html {
+    scroll-padding-top: 65px;
+  }
+  
+  /* Fundo fixo com transparência usando a foto.jpeg da pasta */
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: #4a4238;
+    background: linear-gradient(rgba(251, 249, 247, 0.88), rgba(251, 249, 247, 0.88)), url('foto.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
+  .font-cursive { font-family: 'Great Vibes', cursive; }
+  .bg-casar-header { background-color: rgba(245, 239, 233, 0.9); }
+  .btn-casar { background-color: #a38573; color: #ffffff; }
+  .btn-casar:hover { background-color: #8c6e5c; }
+  .text-casar-primary { color: #8c6e5c; }
+  .border-casar { border-color: #e8ded5; }
+</style>
 </head>
 <body class="antialiased">
 
