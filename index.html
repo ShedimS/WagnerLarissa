@@ -275,6 +275,45 @@ footer {
     animation-duration: 0.01ms !important;
   }
 }
+  ```css
+/* NAV fixada no topo */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+/* A imagem começa abaixo da navegação */
+body {
+  background-position: center 0;
+  background-attachment: fixed;
+}
+
+/* Evita que o conteúdo fique escondido atrás da nav */
+main {
+  padding-top: 70px;
+}
+
+/* Se a seção inicial tiver imagem de fundo próprio,
+   deixa aparecer o fundo global */
+#home {
+  background: transparent !important;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  main {
+    padding-top: 65px;
+  }
+
+  body {
+    background-attachment: scroll;
+  }
+}
+```
 </style>
 ```
 </head>
