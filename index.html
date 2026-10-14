@@ -8,126 +8,275 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
- <style>
+```html
+<style>
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+   ========================================= */
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #4a4238;
+
+  /* Fundo global */
+  background-image:
+    linear-gradient(
+      rgba(251, 249, 247, 0.52),
+      rgba(251, 249, 247, 0.52)
+    ),
+    url('foto.jpeg');
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* =========================================
+   TIPOGRAFIA
+   ========================================= */
+
+h1,
+h2,
+h3,
+h4,
+.font-serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-sans {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* =========================================
+   CORES E ELEMENTOS PRINCIPAIS
+   ========================================= */
+
+:root {
+  --cor-principal: #8b7355;
+  --cor-principal-hover: #725d44;
+  --cor-texto: #4a4238;
+  --cor-borda: rgba(139, 115, 85, 0.35);
+  --fundo-cartao: rgba(255, 255, 255, 0.84);
+  --fundo-claro: rgba(251, 249, 247, 0.55);
+}
+
+/* =========================================
+   FUNDO TRANSPARENTE EM TODAS AS SEÇÕES
+   ========================================= */
+
+/*
+   O !important é necessário para prevalecer
+   sobre classes utilitárias do Tailwind,
+   como bg-white e bg-stone-50.
+*/
+
+body,
+main,
+section,
+header,
+footer {
+  background-color: transparent !important;
+}
+
+/* Navegação */
+nav {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-color: var(--cor-borda);
+}
+
+/* =========================================
+   ÁREA INICIAL
+   ========================================= */
+
+#home {
+  background-color: transparent !important;
+}
+
+/* =========================================
+   SEÇÕES DO SITE
+   ========================================= */
+
+#historia,
+#trajes,
+#local,
+#presentes,
+#galeria,
+#recados,
+#rsvp {
+  background-color: transparent !important;
+}
+
+/* Blocos internos que precisam de contraste */
+.card,
+.cartao,
+.painel,
+.form-container {
+  background-color: var(--fundo-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: 12px;
+}
+
+/* =========================================
+   BOTÕES
+   ========================================= */
+
+button,
+.btn,
+a.btn {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+button:hover,
+.btn:hover,
+a.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Botões principais */
+.bg-amber-800,
+.bg-stone-800,
+button[type="submit"] {
+  background-color: var(--cor-principal) !important;
+}
+
+.bg-amber-800:hover,
+.bg-stone-800:hover,
+button[type="submit"]:hover {
+  background-color: var(--cor-principal-hover) !important;
+}
+
+/* =========================================
+   LINKS
+   ========================================= */
+
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--cor-principal-hover);
+}
+
+/* =========================================
+   FORMULÁRIOS
+   ========================================= */
+
+input,
+select,
+textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+  color: var(--cor-texto);
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid rgba(139, 115, 85, 0.25);
+  border-color: var(--cor-principal);
+}
+
+/* =========================================
+   IMAGENS E GALERIA
+   ========================================= */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#galeria img {
+  object-fit: cover;
+}
+
+/* =========================================
+   MODAIS
+   ========================================= */
+
+.modal,
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.modal-content {
+  background-color: rgba(255, 255, 255, 0.97);
+  color: var(--cor-texto);
+  border-radius: 12px;
+}
+
+/* =========================================
+   RODAPÉ
+   ========================================= */
+
+footer {
+  background-color: rgba(255, 255, 255, 0.40) !important;
+}
+
+/* =========================================
+   ROLAGEM
+   ========================================= */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b8a58d rgba(255, 255, 255, 0.35);
+}
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 768px) {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 65px;
-    min-height: 100%;
   }
 
   body {
-    font-family: 'Montserrat', sans-serif;
-    color: #4a4238;
-    min-height: 100vh;
-    margin: 0;
-
-    /* Fundo fixo */
-    background-image:
-      linear-gradient(
-        rgba(251, 249, 247, 0.72),
-        rgba(251, 249, 247, 0.72)
-      ),
-      url('foto.jpeg');
-
+    background-attachment: scroll;
+    background-position: center top;
     background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
   }
 
-  /* Fontes personalizadas */
-  .font-serif-custom {
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  .font-cursive {
-    font-family: 'Great Vibes', cursive;
-  }
-
-  /* Cores do casamento */
-  .bg-casar-header {
-    background-color: rgba(245, 239, 233, 0.82);
-  }
-
-  .btn-casar {
-    background-color: #a38573;
-    color: #ffffff;
-  }
-
-  .btn-casar:hover {
-    background-color: #8c6e5c;
-  }
-
-  .text-casar-primary {
-    color: #8c6e5c;
-  }
-
-  .border-casar {
-    border-color: #e8ded5;
-  }
-
-  /* Menu permanece legível ao rolar */
   nav {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+
+/* =========================================
+   ACESSIBILIDADE
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  /* Capa com transparência */
-  #home {
-    background-color: rgba(245, 239, 233, 0.55);
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
-
-  /* Seções externas transparentes para mostrar a foto */
-  #historia,
-  #trajes,
-  #local,
-  #presentes,
-  #galeria,
-  #recados,
-  #rsvp,
-  footer {
-    background-color: transparent;
-  }
-
-  /* Cartões e áreas de conteúdo */
-  #historia .bg-stone-50,
-  #trajes .bg-stone-50,
-  #trajes .bg-rose-50\/70,
-  #local .bg-white,
-  #presentes .bg-white,
-  #galeria .bg-stone-50,
-  #recados form,
-  #recados .bg-white,
-  #rsvp #stepBusca,
-  #rsvp #stepSelecao {
-    background-color: rgba(255, 255, 255, 0.90);
-  }
-
-  /* Campos de formulário */
-  input,
-  textarea,
-  select {
-    color: #4a4238;
-  }
-
-  /* Imagens mantêm o comportamento responsivo */
-  img {
-    max-width: 100%;
-  }
-
-  /* Fundo do painel administrativo */
-  #modalAdmin {
-    background-color: rgba(0, 0, 0, 0.60);
-  }
-
-  /* Celulares: evita problemas com background fixo */
-  @media (max-width: 768px) {
-    body {
-      background-attachment: scroll;
-      background-position: center top;
-    }
-  }
+}
 </style>
+```
 </head>
 <body class="antialiased">
 
