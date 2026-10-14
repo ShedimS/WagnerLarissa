@@ -10,27 +10,123 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
  <style>
   html {
+    scroll-behavior: smooth;
     scroll-padding-top: 65px;
+    min-height: 100%;
   }
-  
-  /* Fundo fixo com transparência usando a foto.jpeg da pasta */
+
   body {
     font-family: 'Montserrat', sans-serif;
     color: #4a4238;
-    background: linear-gradient(rgba(251, 249, 247, 0.88), rgba(251, 249, 247, 0.88)), url('foto.jpeg');
+    min-height: 100vh;
+    margin: 0;
+
+    /* Fundo fixo */
+    background-image:
+      linear-gradient(
+        rgba(251, 249, 247, 0.72),
+        rgba(251, 249, 247, 0.72)
+      ),
+      url('foto.jpeg');
+
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
-  .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
-  .font-cursive { font-family: 'Great Vibes', cursive; }
-  .bg-casar-header { background-color: rgba(245, 239, 233, 0.9); }
-  .btn-casar { background-color: #a38573; color: #ffffff; }
-  .btn-casar:hover { background-color: #8c6e5c; }
-  .text-casar-primary { color: #8c6e5c; }
-  .border-casar { border-color: #e8ded5; }
+  /* Fontes personalizadas */
+  .font-serif-custom {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .font-cursive {
+    font-family: 'Great Vibes', cursive;
+  }
+
+  /* Cores do casamento */
+  .bg-casar-header {
+    background-color: rgba(245, 239, 233, 0.82);
+  }
+
+  .btn-casar {
+    background-color: #a38573;
+    color: #ffffff;
+  }
+
+  .btn-casar:hover {
+    background-color: #8c6e5c;
+  }
+
+  .text-casar-primary {
+    color: #8c6e5c;
+  }
+
+  .border-casar {
+    border-color: #e8ded5;
+  }
+
+  /* Menu permanece legível ao rolar */
+  nav {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Capa com transparência */
+  #home {
+    background-color: rgba(245, 239, 233, 0.55);
+  }
+
+  /* Seções externas transparentes para mostrar a foto */
+  #historia,
+  #trajes,
+  #local,
+  #presentes,
+  #galeria,
+  #recados,
+  #rsvp,
+  footer {
+    background-color: transparent;
+  }
+
+  /* Cartões e áreas de conteúdo */
+  #historia .bg-stone-50,
+  #trajes .bg-stone-50,
+  #trajes .bg-rose-50\/70,
+  #local .bg-white,
+  #presentes .bg-white,
+  #galeria .bg-stone-50,
+  #recados form,
+  #recados .bg-white,
+  #rsvp #stepBusca,
+  #rsvp #stepSelecao {
+    background-color: rgba(255, 255, 255, 0.90);
+  }
+
+  /* Campos de formulário */
+  input,
+  textarea,
+  select {
+    color: #4a4238;
+  }
+
+  /* Imagens mantêm o comportamento responsivo */
+  img {
+    max-width: 100%;
+  }
+
+  /* Fundo do painel administrativo */
+  #modalAdmin {
+    background-color: rgba(0, 0, 0, 0.60);
+  }
+
+  /* Celulares: evita problemas com background fixo */
+  @media (max-width: 768px) {
+    body {
+      background-attachment: scroll;
+      background-position: center top;
+    }
+  }
 </style>
 </head>
 <body class="antialiased">
