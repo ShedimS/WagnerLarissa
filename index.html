@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR" class="scroll-smooth" id="htmlRoot">
 <head>
   <meta charset="UTF-8">
   <title>Wagner & Larissa - 11/12/2026</title>
@@ -14,11 +14,24 @@
       --casar-principal: #f6f8f7;
       --casar-borda: rgba(232, 222, 213, 0.9);
       --bg-transparency: 0.65;
+      --bg-site: #f7f2ed;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --nav-bg: rgba(255, 255, 255, 0.98);
+    }
+
+    .dark-mode {
+      --casar-texto: #f3f4f6;
+      --casar-principal: #111827;
+      --casar-borda: rgba(55, 65, 81, 0.9);
+      --bg-transparency: 0.85;
+      --bg-site: #1f2937;
+      --card-bg: rgba(31, 41, 55, 0.92);
+      --nav-bg: rgba(17, 24, 39, 0.98);
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 110px; /* Ajustado para compensar o menu de duas linhas */
+      scroll-padding-top: 135px;
     }
 
     body {
@@ -28,8 +41,9 @@
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       color: var(--casar-texto);
-      background: transparent !important;
+      background: var(--bg-site) !important;
       padding-bottom: 50px;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
@@ -37,9 +51,8 @@
     .btn-casar { background-color: #a38573; color: #ffffff; }
     .btn-casar:hover { background-color: #8c6e5c; }
     .text-casar-primary { color: #8c6e5c; }
-    .border-casar { border-color: #e8ded5; }
+    .border-casar { border-color: var(--casar-borda); }
 
-    /* Fundo independente com paralaxe suave */
     #parallax-bg {
       position: fixed;
       top: 100px;
@@ -49,7 +62,7 @@
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
-      background: #f7f2ed;
+      background: var(--bg-site);
     }
 
     #parallax-image {
@@ -59,8 +72,8 @@
       width: 100%;
       height: calc(100% + 300px);
       background-image: linear-gradient(
-        rgba(255, 253, 250, var(--bg-transparency)),
-        rgba(255, 253, 250, var(--bg-transparency))
+        rgba(30, 25, 20, var(--bg-transparency)),
+        rgba(30, 25, 20, var(--bg-transparency))
       ), url('foto.jpeg');
       background-size: cover;
       background-position: center 25%;
@@ -80,24 +93,20 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background-color: rgba(255, 255, 255, 0.98) !important;
+      background-color: var(--nav-bg) !important;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
 
-    #home, #historia, #trajes, #local, #presentes, #galeria, #recados, #rsvp {
-      background-color: transparent !important;
-    }
-
-    .bg-white { background-color: rgba(255, 255, 255, 0.88) !important; }
-    .bg-white\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
-    .bg-stone-50 { background-color: rgba(250, 250, 249, 0.86) !important; }
+    .bg-white { background-color: var(--card-bg) !important; }
+    .bg-white\/95 { background-color: var(--card-bg) !important; }
+    .bg-stone-50 { background-color: var(--card-bg) !important; }
 
     input, select, textarea {
       max-width: 100%;
       box-sizing: border-box;
       color: var(--casar-texto);
-      background-color: rgba(255, 255, 255, 0.94);
+      background-color: var(--card-bg);
       border-color: var(--casar-borda);
     }
 
@@ -107,13 +116,13 @@
     a, button { transition: color .2s ease, background-color .2s ease, transform .2s ease; }
     button:hover { transform: translateY(-1px); }
 
-    /* ESTILO DO RODAPÉ CNN */
+    /* ESTILO DO RODAPÉ CNN COMPACTO NO CELULAR */
     .cnn-ticker-container {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 44px;
+      height: 40px;
       background-color: rgba(44, 37, 30, 0.95);
       color: #fff;
       z-index: 99;
@@ -127,11 +136,11 @@
     .cnn-label {
       background-color: #8c6e5c;
       color: #fff;
-      padding: 0 16px;
+      padding: 0 12px;
       height: 100%;
       display: flex;
       align-items: center;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -150,8 +159,8 @@
     .cnn-ticker-item {
       display: inline-flex;
       align-items: center;
-      padding: 0 30px;
-      font-size: 12px;
+      padding: 0 25px;
+      font-size: 11px;
       font-weight: 500;
     }
 
@@ -167,8 +176,10 @@
     }
 
     @media (max-width: 768px) {
-      html { scroll-padding-top: 135px; }
-      #parallax-bg { top: 125px; }
+      html { scroll-padding-top: 125px; }
+      #parallax-bg { top: 115px; }
+      .cnn-label span.texto-label { display: none; } /* Vira só o ícone no celular */
+      .cnn-label::after { content: "💌"; font-size: 14px; }
     }
   </style>
 </head>
@@ -178,67 +189,51 @@
     <div id="parallax-image"></div>
   </div>
 
-  <!-- PLAYER DE MÚSICA OCULTO DO YOUTUBE -->
   <div id="youtubePlayerContainer" style="display:none;"></div>
 
   <!-- MENU SUPERIOR EM DUAS LINHAS -->
-  <nav class="sticky top-0 bg-white/98 backdrop-blur-md z-50 border-b border-casar shadow-sm py-2 px-3">
+  <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
     <div class="max-w-7xl mx-auto w-full flex flex-col gap-2">
       
-      <!-- LINHA 1: LOGO (W & L) + PLAYER DE MÚSICA -->
+      <!-- LINHA 1: LOGO (W & L) + PLAYER DE MÚSICA + BOTÃO MODO CLARO/ESCURO -->
       <div class="flex items-center justify-between border-b border-casar/50 pb-2">
-        <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap text-stone-900">W & L</span>
+        <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
-        <!-- PLAYER COMPACTO -->
-        <div class="flex items-center gap-1.5 bg-stone-100 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
-          <button onclick="musicaAnteriorPlaylist()" title="Música Anterior" class="w-6 h-6 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-800 flex items-center justify-center font-bold transition">
-            ⏮
-          </button>
-          <button id="btnPlayPause" onclick="toggleAudioMusica()" title="Play/Pause" class="w-7 h-7 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold hover:scale-105 transition shadow">
-            ▶
-          </button>
-          <button onclick="proximaMusicaPlaylist()" title="Próxima Música" class="w-6 h-6 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-800 flex items-center justify-center font-bold transition">
-            ⏭
-          </button>
+        <div class="flex items-center gap-2">
+          <!-- PLAYER COMPACTO -->
+          <div class="flex items-center gap-1.5 bg-stone-100/80 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
+            <button onclick="musicaAnteriorPlaylist()" title="Música Anterior" class="w-6 h-6 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-800 flex items-center justify-center font-bold transition">⏮</button>
+            <button id="btnPlayPause" onclick="toggleAudioMusica()" title="Play/Pause" class="w-7 h-7 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold hover:scale-105 transition shadow">▶</button>
+            <button onclick="proximaMusicaPlaylist()" title="Próxima Música" class="w-6 h-6 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-800 flex items-center justify-center font-bold transition">⏭</button>
 
-          <div class="flex flex-col w-28 md:w-36 ml-1">
-            <div class="flex justify-between text-[9px] font-bold text-stone-700 truncate">
-              <span id="txtNomeMusica" class="truncate">Carregando...</span>
-              <span id="txtTempoMusica" class="ml-1">0:00</span>
-            </div>
-            <div class="w-full bg-stone-300 rounded-full h-1.5 overflow-hidden mt-0.5 cursor-pointer" onclick="pularParaProgresso(event)">
-              <div id="barraProgressoMusica" class="bg-amber-800 h-1.5 rounded-full w-0 transition-all"></div>
+            <div class="flex flex-col w-24 md:w-36 ml-1">
+              <div class="flex justify-between text-[9px] font-bold truncate">
+                <span id="txtNomeMusica" class="truncate">Carregando...</span>
+                <span id="txtTempoMusica" class="ml-1">0:00</span>
+              </div>
+              <div class="w-full bg-stone-300 rounded-full h-1.5 overflow-hidden mt-0.5 cursor-pointer" onclick="pularParaProgresso(event)">
+                <div id="barraProgressoMusica" class="bg-amber-800 h-1.5 rounded-full w-0 transition-all"></div>
+              </div>
             </div>
           </div>
+
+          <!-- BOTÃO MODO CLARO / ESCURO -->
+          <button onclick="alternarTemaVisual()" title="Alternar Modo Claro/Escuro" class="w-8 h-8 rounded-full border border-casar bg-stone-100/80 flex items-center justify-center text-sm shadow-sm transition hover:scale-105">
+            <span id="iconeTema">🌙</span>
+          </button>
         </div>
       </div>
 
-      <!-- LINHA 2: LINKS DE NAVEGAÇÃO CENTRALIZADOS E ORGANIZADOS -->
-      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-semibold tracking-wider uppercase text-stone-800 py-1 text-center">
-        <a href="#home" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1">
-          <span>🏠</span><span>Início</span>
-        </a>
-        <a href="#historia" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1">
-          <span>💌</span><span>Mensagem</span>
-        </a>
-        <a href="#trajes" class="flex flex-col items-center hover:text-casar-primary transition text-amber-900 leading-tight py-1">
-          <span>👔</span><span>Trajes</span>
-        </a>
-        <a href="#local" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1">
-          <span>📍</span><span>Locais</span>
-        </a>
-        <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1">
-          <span>🎁</span><span>Presentes</span>
-        </a>
-        <a href="#galeria" class="flex flex-col items-center text-amber-800 hover:underline font-bold leading-tight py-1">
-          <span>📸</span><span>Fotos & Envio</span>
-        </a>
-        <a href="#recados" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1">
-          <span>✍️</span><span>Recados</span>
-        </a>
-        <a href="#rsvp" class="flex flex-col items-center hover:text-casar-primary transition font-bold text-casar-primary leading-tight py-1">
-          <span>✅</span><span>Confirme Presença</span>
-        </a>
+      <!-- LINHA 2: LINKS DE NAVEGAÇÃO CENTRALIZADOS -->
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-semibold tracking-wider uppercase py-1 text-center">
+        <a href="#home" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>🏠</span><span>Início</span></a>
+        <a href="#historia" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>💌</span><span>Mensagem</span></a>
+        <a href="#trajes" class="flex flex-col items-center hover:text-casar-primary transition text-amber-600 dark:text-amber-400 leading-tight py-1"><span>👔</span><span>Trajes</span></a>
+        <a href="#local" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>📍</span><span>Locais</span></a>
+        <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>🎁</span><span>Presentes</span></a>
+        <a href="#galeria" class="flex flex-col items-center text-amber-700 dark:text-amber-400 hover:underline font-bold leading-tight py-1"><span>📸</span><span>Fotos & Envio</span></a>
+        <a href="#recados" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>✍️</span><span>Recados</span></a>
+        <a href="#rsvp" class="flex flex-col items-center hover:text-casar-primary transition font-bold text-casar-primary leading-tight py-1"><span>✅</span><span>Confirme Presença</span></a>
       </div>
 
     </div>
@@ -247,12 +242,12 @@
   <!-- CAPA PRINCIPAL -->
   <header id="home" class="py-16 md:py-20 px-4 text-center border-b border-casar">
     <div class="max-w-2xl mx-auto">
-      <p class="text-xs uppercase tracking-[0.3em] text-stone-700 font-semibold mb-3">Com a graça de Deus e com o coração cheio de alegria</p>
-      <h1 class="font-serif-custom text-5xl md:text-7xl font-normal text-stone-900 mb-2">Wagner & Larissa</h1>
-      <p class="font-serif-custom italic text-2xl text-stone-800 font-medium mb-8">Sexta-feira, 11 de Dezembro de 2026</p>
+      <p class="text-xs uppercase tracking-[0.3em] font-semibold mb-3 opacity-80">Com a graça de Deus e com o coração cheio de alegria</p>
+      <h1 class="font-serif-custom text-5xl md:text-7xl font-normal mb-2">Wagner & Larissa</h1>
+      <p class="font-serif-custom italic text-2xl font-medium mb-8 opacity-90">Sexta-feira, 11 de Dezembro de 2026</p>
 
       <div class="my-6 max-w-lg mx-auto">
-        <div class="relative overflow-hidden w-full rounded-2xl shadow-lg border-4 border-white">
+        <div class="relative overflow-hidden w-full rounded-2xl shadow-lg border-4 border-white/50">
           <div id="carrosselTopo" class="flex transition-transform duration-700 ease-in-out">
             <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 md:h-80 object-cover"></div>
             <div class="min-w-full"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 md:h-80 object-cover"></div>
@@ -261,13 +256,13 @@
         </div>
       </div>
 
-      <div class="mt-8 bg-white/90 p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
-        <p class="text-xs uppercase tracking-widest text-stone-700 font-bold mb-4">Faltam apenas</p>
+      <div class="mt-8 bg-white p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
+        <p class="text-xs uppercase tracking-widest font-bold mb-4">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
-          <div><span id="days" class="block font-serif-custom text-3xl font-bold text-stone-900">00</span><span class="text-[10px] uppercase text-stone-700 font-semibold">Dias</span></div>
-          <div><span id="hours" class="block font-serif-custom text-3xl font-bold text-stone-900">00</span><span class="text-[10px] uppercase text-stone-700 font-semibold">Horas</span></div>
-          <div><span id="minutes" class="block font-serif-custom text-3xl font-bold text-stone-900">00</span><span class="text-[10px] uppercase text-stone-700 font-semibold">Min</span></div>
-          <div><span id="seconds" class="block font-serif-custom text-3xl font-bold text-stone-900">00</span><span class="text-[10px] uppercase text-stone-700 font-semibold">Seg</span></div>
+          <div><span id="days" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Dias</span></div>
+          <div><span id="hours" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Horas</span></div>
+          <div><span id="minutes" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Min</span></div>
+          <div><span id="seconds" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Seg</span></div>
         </div>
       </div>
     </div>
@@ -275,66 +270,66 @@
 
   <!-- MENSAGEM DO CASAL -->
   <section id="historia" class="py-16 px-4 max-w-3xl mx-auto text-center">
-    <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-4">Bem-vindos ao nosso site!</h2>
+    <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
     <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
     
-    <div class="text-stone-800 leading-relaxed font-medium text-sm md:text-base space-y-4 text-justify md:text-center">
+    <div class="leading-relaxed font-medium text-sm md:text-base space-y-4 text-justify md:text-center opacity-90">
       <p>
         Criamos esse espaço com muito carinho para compartilhar com vocês todos os detalhes do nosso casamento. 
         Estamos muito felizes e contamos com a presença de cada um de vocês no nosso grande dia — <strong>11 de Dezembro de 2026</strong>!
       </p>
       <p>Aqui vocês vão encontrar todas as informações importantes: cerimônia, recepção e estacionamento no local.</p>
       
-      <div class="bg-white/90 p-6 rounded-2xl border border-casar text-left space-y-3 my-6 shadow-sm">
-        <p class="font-bold text-stone-900 text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
+      <div class="bg-white p-6 rounded-2xl border border-casar text-left space-y-3 my-6 shadow-sm">
+        <p class="font-bold text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
         <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "Confirme Presença" e preencha os dados.</p>
         <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade! Você pode escolher um item da nossa Lista de Casamento ou contribuir com cotas.</p>
       </div>
 
       <div class="pt-4">
-        <p class="text-stone-700 text-xs uppercase tracking-widest font-bold">Com carinho,</p>
-        <p class="font-cursive text-4xl text-stone-900 mt-1">Wagner e Larissa</p>
+        <p class="text-xs uppercase tracking-widest font-bold opacity-80">Com carinho,</p>
+        <p class="font-cursive text-4xl mt-1">Wagner e Larissa</p>
       </div>
     </div>
   </section>
 
   <!-- GUIA DE TRAJES -->
-  <section id="trajes" class="py-16 bg-white/90 border-t border-casar px-4">
+  <section id="trajes" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-1">Guia de Trajes</h2>
-      <p class="text-xs uppercase tracking-widest text-amber-900 font-bold mb-4">Traje: Social</p>
+      <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
+      <p class="text-xs uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold mb-4">Traje: Social</p>
       <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-8"></div>
 
-      <p class="max-w-2xl mx-auto text-stone-800 text-sm leading-relaxed mb-10 font-medium">
+      <p class="max-w-2xl mx-auto text-sm leading-relaxed mb-10 font-medium opacity-90">
         Para celebrar este momento especial, sugerimos <strong>Traje Social</strong>. Preparamos algumas orientações carinhosas para ajudar você:
       </p>
 
       <div class="grid md:grid-cols-2 gap-8 text-left mb-10">
-        <div class="p-6 bg-stone-50/90 rounded-2xl border border-casar shadow-sm space-y-3">
-          <div class="text-3xl mb-1 text-amber-900">👗</div>
-          <h3 class="font-serif-custom text-2xl text-stone-900 font-bold">Para as Mulheres</h3>
-          <p class="text-xs text-stone-800 font-medium leading-relaxed">
+        <div class="p-6 bg-stone-50 rounded-2xl border border-casar shadow-sm space-y-3">
+          <div class="text-3xl mb-1 text-amber-600">👗</div>
+          <h3 class="font-serif-custom text-2xl font-bold">Para as Mulheres</h3>
+          <p class="text-xs font-medium leading-relaxed opacity-90">
             Sugerimos <strong>vestidos midi ou longos</strong>, tecidos fluídos e elegantes para compor uma noite inesquecível.
           </p>
         </div>
 
-        <div class="p-6 bg-stone-50/90 rounded-2xl border border-casar shadow-sm space-y-3">
-          <div class="text-3xl mb-1 text-amber-900">👔</div>
-          <h3 class="font-serif-custom text-2xl text-stone-900 font-bold">Para os Homens</h3>
-          <p class="text-xs text-stone-800 font-medium leading-relaxed">
+        <div class="p-6 bg-stone-50 rounded-2xl border border-casar shadow-sm space-y-3">
+          <div class="text-3xl mb-1 text-amber-600">👔</div>
+          <h3 class="font-serif-custom text-2xl font-bold">Para os Homens</h3>
+          <p class="text-xs font-medium leading-relaxed opacity-90">
             Podem optar por <strong>terno e gravata</strong> ou, se preferirem, <strong>calça social com camisa social</strong> (sem necessidade de gravata ou paletó).
           </p>
         </div>
       </div>
 
-      <div class="max-w-2xl mx-auto p-6 bg-rose-50 border border-rose-200 rounded-2xl text-stone-900 text-xs space-y-3 text-left shadow-sm">
-        <div class="flex items-center gap-2 font-bold text-rose-950 uppercase text-[11px] tracking-wider">
+      <div class="max-w-2xl mx-auto p-6 bg-amber-50/20 border border-amber-300 rounded-2xl text-xs space-y-3 text-left shadow-sm">
+        <div class="flex items-center gap-2 font-bold uppercase text-[11px] tracking-wider text-amber-700 dark:text-amber-300">
           <span>⚠️</span> Lembretes Importantes:
         </div>
-        <ul class="list-disc list-inside space-y-2 text-stone-800 font-medium text-xs leading-relaxed">
+        <ul class="list-disc list-inside space-y-2 font-medium text-xs leading-relaxed opacity-90">
           <li>Pedimos gentilmente que <strong>evitem roupas excessivamente informais</strong> (como jeans, camisetas e tênis).</li>
           <li>Por respeito à noiva, pedimos atenção especial para <strong>NÃO utilizar peças nas cores:</strong>
-            <span class="block mt-1 font-bold text-stone-950">❌ Branco, Off-white, Azul Bebê ou tons muito próximos ao vestido da noiva.</span>
+            <span class="block mt-1 font-bold">❌ Branco, Off-white, Azul Bebê ou tons muito próximos ao vestido da noiva.</span>
           </li>
         </ul>
       </div>
@@ -342,25 +337,25 @@
   </section>
 
   <!-- PROGRAMAÇÃO DO DIA COM GOOGLE MAPS -->
-  <section id="local" class="py-16 bg-stone-50/90 border-y border-casar px-4">
+  <section id="local" class="py-16 bg-stone-50 border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-2">Programação do Dia</h2>
-      <p class="text-xs uppercase tracking-widest text-stone-700 font-bold mb-10">Cerimônia e Recepção</p>
+      <h2 class="font-serif-custom text-3xl font-bold mb-2">Programação do Dia</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-10 opacity-80">Cerimônia e Recepção</p>
 
       <div class="grid md:grid-cols-2 gap-8 text-left">
         <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3">⛪</div>
-            <h3 class="font-serif-custom text-2xl text-stone-900 font-bold mb-2">A Cerimônia</h3>
-            <p class="text-xs text-stone-700 font-medium italic mb-4">
+            <h3 class="font-serif-custom text-2xl font-bold mb-2">A Cerimônia</h3>
+            <p class="text-xs font-medium italic mb-4 opacity-80">
               "Gostaríamos muito de contar com sua presença no momento em que nossa união será abençoada."
             </p>
-            <p class="text-xs text-stone-900 font-semibold mb-1">Data e Horário: Sexta-feira, 11/12/2026 às 16h00</p>
-            <p class="text-xs text-stone-900 font-semibold mb-1">Local: Paróquia Nossa Senhora Rainha da Paz</p>
-            <p class="text-xs text-stone-700 mb-4">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
+            <p class="text-xs font-semibold mb-1">Data e Horário: Sexta-feira, 11/12/2026 às 16h00</p>
+            <p class="text-xs font-semibold mb-1">Local: Paróquia Nossa Senhora Rainha da Paz</p>
+            <p class="text-xs mb-4 opacity-80">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
 
             <div class="w-full h-44 rounded-xl overflow-hidden border border-casar mb-4 shadow-inner">
-              <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.8!2d-49.12!3d-25.53!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUGFyw7NxdWlhIE5vc3NhIFNlbmhvcmEgUmFpbmhhIGRhIFBheg!5e0!3m2!1spt-BR!2sbr!4v1650000000000"></iframe>
+              <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.8!2d-49.12!3d-25.53!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUGFyw7NxdWlhIE5vc3NhIFNlbmhvcmEgUmFpbmhh gibRhIFBheg!5e0!3m2!1spt-BR!2sbr!4v1650000000000"></iframe>
             </div>
           </div>
           <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz+Rua+Joana+Percegona+Zen+78+Borda+do+Campo+São+José+dos+Pinhais+PR" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
@@ -371,13 +366,13 @@
         <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3">🥂</div>
-            <h3 class="font-serif-custom text-2xl text-stone-900 font-bold mb-2">Recepção (A Festa)</h3>
-            <p class="text-xs text-stone-700 font-medium italic mb-4">
+            <h3 class="font-serif-custom text-2xl font-bold mb-2">Recepção (A Festa)</h3>
+            <p class="text-xs font-medium italic mb-4 opacity-80">
               "Contamos com você para compartilhar esse dia maravilhoso conosco a partir das 17h30!"
             </p>
-            <p class="text-xs text-stone-900 font-semibold mb-1">Data e Horário: Sexta-feira, 11/12/2026 às 17h30</p>
-            <p class="text-xs text-stone-900 font-semibold mb-1">Local: Chácara Luz da Mata</p>
-            <p class="text-xs text-stone-700 mb-4">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
+            <p class="text-xs font-semibold mb-1">Data e Horário: Sexta-feira, 11/12/2026 às 17h30</p>
+            <p class="text-xs font-semibold mb-1">Local: Chácara Luz da Mata</p>
+            <p class="text-xs mb-4 opacity-80">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
 
             <div class="w-full h-44 rounded-xl overflow-hidden border border-casar mb-4 shadow-inner">
               <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.8!2d-49.08!3d-25.48!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zQ2jDoWNhcmEgTHV6IGRhIE1hdGE!5e0!3m2!1spt-BR!2sbr!4v1650000000000"></iframe>
@@ -393,37 +388,37 @@
 
   <!-- LISTA DE PRESENTES -->
   <section id="presentes" class="py-16 px-4 max-w-3xl mx-auto text-center scroll-mt-20">
-    <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-2">Lista de Presentes</h2>
-    <p class="text-xs uppercase tracking-widest text-stone-700 font-bold mb-8">Sua contribuição ajudará na nossa caminhada</p>
+    <h2 class="font-serif-custom text-3xl font-bold mb-2">Lista de Presentes</h2>
+    <p class="text-xs uppercase tracking-widest font-bold mb-8 opacity-80">Sua contribuição ajudará na nossa caminhada</p>
 
-    <div class="bg-white/95 p-8 rounded-2xl border border-casar shadow-sm max-w-lg mx-auto">
+    <div class="bg-white p-8 rounded-2xl border border-casar shadow-sm max-w-lg mx-auto">
       <div class="text-4xl mb-3">🎁</div>
-      <h3 class="font-serif-custom text-2xl text-stone-900 font-bold mb-3">Nossa Loja Virtual</h3>
-      <p class="text-stone-800 font-medium text-sm mb-6 leading-relaxed">
+      <h3 class="font-serif-custom text-2xl font-bold mb-3">Nossa Loja Virtual</h3>
+      <p class="font-medium text-sm mb-6 leading-relaxed opacity-90">
         Se desejar nos presentear, fique à vontade! Acesse nossa lista online para escolher uma cota ou contribuição via PIX ou Cartão de Crédito.
       </p>
       <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white py-4 px-8 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-md gap-2">
         <span>💳 Acessar Lista de Presentes (InfinitePay)</span>
       </a>
-      <p class="text-[10px] text-stone-600 font-bold uppercase mt-4">Pagamento 100% seguro via PIX ou Cartão de Crédito</p>
+      <p class="text-[10px] font-bold uppercase mt-4 opacity-75">Pagamento 100% seguro via PIX ou Cartão de Crédito</p>
     </div>
   </section>
 
-  <!-- FOTOS E ENVIO (SEÇÃO UNIFICADA) -->
-  <section id="galeria" class="py-16 bg-white/90 border-t border-casar px-4">
+  <!-- FOTOS E ENVIO -->
+  <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-1">Mural de Fotos</h2>
-      <p class="text-xs uppercase tracking-widest text-stone-700 font-bold mb-8">Envie suas fotos da festa direto para o álbum dos noivos!</p>
+      <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-8 opacity-80">Envie suas fotos da festa direto para o álbum dos noivos!</p>
 
       <div class="mb-10 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto shadow-sm text-left space-y-4">
         <div>
-          <label class="block text-xs font-bold uppercase text-stone-800 mb-1">Seu Nome (Opcional):</label>
-          <input type="text" id="nomeUsuarioInput" placeholder="Ex: Ricardo Paczkowski (ou deixe em branco p/ anônimo)" class="w-full p-2.5 bg-white border border-casar rounded-xl text-xs text-stone-900 font-medium focus:outline-none focus:border-stone-500">
+          <label class="block text-xs font-bold uppercase mb-1 opacity-90">Seu Nome (Opcional):</label>
+          <input type="text" id="nomeUsuarioInput" placeholder="Ex: Ricardo Paczkowski (ou deixe em branco p/ anônimo)" class="w-full p-2.5 border border-casar rounded-xl text-xs font-medium focus:outline-none">
         </div>
 
         <div>
-          <label class="block text-xs font-bold uppercase text-stone-800 mb-1">Escolha uma ou várias fotos:</label>
-          <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2.5 bg-white border border-casar rounded-xl text-xs text-stone-800 focus:outline-none">
+          <label class="block text-xs font-bold uppercase mb-1 opacity-90">Escolha uma ou várias fotos:</label>
+          <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2.5 border border-casar rounded-xl text-xs focus:outline-none">
         </div>
         
         <button onclick="enviarFoto()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-semibold text-xs uppercase tracking-widest shadow-sm">
@@ -431,7 +426,7 @@
         </button>
 
         <div id="containerProgresso" class="hidden mt-4 space-y-1">
-          <div class="flex justify-between text-[11px] font-bold text-stone-800">
+          <div class="flex justify-between text-[11px] font-bold opacity-90">
             <span id="txtStatusProgresso">Preparando envio...</span>
             <span id="pctProgresso">0%</span>
           </div>
@@ -444,7 +439,7 @@
       </div>
 
       <div class="max-w-xl mx-auto">
-        <h3 class="font-serif-custom text-2xl text-stone-900 font-bold mb-4">Álbum de Momentos 📸</h3>
+        <h3 class="font-serif-custom text-2xl font-bold mb-4">Álbum de Momentos 📸</h3>
         <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm">
           <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
             <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
@@ -452,100 +447,84 @@
             <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
           </div>
 
-          <button onclick="fotoAnterior()" type="button" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">
-            &#10094;
-          </button>
-          <button onclick="proximaFoto()" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">
-            &#10095;
-          </button>
+          <button onclick="fotoAnterior()" type="button" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">&#10094;</button>
+          <button onclick="proximaFoto()" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">&#10095;</button>
         </div>
 
         <div class="flex justify-between items-center mt-4">
-          <button onclick="fotoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
-            &#10094; Anterior
-          </button>
-          <span id="contadorFotos" class="text-xs text-stone-900 font-bold">Foto 1</span>
-          <button onclick="proximaFoto()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
-            Próxima &#10095;
-          </button>
+          <button onclick="fotoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">&#10094; Anterior</button>
+          <span id="contadorFotos" class="text-xs font-bold">Foto 1</span>
+          <button onclick="proximaFoto()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">Próxima &#10095;</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- RECADOS -->
-  <section id="recados" class="py-16 bg-stone-50/90 border-t border-casar px-4">
+  <section id="recados" class="py-16 bg-stone-50 border-t border-casar px-4">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-1">Deixe seu Recado</h2>
-      <p class="text-xs uppercase tracking-widest text-stone-700 font-bold mb-8">Escreva uma carinhosa mensagem para Wagner & Larissa</p>
+      <h2 class="font-serif-custom text-3xl font-bold mb-1">Deixe seu Recado</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-8 opacity-80">Escreva uma carinhosa mensagem para Wagner & Larissa</p>
 
       <form onsubmit="enviarRecado(event)" class="bg-white p-6 rounded-2xl border border-casar shadow-sm max-w-lg mx-auto space-y-4 text-left text-xs mb-12">
         <div>
-          <label class="block mb-1 font-bold uppercase text-stone-800">Seu Nome *</label>
-          <input type="text" id="recadoNome" required class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-900 font-medium focus:outline-none">
+          <label class="block mb-1 font-bold uppercase opacity-90">Seu Nome *</label>
+          <input type="text" id="recadoNome" required class="w-full p-3 border border-casar rounded-lg text-sm font-medium focus:outline-none">
         </div>
         <div>
-          <label class="block mb-1 font-bold uppercase text-stone-800">Sua Mensagem / Recado *</label>
-          <textarea id="recadoTexto" rows="3" required placeholder="Deseje felicidades aos noivos..." class="w-full p-3 bg-stone-50 border border-casar rounded-lg text-sm text-stone-900 font-medium focus:outline-none"></textarea>
+          <label class="block mb-1 font-bold uppercase opacity-90">Sua Mensagem / Recado *</label>
+          <textarea id="recadoTexto" rows="3" required placeholder="Deseje felicidades aos noivos..." class="w-full p-3 border border-casar rounded-lg text-sm font-medium focus:outline-none"></textarea>
         </div>
-        <button type="submit" id="btnRecado" class="w-full btn-casar py-3 rounded-xl font-semibold uppercase tracking-widest text-xs">
-          Publicar Recado
-        </button>
+        <button type="submit" id="btnRecado" class="w-full btn-casar py-3 rounded-xl font-semibold uppercase tracking-widest text-xs">Publicar Recado</button>
         <p id="msgStatusRecado" class="hidden text-center text-xs p-2 rounded font-semibold"></p>
       </form>
 
-      <h3 class="font-serif-custom text-2xl text-stone-900 font-bold mb-4">Mensagens Recebidas 💌</h3>
+      <h3 class="font-serif-custom text-2xl font-bold mb-4">Mensagens Recebidas 💌</h3>
       <div class="max-w-lg mx-auto">
         <div class="relative overflow-hidden w-full min-h-[160px] bg-white p-6 rounded-2xl border border-casar shadow-sm flex items-center justify-center">
           <div id="containerRecados" class="w-full transition-opacity duration-500">
-            <p class="text-xs text-stone-500 font-medium italic">Carregando recados...</p>
+            <p class="text-xs font-medium italic opacity-75">Carregando recados...</p>
           </div>
         </div>
 
         <div class="flex justify-between items-center mt-4">
-          <button onclick="recadoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
-            &#10094; Anterior
-          </button>
-          <span id="contadorRecados" class="text-xs text-stone-900 font-bold"></span>
-          <button onclick="proximoRecado()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
-            Próxima &#10095;
-          </button>
+          <button onclick="recadoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">&#10094; Anterior</button>
+          <span id="contadorRecados" class="text-xs font-bold"></span>
+          <button onclick="proximoRecado()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">Próxima &#10095;</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- RSVP -->
-  <section id="rsvp" class="py-16 bg-white/90 border-t border-casar px-4">
+  <section id="rsvp" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-xl mx-auto">
       <div class="text-center mb-8">
-        <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-1">Confirme sua Presença</h2>
-        <p class="text-xs uppercase tracking-widest text-stone-700 font-bold">Localize seu convite por Nome, Sobrenome ou Telefone</p>
+        <h2 class="font-serif-custom text-3xl font-bold mb-1">Confirme sua Presença</h2>
+        <p class="text-xs uppercase tracking-widest font-bold opacity-80">Localize seu convite por Nome, Sobrenome ou Telefone</p>
       </div>
 
       <div id="stepBusca" class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
         <div>
-          <label class="block mb-2 text-xs font-bold uppercase text-stone-800">Localize seu Convite:</label>
+          <label class="block mb-2 text-xs font-bold uppercase opacity-90">Localize seu Convite:</label>
           <div class="flex gap-2">
-            <input type="text" id="inputBusca" placeholder="Ex: Rodrigo, Paczkowski ou (41) 99509-7841" class="w-full p-3 bg-white border border-casar rounded-lg text-sm text-stone-900 font-medium focus:outline-none focus:border-stone-500">
+            <input type="text" id="inputBusca" placeholder="Ex: Rodrigo, Paczkowski ou (41) 99509-7841" class="w-full p-3 border border-casar rounded-lg text-sm font-medium focus:outline-none">
             <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-6 rounded-lg text-xs font-semibold uppercase tracking-wider">Buscar</button>
           </div>
         </div>
-        <p class="text-[11px] text-stone-600 font-medium leading-relaxed">* Digite o seu primeiro nome, o nome do responsável ou o telefone cadastrado. Nosso sistema trará toda a sua família automaticamente.</p>
+        <p class="text-[11px] font-medium leading-relaxed opacity-75">* Digite o seu primeiro nome, o nome do responsável ou o telefone cadastrado. Nosso sistema trará toda a sua família automaticamente.</p>
       </div>
 
       <div id="stepSelecao" class="hidden bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-6">
         <div class="border-b border-casar pb-4">
-          <span class="text-[10px] uppercase tracking-widest text-amber-900 font-bold">Convite Familiar Encontrado</span>
-          <h3 id="txtResponsavel" class="font-serif-custom text-2xl text-stone-900 font-bold mt-1"></h3>
-          <p id="txtTelefone" class="text-xs text-stone-700 font-medium mt-1"></p>
+          <span class="text-[10px] uppercase tracking-widest text-amber-600 font-bold">Convite Familiar Encontrado</span>
+          <h3 id="txtResponsavel" class="font-serif-custom text-2xl font-bold mt-1"></h3>
+          <p id="txtTelefone" class="text-xs font-medium mt-1 opacity-80"></p>
         </div>
 
         <form id="formMembros" onsubmit="salvarConfirmacoes(event)" class="space-y-4">
           <div id="containerMembros" class="space-y-3"></div>
-          <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-4 rounded-xl font-semibold tracking-widest uppercase transition text-xs shadow-sm mt-4">
-            Enviar Confirmações da Família
-          </button>
+          <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-4 rounded-xl font-semibold tracking-widest uppercase transition text-xs shadow-sm mt-4">Enviar Confirmações da Família</button>
         </form>
       </div>
 
@@ -555,7 +534,7 @@
 
   <!-- FOOTER CNN -->
   <div class="cnn-ticker-container">
-    <div class="cnn-label">💌 Recados Ao Vivo</div>
+    <div class="cnn-label"><span class="texto-label">Recados Ao Vivo</span></div>
     <div style="overflow: hidden; width: 100%; display: flex;">
       <div id="cnnTickerTrack" class="cnn-ticker-track">
         <div class="cnn-ticker-item"><span>Carregando felicitações dos convidados...</span></div>
@@ -570,83 +549,55 @@
     </button>
   </div>
 
-  <!-- MODAL ADMIN COM ABAS -->
+  <!-- MODAL ADMIN -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden">
       
       <div class="p-4 border-b border-casar bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
         <div>
-          <h2 class="font-serif-custom text-2xl text-stone-900 font-bold">Painel Administrativo dos Noivos</h2>
-          <p class="text-xs text-stone-600 font-medium">Gerencie convidados, transparência e playlist musical do site.</p>
+          <h2 class="font-serif-custom text-2xl font-bold">Painel Administrativo dos Noivos</h2>
+          <p class="text-xs font-medium opacity-75">Gerencie convidados, administradores e playlist da planilha.</p>
         </div>
 
-        <div class="flex items-center gap-2 bg-stone-200 p-1 rounded-xl text-xs font-bold">
-          <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="px-4 py-2 rounded-lg bg-white text-stone-900 shadow-sm transition">👥 Convidados</button>
-          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="px-4 py-2 rounded-lg text-stone-700 hover:text-stone-950 transition">⚙️ Configurações & Música</button>
+        <div class="flex items-center gap-2 bg-stone-200/80 p-1 rounded-xl text-xs font-bold">
+          <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="px-3 py-2 rounded-lg bg-white shadow-sm transition">👥 Convidados</button>
+          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="px-3 py-2 rounded-lg hover:opacity-100 transition opacity-75">⚙️ Configurações & Música</button>
+          <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="px-3 py-2 rounded-lg hover:opacity-100 transition opacity-75">🔑 Administradores</button>
         </div>
 
-        <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold transition">
-          ✕
-        </button>
+        <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold transition">✕</button>
       </div>
 
-      <!-- ABA 1: GERENCIAR CONVIDADOS -->
+      <!-- ABA 1: CONVIDADOS -->
       <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden">
         <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs">
-          <div class="bg-white p-2 rounded-lg border border-casar shadow-sm">
-            <p class="text-[10px] text-stone-500 uppercase font-bold">Total Lista</p>
-            <span id="statTotal" class="text-lg font-bold text-stone-900">0</span>
-          </div>
-          <div class="bg-white p-2 rounded-lg border border-casar shadow-sm">
-            <p class="text-[10px] text-stone-500 uppercase font-bold">Adultos / Crianças</p>
-            <span id="statTipos" class="text-xs font-bold text-stone-800">0 / 0</span>
-          </div>
-          <div class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm">
-            <p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p>
-            <span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span>
-          </div>
-          <div class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm">
-            <p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p>
-            <span id="statAusentes" class="text-lg font-bold text-rose-900">0</span>
-          </div>
-          <div class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm">
-            <p class="text-[10px] text-amber-700 uppercase font-bold">Pendente RSVP</p>
-            <span id="statPendentes" class="text-lg font-bold text-amber-900">0</span>
-          </div>
-          <div class="bg-stone-100 p-2 rounded-lg border border-stone-300 shadow-sm">
-            <p class="text-[10px] text-stone-600 uppercase font-bold">Aguardando Faltam</p>
-            <span id="statFaltam" class="text-lg font-bold text-stone-900">0</span>
-          </div>
+          <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Total Lista</p><span id="statTotal" class="text-lg font-bold">0</span></div>
+          <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Adultos / Crianças</p><span id="statTipos" class="text-xs font-bold">0 / 0</span></div>
+          <div class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm"><p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span></div>
+          <div class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm"><p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-lg font-bold text-rose-900">0</span></div>
+          <div class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm"><p class="text-[10px] text-amber-700 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-lg font-bold text-amber-900">0</span></div>
+          <div class="bg-stone-100 p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Faltam</p><span id="statFaltam" class="text-lg font-bold">0</span></div>
         </div>
 
-        <div class="p-4 bg-stone-100 border-b border-casar text-xs space-y-3">
+        <div class="p-4 bg-stone-50/50 border-b border-casar text-xs space-y-3">
           <div class="flex flex-col md:flex-row gap-2 items-center justify-between">
-            <div class="w-full md:w-1/2 relative">
-              <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome, Responsável ou Telefone..." class="w-full p-2.5 pl-3 border border-casar rounded-lg bg-white text-xs text-stone-900 font-medium focus:outline-none focus:border-stone-500 shadow-sm">
-            </div>
+            <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome, Responsável ou Telefone..." class="w-full md:w-1/2 p-2.5 border rounded-lg text-xs font-medium focus:outline-none shadow-sm">
             <div class="flex items-center gap-2">
-              <button onclick="carregarAdminLista()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 px-3 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm">
-                🔄 Atualizar Lista
-              </button>
-              <span id="txtResultadosFiltro" class="text-[11px] text-stone-600 font-medium italic">Exibindo todos os registros</span>
+              <button onclick="carregarAdminLista()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 px-3 py-2 rounded-lg text-xs font-bold transition shadow-sm">🔄 Atualizar</button>
+              <span id="txtResultadosFiltro" class="text-[11px] font-medium italic opacity-75">Exibindo todos</span>
             </div>
           </div>
 
-          <div class="pt-2 border-t border-stone-200">
-            <h3 class="font-bold text-stone-800 mb-2 uppercase tracking-wider text-[10px]">➕ Adicionar Novo Convidado à Lista</h3>
+          <div class="pt-2 border-t border-casar">
+            <h3 class="font-bold mb-2 uppercase tracking-wider text-[10px]">➕ Adicionar Convidado</h3>
             <div class="grid md:grid-cols-4 gap-2">
-              <input type="text" id="addResp" placeholder="Responsável / Família *" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
-              <input type="text" id="addNome" placeholder="Nome do Integrante *" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
-              <select id="addTipo" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
-                <option value="Adulto">Adulto</option>
-                <option value="Criança">Criança</option>
-              </select>
-              <input type="text" id="addContato" placeholder="Telefone (Contato)" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
+              <input type="text" id="addResp" placeholder="Responsável / Família *" class="p-2 border rounded font-medium focus:outline-none">
+              <input type="text" id="addNome" placeholder="Nome do Integrante *" class="p-2 border rounded font-medium focus:outline-none">
+              <select id="addTipo" class="p-2 border rounded font-medium focus:outline-none"><option value="Adulto">Adulto</option><option value="Criança">Criança</option></select>
+              <input type="text" id="addContato" placeholder="Telefone" class="p-2 border rounded font-medium focus:outline-none">
             </div>
             <div class="mt-2 flex justify-end">
-              <button onclick="adminAdicionarNovo()" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider shadow-sm">
-                Adicionar Convidado
-              </button>
+              <button onclick="adminAdicionarNovo()" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider shadow-sm">Adicionar Convidado</button>
             </div>
           </div>
         </div>
@@ -654,12 +605,12 @@
         <div id="containerTabelaAdmin" class="p-4 overflow-y-auto flex-1 scroll-smooth">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr class="bg-stone-200/80 border-b border-casar text-stone-900 font-bold uppercase text-[10px] tracking-wider select-none">
-                <th onclick="ordenarPor('responsavel')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Responsável ⇳</th>
-                <th onclick="ordenarPor('nome')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Nome ⇳</th>
+              <tr class="bg-stone-200/80 border-b border-casar font-bold uppercase text-[10px] tracking-wider select-none">
+                <th onclick="ordenarPor('responsavel')" class="p-3 cursor-pointer">Responsável ⇳</th>
+                <th onclick="ordenarPor('nome')" class="p-3 cursor-pointer">Nome ⇳</th>
                 <th class="p-3">Tipo</th>
-                <th onclick="ordenarPor('contato')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Contato ⇳</th>
-                <th class="p-3">Confirmação RSVP</th>
+                <th onclick="ordenarPor('contato')" class="p-3 cursor-pointer">Contato ⇳</th>
+                <th class="p-3">RSVP</th>
                 <th class="p-3">Status</th>
                 <th class="p-3 text-center">Ações</th>
               </tr>
@@ -669,57 +620,68 @@
         </div>
       </div>
 
-      <!-- ABA 2: CONFIGURAÇÕES E PLAYLIST ARRASTÁVEL -->
+      <!-- ABA 2: CONFIGURAÇÕES & MÚSICA SALVA NA PLANILHA -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 text-xs">
-        
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-3">
-          <h3 class="font-serif-custom text-xl text-stone-900 font-bold">✨ Aparência do Fundo</h3>
-          <p class="text-stone-600">Ajuste o nível de transparência da camada branca sobre a foto de fundo do site:</p>
+          <h3 class="font-serif-custom text-xl font-bold">✨ Aparência do Fundo</h3>
+          <p class="opacity-75">Ajuste o nível de transparência da camada escura sobre a foto de fundo:</p>
           <div class="flex items-center gap-4">
-            <span class="font-bold text-stone-700">Mais Foto (Escuro)</span>
+            <span class="font-bold">Mais Escuro</span>
             <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-full accent-amber-800 cursor-pointer">
-            <span class="font-bold text-stone-700">Mais Claro</span>
-            <span id="valorTransparencia" class="font-bold text-amber-900 w-10 text-right text-sm">0.65</span>
+            <span class="font-bold">Mais Claro</span>
+            <span id="valorTransparencia" class="font-bold text-amber-600 w-10 text-right text-sm">0.65</span>
           </div>
         </div>
 
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
-          <h3 class="font-serif-custom text-xl text-stone-900 font-bold">🎵 Playlist & Músicas do YouTube (Arraste para Organizar)</h3>
-          <p class="text-stone-600">Adicione os links do YouTube. Você pode arrastar os itens abaixo para reordenar a playlist:</p>
+          <h3 class="font-serif-custom text-xl font-bold">🎵 Playlist Salva na Planilha (YouTube)</h3>
+          <p class="opacity-75">As músicas adicionadas aqui são salvas na planilha do Google Sheets e sincronizadas automaticamente:</p>
 
           <div class="flex gap-2">
-            <input type="text" id="inputAddMusica" placeholder="Cole o link do YouTube (ex: https://www.youtube.com/watch?v=...)" class="w-full p-3 border border-casar rounded-xl bg-white text-xs font-medium focus:outline-none">
-            <button onclick="adicionarMusicaPlaylist()" class="btn-casar px-6 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap shadow-sm">
-              Adicionar Música
-            </button>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-4 pt-2">
-            <div>
-              <label class="block font-bold text-stone-800 mb-1 uppercase text-[10px]">Modo de Reprodução:</label>
-              <select id="selectModoReprod" onchange="salvarConfigModo()" class="w-full p-2.5 border rounded-xl bg-white font-semibold">
-                <option value="repetir_todas">Repetir Todas (Playlist Contínua)</option>
-                <option value="repetir_uma">Repetir Somente 1 Música</option>
-                <option value="aleatorio">Modo Aleatório (Shuffle)</option>
-              </select>
-            </div>
+            <input type="text" id="inputAddMusica" placeholder="Cole o link do YouTube (ex: https://www.youtube.com/watch?v=...)" class="w-full p-3 border rounded-xl font-medium focus:outline-none">
+            <button onclick="adicionarMusicaPlaylistPlanilha()" class="btn-casar px-6 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap shadow-sm">Salvar na Planilha</button>
           </div>
 
           <div class="mt-4">
-            <h4 class="font-bold text-stone-800 uppercase text-[10px] mb-2">Músicas na Playlist (Segure e Arraste para Mudar a Ordem):</h4>
-            <div id="containerPlaylistAdmin" class="space-y-2 max-h-48 overflow-y-auto p-1 border border-casar rounded-xl bg-white">
-              <p class="text-stone-500 italic p-3">Nenhuma música cadastrada ainda.</p>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Músicas Salvas:</h4>
+            <div id="containerPlaylistAdmin" class="space-y-2 max-h-48 overflow-y-auto p-1 border rounded-xl">
+              <p class="italic p-3 opacity-75">Carregando playlist...</p>
             </div>
           </div>
         </div>
+      </div>
 
+      <!-- ABA 3: ADMINISTRADORES & SENHAS -->
+      <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6 text-xs">
+        <div class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
+          <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores do Painel</h3>
+          <p class="opacity-75">Cadastre novos administradores ou altere senhas de acesso:</p>
+
+          <div class="grid md:grid-cols-3 gap-2">
+            <input type="text" id="novoAdminUser" placeholder="Nome / Usuário do Admin *" class="p-2.5 border rounded-lg font-medium focus:outline-none">
+            <input type="password" id="novoAdminSenha" placeholder="Senha de Acesso *" class="p-2.5 border rounded-lg font-medium focus:outline-none">
+            <button onclick="cadastrarNovoAdmin()" class="btn-casar py-2 px-4 rounded-lg font-bold uppercase tracking-wider shadow-sm">Adicionar Admin</button>
+          </div>
+
+          <div class="mt-4">
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Administradores Cadastrados:</h4>
+            <div id="listaAdminsContainer" class="space-y-2"></div>
+          </div>
+        </div>
+
+        <div class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
+          <h3 class="font-serif-custom text-xl font-bold">🔒 Alterar Minha Senha</h3>
+          <div class="grid md:grid-cols-3 gap-2">
+            <input type="password" id="minhaSenhaAtual" placeholder="Senha Atual" class="p-2.5 border rounded-lg font-medium focus:outline-none">
+            <input type="password" id="minhaNovaSenha" placeholder="Nova Senha" class="p-2.5 border rounded-lg font-medium focus:outline-none">
+            <button onclick="alterarMinhaSenha()" class="bg-emerald-700 hover:bg-emerald-800 text-white py-2 px-4 rounded-lg font-bold uppercase tracking-wider shadow-sm">Atualizar Minha Senha</button>
+          </div>
+        </div>
       </div>
 
       <div class="p-3 bg-stone-50 border-t border-casar flex justify-between items-center text-xs">
-        <span class="text-stone-600 font-medium text-[10px]">Pressione ESC ou clique em Sair para fechar</span>
-        <button onclick="fecharModalAdmin()" class="bg-stone-700 hover:bg-stone-800 text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider">
-          Sair / Fechar
-        </button>
+        <span class="font-medium text-[10px] opacity-75">Pressione ESC ou clique em Sair para fechar</span>
+        <button onclick="fecharModalAdmin()" class="bg-stone-700 hover:bg-stone-800 text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider">Sair / Fechar</button>
       </div>
 
     </div>
@@ -729,7 +691,7 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
-    const SENHA_ADMIN = "1234";
+    let adminLogadoUser = "Noivos";
     let adminAutenticado = false;
 
     let familiaAtual = null;
@@ -739,12 +701,41 @@
 
     let playerYT = null;
     let musicaTocando = false;
-    let playlistMusicas = [
-      { id: "dQw4w9WgXcQ", titulo: "Música Romântica Principal" }
-    ];
+    let playlistMusicas = [];
     let indiceMusicaAtual = 0;
     let intervaloProgresso = null;
-    let dragSrcEl = null;
+
+    function alternarTemaVisual() {
+      const html = document.getElementById("htmlRoot");
+      const icone = document.getElementById("iconeTema");
+      if (html.classList.contains("dark-mode")) {
+        html.classList.remove("dark-mode");
+        icone.innerText = "🌙";
+        localStorage.setItem("casamento_tema", "claro");
+      } else {
+        html.classList.add("dark-mode");
+        icone.innerText = "☀️";
+        localStorage.setItem("casamento_tema", "escuro");
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", function() {
+      const temaSalvo = localStorage.getItem("casamento_tema");
+      if (temaSalvo === "escuro") {
+        document.getElementById("htmlRoot").classList.add("dark-mode");
+        document.getElementById("iconeTema").innerText = "☀️";
+      }
+
+      const transparenciaSalva = localStorage.getItem("casamento_transparencia");
+      if (transparenciaSalva) {
+        alterarTransparenciaFundo(transparenciaSalva);
+        document.getElementById("rangeTransparencia").value = transparenciaSalva;
+      }
+
+      carregarRecados();
+      carregarFotosDrive();
+      carregarPlaylistPlanilha();
+    });
 
     function atualizarParalaxe() {
       const scrollY = window.scrollY;
@@ -767,35 +758,48 @@
       return (match && match[2].length === 11) ? match[2] : null;
     }
 
-    function carregarPlaylistSalva() {
-      const salva = localStorage.getItem("casamento_playlist");
-      if (salva) {
-        try { playlistMusicas = JSON.parse(salva); } catch(e){}
-      }
+    // CARREGAR PLAYLIST DA PLANILHA
+    function carregarPlaylistPlanilha() {
+      executarJSONP({ action: "listarMusicas" }, function(res) {
+        if (res.sucesso && res.músicas && res.músicas.length > 0) {
+          playlistMusicas = res.músicas;
+        } else {
+          playlistMusicas = [{ id: "dQw4w9WgXcQ", titulo: "Música Romântica Principal" }];
+        }
+        renderizarPlaylistAdmin();
+        if (playerYT && playerYT.loadVideoById && playlistMusicas.length > 0) {
+          // Já inicializado
+        }
+      });
     }
 
     function onYouTubeIframeAPIReady() {
-      carregarPlaylistSalva();
-      if (playlistMusicas.length === 0) return;
-
-      const atual = playlistMusicas[indiceMusicaAtual];
-      playerYT = new YT.Player('youtubePlayerContainer', {
-        height: '0',
-        width: '0',
-        videoId: atual.id,
-        playerVars: { 'autoplay': 1, 'controls': 0 },
-        events: {
-          'onReady': (event) => {
-            event.target.playVideo();
-            musicaTocando = true;
-            atualizarBotaoPlayPause();
-            iniciarControleProgresso();
-            buscarNomeVideoYouTube(atual.id);
-          },
-          'onStateChange': onPlayerStateChange
+      executarJSONP({ action: "listarMusicas" }, function(res) {
+        if (res.sucesso && res.músicas && res.músicas.length > 0) {
+          playlistMusicas = res.músicas;
+        } else {
+          playlistMusicas = [{ id: "dQw4w9WgXcQ", titulo: "Música Romântica Principal" }];
         }
+        renderizarPlaylistAdmin();
+
+        const atual = playlistMusicas[indiceMusicaAtual];
+        playerYT = new YT.Player('youtubePlayerContainer', {
+          height: '0',
+          width: '0',
+          videoId: atual.id,
+          playerVars: { 'autoplay': 1, 'controls': 0 },
+          events: {
+            'onReady': (event) => {
+              event.target.playVideo();
+              musicaTocando = true;
+              atualizarBotaoPlayPause();
+              iniciarControleProgresso();
+              buscarNomeVideoYouTube(atual.id);
+            },
+            'onStateChange': onPlayerStateChange
+          }
+        });
       });
-      renderizarPlaylistAdmin();
     }
 
     function buscarNomeVideoYouTube(videoId) {
@@ -805,7 +809,6 @@
           if (data && data.title) {
             playlistMusicas[indiceMusicaAtual].titulo = data.title;
             document.getElementById("txtNomeMusica").innerText = data.title;
-            localStorage.setItem("casamento_playlist", JSON.stringify(playlistMusicas));
             renderizarPlaylistAdmin();
           } else {
             document.getElementById("txtNomeMusica").innerText = playlistMusicas[indiceMusicaAtual].titulo || "Música do Casal";
@@ -824,17 +827,7 @@
 
     function proximaMusicaPlaylist() {
       if (playlistMusicas.length === 0) return;
-      const modo = localStorage.getItem("casamento_modo_reprod") || "repetir_todas";
-      if (modo === "repetir_uma") {
-        playerYT.seekTo(0);
-        playerYT.playVideo();
-        return;
-      }
-      if (modo === "aleatorio") {
-        indiceMusicaAtual = Math.floor(Math.random() * playlistMusicas.length);
-      } else {
-        indiceMusicaAtual = (indiceMusicaAtual + 1) % playlistMusicas.length;
-      }
+      indiceMusicaAtual = (indiceMusicaAtual + 1) % playlistMusicas.length;
       tocarMusicaAtualIndex();
     }
 
@@ -868,11 +861,7 @@
 
     function atualizarBotaoPlayPause() {
       const btn = document.getElementById("btnPlayPause");
-      if (musicaTocando) {
-        btn.innerText = "⏸";
-      } else {
-        btn.innerText = "▶";
-      }
+      btn.innerText = musicaTocando ? "⏸" : "▶";
     }
 
     function iniciarControleProgresso() {
@@ -884,7 +873,6 @@
           if (total > 0) {
             const pct = (atual / total) * 100;
             document.getElementById("barraProgressoMusica").style.width = pct + "%";
-            
             const min = Math.floor(atual / 60);
             const seg = Math.floor(atual % 60).toString().padStart(2, '0');
             document.getElementById("txtTempoMusica").innerText = `${min}:${seg}`;
@@ -899,11 +887,10 @@
       const clickX = event.clientX - rect.left;
       const width = rect.width;
       const pct = clickX / width;
-      const novoTempo = pct * playerYT.getDuration();
-      playerYT.seekTo(novoTempo, true);
+      playerYT.seekTo(pct * playerYT.getDuration(), true);
     }
 
-    function adicionarMusicaPlaylist() {
+    function adicionarMusicaPlaylistPlanilha() {
       const input = document.getElementById("inputAddMusica");
       const url = input.value.trim();
       const videoId = extrairIDYoutube(url);
@@ -911,122 +898,164 @@
         alert("Link do YouTube inválido.");
         return;
       }
-      playlistMusicas.push({ id: videoId, titulo: `Nova Música (${videoId})` });
-      localStorage.setItem("casamento_playlist", JSON.stringify(playlistMusicas));
-      input.value = "";
-      renderizarPlaylistAdmin();
-      alert("Música adicionada à playlist com sucesso!");
+
+      executarJSONP({ action: "salvarMusica", videoId: videoId, titulo: "Nova Música" }, function(res) {
+        if (res.sucesso) {
+          input.value = "";
+          carregarPlaylistPlanilha();
+          alert("Música salva na planilha com sucesso!");
+        } else {
+          alert("Erro ao salvar música na planilha.");
+        }
+      });
     }
 
-    function removerMusicaPlaylist(idx) {
-      playlistMusicas.splice(idx, 1);
-      localStorage.setItem("casamento_playlist", JSON.stringify(playlistMusicas));
-      renderizarPlaylistAdmin();
-    }
-
-    function handleDragStart(e) {
-      dragSrcEl = this;
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/html', this.innerHTML);
-      this.classList.add('opacity-40');
-    }
-
-    function handleDragOver(e) {
-      if (e.preventDefault) e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      return false;
-    }
-
-    function handleDrop(e) {
-      if (e.stopPropagation) e.stopPropagation();
-      if (dragSrcEl !== this) {
-        const srcIndex = Number(dragSrcEl.getAttribute('data-index'));
-        const targetIndex = Number(this.getAttribute('data-index'));
-        
-        const itemMovido = playlistMusicas.splice(srcIndex, 1)[0];
-        playlistMusicas.splice(targetIndex, 0, itemMovido);
-        
-        localStorage.setItem("casamento_playlist", JSON.stringify(playlistMusicas));
-        renderizarPlaylistAdmin();
+    function removerMusicaPlanilha(id) {
+      if (confirm("Deseja remover esta música da planilha?")) {
+        executarJSONP({ action: "removerMusica", id: id }, function(res) {
+          if (res.sucesso) carregarPlaylistPlanilha();
+        });
       }
-      return false;
-    }
-
-    function handleDragEnd(e) {
-      this.classList.remove('opacity-40');
     }
 
     function renderizarPlaylistAdmin() {
       const container = document.getElementById("containerPlaylistAdmin");
       if (!container) return;
       if (playlistMusicas.length === 0) {
-        container.innerHTML = `<p class="text-stone-500 italic p-3">Nenhuma música cadastrada.</p>`;
+        container.innerHTML = `<p class="italic p-3 opacity-75">Nenhuma música cadastrada.</p>`;
         return;
       }
       container.innerHTML = "";
       playlistMusicas.forEach((m, idx) => {
-        const div = document.createElement("div");
-        div.className = "flex items-center justify-between p-2.5 bg-white border border-casar rounded-xl cursor-move hover:bg-amber-50/50 transition shadow-xs";
-        div.setAttribute("draggable", "true");
-        div.setAttribute("data-index", idx);
-        
-        div.innerHTML = `
-          <div class="flex items-center gap-2 truncate">
-            <span class="text-stone-400 font-bold">☰</span>
-            <span class="font-bold text-stone-800 truncate">🎵 ${m.titulo}</span>
+        container.innerHTML += `
+          <div class="flex items-center justify-between p-2.5 bg-white rounded-xl shadow-xs border">
+            <span class="font-bold truncate">🎵 ${m.titulo || m.id}</span>
+            <button onclick="removerMusicaPlanilha('${m.id}')" class="text-rose-700 hover:underline font-bold ml-2">Remover</button>
           </div>
-          <button onclick="removerMusicaPlaylist(${idx})" class="text-rose-700 hover:underline font-bold ml-2">Remover</button>
         `;
-
-        div.addEventListener('dragstart', handleDragStart, false);
-        div.addEventListener('dragover', handleDragOver, false);
-        div.addEventListener('drop', handleDrop, false);
-        div.addEventListener('dragend', handleDragEnd, false);
-
-        container.appendChild(div);
       });
-    }
-
-    function salvarConfigModo() {
-      const modo = document.getElementById("selectModoReprod").value;
-      localStorage.setItem("casamento_modo_reprod", modo);
     }
 
     function alternarAbaAdmin(aba) {
       const btnConv = document.getElementById("tabBtnConvidados");
       const btnConf = document.getElementById("tabBtnConfig");
+      const btnAdmins = document.getElementById("tabBtnAdmins");
       const divConv = document.getElementById("abaConvidados");
       const divConf = document.getElementById("abaConfig");
+      const divAdmins = document.getElementById("abaAdmins");
 
-      if (aba === 'convidados') {
-        btnConv.className = "px-4 py-2 rounded-lg bg-white text-stone-900 shadow-sm transition";
-        btnConf.className = "px-4 py-2 rounded-lg text-stone-700 hover:text-stone-950 transition";
-        divConv.classList.remove("hidden");
-        divConf.classList.add("hidden");
-      } else {
-        btnConf.className = "px-4 py-2 rounded-lg bg-white text-stone-900 shadow-sm transition";
-        btnConv.className = "px-4 py-2 rounded-lg text-stone-700 hover:text-stone-950 transition";
-        divConf.classList.remove("hidden");
-        divConv.classList.add("hidden");
-      }
+      btnConv.className = aba === 'convidados' ? "px-3 py-2 rounded-lg bg-white shadow-sm font-bold" : "px-3 py-2 rounded-lg opacity-75";
+      btnConf.className = aba === 'config' ? "px-3 py-2 rounded-lg bg-white shadow-sm font-bold" : "px-3 py-2 rounded-lg opacity-75";
+      btnAdmins.className = aba === 'admins' ? "px-3 py-2 rounded-lg bg-white shadow-sm font-bold" : "px-3 py-2 rounded-lg opacity-75";
+
+      divConv.classList.toggle("hidden", aba !== 'convidados');
+      divConf.classList.toggle("hidden", aba !== 'config');
+      divAdmins.classList.toggle("hidden", aba !== 'admins');
+
+      if (aba === 'admins') carregarListaAdmins();
     }
 
-    window.addEventListener("DOMContentLoaded", function() {
-      const salva = localStorage.getItem("casamento_transparencia");
-      if (salva) {
-        alterarTransparenciaFundo(salva);
-        const slider = document.getElementById("rangeTransparencia");
-        if (slider) slider.value = salva;
-      }
-      const modoSalvo = localStorage.getItem("casamento_modo_reprod");
-      if (modoSalvo) {
-        document.getElementById("selectModoReprod").value = modoSalvo;
-      }
+    // GERENCIAMENTO DE ADMINISTRADORES
+    function carregarListaAdmins() {
+      executarJSONP({ action: "listarAdmins" }, function(res) {
+        const container = document.getElementById("listaAdminsContainer");
+        if (!container) return;
+        if (res.sucesso && res.admins) {
+          container.innerHTML = "";
+          res.admins.forEach(adm => {
+            container.innerHTML += `
+              <div class="flex items-center justify-between p-2.5 bg-white border rounded-xl">
+                <span class="font-bold">👤 ${adm.usuario}</span>
+                <div class="flex gap-2">
+                  <input type="password" id="pass_${adm.usuario}" placeholder="Nova senha" class="p-1 border rounded text-xs w-28">
+                  <button onclick="adminTrocarSenha('${adm.usuario}')" class="bg-stone-700 text-white px-3 py-1 rounded text-xs font-bold">Alterar Senha</button>
+                </div>
+              </div>
+            `;
+          });
+        }
+      });
+    }
 
-      carregarRecados();
-      carregarFotosDrive();
-    });
+    function cadastrarNovoAdmin() {
+      const user = document.getElementById("novoAdminUser").value.trim();
+      const pass = document.getElementById("novoAdminSenha").value.trim();
+      if (!user || !pass) {
+        alert("Preencha o usuário e a senha.");
+        return;
+      }
+      executarJSONP({ action: "salvarAdmin", usuario: user, senha: pass }, function(res) {
+        if (res.sucesso) {
+          document.getElementById("novoAdminUser").value = "";
+          document.getElementById("novoAdminSenha").value = "";
+          carregarListaAdmins();
+          alert("Administrador cadastrado com sucesso!");
+        } else {
+          alert(res.mensagem || "Erro ao cadastrar administrador.");
+        }
+      });
+    }
 
+    function adminTrocarSenha(usuario) {
+      const novaSenha = document.getElementById(`pass_${usuario}`).value.trim();
+      if (!novaSenha) {
+        alert("Digite a nova senha.");
+        return;
+      }
+      executarJSONP({ action: "salvarAdmin", usuario: usuario, senha: novaSenha }, function(res) {
+        if (res.sucesso) {
+          document.getElementById(`pass_${usuario}`).value = "";
+          alert("Senha alterada com sucesso!");
+        }
+      });
+    }
+
+    function alterarMinhaSenha() {
+      const atual = document.getElementById("minhaSenhaAtual").value.trim();
+      const nova = document.getElementById("minhaNovaSenha").value.trim();
+      if (!atual || !nova) {
+        alert("Preencha a senha atual e a nova senha.");
+        return;
+      }
+      executarJSONP({ action: "alterarSenhaPropria", usuario: adminLogadoUser, senhaAtual: atual, novaSenha: nova }, function(res) {
+        if (res.sucesso) {
+          document.getElementById("minhaSenhaAtual").value = "";
+          document.getElementById("minhaNovaSenha").value = "";
+          alert("Sua senha foi alterada com sucesso!");
+        } else {
+          alert(res.mensagem || "Senha atual incorreta.");
+        }
+      });
+    }
+
+    function abrirModalAdmin() {
+      if (!adminAutenticado) {
+        const usuarioDig = prompt("🔒 Área restrita para os Noivos.\nDigite seu usuário (Ex: Noivos):");
+        if (usuarioDig === null) return;
+        const senhaDig = prompt("Digite sua senha de acesso:");
+        if (senhaDig === null) return;
+
+        executarJSONP({ action: "loginAdmin", usuario: usuarioDig, senha: senhaDig }, function(res) {
+          if (res.sucesso) {
+            adminAutenticado = true;
+            adminLogadoUser = usuarioDig;
+            document.getElementById("modalAdmin").classList.remove("hidden");
+            carregarAdminLista();
+          } else {
+            alert("❌ Usuário ou senha incorretos!");
+          }
+        });
+        return;
+      }
+      document.getElementById("modalAdmin").classList.remove("hidden");
+      carregarAdminLista();
+    }
+
+    function fecharModalAdmin() {
+      document.getElementById("modalAdmin").classList.add("hidden");
+    }
+
+    // CONTAGEM REGRESSIVA
     const targetDate = new Date("2026-12-11T16:00:00").getTime();
     function updateCountdown() {
       const now = new Date().getTime();
@@ -1054,9 +1083,7 @@
       }
       if (cBaixo && cBaixo.children.length > 0) {
         cBaixo.style.transform = `translateX(-${idxFotoBaixo * 100}%)`;
-        if (contador) {
-          contador.innerText = `Foto ${idxFotoBaixo + 1} de ${cBaixo.children.length}`;
-        }
+        if (contador) contador.innerText = `Foto ${idxFotoBaixo + 1} de ${cBaixo.children.length}`;
       }
     }
 
@@ -1075,7 +1102,6 @@
       idxFotoBaixo = (idxFotoBaixo - 1 + total) % total;
       atualizarCarrosseis();
     }
-
     setInterval(proximaFoto, 4500);
 
     function carregarFotosDrive() {
@@ -1083,24 +1109,13 @@
         if (res.sucesso && res.fotos && res.fotos.length > 0) {
           const cTopo = document.getElementById("carrosselTopo");
           const cBaixo = document.getElementById("carrosselFotos");
-          
           cTopo.innerHTML = "";
           cBaixo.innerHTML = "";
-          
           res.fotos.forEach(url => {
-            const slide1 = document.createElement("div");
-            slide1.className = "min-w-full";
-            slide1.innerHTML = `<img src="${url}" class="w-full h-72 md:h-80 object-cover" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80'">`;
-            cTopo.appendChild(slide1);
-
-            const slide2 = document.createElement("div");
-            slide2.className = "min-w-full";
-            slide2.innerHTML = `<img src="${url}" class="w-full h-80 md:h-96 object-cover" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80'">`;
-            cBaixo.appendChild(slide2);
+            cTopo.innerHTML += `<div class="min-w-full"><img src="${url}" class="w-full h-72 md:h-80 object-cover"></div>`;
+            cBaixo.innerHTML += `<div class="min-w-full"><img src="${url}" class="w-full h-80 md:h-96 object-cover"></div>`;
           });
-          
-          idxFotoTopo = 0;
-          idxFotoBaixo = 0;
+          idxFotoTopo = 0; idxFotoBaixo = 0;
           atualizarCarrosseis();
         }
       });
@@ -1122,8 +1137,6 @@
       }
 
       const arquivos = Array.from(input.files);
-      const totalArquivos = arquivos.length;
-      
       btn.disabled = true;
       status.classList.add("hidden");
       boxProgresso.classList.remove("hidden");
@@ -1131,12 +1144,9 @@
       pctTxt.innerText = "0%";
 
       let enviadosSucesso = 0;
-
-      for (let i = 0; i < totalArquivos; i++) {
+      for (let i = 0; i < arquivos.length; i++) {
         const file = arquivos[i];
-        const numFoto = i + 1;
-
-        txtStatus.innerText = `Enviando foto ${numFoto} de ${totalArquivos}...`;
+        txtStatus.innerText = `Enviando foto ${i + 1} de ${arquivos.length}...`;
 
         const base64Data = await new Promise((resolve) => {
           const reader = new FileReader();
@@ -1144,59 +1154,29 @@
           reader.readAsDataURL(file);
         });
 
-        const payload = {
-          action: "uploadFoto",
-          base64: base64Data,
-          mimeType: file.type,
-          nomeUsuario: nomeInput
-        };
-
         try {
           const res = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({ action: "uploadFoto", base64: base64Data, mimeType: file.type, nomeUsuario: nomeInput })
           });
-          
           const resultado = await res.json();
+          if (resultado.sucesso) enviadosSucesso++;
+        } catch (err) {}
 
-          if (resultado.sucesso) {
-            enviadosSucesso++;
-            if (resultado.url) {
-              const cBaixo = document.getElementById("carrosselFotos");
-              const novoSlide = document.createElement("div");
-              novoSlide.className = "min-w-full";
-              novoSlide.innerHTML = `<img src="${resultado.url}" class="w-full h-80 md:h-96 object-cover">`;
-              cBaixo.prepend(novoSlide);
-            }
-          }
-        } catch (err) {
-          console.error(`Erro ao enviar foto ${numFoto}:`, err);
-        }
-
-        const pct = Math.round((numFoto / totalArquivos) * 100);
+        const pct = Math.round(((i + 1) / arquivos.length) * 100);
         barra.style.width = pct + "%";
         pctTxt.innerText = pct + "%";
       }
 
       setTimeout(() => {
         boxProgresso.classList.add("hidden");
-        status.className = enviadosSucesso > 0 
-          ? "mt-3 text-center text-xs p-2 rounded bg-emerald-50 text-emerald-900 font-bold" 
-          : "mt-3 text-center text-xs p-2 rounded bg-rose-50 text-rose-900 font-bold";
-        
-        status.innerText = enviadosSucesso === totalArquivos
-          ? `Sucesso! ${enviadosSucesso} foto(s) enviada(s) para o álbum.`
-          : `Foram enviadas ${enviadosSucesso} de ${totalArquivos} foto(s).`;
-        
+        status.className = "mt-3 text-center text-xs p-2 rounded font-bold bg-emerald-50 text-emerald-900";
+        status.innerText = `Sucesso! ${enviadosSucesso} foto(s) enviada(s).`;
         status.classList.remove("hidden");
-
         input.value = "";
-        idxFotoBaixo = 0;
-        atualizarCarrosseis();
-
         btn.disabled = false;
-        btn.innerText = "📸 Salvar Fotos no Álbum dos Noivos";
+        carregarFotosDrive();
       }, 500);
     }
 
@@ -1210,10 +1190,7 @@
           exibirRecadoAtual();
           atualizarTickerCNN(res.recados);
         } else {
-          document.getElementById("containerRecados").innerHTML = `
-            <p class="text-xs text-stone-500 font-medium italic">Seja o primeiro a deixar uma mensagem de carinho aos noivos!</p>
-          `;
-          document.getElementById("contadorRecados").innerText = "";
+          document.getElementById("containerRecados").innerHTML = `<p class="text-xs font-medium italic opacity-75">Seja o primeiro a deixar uma mensagem!</p>`;
         }
       });
     }
@@ -1221,14 +1198,10 @@
     function atualizarTickerCNN(recados) {
       const track = document.getElementById("cnnTickerTrack");
       if (!track) return;
-
       let html = "";
-      const listaDuplicada = [...recados, ...recados];
-
-      listaDuplicada.forEach(r => {
+      [...recados, ...recados].forEach(r => {
         html += `<div class="cnn-ticker-item"><span class="autor">${r.nome}:</span> "${r.mensagem}" &nbsp;&nbsp;&bull;&nbsp;&nbsp;</div>`;
       });
-
       track.innerHTML = html;
     }
 
@@ -1240,14 +1213,9 @@
 
       container.style.opacity = 0;
       setTimeout(() => {
-        container.innerHTML = `
-          <p class="font-serif-custom italic text-lg text-stone-900 font-semibold mb-3">"${r.mensagem}"</p>
-          <p class="text-xs font-bold uppercase tracking-wider text-amber-900">— ${r.nome}</p>
-        `;
+        container.innerHTML = `<p class="font-serif-custom italic text-lg font-semibold mb-3">"${r.mensagem}"</p><p class="text-xs font-bold uppercase tracking-wider">— ${r.nome}</p>`;
         container.style.opacity = 1;
-        if (contador) {
-          contador.innerText = `Mensagem ${idxRecado + 1} de ${listaRecadosGlobal.length}`;
-        }
+        if (contador) contador.innerText = `Mensagem ${idxRecado + 1} de ${listaRecadosGlobal.length}`;
       }, 300);
     }
 
@@ -1264,7 +1232,6 @@
         exibirRecadoAtual();
       }
     }
-
     setInterval(proximoRecado, 6000);
 
     function enviarRecado(event) {
@@ -1277,17 +1244,12 @@
       btn.disabled = true;
       btn.innerText = "ENVIANDO...";
 
-      executarJSONP({
-        action: "salvarRecado",
-        nome: nome,
-        mensagem: mensagem
-      }, function(res) {
+      executarJSONP({ action: "salvarRecado", nome: nome, mensagem: mensagem }, function(res) {
         btn.disabled = false;
         btn.innerText = "PUBLICAR RECADO";
-        status.className = res.sucesso ? "text-center text-xs p-2 rounded bg-emerald-50 text-emerald-900 font-bold" : "text-center text-xs p-2 rounded bg-rose-50 text-rose-900 font-bold";
+        status.className = res.sucesso ? "text-center text-xs p-2 rounded font-bold bg-emerald-50 text-emerald-900" : "text-center text-xs p-2 rounded font-bold bg-rose-50 text-rose-900";
         status.innerText = res.mensagem;
         status.classList.remove("hidden");
-
         if (res.sucesso) {
           document.getElementById("recadoNome").value = "";
           document.getElementById("recadoTexto").value = "";
@@ -1309,7 +1271,6 @@
       executarJSONP({ action: "buscarConvite", termo: termo }, function(res) {
         btn.disabled = false;
         btn.innerText = "BUSCAR";
-
         if (res.sucesso) {
           familiaAtual = res;
           document.getElementById("stepBusca").classList.add("hidden");
@@ -1319,15 +1280,11 @@
 
           const container = document.getElementById("containerMembros");
           container.innerHTML = "";
-
           res.membros.forEach((m, idx) => {
             container.innerHTML += `
-              <div class="p-4 bg-white border border-casar rounded-xl flex items-center justify-between gap-4 shadow-sm">
-                <div>
-                  <p class="font-bold text-stone-900 text-sm">${m.nome}</p>
-                  <span class="text-[10px] uppercase text-stone-600 font-semibold">${m.tipo}</span>
-                </div>
-                <select id="membro_${idx}" data-nome="${m.nome}" class="p-2 border border-casar rounded-lg text-xs bg-stone-50 font-semibold text-stone-900">
+              <div class="p-4 bg-white border rounded-xl flex items-center justify-between gap-4 shadow-sm">
+                <div><p class="font-bold text-sm">${m.nome}</p><span class="text-[10px] uppercase font-semibold opacity-75">${m.tipo}</span></div>
+                <select id="membro_${idx}" data-nome="${m.nome}" class="p-2 border rounded-lg text-xs font-semibold">
                   <option value="Sim, estarei presente">Sim, estarei presente</option>
                   <option value="Infelizmente não poderei ir">Não poderei ir</option>
                 </select>
@@ -1346,34 +1303,21 @@
       event.preventDefault();
       const btn = document.getElementById("btnSalvarRSVP");
       const status = document.getElementById("statusMsgRSVP");
-
       btn.disabled = true;
       btn.innerText = "ENVIANDO...";
 
       const payload = [];
       familiaAtual.membros.forEach((m, idx) => {
         const select = document.getElementById(`membro_${idx}`);
-        payload.push({
-          nome: select.getAttribute("data-nome"),
-          status: select.value
-        });
+        payload.push({ nome: select.getAttribute("data-nome"), status: select.value });
       });
 
-      executarJSONP({
-        action: "confirmarPresenca",
-        responsavel: familiaAtual.responsavel,
-        telefone: familiaAtual.telefoneMascarado,
-        payload: JSON.stringify(payload)
-      }, function(res) {
+      executarJSONP({ action: "confirmarPresenca", responsavel: familiaAtual.responsavel, telefone: familiaAtual.telefoneMascarado, payload: JSON.stringify(payload) }, function(res) {
         btn.disabled = false;
         btn.innerText = "ENVIAR CONFIRMAÇÕES DA FAMÍLIA";
-
-        status.className = res.sucesso 
-          ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-900 font-bold border border-emerald-200"
-          : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-900 font-bold border border-rose-200";
+        status.className = res.sucesso ? "mt-4 p-4 rounded-lg text-center text-xs bg-emerald-50 text-emerald-900 font-bold border" : "mt-4 p-4 rounded-lg text-center text-xs bg-rose-50 text-rose-900 font-bold border";
         status.innerText = res.mensagem;
         status.classList.remove("hidden");
-
         if (res.sucesso) {
           setTimeout(() => {
             document.getElementById("stepSelecao").classList.add("hidden");
@@ -1383,28 +1327,6 @@
           }, 2000);
         }
       });
-    }
-
-    function abrirModalAdmin() {
-      if (!adminAutenticado) {
-        const senhaDigitada = prompt("🔒 Área restrita para os Noivos.\nPor favor, digite a senha de acesso:");
-        if (senhaDigitada === null) return;
-        
-        if (senhaDigitada === SENHA_ADMIN) {
-          adminAutenticado = true;
-        } else {
-          alert("❌ Senha incorreta! Acesso negado.");
-          return;
-        }
-      }
-
-      document.getElementById("modalAdmin").classList.remove("hidden");
-      carregarAdminLista();
-      renderizarPlaylistAdmin();
-    }
-
-    function fecharModalAdmin() {
-      document.getElementById("modalAdmin").classList.add("hidden");
     }
 
     function carregarAdminLista() {
@@ -1423,40 +1345,22 @@
     }
 
     function ordenarPor(campo) {
-      if (ordemCampo === campo) {
-        ordemAsc = !ordemAsc;
-      } else {
-        ordemCampo = campo;
-        ordemAsc = true;
-      }
+      if (ordemCampo === campo) ordemAsc = !ordemAsc;
+      else { ordemCampo = campo; ordemAsc = true; }
       filtrarETabelaAdmin();
     }
 
     function calcularEstatisticas() {
       const ativos = convidadosCache.filter(c => c.ativo);
       const total = ativos.length;
-
-      let adultos = 0;
-      let criancas = 0;
-      let confirmados = 0;
-      let ausentes = 0;
-      let pendentes = 0;
+      let adultos = 0, criancas = 0, confirmados = 0, ausentes = 0, pendentes = 0;
 
       ativos.forEach(c => {
-        if ((c.tipo || "").toLowerCase().indexOf("crian") !== -1) {
-          criancas++;
-        } else {
-          adultos++;
-        }
-
+        if ((c.tipo || "").toLowerCase().indexOf("crian") !== -1) criancas++; else adultos++;
         const rsvp = (c.rsvpStatus || "").toLowerCase();
-        if (rsvp.indexOf("sim") !== -1 || rsvp.indexOf("confirmad") !== -1 || rsvp.indexOf("presente") !== -1) {
-          confirmados++;
-        } else if (rsvp.indexOf("nao") !== -1 || rsvp.indexOf("não") !== -1 || rsvp.indexOf("ausente") !== -1) {
-          ausentes++;
-        } else {
-          pendentes++;
-        }
+        if (rsvp.indexOf("sim") !== -1 || rsvp.indexOf("confirmad") !== -1 || rsvp.indexOf("presente") !== -1) confirmados++;
+        else if (rsvp.indexOf("nao") !== -1 || rsvp.indexOf("não") !== -1) ausentes++;
+        else pendentes++;
       });
 
       document.getElementById("statTotal").innerText = total;
@@ -1469,13 +1373,9 @@
 
     function filtrarETabelaAdmin() {
       const termo = normalizar(document.getElementById("inputPesquisaAdmin").value);
-      
       let filtrados = convidadosCache.filter(c => {
         if (!termo) return true;
-        const resp = normalizar(c.responsavel);
-        const nome = normalizar(c.nome);
-        const cont = normalizar(c.contato);
-        return resp.indexOf(termo) !== -1 || nome.indexOf(termo) !== -1 || cont.indexOf(termo) !== -1;
+        return normalizar(c.responsavel).indexOf(termo) !== -1 || normalizar(c.nome).indexOf(termo) !== -1 || normalizar(c.contato).indexOf(termo) !== -1;
       });
 
       filtrados.sort((a, b) => {
@@ -1486,124 +1386,76 @@
         return 0;
       });
 
-      document.getElementById("txtResultadosFiltro").innerText = termo 
-        ? `Exibindo ${filtrados.length} de ${convidadosCache.length} registro(s)`
-        : `Exibindo todos os ${convidadosCache.length} registro(s)`;
-
       renderizarTabelaAdmin(filtrados);
     }
 
     function renderizarTabelaAdmin(lista) {
       const tbody = document.getElementById("tabelaAdminBody");
       tbody.innerHTML = "";
-
       if (lista.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-stone-500 font-medium italic">Nenhum convidado localizado com os filtros aplicados.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center italic opacity-75">Nenhum convidado localizado.</td></tr>`;
         return;
       }
-
       lista.forEach(c => {
-        const tr = document.createElement("tr");
-        tr.className = `border-b border-stone-200 transition-all duration-300 ${c.ativo ? '' : 'opacity-40 bg-stone-100'}`;
-        tr.id = `linha_${c.linha}`;
-
-        const statusRSVP = c.rsvpStatus || "Pendente";
         let badgeRSVP = `<span class="bg-stone-200 text-stone-800 px-2 py-0.5 rounded text-[10px] font-bold">⏳ Pendente</span>`;
-        if (statusRSVP.toLowerCase().indexOf("sim") !== -1 || statusRSVP.toLowerCase().indexOf("presente") !== -1) {
-          badgeRSVP = `<span class="bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded text-[10px] font-bold">✅ Confirmado</span>`;
-        } else if (statusRSVP.toLowerCase().indexOf("nao") !== -1 || statusRSVP.toLowerCase().indexOf("não") !== -1) {
-          badgeRSVP = `<span class="bg-rose-100 text-rose-900 px-2 py-0.5 rounded text-[10px] font-bold">❌ Não irá</span>`;
-        }
+        const rsvp = (c.rsvpStatus || "").toLowerCase();
+        if (rsvp.indexOf("sim") !== -1 || rsvp.indexOf("presente") !== -1) badgeRSVP = `<span class="bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded text-[10px] font-bold">✅ Confirmado</span>`;
+        else if (rsvp.indexOf("nao") !== -1 || rsvp.indexOf("não") !== -1) badgeRSVP = `<span class="bg-rose-100 text-rose-900 px-2 py-0.5 rounded text-[10px] font-bold">❌ Não irá</span>`;
 
-        tr.innerHTML = `
-          <td class="p-3 font-bold text-stone-900">${c.responsavel}</td>
-          <td class="p-3 font-medium text-stone-800">${c.nome}</td>
-          <td class="p-3 font-medium text-stone-800">${c.tipo}</td>
-          <td class="p-3 font-medium text-stone-800">${c.contato || '-'}</td>
-          <td class="p-3">${badgeRSVP}</td>
-          <td class="p-3 font-bold text-stone-800">${c.ativo ? '🟢 Ativo' : '🔴 Desativado'}</td>
-          <td class="p-3 text-center space-x-2">
-            <button onclick="ativarEdicaoLinha(${c.linha})" class="text-blue-700 hover:underline font-bold">Editar</button>
-            <button onclick="adminRemover(${c.linha})" class="text-rose-700 hover:underline font-bold">Remover</button>
-          </td>
+        tbody.innerHTML += `
+          <tr class="border-b transition-all duration-300 ${c.ativo ? '' : 'opacity-40 bg-stone-100'}" id="linha_${c.linha}">
+            <td class="p-3 font-bold">${c.responsavel}</td>
+            <td class="p-3 font-medium">${c.nome}</td>
+            <td class="p-3 font-medium">${c.tipo}</td>
+            <td class="p-3 font-medium">${c.contato || '-'}</td>
+            <td class="p-3">${badgeRSVP}</td>
+            <td class="p-3 font-bold">${c.ativo ? '🟢 Ativo' : '🔴 Desativado'}</td>
+            <td class="p-3 text-center space-x-2">
+              <button onclick="ativarEdicaoLinha(${c.linha})" class="text-blue-600 hover:underline font-bold">Editar</button>
+              <button onclick="adminRemover(${c.linha})" class="text-rose-600 hover:underline font-bold">Remover</button>
+            </td>
+          </tr>
         `;
-        tbody.appendChild(tr);
       });
     }
 
     function ativarEdicaoLinha(linha) {
       const c = convidadosCache.find(item => item.linha === linha);
       if (!c) return;
-
       const tr = document.getElementById(`linha_${linha}`);
-      tr.className = "border-2 border-amber-500 bg-amber-50 shadow-md transition-all duration-300";
-
       tr.innerHTML = `
-        <td class="p-2"><input type="text" id="editResp_${linha}" value="${c.responsavel}" class="w-full p-1.5 border border-amber-400 rounded bg-white text-xs font-bold text-stone-900 focus:outline-none"></td>
-        <td class="p-2"><input type="text" id="editNome_${linha}" value="${c.nome}" class="w-full p-1.5 border border-amber-400 rounded bg-white text-xs font-medium text-stone-900 focus:outline-none"></td>
-        <td class="p-2">
-          <select id="editTipo_${linha}" class="p-1.5 border border-amber-400 rounded bg-white text-xs font-semibold text-stone-900 focus:outline-none">
-            <option value="Adulto" ${c.tipo === 'Adulto' ? 'selected' : ''}>Adulto</option>
-            <option value="Criança" ${c.tipo === 'Criança' ? 'selected' : ''}>Criança</option>
-          </select>
-        </td>
-        <td class="p-2"><input type="text" id="editContato_${linha}" value="${c.contato || ''}" class="w-full p-1.5 border border-amber-400 rounded bg-white text-xs font-medium text-stone-900 focus:outline-none"></td>
-        <td class="p-2 text-stone-500 text-[10px] font-semibold italic">Mantido</td>
-        <td class="p-2 font-bold text-xs text-stone-900">🟢 Ativo</td>
-        <td class="p-2 text-center space-x-1 min-w-[120px]">
-          <button onclick="salvarEdicaoLinha(${linha})" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1 rounded text-[11px] font-bold shadow-sm">Salvar</button>
-          <button onclick="filtrarETabelaAdmin()" class="bg-stone-500 hover:bg-stone-600 text-white px-2.5 py-1 rounded text-[11px] font-bold">Cancelar</button>
+        <td class="p-2"><input type="text" id="editResp_${linha}" value="${c.responsavel}" class="w-full p-1 border rounded text-xs font-bold"></td>
+        <td class="p-2"><input type="text" id="editNome_${linha}" value="${c.nome}" class="w-full p-1 border rounded text-xs"></td>
+        <td class="p-2"><select id="editTipo_${linha}" class="p-1 border rounded text-xs"><option value="Adulto" ${c.tipo==='Adulto'?'selected':''}>Adulto</option><option value="Criança" ${c.tipo==='Criança'?'selected':''}>Criança</option></select></td>
+        <td class="p-2"><input type="text" id="editContato_${linha}" value="${c.contato||''}" class="w-full p-1 border rounded text-xs"></td>
+        <td class="p-2 text-[10px] italic">Mantido</td>
+        <td class="p-2 font-bold text-xs">🟢 Ativo</td>
+        <td class="p-2 text-center space-x-1">
+          <button onclick="salvarEdicaoLinha(${linha})" class="bg-emerald-700 text-white px-2.5 py-1 rounded text-[11px] font-bold">Salvar</button>
+          <button onclick="carregarAdminLista()" class="bg-stone-500 text-white px-2 py-1 rounded text-[11px]">Cancelar</button>
         </td>
       `;
-
-      tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => {
-        const inputFoco = document.getElementById(`editResp_${linha}`);
-        if (inputFoco) inputFoco.focus();
-      }, 150);
     }
 
     function salvarEdicaoLinha(linha) {
-      const resp = document.getElementById(`editResp_${linha}`).value;
-      const nome = document.getElementById(`editNome_${linha}`).value;
-      const tipo = document.getElementById(`editTipo_${linha}`).value;
-      const contato = document.getElementById(`editContato_${linha}`).value;
-
-      if (!resp || !nome) {
-        alert("Preencha o responsável e o nome do convidado.");
-        return;
-      }
-
       executarJSONP({
         action: "adminSalvar",
         linha: linha,
-        responsavel: resp,
-        nome: nome,
-        tipo: tipo,
-        contato: contato
-      }, function() {
-        carregarAdminLista();
-      });
+        responsavel: document.getElementById(`editResp_${linha}`).value,
+        nome: document.getElementById(`editNome_${linha}`).value,
+        tipo: document.getElementById(`editTipo_${linha}`).value,
+        contato: document.getElementById(`editContato_${linha}`).value
+      }, function() { carregarAdminLista(); });
     }
 
     function adminAdicionarNovo() {
-      const resp = document.getElementById("addResp").value;
-      const nome = document.getElementById("addNome").value;
-      const tipo = document.getElementById("addTipo").value;
-      const contato = document.getElementById("addContato").value;
-
-      if (!resp || !nome) {
-        alert("Por favor, preencha o Responsável e o Nome.");
-        return;
-      }
-
       executarJSONP({
         action: "adminSalvar",
         linha: 0,
-        responsavel: resp,
-        nome: nome,
-        tipo: tipo,
-        contato: contato
+        responsavel: document.getElementById("addResp").value,
+        nome: document.getElementById("addNome").value,
+        tipo: document.getElementById("addTipo").value,
+        contato: document.getElementById("addContato").value
       }, function() {
         document.getElementById("addResp").value = "";
         document.getElementById("addNome").value = "";
@@ -1613,10 +1465,8 @@
     }
 
     function adminRemover(linha) {
-      if (confirm("Deseja realmente remover este convidado da lista?")) {
-        executarJSONP({ action: "adminDesativar", linha: linha }, function() {
-          carregarAdminLista();
-        });
+      if (confirm("Deseja realmente remover este convidado?")) {
+        executarJSONP({ action: "adminDesativar", linha: linha }, function() { carregarAdminLista(); });
       }
     }
 
@@ -1627,11 +1477,7 @@
         if (script.parentNode) script.parentNode.removeChild(script);
         callbackSuccess(res);
       };
-
-      const query = Object.keys(params)
-        .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-        .join("&");
-
+      const query = Object.keys(params).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join("&");
       const script = document.createElement("script");
       script.src = `${API_URL}?${query}&callback=${callbackName}`;
       document.body.appendChild(script);
