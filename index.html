@@ -8,26 +8,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+ <style>
   html {
     scroll-padding-top: 65px;
   }
   
-  /* Fundo fixo com maior transparência na foto.jpeg */
+  /* Corpo com cor base suave */
   body { 
     font-family: 'Montserrat', sans-serif; 
     color: #2c251e;
-    /* Alterado de 0.92 para 0.75 para a foto aparecer bem mais */
-    background: linear-gradient(rgba(255, 253, 250, 0.75), rgba(255, 253, 250, 0.75)), url('foto.jpeg');
+    background-color: #fffdfa;
+  }
+
+  /* Capa principal (Hero) com a foto.jpeg fixa e efeito de paralaxe abaixo do menu */
+  #home {
+    background: linear-gradient(rgba(255, 253, 250, 0.65), rgba(255, 253, 250, 0.65)), url('foto.jpeg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed; /* Cria o efeito de rolagem mais lenta/paralaxe */
     background-repeat: no-repeat;
   }
 
   .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
   .font-cursive { font-family: 'Great Vibes', cursive; }
-  .bg-casar-header { background-color: rgba(245, 239, 233, 0.70); }
+  .bg-casar-header { background-color: rgba(245, 239, 233, 0.50); }
   .btn-casar { background-color: #8c6e5c; color: #ffffff; }
   .btn-casar:hover { background-color: #725645; }
   .text-casar-primary { color: #8c6e5c; }
