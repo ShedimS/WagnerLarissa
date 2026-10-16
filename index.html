@@ -11,11 +11,11 @@
   <style>
     :root {
       --casar-texto: #2c251e;
+      --casar-titulos: #111827;
       --casar-borda: rgba(200, 180, 160, 0.6);
       --bg-transparency: 0.65;
       --bg-site: #f7f2ed;
       --card-bg: rgba(255, 255, 255, 0.95);
-      --card-sub-bg: #f3eee8;
       --nav-bg: rgba(255, 255, 255, 0.98);
       --player-bg: #eae3db;
       --input-bg: #ffffff;
@@ -23,14 +23,14 @@
 
     .dark-mode {
       --casar-texto: #f3f4f6;
+      --casar-titulos: #fbbf24;
       --casar-borda: rgba(75, 85, 99, 0.8);
       --bg-transparency: 0.85;
       --bg-site: #111827;
       --card-bg: rgba(31, 41, 55, 0.95);
-      --card-sub-bg: #1f2937;
       --nav-bg: rgba(17, 24, 39, 0.98);
       --player-bg: #374151;
-      --input-bg: #111827;
+      --input-bg: #1f2937;
     }
 
     html {
@@ -50,7 +50,11 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
+    .font-serif-custom { 
+      font-family: 'Cormorant Garamond', serif; 
+      color: var(--casar-titulos) !important;
+    }
+    
     .font-cursive { font-family: 'Great Vibes', cursive; }
     .btn-casar { background-color: #a38573; color: #ffffff; }
     .btn-casar:hover { background-color: #8c6e5c; }
@@ -199,7 +203,7 @@
   <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
     <div class="max-w-4xl mx-auto w-full flex flex-col items-center gap-2">
       
-      <!-- LINHA 1: LOGO + PLAYER + TEMA CENTRALIZADOS JUNTO -->
+      <!-- LINHA 1: LOGO + PLAYER + TEMA CENTRALIZADOS -->
       <div class="w-full max-w-xl flex items-center justify-center gap-4 border-b border-casar/50 pb-2">
         <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
@@ -250,15 +254,11 @@
 
       <div class="my-6 max-w-lg mx-auto">
         <div class="relative overflow-hidden w-full rounded-2xl shadow-lg border-4 border-white/50">
-          <div id="carrosselTopo" class="flex transition-transform duration-700 ease-in-out">
-            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 md:h-80 object-cover"></div>
-            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 md:h-80 object-cover"></div>
-            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 md:h-80 object-cover"></div>
-          </div>
+          <div id="carrosselTopo" class="flex transition-transform duration-700 ease-in-out"></div>
         </div>
       </div>
 
-      <!-- CONTADOR REGRESSIVO CORRIGIDO -->
+      <!-- CONTADOR REGRESSIVO -->
       <div class="mt-8 bg-white p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
         <p class="text-xs uppercase tracking-widest font-bold mb-4">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
@@ -271,7 +271,7 @@
     </div>
   </header>
 
-  <!-- MENSAGEM -->
+  <!-- MENSAGEM DO CASAL -->
   <section id="historia" class="py-16 px-4 max-w-3xl mx-auto text-center">
     <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
     <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
@@ -289,7 +289,7 @@
     </div>
   </section>
 
-  <!-- TRAJES -->
+  <!-- GUIA DE TRAJES -->
   <section id="trajes" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
@@ -330,7 +330,7 @@
     </div>
   </section>
 
-  <!-- GALERIA -->
+  <!-- GALERIA DE FOTOS -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
@@ -339,8 +339,10 @@
         <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border border-casar rounded-xl text-xs">
         <button onclick="enviarFoto()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase">📸 Enviar Fotos</button>
       </div>
-      <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border border-casar">
-        <div id="carrosselFotos" class="flex transition-transform duration-700"></div>
+      <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border border-casar min-h-[250px] bg-stone-100 flex items-center justify-center">
+        <div id="carrosselFotos" class="flex transition-transform duration-700 w-full">
+          <p class="text-center text-xs opacity-70 p-8 w-full">Carregando fotos do álbum...</p>
+        </div>
       </div>
     </div>
   </section>
@@ -422,27 +424,29 @@
     </div>
   </div>
 
-  <!-- MODAL ADMIN -->
+  <!-- MODAL ADMIN COM ABAS -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden text-xs">
       
       <div class="p-4 border-b border-casar bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
         <div>
           <h2 class="font-serif-custom text-2xl font-bold">Painel Administrativo dos Noivos</h2>
-          <p class="opacity-75">Gerencie convidados, recados e playlist diretamente na planilha.</p>
+          <p class="opacity-75">Gerencie convidados, fotos, cores e a playlist das músicas.</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-2 bg-stone-200/80 p-1 rounded-xl font-bold">
           <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="px-3 py-2 rounded-lg bg-white shadow-sm">👥 Convidados</button>
+          <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="px-3 py-2 rounded-lg opacity-75">📸 Fotos</button>
           <button onclick="alternarAbaAdmin('recadosAdm')" id="tabBtnRecados" class="px-3 py-2 rounded-lg opacity-75">💌 Recados</button>
-          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="px-3 py-2 rounded-lg opacity-75">⚙️ Músicas & Fundo</button>
+          <button onclick="alternarAbaAdmin('design')" id="tabBtnDesign" class="px-3 py-2 rounded-lg opacity-75">🎨 Design & Cores</button>
+          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="px-3 py-2 rounded-lg opacity-75">🎵 Músicas</button>
           <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="px-3 py-2 rounded-lg opacity-75">🔑 Admins</button>
         </div>
 
         <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">✕</button>
       </div>
 
-      <!-- ABA 1: CONVIDADOS (COM CARDS CLICÁVEIS PARA FILTRAR) -->
+      <!-- ABA 1: CONVIDADOS -->
       <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden">
         <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center cursor-pointer select-none">
           <div onclick="filtrarStatusRsvp('')" class="bg-white p-2 rounded-lg border shadow-sm hover:border-amber-500 transition"><p class="text-[10px] uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-lg font-bold">0</span></div>
@@ -491,14 +495,51 @@
         </div>
       </div>
 
-      <!-- ABA RECADOS (GERENCIAR / MODERAR RECADOS) -->
+      <!-- ABA 2: GERENCIAMENTO DE FOTOS DO CARROSSEL -->
+      <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4">
+        <h3 class="font-serif-custom text-xl font-bold">📸 Gerenciar Fotos do Carrossel</h3>
+        <p class="opacity-75">Você pode ocultar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
+        <div id="containerFotosAdmin" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+      </div>
+
+      <!-- ABA 3: RECADOS -->
       <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4">
         <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
         <p class="opacity-75">Remova recados inadequados para que não passem no rodapé ao vivo do site.</p>
         <div id="containerRecadosAdmin" class="space-y-3"></div>
       </div>
 
-      <!-- ABA MÚSICAS & CONFIGS (COM PESQUISA NO YOUTUBE PELO NOME) -->
+      <!-- ABA 4: DESIGN & PERSONALIZAÇÃO DE CORES DA FONTE -->
+      <div id="abaDesign" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
+        <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
+          <h3 class="font-serif-custom text-xl font-bold">🎨 Personalização Visual das Fontes e Letras</h3>
+          <p class="opacity-75">Ajuste as cores dos textos do site para cada tema (as escolhas são salvas para todos os visitantes):</p>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded-xl border space-y-2">
+              <label class="block font-bold">Texto Principal (Tema Claro):</label>
+              <input type="color" id="pickerCorTextoClaro" value="#2c251e" onchange="salvarCorPersonalizada('texto_claro', this.value)" class="w-full h-10 rounded cursor-pointer border">
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border space-y-2">
+              <label class="block font-bold">Texto Principal (Tema Escuro):</label>
+              <input type="color" id="pickerCorTextoEscuro" value="#f3f4f6" onchange="salvarCorPersonalizada('texto_escuro', this.value)" class="w-full h-10 rounded cursor-pointer border">
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border space-y-2">
+              <label class="block font-bold">Cor dos Títulos (W & L):</label>
+              <input type="color" id="pickerCorTitulos" value="#111827" onchange="salvarCorPersonalizada('titulos', this.value)" class="w-full h-10 rounded cursor-pointer border">
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-casar flex items-center justify-between">
+            <span class="opacity-75 text-xs">Deseja restaurar as cores originais?</span>
+            <button onclick="restaurarCoresPadrao()" class="bg-stone-600 text-white px-4 py-2 rounded-lg font-bold text-xs uppercase">Restaurar Padrão</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 5: MÚSICAS & DRAG AND DROP (REORDENAR ARRASTANDO) -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-3">
           <h3 class="font-serif-custom text-xl font-bold">✨ Transparência do Fundo</h3>
@@ -511,21 +552,22 @@
         </div>
 
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar e Adicionar Música do YouTube</h3>
-          <p class="opacity-75">Digite o nome da música para pesquisar no YouTube ou cole diretamente o link:</p>
+          <h3 class="font-serif-custom text-xl font-bold">🎵 Playlist e Reordenação (Segure e Arraste para Organizar)</h3>
+          <p class="opacity-75">Digite o nome da música para pesquisar no YouTube ou cole diretamente a URL:</p>
+          
           <div class="flex gap-2">
             <input type="text" id="inputPesquisarMusica" placeholder="Ex: Ed Sheeran - Perfect" class="w-full p-3 border rounded-xl font-medium">
             <button onclick="pesquisarEAdicionarMusica()" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar e Salvar</button>
           </div>
 
           <div class="mt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Músicas Salvas na Playlist:</h4>
-            <div id="containerPlaylistAdmin" class="space-y-2 max-h-48 overflow-y-auto p-1 border rounded-xl"></div>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist (Arraste os itens abaixo para mudar a ordem):</h4>
+            <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100"></div>
           </div>
         </div>
       </div>
 
-      <!-- ABA ADMINS -->
+      <!-- ABA 6: ADMINS -->
       <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
           <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores</h3>
@@ -561,6 +603,9 @@
     let adminAutenticado = false;
 
     let convidadosCache = [];
+    let fotosDriveCache = [];
+    let fotosDesativadasSet = new Set(JSON.parse(localStorage.getItem("casamento_fotos_desativadas") || "[]"));
+
     let ordemCampo = 'responsavel';
     let ordemAsc = true;
     let filtroRsvpAtivo = '';
@@ -569,6 +614,7 @@
     let musicaTocando = false;
     let playlistMusicas = [];
     let indiceMusicaAtual = 0;
+    let dragSrcEl = null;
 
     function alternarVerSenha(idInput) {
       const el = document.getElementById(idInput);
@@ -589,7 +635,38 @@
       }
     }
 
+    // APLICAR E SALVAR CORES PERSONALIZADAS DE FONTE
+    function salvarCorPersonalizada(chave, valor) {
+      localStorage.setItem("casamento_cor_" + chave, valor);
+      aplicarCoresCustomizadas();
+    }
+
+    function aplicarCoresCustomizadas() {
+      const corClaro = localStorage.getItem("casamento_cor_texto_claro");
+      const corEscuro = localStorage.getItem("casamento_cor_texto_escuro");
+      const corTitulos = localStorage.getItem("casamento_cor_titulos");
+
+      if (corClaro) document.documentElement.style.setProperty('--casar-texto', corClaro);
+      if (corTitulos) document.documentElement.style.setProperty('--casar-titulos', corTitulos);
+
+      if (document.getElementById("pickerCorTextoClaro") && corClaro) document.getElementById("pickerCorTextoClaro").value = corClaro;
+      if (document.getElementById("pickerCorTextoEscuro") && corEscuro) document.getElementById("pickerCorTextoEscuro").value = corEscuro;
+      if (document.getElementById("pickerCorTitulos") && corTitulos) document.getElementById("pickerCorTitulos").value = corTitulos;
+    }
+
+    function restaurarCoresPadrao() {
+      localStorage.removeItem("casamento_cor_texto_claro");
+      localStorage.removeItem("casamento_cor_texto_escuro");
+      localStorage.removeItem("casamento_cor_titulos");
+      document.documentElement.style.removeProperty('--casar-texto');
+      document.documentElement.style.removeProperty('--casar-titulos');
+      aplicarCoresCustomizadas();
+      alert("Cores restauradas para o padrão inicial.");
+    }
+
     window.addEventListener("DOMContentLoaded", function() {
+      aplicarCoresCustomizadas();
+
       const temaSalvo = localStorage.getItem("casamento_tema");
       if (temaSalvo === "escuro") {
         document.getElementById("htmlRoot").classList.add("dark-mode");
@@ -610,7 +687,6 @@
       iniciarContadorRegressivo();
     });
 
-    // LÓGICA CORRIGIDA DA CONTAGEM REGRESSIVA
     function iniciarContadorRegressivo() {
       const targetDate = new Date("2026-12-11T16:00:00").getTime();
       function update() {
@@ -757,15 +833,67 @@
       }
     }
 
+    // DRAG AND DROP (ARRASTAR E SOLTAR PARA REORDENAR PLAYLIST)
+    function handleDragStart(e) {
+      dragSrcEl = this;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/html', this.innerHTML);
+      this.classList.add('opacity-40');
+    }
+
+    function handleDragOver(e) {
+      if (e.preventDefault) e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      return false;
+    }
+
+    function handleDrop(e) {
+      if (e.stopPropagation) e.stopPropagation();
+      if (dragSrcEl !== this) {
+        const srcIdx = Number(dragSrcEl.getAttribute('data-index'));
+        const targetIdx = Number(this.getAttribute('data-index'));
+
+        const itemMovido = playlistMusicas.splice(srcIdx, 1)[0];
+        playlistMusicas.splice(targetIdx, 0, itemMovido);
+
+        renderizarPlaylistAdmin();
+      }
+      return false;
+    }
+
+    function handleDragEnd(e) {
+      this.classList.remove('opacity-40');
+    }
+
     function renderizarPlaylistAdmin() {
       const container = document.getElementById("containerPlaylistAdmin");
       if (!container) return;
-      container.innerHTML = playlistMusicas.map(m => `
-        <div class="flex items-center justify-between p-2.5 bg-white rounded-xl border">
-          <span class="font-bold truncate">🎵 ${m.titulo || m.id}</span>
-          <button onclick="removerMusicaPlanilha('${m.id}')" class="text-rose-700 font-bold ml-2">Remover</button>
-        </div>
-      `).join('') || `<p class="italic p-3 opacity-75">Nenhuma música cadastrada.</p>`;
+      if (playlistMusicas.length === 0) {
+        container.innerHTML = `<p class="italic p-3 opacity-75">Nenhuma música cadastrada.</p>`;
+        return;
+      }
+      container.innerHTML = "";
+      playlistMusicas.forEach((m, idx) => {
+        const div = document.createElement("div");
+        div.className = "flex items-center justify-between p-2.5 bg-white rounded-xl border cursor-move shadow-xs hover:bg-stone-50 transition";
+        div.setAttribute("draggable", "true");
+        div.setAttribute("data-index", idx);
+
+        div.innerHTML = `
+          <div class="flex items-center gap-2 truncate">
+            <span class="text-stone-400 font-bold">☰</span>
+            <span class="font-bold truncate">🎵 ${m.titulo || m.id}</span>
+          </div>
+          <button onclick="removerMusicaPlanilha('${m.id}')" class="text-rose-700 font-bold ml-2 hover:underline">Remover</button>
+        `;
+
+        div.addEventListener('dragstart', handleDragStart, false);
+        div.addEventListener('dragover', handleDragOver, false);
+        div.addEventListener('drop', handleDrop, false);
+        div.addEventListener('dragend', handleDragEnd, false);
+
+        container.appendChild(div);
+      });
     }
 
     function abrirModalAdmin() {
@@ -816,15 +944,84 @@
 
     function alternarAbaAdmin(aba) {
       document.getElementById("abaConvidados").classList.toggle("hidden", aba !== 'convidados');
+      document.getElementById("abaFotosAdm").classList.toggle("hidden", aba !== 'fotosAdm');
       document.getElementById("abaRecadosAdm").classList.toggle("hidden", aba !== 'recadosAdm');
+      document.getElementById("abaDesign").classList.toggle("hidden", aba !== 'design');
       document.getElementById("abaConfig").classList.toggle("hidden", aba !== 'config');
       document.getElementById("abaAdmins").classList.toggle("hidden", aba !== 'admins');
 
       if (aba === 'admins') carregarListaAdmins();
       if (aba === 'recadosAdm') carregarRecadosAdmin();
+      if (aba === 'fotosAdm') carregarFotosAdmin();
     }
 
-    // LISTAR E REMOVER RECADOS INADEQUADOS
+    // CARREGAR E RENDERIZAR FOTOS NO MURAL E CARROSSEL
+    function carregarFotosDrive() {
+      executarJSONP({ action: "listarFotos" }, function(res) {
+        if (res.sucesso && res.fotos) {
+          fotosDriveCache = res.fotos;
+          renderizarCarrosseis();
+        }
+      });
+    }
+
+    function renderizarCarrosseis() {
+      const cTopo = document.getElementById("carrosselTopo");
+      const cBaixo = document.getElementById("carrosselFotos");
+
+      const fotosAtivas = fotosDriveCache.filter(url => !fotosDesativadasSet.has(url));
+
+      if (fotosAtivas.length === 0) {
+        if (cBaixo) cBaixo.innerHTML = `<p class="text-center text-xs opacity-70 p-8 w-full">Nenhuma foto disponível no momento.</p>`;
+        return;
+      }
+
+      if (cTopo) {
+        cTopo.innerHTML = fotosAtivas.map(url => `
+          <div class="min-w-full"><img src="${url}" class="w-full h-72 md:h-80 object-cover"></div>
+        `).join('');
+      }
+
+      if (cBaixo) {
+        cBaixo.innerHTML = fotosAtivas.map(url => `
+          <div class="min-w-full"><img src="${url}" class="w-full h-80 md:h-96 object-cover"></div>
+        `).join('');
+      }
+    }
+
+    function carregarFotosAdmin() {
+      const container = document.getElementById("containerFotosAdmin");
+      if (!container) return;
+
+      if (fotosDriveCache.length === 0) {
+        container.innerHTML = `<p class="col-span-4 text-center italic p-4 opacity-75">Nenhuma foto no Google Drive.</p>`;
+        return;
+      }
+
+      container.innerHTML = fotosDriveCache.map(url => {
+        const desativada = fotosDesativadasSet.has(url);
+        return `
+          <div class="bg-white p-2 rounded-xl border shadow-xs text-center space-y-2">
+            <img src="${url}" class="w-full h-32 object-cover rounded-lg ${desativada ? 'opacity-30 grayscale' : ''}">
+            <button onclick="alternarStatusFoto('${url}')" class="w-full py-1.5 rounded text-[10px] font-bold uppercase transition ${desativada ? 'bg-emerald-700 text-white' : 'bg-rose-700 text-white'}">
+              ${desativada ? '✅ Ativar no Carrossel' : '🚫 Ocultar do Carrossel'}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function alternarStatusFoto(url) {
+      if (fotosDesativadasSet.has(url)) {
+        fotosDesativadasSet.delete(url);
+      } else {
+        fotosDesativadasSet.add(url);
+      }
+      localStorage.setItem("casamento_fotos_desativadas", JSON.stringify(Array.from(fotosDesativadasSet)));
+      carregarFotosAdmin();
+      renderizarCarrosseis();
+    }
+
     function carregarRecadosAdmin() {
       executarJSONP({ action: "listarRecados" }, function(res) {
         const container = document.getElementById("containerRecadosAdmin");
@@ -940,7 +1137,6 @@
       
       let filtrados = convidadosCache.filter(c => {
         const atendeTermo = !termo || normalizar(c.responsavel).includes(termo) || normalizar(c.nome).includes(termo);
-        
         const rsvp = normalizar(c.rsvpStatus);
         let atendeRsvp = true;
 
@@ -992,7 +1188,6 @@
       }
     }
 
-    // CARREGAR RECADOS E RENDERIZAR NO TICKER CNN
     function carregarRecados() {
       executarJSONP({ action: "listarRecados" }, function(res) {
         if (res.sucesso && res.recados && res.recados.length > 0) {
@@ -1040,14 +1235,6 @@
       alert("Presença confirmada!");
       document.getElementById("stepSelecao").classList.add("hidden");
       document.getElementById("stepBusca").classList.remove("hidden");
-    }
-
-    function carregarFotosDrive() {
-      executarJSONP({ action: "listarFotos" }, function(res) {
-        if (res.sucesso && res.fotos) {
-          document.getElementById("carrosselFotos").innerHTML = res.fotos.map(url => `<div class="min-w-full"><img src="${url}" class="w-full h-80 object-cover"></div>`).join('');
-        }
-      });
     }
 
     function enviarFoto() {
