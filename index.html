@@ -11,20 +11,26 @@
   <style>
     :root {
       --casar-texto: #2c251e;
-      --casar-borda: rgba(232, 222, 213, 0.9);
+      --casar-borda: rgba(200, 180, 160, 0.6);
       --bg-transparency: 0.65;
       --bg-site: #f7f2ed;
-      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-sub-bg: #f3eee8;
       --nav-bg: rgba(255, 255, 255, 0.98);
+      --player-bg: #eae3db;
+      --input-bg: #ffffff;
     }
 
     .dark-mode {
       --casar-texto: #f3f4f6;
-      --casar-borda: rgba(55, 65, 81, 0.9);
+      --casar-borda: rgba(75, 85, 99, 0.8);
       --bg-transparency: 0.85;
       --bg-site: #111827;
       --card-bg: rgba(31, 41, 55, 0.95);
+      --card-sub-bg: #1f2937;
       --nav-bg: rgba(17, 24, 39, 0.98);
+      --player-bg: #374151;
+      --input-bg: #111827;
     }
 
     html {
@@ -53,7 +59,7 @@
 
     #parallax-bg {
       position: fixed;
-      top: 100px;
+      top: 0;
       right: 0;
       bottom: 0;
       left: 0;
@@ -65,10 +71,10 @@
 
     #parallax-image {
       position: absolute;
-      top: -150px;
+      top: -100px;
       left: 0;
       width: 100%;
-      height: calc(100% + 300px);
+      height: calc(100% + 200px);
       background-image: linear-gradient(
         rgba(30, 25, 20, var(--bg-transparency)),
         rgba(30, 25, 20, var(--bg-transparency))
@@ -76,7 +82,6 @@
       background-size: cover;
       background-position: center 25%;
       background-repeat: no-repeat;
-      will-change: transform;
     }
 
     body > nav, body > header, body > section, body > footer {
@@ -93,14 +98,21 @@
       -webkit-backdrop-filter: blur(12px);
     }
 
-    .bg-white, .bg-white\/95, .bg-stone-50 { background-color: var(--card-bg) !important; }
+    .bg-white, .bg-white\/95, .bg-stone-50 { 
+      background-color: var(--card-bg) !important; 
+      color: var(--casar-texto) !important;
+    }
+
+    .player-container {
+      background-color: var(--player-bg) !important;
+    }
 
     input, select, textarea {
       max-width: 100%;
       box-sizing: border-box;
-      color: var(--casar-texto);
-      background-color: var(--card-bg);
-      border-color: var(--casar-borda);
+      color: var(--casar-texto) !important;
+      background-color: var(--input-bg) !important;
+      border-color: var(--casar-borda) !important;
     }
 
     img { max-width: 100%; }
@@ -143,7 +155,7 @@
     .cnn-ticker-track {
       display: flex;
       white-space: nowrap;
-      animation: tickerAnimation 30s linear infinite;
+      animation: tickerAnimation 25s linear infinite;
     }
 
     .cnn-ticker-track:hover { animation-play-state: paused; }
@@ -154,6 +166,7 @@
       padding: 0 25px;
       font-size: 11px;
       font-weight: 500;
+      color: #ffffff;
     }
 
     .cnn-ticker-item span.autor {
@@ -169,13 +182,12 @@
 
     @media (max-width: 768px) {
       html { scroll-padding-top: 125px; }
-      #parallax-bg { top: 115px; }
       .cnn-label span.texto-label { display: none; }
       .cnn-label::after { content: "💌"; font-size: 14px; }
     }
   </style>
 </head>
-<body class="antialiased" onscroll="atualizarParalaxe()">
+<body class="antialiased">
 
   <div id="parallax-bg">
     <div id="parallax-image"></div>
@@ -183,32 +195,32 @@
 
   <div id="youtubePlayerContainer" style="display:none;"></div>
 
-  <!-- NAV CENTRALIZADO TAMBÉM NO PC -->
+  <!-- NAVEGAÇÃO CENTRALIZADA NO PC E CELULAR -->
   <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
     <div class="max-w-4xl mx-auto w-full flex flex-col items-center gap-2">
       
-      <!-- LINHA 1: LOGO + PLAYER + TEMA -->
-      <div class="w-full flex items-center justify-between border-b border-casar/50 pb-2">
+      <!-- LINHA 1: LOGO + PLAYER + TEMA CENTRALIZADOS JUNTO -->
+      <div class="w-full max-w-xl flex items-center justify-center gap-4 border-b border-casar/50 pb-2">
         <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
         <div class="flex items-center gap-2">
-          <div class="flex items-center gap-1.5 bg-stone-100/80 dark:bg-stone-800/80 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
-            <button onclick="musicaAnteriorPlaylist()" title="Anterior" class="w-6 h-6 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-800 dark:text-stone-100 flex items-center justify-center font-bold">⏮</button>
+          <div class="player-container flex items-center gap-1.5 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
+            <button onclick="musicaAnteriorPlaylist()" title="Anterior" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 text-stone-800 dark:text-stone-100 flex items-center justify-center font-bold">⏮</button>
             <button id="btnPlayPause" onclick="toggleAudioMusica()" title="Play/Pause" class="w-7 h-7 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold shadow">▶</button>
-            <button onclick="proximaMusicaPlaylist()" title="Próxima" class="w-6 h-6 rounded-full bg-stone-200 dark:bg-stone-700 text-stone-800 dark:text-stone-100 flex items-center justify-center font-bold">⏭</button>
+            <button onclick="proximaMusicaPlaylist()" title="Próxima" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 text-stone-800 dark:text-stone-100 flex items-center justify-center font-bold">⏭</button>
 
             <div class="flex flex-col w-28 md:w-36 ml-1">
               <div class="flex justify-between text-[9px] font-bold truncate">
                 <span id="txtNomeMusica" class="truncate">Carregando...</span>
                 <span id="txtTempoMusica" class="ml-1">0:00</span>
               </div>
-              <div class="w-full bg-stone-300 dark:bg-stone-600 rounded-full h-1.5 overflow-hidden mt-0.5 cursor-pointer" onclick="pularParaProgresso(event)">
+              <div class="w-full bg-stone-400 dark:bg-stone-600 rounded-full h-1.5 overflow-hidden mt-0.5 cursor-pointer" onclick="pularParaProgresso(event)">
                 <div id="barraProgressoMusica" class="bg-amber-800 h-1.5 rounded-full w-0 transition-all"></div>
               </div>
             </div>
           </div>
 
-          <button onclick="alternarTemaVisual()" title="Alternar Modo Claro/Escuro" class="w-8 h-8 rounded-full border border-casar bg-stone-100/80 dark:bg-stone-800/80 flex items-center justify-center text-sm shadow-sm">
+          <button onclick="alternarTemaVisual()" title="Alternar Modo Claro/Escuro" class="w-8 h-8 rounded-full border border-casar player-container flex items-center justify-center text-sm shadow-sm">
             <span id="iconeTema">🌙</span>
           </button>
         </div>
@@ -246,6 +258,7 @@
         </div>
       </div>
 
+      <!-- CONTADOR REGRESSIVO CORRIGIDO -->
       <div class="mt-8 bg-white p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
         <p class="text-xs uppercase tracking-widest font-bold mb-4">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
@@ -258,7 +271,7 @@
     </div>
   </header>
 
-  <!-- SEÇÕES DO SITE -->
+  <!-- MENSAGEM -->
   <section id="historia" class="py-16 px-4 max-w-3xl mx-auto text-center">
     <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
     <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
@@ -276,7 +289,7 @@
     </div>
   </section>
 
-  <!-- TRAJES, LOCAL, PRESENTES, FOTOS, RECADOS, RSVP... -->
+  <!-- TRAJES -->
   <section id="trajes" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
@@ -296,6 +309,7 @@
     </div>
   </section>
 
+  <!-- LOCAL -->
   <section id="local" class="py-16 bg-stone-50 border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-2">Programação do Dia</h2>
@@ -316,6 +330,7 @@
     </div>
   </section>
 
+  <!-- GALERIA -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
@@ -330,6 +345,7 @@
     </div>
   </section>
 
+  <!-- RECADOS -->
   <section id="recados" class="py-16 bg-stone-50 border-t border-casar px-4">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Deixe seu Recado</h2>
@@ -342,6 +358,7 @@
     </div>
   </section>
 
+  <!-- RSVP -->
   <section id="rsvp" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-2">Confirme sua Presença</h2>
@@ -361,6 +378,7 @@
     </div>
   </section>
 
+  <!-- RODAPÉ ESTILO CNN -->
   <div class="cnn-ticker-container">
     <div class="cnn-label"><span class="texto-label">Recados Ao Vivo</span></div>
     <div style="overflow: hidden; width: 100%;"><div id="cnnTickerTrack" class="cnn-ticker-track"></div></div>
@@ -370,7 +388,7 @@
     <button onclick="abrirModalAdmin()" class="bg-stone-900 hover:bg-black text-white p-3 rounded-full shadow-lg text-xs flex items-center gap-2 font-bold">🔒 Painel Noivos</button>
   </div>
 
-  <!-- MODAL DE LOGIN (COM USUÁRIO, SENHA, OLHINHO E SALVAR) -->
+  <!-- MODAL DE LOGIN -->
   <div id="modalLogin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4 text-xs">
       <div class="text-center">
@@ -394,7 +412,7 @@
 
         <div class="flex items-center gap-2 pt-1">
           <input type="checkbox" id="chkSalvarCredenciais" class="rounded border">
-          <label for="chkSalvarCredenciais" class="font-bold opacity-80 cursor-pointer">Lembrar / Salvar senha neste navegador</label>
+          <label for="chkSalvarCredenciais" class="font-bold opacity-80 cursor-pointer">Lembrar senha neste navegador</label>
         </div>
 
         <button type="submit" id="btnLoginSubmit" class="w-full btn-casar py-3 rounded-xl font-bold uppercase tracking-wider text-xs shadow-sm">Entrar no Painel</button>
@@ -411,26 +429,27 @@
       <div class="p-4 border-b border-casar bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
         <div>
           <h2 class="font-serif-custom text-2xl font-bold">Painel Administrativo dos Noivos</h2>
-          <p class="opacity-75">Gerencie convidados, administradores e playlist diretamente na planilha.</p>
+          <p class="opacity-75">Gerencie convidados, recados e playlist diretamente na planilha.</p>
         </div>
 
-        <div class="flex items-center gap-2 bg-stone-200/80 p-1 rounded-xl font-bold">
+        <div class="flex flex-wrap items-center gap-2 bg-stone-200/80 p-1 rounded-xl font-bold">
           <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="px-3 py-2 rounded-lg bg-white shadow-sm">👥 Convidados</button>
+          <button onclick="alternarAbaAdmin('recadosAdm')" id="tabBtnRecados" class="px-3 py-2 rounded-lg opacity-75">💌 Recados</button>
           <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="px-3 py-2 rounded-lg opacity-75">⚙️ Músicas & Fundo</button>
-          <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="px-3 py-2 rounded-lg opacity-75">🔑 Administradores</button>
+          <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="px-3 py-2 rounded-lg opacity-75">🔑 Admins</button>
         </div>
 
         <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">✕</button>
       </div>
 
-      <!-- ABA 1: CONVIDADOS -->
+      <!-- ABA 1: CONVIDADOS (COM CARDS CLICÁVEIS PARA FILTRAR) -->
       <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden">
-        <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center">
-          <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-lg font-bold">0</span></div>
+        <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center cursor-pointer select-none">
+          <div onclick="filtrarStatusRsvp('')" class="bg-white p-2 rounded-lg border shadow-sm hover:border-amber-500 transition"><p class="text-[10px] uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-lg font-bold">0</span></div>
           <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Adultos/Crianças</p><span id="statTipos" class="text-xs font-bold">0 / 0</span></div>
-          <div class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm"><p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span></div>
-          <div class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm"><p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-lg font-bold text-rose-900">0</span></div>
-          <div class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm"><p class="text-[10px] text-amber-700 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-lg font-bold text-amber-900">0</span></div>
+          <div onclick="filtrarStatusRsvp('confirmado')" class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm hover:border-emerald-600 transition"><p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span></div>
+          <div onclick="filtrarStatusRsvp('nao')" class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm hover:border-rose-600 transition"><p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-lg font-bold text-rose-900">0</span></div>
+          <div onclick="filtrarStatusRsvp('pendente')" class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm hover:border-amber-600 transition"><p class="text-[10px] text-amber-700 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-lg font-bold text-amber-900">0</span></div>
           <div class="bg-stone-100 p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Faltam</p><span id="statFaltam" class="text-lg font-bold">0</span></div>
         </div>
 
@@ -472,7 +491,14 @@
         </div>
       </div>
 
-      <!-- ABA 2: MÚSICAS & CONFIGS -->
+      <!-- ABA RECADOS (GERENCIAR / MODERAR RECADOS) -->
+      <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4">
+        <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
+        <p class="opacity-75">Remova recados inadequados para que não passem no rodapé ao vivo do site.</p>
+        <div id="containerRecadosAdmin" class="space-y-3"></div>
+      </div>
+
+      <!-- ABA MÚSICAS & CONFIGS (COM PESQUISA NO YOUTUBE PELO NOME) -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-3">
           <h3 class="font-serif-custom text-xl font-bold">✨ Transparência do Fundo</h3>
@@ -485,19 +511,24 @@
         </div>
 
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎵 Playlist Salva na Planilha Excel</h3>
+          <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar e Adicionar Música do YouTube</h3>
+          <p class="opacity-75">Digite o nome da música para pesquisar no YouTube ou cole diretamente o link:</p>
           <div class="flex gap-2">
-            <input type="text" id="inputAddMusica" placeholder="Link do YouTube..." class="w-full p-3 border rounded-xl font-medium">
-            <button onclick="adicionarMusicaPlaylistPlanilha()" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Salvar na Planilha</button>
+            <input type="text" id="inputPesquisarMusica" placeholder="Ex: Ed Sheeran - Perfect" class="w-full p-3 border rounded-xl font-medium">
+            <button onclick="pesquisarEAdicionarMusica()" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar e Salvar</button>
           </div>
-          <div id="containerPlaylistAdmin" class="space-y-2 max-h-48 overflow-y-auto p-1 border rounded-xl"></div>
+
+          <div class="mt-4">
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Músicas Salvas na Playlist:</h4>
+            <div id="containerPlaylistAdmin" class="space-y-2 max-h-48 overflow-y-auto p-1 border rounded-xl"></div>
+          </div>
         </div>
       </div>
 
-      <!-- ABA 3: ADMINISTRADORES NA PLANILHA -->
+      <!-- ABA ADMINS -->
       <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores na Planilha</h3>
+          <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores</h3>
           <div class="grid md:grid-cols-3 gap-2">
             <input type="text" id="novoAdminUser" placeholder="Usuário *" class="p-2.5 border rounded-lg font-medium">
             <div class="relative">
@@ -508,7 +539,7 @@
           </div>
 
           <div class="mt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Administradores Registrados na Planilha:</h4>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Administradores Registrados:</h4>
             <div id="listaAdminsContainer" class="space-y-2"></div>
           </div>
         </div>
@@ -532,6 +563,7 @@
     let convidadosCache = [];
     let ordemCampo = 'responsavel';
     let ordemAsc = true;
+    let filtroRsvpAtivo = '';
 
     let playerYT = null;
     let musicaTocando = false;
@@ -575,14 +607,24 @@
       carregarRecados();
       carregarFotosDrive();
       carregarPlaylistPlanilha();
+      iniciarContadorRegressivo();
     });
 
-    function atualizarParalaxe() {
-      const scrollY = window.scrollY;
-      const parallaxImg = document.getElementById("parallax-image");
-      if (parallaxImg) {
-        parallaxImg.style.transform = `translate3d(0, ${scrollY * 0.25}px, 0)`;
+    // LÓGICA CORRIGIDA DA CONTAGEM REGRESSIVA
+    function iniciarContadorRegressivo() {
+      const targetDate = new Date("2026-12-11T16:00:00").getTime();
+      function update() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff > 0) {
+          document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+          document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+          document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+          document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
       }
+      setInterval(update, 1000);
+      update();
     }
 
     function alterarTransparenciaFundo(valor) {
@@ -677,13 +719,33 @@
       playerYT.seekTo(pct * playerYT.getDuration(), true);
     }
 
-    function adicionarMusicaPlaylistPlanilha() {
-      const input = document.getElementById("inputAddMusica");
-      const videoId = extrairIDYoutube(input.value.trim());
-      if (!videoId) return alert("Link do YouTube inválido.");
+    function pesquisarEAdicionarMusica() {
+      const termo = document.getElementById("inputPesquisarMusica").value.trim();
+      if (!termo) return alert("Digite o nome da música ou o link do YouTube.");
 
-      executarJSONP({ action: "salvarMusica", videoId: videoId, titulo: "Nova Música" }, function(res) {
-        if (res.sucesso) { input.value = ""; carregarPlaylistPlanilha(); alert("Música salva!"); }
+      let videoId = extrairIDYoutube(termo);
+
+      if (videoId) {
+        salvarMusicaDireta(videoId, termo);
+      } else {
+        fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${termo}`)
+          .then(r => r.json())
+          .then(data => {
+            salvarMusicaDireta(termo, data.title || termo);
+          })
+          .catch(() => {
+            salvarMusicaDireta(termo, termo);
+          });
+      }
+    }
+
+    function salvarMusicaDireta(id, titulo) {
+      executarJSONP({ action: "salvarMusica", videoId: id, titulo: titulo }, function(res) {
+        if (res.sucesso) { 
+          document.getElementById("inputPesquisarMusica").value = ""; 
+          carregarPlaylistPlanilha(); 
+          alert("Música salva com sucesso!"); 
+        }
       });
     }
 
@@ -724,15 +786,8 @@
       const user = document.getElementById("loginUsuario").value.trim();
       const pass = document.getElementById("loginSenha").value.trim();
       const salvar = document.getElementById("chkSalvarCredenciais").checked;
-      const btn = document.getElementById("btnLoginSubmit");
-
-      btn.disabled = true;
-      btn.innerText = "VERIFICANDO...";
 
       executarJSONP({ action: "loginAdmin", usuario: user, senha: pass }, function(res) {
-        btn.disabled = false;
-        btn.innerText = "ENTRAR NO PAINEL";
-
         if (res.sucesso) {
           adminAutenticado = true;
           adminLogadoUser = user;
@@ -761,9 +816,44 @@
 
     function alternarAbaAdmin(aba) {
       document.getElementById("abaConvidados").classList.toggle("hidden", aba !== 'convidados');
+      document.getElementById("abaRecadosAdm").classList.toggle("hidden", aba !== 'recadosAdm');
       document.getElementById("abaConfig").classList.toggle("hidden", aba !== 'config');
       document.getElementById("abaAdmins").classList.toggle("hidden", aba !== 'admins');
+
       if (aba === 'admins') carregarListaAdmins();
+      if (aba === 'recadosAdm') carregarRecadosAdmin();
+    }
+
+    // LISTAR E REMOVER RECADOS INADEQUADOS
+    function carregarRecadosAdmin() {
+      executarJSONP({ action: "listarRecados" }, function(res) {
+        const container = document.getElementById("containerRecadosAdmin");
+        if (!container) return;
+        if (res.sucesso && res.recados && res.recados.length > 0) {
+          container.innerHTML = res.recados.map((r, i) => `
+            <div class="flex items-center justify-between p-3 bg-white border rounded-xl shadow-xs">
+              <div>
+                <p class="font-bold text-stone-900">${r.nome}</p>
+                <p class="italic text-stone-700">"${r.mensagem}"</p>
+              </div>
+              <button onclick="removerRecadoAdmin(${i})" class="bg-rose-700 text-white px-3 py-1 rounded text-xs font-bold hover:bg-rose-800">Remover</button>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = `<p class="italic p-3 opacity-75">Nenhum recado publicado.</p>`;
+        }
+      });
+    }
+
+    function removerRecadoAdmin(linha) {
+      if (confirm("Deseja remover este recado?")) {
+        executarJSONP({ action: "removerRecado", linha: linha }, function(res) {
+          if (res.sucesso) {
+            carregarRecadosAdmin();
+            carregarRecados();
+          }
+        });
+      }
     }
 
     function carregarListaAdmins() {
@@ -810,9 +900,35 @@
       executarJSONP({ action: "adminListar" }, function(res) {
         if (res.sucesso) {
           convidadosCache = res.convidados;
+          calcularEstatisticas();
           filtrarETabelaAdmin();
         }
       });
+    }
+
+    function calcularEstatisticas() {
+      const ativos = convidadosCache.filter(c => c.ativo);
+      let adultos = 0, criancas = 0, confirmados = 0, ausentes = 0, pendentes = 0;
+
+      ativos.forEach(c => {
+        if ((c.tipo || "").toLowerCase().indexOf("crian") !== -1) criancas++; else adultos++;
+        const rsvp = (c.rsvpStatus || "").toLowerCase();
+        if (rsvp.indexOf("sim") !== -1 || rsvp.indexOf("presente") !== -1 || rsvp.indexOf("confirmad") !== -1) confirmados++;
+        else if (rsvp.indexOf("nao") !== -1 || rsvp.indexOf("não") !== -1) ausentes++;
+        else pendentes++;
+      });
+
+      document.getElementById("statTotal").innerText = ativos.length;
+      document.getElementById("statTipos").innerText = `${adultos} / ${criancas}`;
+      document.getElementById("statConfirmados").innerText = confirmados;
+      document.getElementById("statAusentes").innerText = ausentes;
+      document.getElementById("statPendentes").innerText = pendentes;
+      document.getElementById("statFaltam").innerText = pendentes;
+    }
+
+    function filtrarStatusRsvp(status) {
+      filtroRsvpAtivo = status;
+      filtrarETabelaAdmin();
     }
 
     function normalizar(txt) {
@@ -821,7 +937,24 @@
 
     function filtrarETabelaAdmin() {
       const termo = normalizar(document.getElementById("inputPesquisaAdmin").value);
-      let filtrados = convidadosCache.filter(c => !termo || normalizar(c.responsavel).includes(termo) || normalizar(c.nome).includes(termo));
+      
+      let filtrados = convidadosCache.filter(c => {
+        const atendeTermo = !termo || normalizar(c.responsavel).includes(termo) || normalizar(c.nome).includes(termo);
+        
+        const rsvp = normalizar(c.rsvpStatus);
+        let atendeRsvp = true;
+
+        if (filtroRsvpAtivo === 'confirmado') {
+          atendeRsvp = rsvp.includes('sim') || rsvp.includes('presente') || rsvp.includes('confirmad');
+        } else if (filtroRsvpAtivo === 'nao') {
+          atendeRsvp = rsvp.includes('nao') || rsvp.includes('não');
+        } else if (filtroRsvpAtivo === 'pendente') {
+          atendeRsvp = !rsvp.includes('sim') && !rsvp.includes('nao') && !rsvp.includes('não') && !rsvp.includes('presente');
+        }
+
+        return atendeTermo && atendeRsvp;
+      });
+
       renderizarTabelaAdmin(filtrados);
     }
 
@@ -859,10 +992,19 @@
       }
     }
 
+    // CARREGAR RECADOS E RENDERIZAR NO TICKER CNN
     function carregarRecados() {
       executarJSONP({ action: "listarRecados" }, function(res) {
-        if (res.sucesso && res.recados) {
-          document.getElementById("containerRecados").innerHTML = `<p class="font-serif-custom italic text-lg font-semibold">"${res.recados[0]?.mensagem || 'Bem-vindos!'}"</p>`;
+        if (res.sucesso && res.recados && res.recados.length > 0) {
+          const container = document.getElementById("containerRecados");
+          const track = document.getElementById("cnnTickerTrack");
+
+          container.innerHTML = `<p class="font-serif-custom italic text-lg font-semibold">"${res.recados[0].mensagem}"</p>`;
+
+          const recadosDuplicados = [...res.recados, ...res.recados];
+          track.innerHTML = recadosDuplicados.map(r => `
+            <div class="cnn-ticker-item"><span class="autor">${r.nome}:</span> "${r.mensagem}" &nbsp;&nbsp;&bull;&nbsp;&nbsp;</div>
+          `).join('');
         }
       });
     }
