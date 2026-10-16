@@ -13,7 +13,7 @@
       --casar-texto: #2c251e;
       --casar-principal: #f6f8f7;
       --casar-borda: rgba(232, 222, 213, 0.9);
-      --bg-transparency: 0.65; /* Valor inicial da transparência ajustável pelo painel */
+      --bg-transparency: 0.65;
     }
 
     html {
@@ -34,13 +34,12 @@
 
     .font-serif-custom { font-family: 'Cormorant Garamond', serif; }
     .font-cursive { font-family: 'Great Vibes', cursive; }
-    .bg-casar-header { background-color: transparent !important; }
     .btn-casar { background-color: #a38573; color: #ffffff; }
     .btn-casar:hover { background-color: #8c6e5c; }
     .text-casar-primary { color: #8c6e5c; }
     .border-casar { border-color: #e8ded5; }
 
-    /* Fundo independente fixo abaixo do menu (altura exata de 60px do nav) */
+    /* Fundo independente com paralaxe nativo suave na rolagem */
     #parallax-bg {
       position: fixed;
       top: 60px;
@@ -53,25 +52,23 @@
       background: #f7f2ed;
     }
 
-    /* Imagem com enquadramento perfeito (background-position ajustado para o topo e efeito paralaxe suave) */
     #parallax-image {
       position: absolute;
-      top: -120px;
+      top: -150px;
       left: 0;
       width: 100%;
-      height: calc(100% + 240px);
+      height: calc(100% + 300px);
       background-image: linear-gradient(
         rgba(255, 253, 250, var(--bg-transparency)),
         rgba(255, 253, 250, var(--bg-transparency))
       ), url('foto.jpeg');
       background-size: cover;
-      background-position: center 20%; /* Ajuste fino para o rosto não ficar cortado ou embaixo do menu */
+      background-position: center 25%;
       background-repeat: no-repeat;
-      transform: translate3d(0, 0, 0);
+      /* Movimento de paralaxe suave via CSS scroll */
       will-change: transform;
     }
 
-    /* Conteúdo sempre na frente */
     body > nav,
     body > header,
     body > section,
@@ -94,10 +91,8 @@
     }
 
     .bg-white { background-color: rgba(255, 255, 255, 0.88) !important; }
-    .bg-white\/80 { background-color: rgba(255, 255, 255, 0.82) !important; }
     .bg-white\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
     .bg-stone-50 { background-color: rgba(250, 250, 249, 0.86) !important; }
-    .bg-rose-50\/70 { background-color: rgba(255, 241, 242, 0.86) !important; }
 
     input, select, textarea {
       max-width: 100%;
@@ -175,27 +170,30 @@
     @media (max-width: 768px) {
       html { scroll-padding-top: 70px; }
       #parallax-bg { top: 60px; }
-      #parallax-image {
-        top: -40px;
-        height: calc(100% + 80px);
-        background-position: center top;
-        transform: none !important;
-      }
     }
   </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" onscroll="atualizarParalaxe()">
 
-  <!-- FUNDO PARALLAX ABAIXO DO NAV -->
   <div id="parallax-bg">
     <div id="parallax-image"></div>
   </div>
 
-  <!-- MENU SUPERIOR FIXO -->
+  <!-- PLAYER DE MÚSICA OCULTO DO YOUTUBE -->
+  <div id="youtubePlayerContainer" style="display:none;"></div>
+
+  <!-- MENU SUPERIOR -->
   <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm h-[60px] flex items-center">
     <div class="max-w-5xl mx-auto px-4 w-full flex justify-between items-center text-xs tracking-widest uppercase text-stone-800 font-semibold">
-      <span class="font-serif-custom text-xl font-semibold tracking-normal capitalize">W & L</span>
-      <div class="space-x-2 md:space-x-5 text-[10px] md:text-xs overflow-x-auto whitespace-nowrap py-2">
+      <div class="flex items-center gap-3">
+        <span class="font-serif-custom text-xl font-semibold tracking-normal capitalize">W & L</span>
+        <!-- BOTÃO DE AUDIO FLUTUANTE NO NAV -->
+        <button id="btnAudio" onclick="toggleAudioMusica()" class="hidden bg-amber-100 hover:bg-amber-200 text-amber-900 px-2.5 py-1 rounded-full text-[10px] font-bold items-center gap-1 shadow-sm transition">
+          🔇 <span>Tocar Música</span>
+        </button>
+      </div>
+
+      <div class="space-x-2 md:space-x-4 text-[10px] md:text-xs overflow-x-auto whitespace-nowrap py-2">
         <a href="#home" class="hover:text-casar-primary transition">Início</a>
         <a href="#historia" class="hover:text-casar-primary transition">Mensagem</a>
         <a href="#trajes" class="hover:text-casar-primary transition text-amber-900">Trajes</a>
@@ -203,13 +201,13 @@
         <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="hover:text-casar-primary transition">Presentes</a>
         <a href="#galeria" class="hover:text-casar-primary transition">Fotos</a>
         <a href="#galeria" class="text-amber-800 hover:underline font-bold">📸 Envie sua Foto</a>
-        <a href="#recados" class="hover:text-casar-primary transition">Recados</a>
-        <a href="#rsvp" class="hover:text-casar-primary transition font-bold text-casar-primary">RSVP</a>
+        <a href="#recados" class="hover:text-casar-primary transition">Deixe seu Recado</a>
+        <a href="#rsvp" class="hover:text-casar-primary transition font-bold text-casar-primary">Confirme sua Presença</a>
       </div>
     </div>
   </nav>
 
-  <!-- CAPA PRINCIPAL (HERO) -->
+  <!-- CAPA PRINCIPAL -->
   <header id="home" class="py-16 md:py-20 px-4 text-center border-b border-casar">
     <div class="max-w-2xl mx-auto">
       <p class="text-xs uppercase tracking-[0.3em] text-stone-700 font-semibold mb-3">Com a graça de Deus e com o coração cheio de alegria</p>
@@ -252,7 +250,7 @@
       
       <div class="bg-white/90 p-6 rounded-2xl border border-casar text-left space-y-3 my-6 shadow-sm">
         <p class="font-bold text-stone-900 text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
-        <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "RSVP" e preencha os dados.</p>
+        <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "Confirme sua Presença" e preencha os dados.</p>
         <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade! Você pode escolher um item da nossa Lista de Casamento ou contribuir com cotas.</p>
       </div>
 
@@ -306,14 +304,15 @@
     </div>
   </section>
 
-  <!-- PROGRAMAÇÃO DO DIA -->
+  <!-- PROGRAMAÇÃO DO DIA COM PRÉVIA DO GOOGLE MAPS -->
   <section id="local" class="py-16 bg-stone-50/90 border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-2">Programação do Dia</h2>
       <p class="text-xs uppercase tracking-widest text-stone-700 font-bold mb-10">Cerimônia e Recepção</p>
 
       <div class="grid md:grid-cols-2 gap-8 text-left">
-        <div class="p-8 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
+        <!-- CERIMÔNIA -->
+        <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3">⛪</div>
             <h3 class="font-serif-custom text-2xl text-stone-900 font-bold mb-2">A Cerimônia</h3>
@@ -322,14 +321,20 @@
             </p>
             <p class="text-xs text-stone-900 font-semibold mb-1">Data e Horário: Sexta-feira, 11/12/2026 às 16h00</p>
             <p class="text-xs text-stone-900 font-semibold mb-1">Local: Paróquia Nossa Senhora Rainha da Paz</p>
-            <p class="text-xs text-stone-700">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
+            <p class="text-xs text-stone-700 mb-4">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
+
+            <!-- Prévia do Mapa Google Maps -->
+            <div class="w-full h-44 rounded-xl overflow-hidden border border-casar mb-4 shadow-inner">
+              <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.8!2d-49.12!3d-25.53!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUGFyw7NxdWlhIE5vc3NhIFNlbmhvcmEgUmFpbmhhIGRhIFBheg!5e0!3m2!1spt-BR!2sbr!4v1650000000000"></iframe>
+            </div>
           </div>
-          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz+Rua+Joana+Percegona+Zen+78+Borda+do+Campo+São+José+dos+Pinhais+PR" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
-            📍 Ver no Google Maps (Cerimônia)
+          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz+Rua+Joana+Percegona+Zen+78+Borda+do+Campo+São+José+dos+Pinhais+PR" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
+            📍 Abrir no Google Maps (Cerimônia)
           </a>
         </div>
 
-        <div class="p-8 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
+        <!-- RECEPÇÃO -->
+        <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3">🥂</div>
             <h3 class="font-serif-custom text-2xl text-stone-900 font-bold mb-2">Recepção (A Festa)</h3>
@@ -338,10 +343,15 @@
             </p>
             <p class="text-xs text-stone-900 font-semibold mb-1">Data e Horário: Sexta-feira, 11/12/2026 às 17h30</p>
             <p class="text-xs text-stone-900 font-semibold mb-1">Local: Chácara Luz da Mata</p>
-            <p class="text-xs text-stone-700">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
+            <p class="text-xs text-stone-700 mb-4">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
+
+            <!-- Prévia do Mapa Google Maps -->
+            <div class="w-full h-44 rounded-xl overflow-hidden border border-casar mb-4 shadow-inner">
+              <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.8!2d-49.08!3d-25.48!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zQ2jDoWNhcmEgTHV6IGRhIE1hdGE!5e0!3m2!1spt-BR!2sbr!4v1650000000000"></iframe>
+            </div>
           </div>
-          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata+Planta+Laranjeiras+Piraquara+PR" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
-            📍 Ver no Google Maps (Recepção)
+          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata+Planta+Laranjeiras+Piraquara+PR" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full btn-casar py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-widest transition shadow-sm gap-2">
+            📍 Abrir no Google Maps (Recepção)
           </a>
         </div>
       </div>
@@ -476,7 +486,7 @@
   <section id="rsvp" class="py-16 bg-white/90 border-t border-casar px-4">
     <div class="max-w-xl mx-auto">
       <div class="text-center mb-8">
-        <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-1">Confirmação de Presença</h2>
+        <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-1">Confirme sua Presença</h2>
         <p class="text-xs uppercase tracking-widest text-stone-700 font-bold">Localize seu convite por Nome, Sobrenome ou Telefone</p>
       </div>
 
@@ -534,7 +544,7 @@
       <div class="p-4 border-b border-casar flex justify-between items-center bg-stone-50">
         <div>
           <h2 class="font-serif-custom text-2xl text-stone-900 font-bold">Painel Administrativo de Convidados</h2>
-          <p class="text-xs text-stone-600 font-medium">Gerencie o evento e ajuste a transparência da foto de fundo.</p>
+          <p class="text-xs text-stone-600 font-medium">Gerencie o evento, transparência e música do site.</p>
         </div>
         <div class="flex items-center gap-2">
           <button onclick="carregarAdminLista()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm">
@@ -546,14 +556,20 @@
         </div>
       </div>
 
-      <!-- CONTROLE DE TRANSPARÊNCIA DO FUNDO -->
-      <div class="p-3 bg-amber-50/80 border-b border-casar flex items-center justify-between px-6 text-xs">
-        <span class="font-bold text-stone-800">✨ Ajustar Transparência da Foto de Fundo:</span>
-        <div class="flex items-center gap-3">
-          <span class="text-[10px] text-stone-600 font-bold">Mais Foto</span>
-          <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-36 accent-amber-800 cursor-pointer">
-          <span class="text-[10px] text-stone-600 font-bold">Mais Claro</span>
-          <span id="valorTransparencia" class="font-bold text-amber-900 w-8 text-right">0.65</span>
+      <!-- CONTROLES DE CONFIGURAÇÃO (TRANSPARÊNCIA E MÚSICA DO YOUTUBE) -->
+      <div class="p-4 bg-amber-50/80 border-b border-casar grid md:grid-cols-2 gap-4 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-stone-800">✨ Transparência do Fundo:</span>
+          <div class="flex items-center gap-2">
+            <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-28 accent-amber-800 cursor-pointer">
+            <span id="valorTransparencia" class="font-bold text-amber-900 w-8 text-right">0.65</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-stone-800 whitespace-nowrap">🎵 Link YouTube:</span>
+          <input type="text" id="inputYoutubeLink" placeholder="Cole o link do YouTube aqui..." class="w-full p-1.5 border border-casar rounded bg-white text-xs font-medium focus:outline-none">
+          <button onclick="salvarLinkMusica()" class="btn-casar py-1.5 px-3 rounded text-xs font-bold uppercase tracking-wider">Salvar</button>
         </div>
       </div>
 
@@ -641,6 +657,9 @@
     </div>
   </div>
 
+  <!-- SCRIPT DA API YOUTUBE IFRAME -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxuFZQUONbk1h_fljqDKhCxltM1D6s6wV0SrR_RYQ52zMRDghbt2OEM16v7Xg1wGeJS6Q/exec";
     const SENHA_ADMIN = "1234";
@@ -650,11 +669,78 @@
     let convidadosCache = [];
     let ordemCampo = 'responsavel';
     let ordemAsc = true;
+    let playerYT = null;
+    let musicaTocando = false;
+
+    // Efeito Paralaxe Suave ao rolar a página
+    function atualizarParalaxe() {
+      const scrollY = window.scrollY;
+      const parallaxImg = document.getElementById("parallax-image");
+      if (parallaxImg) {
+        parallaxImg.style.transform = `translate3d(0, ${scrollY * 0.25}px, 0)`;
+      }
+    }
 
     function alterarTransparenciaFundo(valor) {
       document.documentElement.style.setProperty('--bg-transparency', valor);
       document.getElementById("valorTransparencia").innerText = parseFloat(valor).toFixed(2);
       localStorage.setItem("casamento_transparencia", valor);
+    }
+
+    // Gerenciamento de Música do YouTube
+    function extrairIDYoutube(url) {
+      if (!url) return null;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function onYouTubeIframeAPIReady() {
+      const linkSalvo = localStorage.getItem("casamento_yt_link") || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Exemplo padrão
+      const videoId = extrairIDYoutube(linkSalvo);
+      
+      if (videoId) {
+        playerYT = new YT.Player('youtubePlayerContainer', {
+          height: '0',
+          width: '0',
+          videoId: videoId,
+          playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': videoId },
+          events: {
+            'onReady': () => {
+              document.getElementById("btnAudio").classList.remove("hidden");
+              document.getElementById("btnAudio").classList.add("flex");
+            }
+          }
+        });
+      }
+    }
+
+    function toggleAudioMusica() {
+      if (!playerYT) return;
+      const btn = document.getElementById("btnAudio");
+      if (musicaTocando) {
+        playerYT.pauseVideo();
+        musicaTocando = false;
+        btn.innerHTML = "🔇 <span>Tocar Música</span>";
+        btn.className = "flex bg-amber-100 hover:bg-amber-200 text-amber-900 px-2.5 py-1 rounded-full text-[10px] font-bold items-center gap-1 shadow-sm transition";
+      } else {
+        playerYT.playVideo();
+        musicaTocando = true;
+        btn.innerHTML = "🔊 <span>Pausar Música</span>";
+        btn.className = "flex bg-emerald-100 hover:bg-emerald-200 text-emerald-900 px-2.5 py-1 rounded-full text-[10px] font-bold items-center gap-1 shadow-sm transition animate-pulse";
+      }
+    }
+
+    function salvarLinkMusica() {
+      const link = document.getElementById("inputYoutubeLink").value.trim();
+      const videoId = extrairIDYoutube(link);
+      if (!videoId) {
+        alert("Link do YouTube inválido.");
+        return;
+      }
+      localStorage.setItem("casamento_yt_link", link);
+      alert("Link de música salvo com sucesso! A página será atualizada.");
+      location.reload();
     }
 
     window.addEventListener("DOMContentLoaded", function() {
@@ -664,6 +750,11 @@
         const slider = document.getElementById("rangeTransparencia");
         if (slider) slider.value = salva;
       }
+      const linkSalvo = localStorage.getItem("casamento_yt_link");
+      if (linkSalvo) {
+        document.getElementById("inputYoutubeLink").value = linkSalvo;
+      }
+
       carregarRecados();
       carregarFotosDrive();
     });
