@@ -166,9 +166,35 @@
       <h1 class="font-serif-custom text-5xl md:text-7xl font-normal text-stone-800 mb-2">Wagner & Larissa</h1>
       <p class="font-serif-custom italic text-2xl text-casar-primary mb-8">Sexta-feira, 11 de Dezembro de 2026</p>
 
-      <div class="my-8 overflow-hidden rounded-2xl shadow-lg border-4 border-white max-w-lg mx-auto">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" alt="Wagner e Larissa" class="w-full h-80 object-cover">
+       <!-- CARROSSEL DE FOTOS -->
+      <div class="max-w-xl mx-auto">
+        <div class="relative overflow-hidden w-full rounded-2xl border border-casar shadow-sm">
+          <div id="carrosselFotos" class="flex transition-transform duration-700 ease-in-out">
+            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+            <div class="min-w-full"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80" class="w-full h-80 md:h-96 object-cover"></div>
+          </div>
+
+          <button onclick="fotoAnterior()" type="button" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">
+            &#10094;
+          </button>
+          <button onclick="proximaFoto()" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition focus:outline-none text-lg">
+            &#10095;
+          </button>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+          <button onclick="fotoAnterior()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+            &#10094; Anterior
+          </button>
+          <span id="contadorFotos" class="text-xs text-stone-500 font-medium">Foto 1</span>
+          <button onclick="proximaFoto()" type="button" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+            Próxima &#10095;
+          </button>
+        </div>
       </div>
+    </div>
+  </section>
 
       <!-- CONTAGEM REGRESSIVA -->
       <div class="mt-10 bg-white/80 p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
