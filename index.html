@@ -39,10 +39,10 @@
     .text-casar-primary { color: #8c6e5c; }
     .border-casar { border-color: #e8ded5; }
 
-    /* Fundo independente com paralaxe nativo suave na rolagem */
+    /* Fundo independente com paralaxe suave */
     #parallax-bg {
       position: fixed;
-      top: 60px;
+      top: 65px;
       right: 0;
       bottom: 0;
       left: 0;
@@ -65,7 +65,6 @@
       background-size: cover;
       background-position: center 25%;
       background-repeat: no-repeat;
-      /* Movimento de paralaxe suave via CSS scroll */
       will-change: transform;
     }
 
@@ -81,7 +80,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background-color: rgba(255, 255, 255, 0.94) !important;
+      background-color: rgba(255, 255, 255, 0.96) !important;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
@@ -169,7 +168,7 @@
 
     @media (max-width: 768px) {
       html { scroll-padding-top: 70px; }
-      #parallax-bg { top: 60px; }
+      #parallax-bg { top: 65px; }
     }
   </style>
 </head>
@@ -182,18 +181,33 @@
   <!-- PLAYER DE MÚSICA OCULTO DO YOUTUBE -->
   <div id="youtubePlayerContainer" style="display:none;"></div>
 
-  <!-- MENU SUPERIOR -->
-  <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm h-[60px] flex items-center">
-    <div class="max-w-5xl mx-auto px-4 w-full flex justify-between items-center text-xs tracking-widest uppercase text-stone-800 font-semibold">
-      <div class="flex items-center gap-3">
+  <!-- MENU SUPERIOR OTIMIZADO -->
+  <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-casar shadow-sm min-h-[65px] flex items-center py-2">
+    <div class="max-w-6xl mx-auto px-4 w-full flex flex-col md:flex-row justify-between items-center gap-2">
+      
+      <!-- LOGO E PLAYER DE MÚSICA COM PROGRESSO -->
+      <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
         <span class="font-serif-custom text-xl font-semibold tracking-normal capitalize">W & L</span>
-        <!-- BOTÃO DE AUDIO FLUTUANTE NO NAV -->
-        <button id="btnAudio" onclick="toggleAudioMusica()" class="hidden bg-amber-100 hover:bg-amber-200 text-amber-900 px-2.5 py-1 rounded-full text-[10px] font-bold items-center gap-1 shadow-sm transition">
-          🔇 <span>Tocar Música</span>
-        </button>
+        
+        <!-- MINI PLAYER COM PROGRESSO -->
+        <div class="flex items-center gap-2 bg-stone-100 border border-casar px-3 py-1 rounded-full shadow-inner text-[11px]">
+          <button id="btnPlayPause" onclick="toggleAudioMusica()" class="w-6 h-6 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold hover:scale-105 transition">
+            ▶
+          </button>
+          <div class="flex flex-col w-28 md:w-36">
+            <div class="flex justify-between text-[9px] font-bold text-stone-700">
+              <span id="txtNomeMusica">Música do Casal</span>
+              <span id="txtTempoMusica">0:00</span>
+            </div>
+            <div class="w-full bg-stone-300 rounded-full h-1.5 overflow-hidden mt-0.5 cursor-pointer" onclick="pularParaProgresso(event)">
+              <div id="barraProgressoMusica" class="bg-amber-800 h-1.5 rounded-full w-0 transition-all"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="space-x-2 md:space-x-4 text-[10px] md:text-xs overflow-x-auto whitespace-nowrap py-2">
+      <!-- LINKS DE NAVEGAÇÃO ORGANIZADOS -->
+      <div class="flex items-center space-x-3 md:space-x-4 text-[11px] font-semibold tracking-wider uppercase text-stone-800 overflow-x-auto w-full md:w-auto py-1 justify-center md:justify-end">
         <a href="#home" class="hover:text-casar-primary transition">Início</a>
         <a href="#historia" class="hover:text-casar-primary transition">Mensagem</a>
         <a href="#trajes" class="hover:text-casar-primary transition text-amber-900">Trajes</a>
@@ -204,6 +218,7 @@
         <a href="#recados" class="hover:text-casar-primary transition">Deixe seu Recado</a>
         <a href="#rsvp" class="hover:text-casar-primary transition font-bold text-casar-primary">Confirme sua Presença</a>
       </div>
+
     </div>
   </nav>
 
@@ -304,14 +319,13 @@
     </div>
   </section>
 
-  <!-- PROGRAMAÇÃO DO DIA COM PRÉVIA DO GOOGLE MAPS -->
+  <!-- PROGRAMAÇÃO DO DIA COM GOOGLE MAPS -->
   <section id="local" class="py-16 bg-stone-50/90 border-y border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl text-stone-900 font-bold mb-2">Programação do Dia</h2>
       <p class="text-xs uppercase tracking-widest text-stone-700 font-bold mb-10">Cerimônia e Recepção</p>
 
       <div class="grid md:grid-cols-2 gap-8 text-left">
-        <!-- CERIMÔNIA -->
         <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3">⛪</div>
@@ -323,7 +337,6 @@
             <p class="text-xs text-stone-900 font-semibold mb-1">Local: Paróquia Nossa Senhora Rainha da Paz</p>
             <p class="text-xs text-stone-700 mb-4">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
 
-            <!-- Prévia do Mapa Google Maps -->
             <div class="w-full h-44 rounded-xl overflow-hidden border border-casar mb-4 shadow-inner">
               <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.8!2d-49.12!3d-25.53!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUGFyw7NxdWlhIE5vc3NhIFNlbmhvcmEgUmFpbmhhIGRhIFBheg!5e0!3m2!1spt-BR!2sbr!4v1650000000000"></iframe>
             </div>
@@ -333,7 +346,6 @@
           </a>
         </div>
 
-        <!-- RECEPÇÃO -->
         <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm flex flex-col justify-between">
           <div>
             <div class="text-3xl mb-3">🥂</div>
@@ -345,7 +357,6 @@
             <p class="text-xs text-stone-900 font-semibold mb-1">Local: Chácara Luz da Mata</p>
             <p class="text-xs text-stone-700 mb-4">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
 
-            <!-- Prévia do Mapa Google Maps -->
             <div class="w-full h-44 rounded-xl overflow-hidden border border-casar mb-4 shadow-inner">
               <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.8!2d-49.08!3d-25.48!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zQ2jDoWNhcmEgTHV6IGRhIE1hdGE!5e0!3m2!1spt-BR!2sbr!4v1650000000000"></iframe>
             </div>
@@ -537,114 +548,158 @@
     </button>
   </div>
 
-  <!-- MODAL ADMIN -->
+  <!-- MODAL ADMIN COM ABAS -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden">
       
-      <div class="p-4 border-b border-casar flex justify-between items-center bg-stone-50">
+      <!-- CABEÇALHO DO MODAL E ABAS -->
+      <div class="p-4 border-b border-casar bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
         <div>
-          <h2 class="font-serif-custom text-2xl text-stone-900 font-bold">Painel Administrativo de Convidados</h2>
-          <p class="text-xs text-stone-600 font-medium">Gerencie o evento, transparência e música do site.</p>
+          <h2 class="font-serif-custom text-2xl text-stone-900 font-bold">Painel Administrativo dos Noivos</h2>
+          <p class="text-xs text-stone-600 font-medium">Gerencie convidados, transparência e playlist musical do site.</p>
         </div>
-        <div class="flex items-center gap-2">
-          <button onclick="carregarAdminLista()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm">
-            🔄 Atualizar
-          </button>
-          <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold transition">
-            ✕
-          </button>
+
+        <!-- ABAS DE NAVEGAÇÃO DO PAINEL -->
+        <div class="flex items-center gap-2 bg-stone-200 p-1 rounded-xl text-xs font-bold">
+          <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="px-4 py-2 rounded-lg bg-white text-stone-900 shadow-sm transition">👥 Convidados</button>
+          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="px-4 py-2 rounded-lg text-stone-700 hover:text-stone-950 transition">⚙️ Configurações & Música</button>
         </div>
+
+        <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold transition">
+          ✕
+        </button>
       </div>
 
-      <!-- CONTROLES DE CONFIGURAÇÃO (TRANSPARÊNCIA E MÚSICA DO YOUTUBE) -->
-      <div class="p-4 bg-amber-50/80 border-b border-casar grid md:grid-cols-2 gap-4 text-xs">
-        <div class="flex items-center justify-between">
-          <span class="font-bold text-stone-800">✨ Transparência do Fundo:</span>
-          <div class="flex items-center gap-2">
-            <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-28 accent-amber-800 cursor-pointer">
-            <span id="valorTransparencia" class="font-bold text-amber-900 w-8 text-right">0.65</span>
+      <!-- ABA 1: GERENCIAR CONVIDADOS -->
+      <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden">
+        <!-- MÉTRICAS -->
+        <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs">
+          <div class="bg-white p-2 rounded-lg border border-casar shadow-sm">
+            <p class="text-[10px] text-stone-500 uppercase font-bold">Total Lista</p>
+            <span id="statTotal" class="text-lg font-bold text-stone-900">0</span>
+          </div>
+          <div class="bg-white p-2 rounded-lg border border-casar shadow-sm">
+            <p class="text-[10px] text-stone-500 uppercase font-bold">Adultos / Crianças</p>
+            <span id="statTipos" class="text-xs font-bold text-stone-800">0 / 0</span>
+          </div>
+          <div class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm">
+            <p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p>
+            <span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span>
+          </div>
+          <div class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm">
+            <p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p>
+            <span id="statAusentes" class="text-lg font-bold text-rose-900">0</span>
+          </div>
+          <div class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm">
+            <p class="text-[10px] text-amber-700 uppercase font-bold">Pendente RSVP</p>
+            <span id="statPendentes" class="text-lg font-bold text-amber-900">0</span>
+          </div>
+          <div class="bg-stone-100 p-2 rounded-lg border border-stone-300 shadow-sm">
+            <p class="text-[10px] text-stone-600 uppercase font-bold">Aguardando Faltam</p>
+            <span id="statFaltam" class="text-lg font-bold text-stone-900">0</span>
           </div>
         </div>
 
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-stone-800 whitespace-nowrap">🎵 Link YouTube:</span>
-          <input type="text" id="inputYoutubeLink" placeholder="Cole o link do YouTube aqui..." class="w-full p-1.5 border border-casar rounded bg-white text-xs font-medium focus:outline-none">
-          <button onclick="salvarLinkMusica()" class="btn-casar py-1.5 px-3 rounded text-xs font-bold uppercase tracking-wider">Salvar</button>
+        <!-- PESQUISA E CADASTRO -->
+        <div class="p-4 bg-stone-100 border-b border-casar text-xs space-y-3">
+          <div class="flex flex-col md:flex-row gap-2 items-center justify-between">
+            <div class="w-full md:w-1/2 relative">
+              <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome, Responsável ou Telefone..." class="w-full p-2.5 pl-3 border border-casar rounded-lg bg-white text-xs text-stone-900 font-medium focus:outline-none focus:border-stone-500 shadow-sm">
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="carregarAdminLista()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 px-3 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm">
+                🔄 Atualizar Lista
+              </button>
+              <span id="txtResultadosFiltro" class="text-[11px] text-stone-600 font-medium italic">Exibindo todos os registros</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-stone-200">
+            <h3 class="font-bold text-stone-800 mb-2 uppercase tracking-wider text-[10px]">➕ Adicionar Novo Convidado à Lista</h3>
+            <div class="grid md:grid-cols-4 gap-2">
+              <input type="text" id="addResp" placeholder="Responsável / Família *" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
+              <input type="text" id="addNome" placeholder="Nome do Integrante *" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
+              <select id="addTipo" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
+                <option value="Adulto">Adulto</option>
+                <option value="Criança">Criança</option>
+              </select>
+              <input type="text" id="addContato" placeholder="Telefone (Contato)" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
+            </div>
+            <div class="mt-2 flex justify-end">
+              <button onclick="adminAdicionarNovo()" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider shadow-sm">
+                Adicionar Convidado
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABELA -->
+        <div id="containerTabelaAdmin" class="p-4 overflow-y-auto flex-1 scroll-smooth">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-stone-200/80 border-b border-casar text-stone-900 font-bold uppercase text-[10px] tracking-wider select-none">
+                <th onclick="ordenarPor('responsavel')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Responsável ⇳</th>
+                <th onclick="ordenarPor('nome')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Nome ⇳</th>
+                <th class="p-3">Tipo</th>
+                <th onclick="ordenarPor('contato')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Contato ⇳</th>
+                <th class="p-3">Confirmação RSVP</th>
+                <th class="p-3">Status</th>
+                <th class="p-3 text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaAdminBody"></tbody>
+          </table>
         </div>
       </div>
 
-      <!-- MÉTRICAS -->
-      <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs">
-        <div class="bg-white p-2 rounded-lg border border-casar shadow-sm">
-          <p class="text-[10px] text-stone-500 uppercase font-bold">Total Lista</p>
-          <span id="statTotal" class="text-lg font-bold text-stone-900">0</span>
-        </div>
-        <div class="bg-white p-2 rounded-lg border border-casar shadow-sm">
-          <p class="text-[10px] text-stone-500 uppercase font-bold">Adultos / Crianças</p>
-          <span id="statTipos" class="text-xs font-bold text-stone-800">0 / 0</span>
-        </div>
-        <div class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm">
-          <p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p>
-          <span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span>
-        </div>
-        <div class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm">
-          <p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p>
-          <span id="statAusentes" class="text-lg font-bold text-rose-900">0</span>
-        </div>
-        <div class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm">
-          <p class="text-[10px] text-amber-700 uppercase font-bold">Pendente RSVP</p>
-          <span id="statPendentes" class="text-lg font-bold text-amber-900">0</span>
-        </div>
-        <div class="bg-stone-100 p-2 rounded-lg border border-stone-300 shadow-sm">
-          <p class="text-[10px] text-stone-600 uppercase font-bold">Aguardando Faltam</p>
-          <span id="statFaltam" class="text-lg font-bold text-stone-900">0</span>
-        </div>
-      </div>
-
-      <!-- PESQUISA E CADASTRO -->
-      <div class="p-4 bg-stone-100 border-b border-casar text-xs space-y-3">
-        <div class="flex flex-col md:flex-row gap-2 items-center justify-between">
-          <div class="w-full md:w-1/2 relative">
-            <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome, Responsável ou Telefone..." class="w-full p-2.5 pl-3 border border-casar rounded-lg bg-white text-xs text-stone-900 font-medium focus:outline-none focus:border-stone-500 shadow-sm">
+      <!-- ABA 2: CONFIGURAÇÕES, TRANSPARÊNCIA E PLAYLIST DE MÚSICA -->
+      <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 text-xs">
+        
+        <!-- TRANSPARÊNCIA DO FUNDO -->
+        <div class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-3">
+          <h3 class="font-serif-custom text-xl text-stone-900 font-bold">✨ Aparência do Fundo</h3>
+          <p class="text-stone-600">Ajuste o nível de transparência da camada branca sobre a foto de fundo do site:</p>
+          <div class="flex items-center gap-4">
+            <span class="font-bold text-stone-700">Mais Foto (Escuro)</span>
+            <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-full accent-amber-800 cursor-pointer">
+            <span class="font-bold text-stone-700">Mais Claro</span>
+            <span id="valorTransparencia" class="font-bold text-amber-900 w-10 text-right text-sm">0.65</span>
           </div>
-          <span id="txtResultadosFiltro" class="text-[11px] text-stone-600 font-medium italic">Exibindo todos os registros</span>
         </div>
 
-        <div class="pt-2 border-t border-stone-200">
-          <h3 class="font-bold text-stone-800 mb-2 uppercase tracking-wider text-[10px]">➕ Adicionar Novo Convidado à Lista</h3>
-          <div class="grid md:grid-cols-4 gap-2">
-            <input type="text" id="addResp" placeholder="Responsável / Família *" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
-            <input type="text" id="addNome" placeholder="Nome do Integrante *" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
-            <select id="addTipo" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
-              <option value="Adulto">Adulto</option>
-              <option value="Criança">Criança</option>
-            </select>
-            <input type="text" id="addContato" placeholder="Telefone (Contato)" class="p-2 border rounded bg-white text-stone-900 font-medium focus:outline-none">
-          </div>
-          <div class="mt-2 flex justify-end">
-            <button onclick="adminAdicionarNovo()" class="btn-casar py-2 px-5 rounded-lg text-xs font-semibold uppercase tracking-wider shadow-sm">
-              Adicionar Convidado
+        <!-- GERENCIAMENTO DA PLAYLIST DE MÚSICA -->
+        <div class="bg-stone-50 p-6 rounded-2xl border border-casar shadow-sm space-y-4">
+          <h3 class="font-serif-custom text-xl text-stone-900 font-bold">🎵 Playlist & Músicas do YouTube</h3>
+          <p class="text-stone-600">Adicione os links do YouTube que irão tocar automaticamente na abertura do site:</p>
+
+          <div class="flex gap-2">
+            <input type="text" id="inputAddMusica" placeholder="Cole o link do YouTube (ex: https://www.youtube.com/watch?v=...)" class="w-full p-3 border border-casar rounded-xl bg-white text-xs font-medium focus:outline-none">
+            <button onclick="adicionarMusicaPlaylist()" class="btn-casar px-6 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap shadow-sm">
+              Adicionar Música
             </button>
           </div>
-        </div>
-      </div>
 
-      <!-- TABELA -->
-      <div id="containerTabelaAdmin" class="p-4 overflow-y-auto flex-1 scroll-smooth">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="bg-stone-200/80 border-b border-casar text-stone-900 font-bold uppercase text-[10px] tracking-wider select-none">
-              <th onclick="ordenarPor('responsavel')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Responsável ⇳</th>
-              <th onclick="ordenarPor('nome')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Nome ⇳</th>
-              <th class="p-3">Tipo</th>
-              <th onclick="ordenarPor('contato')" class="p-3 cursor-pointer hover:bg-stone-300 transition">Contato ⇳</th>
-              <th class="p-3">Confirmação RSVP</th>
-              <th class="p-3">Status</th>
-              <th class="p-3 text-center">Ações</th>
-            </tr>
-          </thead>
-          <tbody id="tabelaAdminBody"></tbody>
-        </table>
+          <!-- OPÇÕES DE REPRODUÇÃO -->
+          <div class="grid md:grid-cols-2 gap-4 pt-2">
+            <div>
+              <label class="block font-bold text-stone-800 mb-1 uppercase text-[10px]">Modo de Reprodução:</label>
+              <select id="selectModoReprod" onchange="salvarConfigModo()" class="w-full p-2.5 border rounded-xl bg-white font-semibold">
+                <option value="repetir_todas">Repetir Todas (Playlist Contínua)</option>
+                <option value="repetir_uma">Repetir Somente 1 Música</option>
+                <option value="aleatorio">Modo Aleatório (Shuffle)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- LISTA DE MÚSICAS CADASTRADAS -->
+          <div class="mt-4">
+            <h4 class="font-bold text-stone-800 uppercase text-[10px] mb-2">Músicas na Playlist:</h4>
+            <div id="containerPlaylistAdmin" class="space-y-2 max-h-40 overflow-y-auto">
+              <p class="text-stone-500 italic">Nenhuma música cadastrada ainda.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="p-3 bg-stone-50 border-t border-casar flex justify-between items-center text-xs">
@@ -669,10 +724,17 @@
     let convidadosCache = [];
     let ordemCampo = 'responsavel';
     let ordemAsc = true;
+
+    // VARIÁVEIS DE MÚSICA & PLAYLIST
     let playerYT = null;
     let musicaTocando = false;
+    let playlistMusicas = [
+      { id: "dQw4w9WgXcQ", titulo: "Música Romântica Principal" }
+    ];
+    let indiceMusicaAtual = 0;
+    let intervaloProgresso = null;
 
-    // Efeito Paralaxe Suave ao rolar a página
+    // Efeito Paralaxe Suave
     function atualizarParalaxe() {
       const scrollY = window.scrollY;
       const parallaxImg = document.getElementById("parallax-image");
@@ -687,7 +749,7 @@
       localStorage.setItem("casamento_transparencia", valor);
     }
 
-    // Gerenciamento de Música do YouTube
+    // YOUTUBE PLAYER & PLAYLIST
     function extrairIDYoutube(url) {
       if (!url) return null;
       const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -695,52 +757,171 @@
       return (match && match[2].length === 11) ? match[2] : null;
     }
 
+    function carregarPlaylistSalva() {
+      const salva = localStorage.getItem("casamento_playlist");
+      if (salva) {
+        try { playlistMusicas = JSON.parse(salva); } catch(e){}
+      }
+    }
+
     function onYouTubeIframeAPIReady() {
-      const linkSalvo = localStorage.getItem("casamento_yt_link") || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Exemplo padrão
-      const videoId = extrairIDYoutube(linkSalvo);
-      
-      if (videoId) {
-        playerYT = new YT.Player('youtubePlayerContainer', {
-          height: '0',
-          width: '0',
-          videoId: videoId,
-          playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': videoId },
-          events: {
-            'onReady': () => {
-              document.getElementById("btnAudio").classList.remove("hidden");
-              document.getElementById("btnAudio").classList.add("flex");
-            }
-          }
-        });
+      carregarPlaylistSalva();
+      if (playlistMusicas.length === 0) return;
+
+      const atual = playlistMusicas[indiceMusicaAtual];
+      playerYT = new YT.Player('youtubePlayerContainer', {
+        height: '0',
+        width: '0',
+        videoId: atual.id,
+        playerVars: { 'autoplay': 1, 'controls': 0 },
+        events: {
+          'onReady': (event) => {
+            event.target.playVideo();
+            musicaTocando = true;
+            atualizarBotaoPlayPause();
+            iniciarControleProgresso();
+          },
+          'onStateChange': onPlayerStateChange
+        }
+      });
+      renderizarPlaylistAdmin();
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.ENDED) {
+        proximaMusicaPlaylist();
+      }
+    }
+
+    function proximaMusicaPlaylist() {
+      const modo = localStorage.getItem("casamento_modo_reprod") || "repetir_todas";
+      if (modo === "repetir_uma") {
+        playerYT.seekTo(0);
+        playerYT.playVideo();
+        return;
+      }
+      if (modo === "aleatorio") {
+        indiceMusicaAtual = Math.floor(Math.random() * playlistMusicas.length);
+      } else {
+        indiceMusicaAtual = (indiceMusicaAtual + 1) % playlistMusicas.length;
+      }
+      const prox = playlistMusicas[indiceMusicaAtual];
+      if (prox && playerYT) {
+        playerYT.loadVideoById(prox.id);
+        document.getElementById("txtNomeMusica").innerText = prox.titulo || "Música do Casal";
       }
     }
 
     function toggleAudioMusica() {
       if (!playerYT) return;
-      const btn = document.getElementById("btnAudio");
       if (musicaTocando) {
         playerYT.pauseVideo();
         musicaTocando = false;
-        btn.innerHTML = "🔇 <span>Tocar Música</span>";
-        btn.className = "flex bg-amber-100 hover:bg-amber-200 text-amber-900 px-2.5 py-1 rounded-full text-[10px] font-bold items-center gap-1 shadow-sm transition";
       } else {
         playerYT.playVideo();
         musicaTocando = true;
-        btn.innerHTML = "🔊 <span>Pausar Música</span>";
-        btn.className = "flex bg-emerald-100 hover:bg-emerald-200 text-emerald-900 px-2.5 py-1 rounded-full text-[10px] font-bold items-center gap-1 shadow-sm transition animate-pulse";
+      }
+      atualizarBotaoPlayPause();
+    }
+
+    function atualizarBotaoPlayPause() {
+      const btn = document.getElementById("btnPlayPause");
+      if (musicaTocando) {
+        btn.innerText = "⏸";
+      } else {
+        btn.innerText = "▶";
       }
     }
 
-    function salvarLinkMusica() {
-      const link = document.getElementById("inputYoutubeLink").value.trim();
-      const videoId = extrairIDYoutube(link);
+    function iniciarControleProgresso() {
+      if (intervaloProgresso) clearInterval(intervaloProgresso);
+      intervaloProgresso = setInterval(() => {
+        if (playerYT && playerYT.getCurrentTime && playerYT.getDuration) {
+          const atual = playerYT.getCurrentTime();
+          const total = playerYT.getDuration();
+          if (total > 0) {
+            const pct = (atual / total) * 100;
+            document.getElementById("barraProgressoMusica").style.width = pct + "%";
+            
+            const min = Math.floor(atual / 60);
+            const seg = Math.floor(atual % 60).toString().padStart(2, '0');
+            document.getElementById("txtTempoMusica").innerText = `${min}:${seg}`;
+          }
+        }
+      }, 1000);
+    }
+
+    function pularParaProgresso(event) {
+      if (!playerYT || !playerYT.getDuration) return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const width = rect.width;
+      const pct = clickX / width;
+      const novoTempo = pct * playerYT.getDuration();
+      playerYT.seekTo(novoTempo, true);
+    }
+
+    function adicionarMusicaPlaylist() {
+      const input = document.getElementById("inputAddMusica");
+      const url = input.value.trim();
+      const videoId = extrairIDYoutube(url);
       if (!videoId) {
         alert("Link do YouTube inválido.");
         return;
       }
-      localStorage.setItem("casamento_yt_link", link);
-      alert("Link de música salvo com sucesso! A página será atualizada.");
-      location.reload();
+      playlistMusicas.push({ id: videoId, titulo: `Música ${playlistMusicas.length + 1}` });
+      localStorage.setItem("casamento_playlist", JSON.stringify(playlistMusicas));
+      input.value = "";
+      renderizarPlaylistAdmin();
+      alert("Música adicionada à playlist com sucesso!");
+    }
+
+    function removerMusicaPlaylist(idx) {
+      playlistMusicas.splice(idx, 1);
+      localStorage.setItem("casamento_playlist", JSON.stringify(playlistMusicas));
+      renderizarPlaylistAdmin();
+    }
+
+    function renderizarPlaylistAdmin() {
+      const container = document.getElementById("containerPlaylistAdmin");
+      if (!container) return;
+      if (playlistMusicas.length === 0) {
+        container.innerHTML = `<p class="text-stone-500 italic">Nenhuma música cadastrada.</p>`;
+        return;
+      }
+      container.innerHTML = "";
+      playlistMusicas.forEach((m, idx) => {
+        container.innerHTML += `
+          <div class="flex items-center justify-between p-2.5 bg-white border border-casar rounded-xl">
+            <span class="font-bold text-stone-800">🎵 ${m.titulo} (ID: ${m.id})</span>
+            <button onclick="removerMusicaPlaylist(${idx})" class="text-rose-700 hover:underline font-bold">Remover</button>
+          </div>
+        `;
+      });
+    }
+
+    function salvarConfigModo() {
+      const modo = document.getElementById("selectModoReprod").value;
+      localStorage.setItem("casamento_modo_reprod", modo);
+    }
+
+    function alternarAbaAdmin(aba) {
+      const btnConv = document.getElementById("tabBtnConvidados");
+      const btnConf = document.getElementById("tabBtnConfig");
+      const divConv = document.getElementById("abaConvidados");
+      const divConf = document.getElementById("abaConfig");
+
+      if (aba === 'convidados') {
+        btnConv.className = "px-4 py-2 rounded-lg bg-white text-stone-900 shadow-sm transition";
+        btnConf.className = "px-4 py-2 rounded-lg text-stone-700 hover:text-stone-950 transition";
+        divConv.classList.remove("hidden");
+        divConf.classList.add("hidden");
+      } else {
+        btnConf.className = "px-4 py-2 rounded-lg bg-white text-stone-900 shadow-sm transition";
+        btnConv.className = "px-4 py-2 rounded-lg text-stone-700 hover:text-stone-950 transition";
+        divConf.classList.remove("hidden");
+        divConv.classList.add("hidden");
+      }
     }
 
     window.addEventListener("DOMContentLoaded", function() {
@@ -750,9 +931,9 @@
         const slider = document.getElementById("rangeTransparencia");
         if (slider) slider.value = salva;
       }
-      const linkSalvo = localStorage.getItem("casamento_yt_link");
-      if (linkSalvo) {
-        document.getElementById("inputYoutubeLink").value = linkSalvo;
+      const modoSalvo = localStorage.getItem("casamento_modo_reprod");
+      if (modoSalvo) {
+        document.getElementById("selectModoReprod").value = modoSalvo;
       }
 
       carregarRecados();
@@ -1137,6 +1318,7 @@
 
       document.getElementById("modalAdmin").classList.remove("hidden");
       carregarAdminLista();
+      renderizarPlaylistAdmin();
     }
 
     function fecharModalAdmin() {
