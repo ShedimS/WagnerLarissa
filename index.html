@@ -19,8 +19,6 @@
       --nav-bg: rgba(255, 255, 255, 0.98);
       --player-bg: #eae3db;
       --input-bg: #ffffff;
-      --text-stroke-color: transparent;
-      --text-stroke-width: 0px;
     }
 
     .dark-mode {
@@ -43,26 +41,19 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
+    /* Trava de cor dos modais admin para legibilidade absoluta */
     #modalAdmin, #modalAdmin *, #modalLogin, #modalLogin * {
-      color: #1c1917 !important;
       -webkit-text-stroke: 0px transparent !important;
-    }
-    #modalAdmin input, #modalAdmin select, #modalAdmin textarea,
-    #modalLogin input, #modalLogin select, #modalLogin textarea {
-      background-color: #ffffff !important;
-      color: #1c1917 !important;
-      border-color: #d6d3d1 !important;
     }
 
     body, p, span, div, li, label, strong, em, b, i, a {
       color: var(--casar-texto);
-      -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
     }
 
     h1, h2, h3, h4, h5, h6, .font-serif-custom { 
       font-family: 'Cormorant Garamond', serif; 
       color: var(--casar-titulos);
-      -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
+      word-break: break-word;
     }
 
     html {
@@ -79,6 +70,7 @@
       background: var(--bg-site) !important;
       padding-bottom: 50px;
       transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
     }
     
     .font-cursive { font-family: 'Great Vibes', cursive; }
@@ -172,6 +164,20 @@
       color: #d4b5a0 !important; font-weight: 700; margin-right: 6px;
     }
 
+    /* Correção do hover das abas do admin para não sumir o texto */
+    .tab-admin-btn {
+      color: #44403c !important;
+      background-color: #e7e5e4 !important;
+    }
+    .tab-admin-btn:hover {
+      background-color: #a38573 !important;
+      color: #ffffff !important;
+    }
+    .tab-admin-btn.active-tab {
+      background-color: #1c1917 !important;
+      color: #ffffff !important;
+    }
+
     @keyframes tickerAnimation {
       0% { transform: translate3d(0, 0, 0); }
       100% { transform: translate3d(-50%, 0, 0); }
@@ -185,9 +191,9 @@
 
   <!-- NAVEGAÇÃO E PLAYER -->
   <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
-    <div class="max-w-4xl mx-auto w-full flex flex-col items-center gap-2">
+    <div class="max-w-5xl mx-auto w-full flex flex-col items-center gap-2">
       
-      <div class="w-full max-w-xl flex items-center justify-center gap-4 border-b border-casar/50 pb-2">
+      <div class="w-full max-w-2xl flex flex-wrap items-center justify-between gap-2 border-b border-casar/50 pb-2 px-2">
         <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
         <div class="flex items-center gap-2">
@@ -210,7 +216,7 @@
             <!-- CONTROLE DE VOLUME -->
             <div class="flex items-center gap-1 ml-1 border-l border-casar/50 pl-1.5">
               <span id="iconeVolume" class="cursor-pointer text-xs" onclick="alternarMute()">🔊</span>
-              <input type="range" id="sliderVolume" min="0" max="100" value="80" oninput="alterarVolume(this.value)" class="w-12 md:w-16 h-1 bg-stone-400 rounded-lg appearance-none cursor-pointer accent-amber-800">
+              <input type="range" id="sliderVolume" min="0" max="100" value="80" oninput="alterarVolume(this.value)" class="w-10 md:w-16 h-1 bg-stone-400 rounded-lg appearance-none cursor-pointer accent-amber-800">
             </div>
           </div>
 
@@ -221,121 +227,183 @@
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-semibold tracking-wider uppercase py-1 text-center">
-        <a href="#home" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>🏠</span><span>Início</span></a>
-        <a href="#historia" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>💌</span><span>Mensagem</span></a>
-        <a href="#trajes" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>👔</span><span>Trajes</span></a>
-        <a href="#local" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>📍</span><span>Locais</span></a>
-        <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>🎁</span><span>Presentes</span></a>
-        <a href="#galeria" class="flex flex-col items-center hover:text-casar-primary font-bold leading-tight py-1"><span>📸</span><span>Fotos</span></a>
-        <a href="#recados" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>✍️</span><span>Recados</span></a>
-        <a href="#rsvp" class="flex flex-col items-center hover:text-casar-primary transition font-bold leading-tight py-1"><span>✅</span><span>RSVP</span></a>
+      <!-- MENU ATUALIZADO CONFORME SOLICITADO -->
+      <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] md:text-[11px] font-semibold tracking-wider uppercase py-1 text-center w-full px-2">
+        <a href="#home" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>🏠</span><span>Início</span></a>
+        <a href="#historia" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>💌</span><span>Mensagem</span></a>
+        <a href="#trajes" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>👔</span><span>Trajes</span></a>
+        <a href="#local" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>📍</span><span>Locais</span></a>
+        <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>🎁</span><span>Presentes</span></a>
+        <a href="#galeria" class="flex items-center gap-1 hover:text-casar-primary font-bold py-1"><span>📸</span><span>Envie sua Foto</span></a>
+        <a href="#recados" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>✍️</span><span>Deixe seu Recado</span></a>
+        <a href="#rsvp" class="flex items-center gap-1 hover:text-casar-primary transition font-bold py-1 text-amber-800 dark:text-amber-400"><span>✅</span><span>Confirme sua Reserva</span></a>
       </div>
 
     </div>
   </nav>
 
   <!-- CAPA PRINCIPAL -->
-  <header id="home" class="py-12 md:py-16 px-4 text-center">
-    <div class="max-w-2xl mx-auto monobloco-card p-6 md:p-10 rounded-3xl">
-      <p class="text-xs uppercase tracking-[0.3em] font-semibold mb-3 opacity-90">Com a graça de Deus e com o coração cheio de alegria</p>
-      <h1 class="font-serif-custom text-5xl md:text-7xl font-normal mb-2">Wagner & Larissa</h1>
-      <p class="font-serif-custom italic text-2xl font-medium mb-8 opacity-90">Sexta-feira, 11 de Dezembro de 2026</p>
+  <header id="home" class="py-8 md:py-16 px-4 text-center">
+    <div class="max-w-2xl mx-auto monobloco-card p-5 md:p-10 rounded-3xl">
+      <p class="text-[11px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] font-semibold mb-3 opacity-90 leading-relaxed">
+        Com a graça de Deus e com o coração cheio de alegria
+      </p>
+      <h1 class="font-serif-custom text-4xl sm:text-6xl md:text-7xl font-normal mb-2 leading-tight">
+        Wagner & Larissa
+      </h1>
+      <p class="font-serif-custom italic text-xl sm:text-2xl font-medium mb-6 md:mb-8 opacity-90">
+        Sexta-feira, 11 de Dezembro de 2026
+      </p>
 
-      <div class="my-6 max-w-lg mx-auto">
+      <div class="my-4 md:my-6 max-w-lg mx-auto">
         <div class="relative overflow-hidden w-full rounded-2xl shadow-md border-2 border-stone-200">
           <div id="carrosselTopo" class="flex transition-transform duration-700 ease-in-out"></div>
         </div>
       </div>
 
-      <div class="mt-8 monobloco-card p-6 rounded-2xl max-w-md mx-auto">
-        <p class="text-xs uppercase tracking-widest font-bold mb-4">Faltam apenas</p>
-        <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
-          <div><span id="days" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Dias</span></div>
-          <div><span id="hours" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Horas</span></div>
-          <div><span id="minutes" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Min</span></div>
-          <div><span id="seconds" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Seg</span></div>
+      <div class="mt-6 md:mt-8 monobloco-card p-4 md:p-6 rounded-2xl max-w-md mx-auto">
+        <p class="text-xs uppercase tracking-widest font-bold mb-3 md:mb-4">Faltam apenas</p>
+        <div id="countdown" class="grid grid-cols-4 gap-1 sm:gap-2 text-center">
+          <div><span id="days" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Dias</span></div>
+          <div><span id="hours" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Horas</span></div>
+          <div><span id="minutes" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Min</span></div>
+          <div><span id="seconds" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Seg</span></div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- MENSAGEM DO CASAL -->
-  <section id="historia" class="py-12 px-4 max-w-3xl mx-auto text-center">
+  <!-- MENSAGEM ENCORPADA -->
+  <section id="historia" class="py-10 md:py-14 px-4 max-w-3xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
-      <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
-      <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
+      <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-3 leading-snug">Bem-vindos ao nosso Sonho!</h2>
+      <div class="w-16 h-0.5 bg-casar-primary mx-auto mb-6"></div>
+      
       <div class="leading-relaxed font-medium text-sm md:text-base space-y-4 text-justify md:text-center">
-        <p>Criamos esse espaço com muito carinho para compartilhar com vocês todos os detalhes do nosso casamento. Estamos muito felizes e contamos com a presença de cada um de vocês no nosso grande dia — <strong>11 de Dezembro de 2026</strong>!</p>
-        <div class="monobloco-card p-6 rounded-2xl text-left space-y-3 my-6">
-          <p class="font-bold text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
-          <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "RSVP" e preencha os dados.</p>
-          <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade! Acesse nossa Lista de Casamento.</p>
+        <p>
+          É com o coração transbordando de felicidade que preparamos este cantinho especial para você. A nossa história até aqui foi construída com muito amor, cumplicidade e a bênção de Deus, e não conseguiríamos imaginar o nosso grande dia sem a presença das pessoas que mais amamos no mundo.
+        </p>
+        <p>
+          A contagem regressiva já começou! Aqui no nosso site você encontrará todos os detalhes para se preparar para o dia <strong>11 de Dezembro de 2026</strong>: orientações para a cerimônia, informações sobre a recepção, trajes, localização no mapa e nossa lista de presentes.
+        </p>
+        
+        <div class="monobloco-card p-5 md:p-6 rounded-2xl text-left space-y-3 my-6 border-l-4 border-l-amber-800">
+          <p class="font-bold text-xs uppercase tracking-wider text-amber-900 dark:text-amber-400">📌 Avisos Importantes para os Convidado:</p>
+          <p class="text-xs"><strong>1. Confirme sua Reserva:</strong> É indispensável para o nosso planejamento e organização do bufê. Por favor, acesse a aba "Confirme sua Reserva" no menu até 20 dias antes do evento.</p>
+          <p class="text-xs"><strong>2. Lista de Presentes:</strong> Caso deseje nos abençoar com um presente, disponibilizamos nossa lista virtual totalmente segura via Pix ou Cartão.</p>
         </div>
-        <div class="pt-4">
-          <p class="text-xs uppercase tracking-widest font-bold opacity-90">Com carinho,</p>
-          <p class="font-cursive text-4xl mt-1">Wagner & Larissa</p>
+
+        <div class="pt-4 text-center">
+          <p class="text-xs uppercase tracking-widest font-bold opacity-90">Contamos com a sua presença!</p>
+          <p class="font-cursive text-4xl sm:text-5xl mt-2">Wagner & Larissa</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GUIA DE TRAJES -->
-  <section id="trajes" class="py-12 px-4 max-w-4xl mx-auto text-center">
+  <!-- GUIA DE TRAJES ENCORPADO -->
+  <section id="trajes" class="py-10 md:py-14 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
-      <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
-      <p class="text-xs uppercase tracking-widest font-bold mb-4">Traje: Social</p>
+      <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-1">Guia de Trajes</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-4 text-amber-900 dark:text-amber-400">Traje Sugerido: Social Completo / Passeio Fino</p>
+      <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
+
+      <p class="text-xs md:text-sm font-medium leading-relaxed max-w-2xl mx-auto mb-8">
+        Queremos que todos se sintam elegantes e confortáveis para comemorar e dançar conosco a noite toda! Preparamos algumas dicas para ajudar na escolha do seu look:
+      </p>
+
       <div class="grid md:grid-cols-2 gap-6 text-left my-6">
-        <div class="p-6 monobloco-card rounded-2xl space-y-2">
+        <div class="p-6 monobloco-card rounded-2xl space-y-3">
           <div class="text-3xl">👗</div>
           <h3 class="font-serif-custom text-2xl font-bold">Para as Mulheres</h3>
-          <p class="text-xs font-medium">Sugerimos vestidos midi ou longos.</p>
+          <p class="text-xs font-medium leading-relaxed">
+            Sugerimos <strong>vestidos midi ou longos</strong>, macacões sociais finos ou conjuntos elegantes. Tecidos fluídos e leves combinam perfeitamente com a proposta da nossa celebração.
+          </p>
         </div>
-        <div class="p-6 monobloco-card rounded-2xl space-y-2">
+        <div class="p-6 monobloco-card rounded-2xl space-y-3">
           <div class="text-3xl">👔</div>
           <h3 class="font-serif-custom text-2xl font-bold">Para os Homens</h3>
-          <p class="text-xs font-medium">Terno e gravata ou calça social com camisa social.</p>
+          <p class="text-xs font-medium leading-relaxed">
+            A orientação é <strong>terno e gravata</strong>, ou se preferir um visual um pouco mais leve, <strong>calça social com camisa de manga longa</strong> e sapato social. 
+          </p>
         </div>
       </div>
-      <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs text-left space-y-2">
-        <div class="font-bold text-rose-950 uppercase text-[11px]">⚠️ Lembretes Importantes:</div>
-        <p class="text-stone-800">Por respeito à noiva, pedimos atenção especial para <strong>NÃO utilizar peças nas cores: Branco, Off-white, Azul Bebê</strong> ou tons muito próximos ao vestido da noiva.</p>
+
+      <div class="p-5 bg-rose-50/90 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-2xl text-xs text-left space-y-2">
+        <div class="font-bold text-rose-950 dark:text-rose-300 uppercase text-[11px] tracking-wider flex items-center gap-1">
+          <span>⚠️</span> Lembretes de Etiqueta com Carinho:
+        </div>
+        <ul class="list-disc list-inside space-y-1 text-stone-800 dark:text-stone-200 font-medium">
+          <li>Pedimos que evitem roupas excessivamente informais (jeans, camisetas básicas ou tênis esportivos).</li>
+          <li><strong>Cores Exclusivas da Noiva:</strong> Por gentileza, pedimos que não utilizem trajes nas cores <strong>Branco, Off-White, Bege Claro, Palha ou Azul Bebê</strong>.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- PROGRAMAÇÃO DO DIA -->
-  <section id="local" class="py-12 px-4 max-w-4xl mx-auto text-center">
+  <!-- PROGRAMAÇÃO DO DIA COM MINI MAPAS -->
+  <section id="local" class="py-10 md:py-14 px-4 max-w-5xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
-      <h2 class="font-serif-custom text-3xl font-bold mb-2">Programação do Dia</h2>
-      <div class="grid md:grid-cols-2 gap-6 text-left mt-6">
-        <div class="p-6 monobloco-card rounded-2xl flex flex-col justify-between">
+      <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-2">Programação do Dia & Locais</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-8 opacity-80">Confira o cronograma completo para não perder nenhum momento</p>
+
+      <div class="grid md:grid-cols-2 gap-8 text-left">
+        
+        <!-- CARD CERIMÔNIA -->
+        <div class="p-6 monobloco-card rounded-2xl flex flex-col justify-between space-y-4">
           <div>
-            <h3 class="font-serif-custom text-2xl font-bold mb-2">⛪ Cerimônia</h3>
-            <p class="text-xs font-semibold">Sexta-feira, 11/12/2026 às 16h00</p>
-            <p class="text-xs mb-1 opacity-90">Paróquia Nossa Senhora Rainha da Paz</p>
-            <p class="text-[11px] opacity-75">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
+            <div class="text-3xl mb-2">⛪</div>
+            <h3 class="font-serif-custom text-2xl font-bold mb-1">Cerimônia Religiosa</h3>
+            <p class="text-xs font-semibold text-amber-900 dark:text-amber-400 mb-2">Sexta-feira, 11/12/2026 às 16h00 (Pontualmente)</p>
+            <p class="text-xs mb-1 font-bold">Paróquia Nossa Senhora Rainha da Paz</p>
+            <p class="text-[11px] opacity-80 mb-3">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
+            <p class="text-[11px] leading-relaxed opacity-90 mb-4">
+              A cerimônia abençoará nossa união em um ambiente acolhedor e cheio de fé. Recomendamos chegar com 20 minutos de antecedência.
+            </p>
+
+            <!-- MINI MAPA CERIMÔNIA -->
+            <div class="w-full h-44 rounded-xl overflow-hidden border border-stone-300 shadow-sm mb-4">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.8651817117185!2d-49.1235!3d-25.5428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDMyJzM0LjEiUyA0OcKwMDcnMjQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
           </div>
-          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz" target="_blank" class="mt-4 inline-flex items-center justify-center w-full btn-casar py-2.5 rounded-xl text-xs font-bold uppercase">📍 Google Maps (Cerimônia)</a>
+          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz+São+José+dos+Pinhais" target="_blank" class="inline-flex items-center justify-center w-full btn-casar py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm">📍 Abrir Rota no Google Maps</a>
         </div>
-        <div class="p-6 monobloco-card rounded-2xl flex flex-col justify-between">
+
+        <!-- CARD RECEPÇÃO -->
+        <div class="p-6 monobloco-card rounded-2xl flex flex-col justify-between space-y-4">
           <div>
-            <h3 class="font-serif-custom text-2xl font-bold mb-2">🥂 Recepção</h3>
-            <p class="text-xs font-semibold">Sexta-feira, 11/12/2026 às 17h30</p>
-            <p class="text-xs mb-1 opacity-90">Chácara Luz da Mata</p>
-            <p class="text-[11px] opacity-75">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
+            <div class="text-3xl mb-2">🥂</div>
+            <h3 class="font-serif-custom text-2xl font-bold mb-1">Recepção & Festa</h3>
+            <p class="text-xs font-semibold text-amber-900 dark:text-amber-400 mb-2">Sexta-feira, 11/12/2026 às 17h30</p>
+            <p class="text-xs mb-1 font-bold">Chácara Luz da Mata</p>
+            <p class="text-[11px] opacity-80 mb-3">Planta Laranjeiras, Piraquara - PR (Estacionamento amplo e gratuito no local)</p>
+            <p class="text-[11px] leading-relaxed opacity-90 mb-4">
+              Logo após a celebração, iremos nos reunir para um jantar especial, bebidas e muita dança em um espaço arborizado encantador!
+            </p>
+
+            <!-- MINI MAPA RECEPÇÃO -->
+            <div class="w-full h-44 rounded-xl overflow-hidden border border-stone-300 shadow-sm mb-4">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.123456789!2d-49.0600!3d-25.4800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI4JzA4LjAiUyA0OcKwMDMnMzYuMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
           </div>
-          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata" target="_blank" class="mt-4 inline-flex items-center justify-center w-full btn-casar py-2.5 rounded-xl text-xs font-bold uppercase">📍 Google Maps (Recepção)</a>
+          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata+Piraquara" target="_blank" class="inline-flex items-center justify-center w-full btn-casar py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm">📍 Abrir Rota no Google Maps</a>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- MURAL DE FOTOS -->
-  <section id="galeria" class="py-12 px-4 max-w-4xl mx-auto text-center">
+  <section id="galeria" class="py-10 md:py-14 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
-      <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
-      <div class="mb-8 monobloco-card p-6 rounded-2xl max-w-lg mx-auto text-left space-y-3">
+      <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-1">Mural de Fotos</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80">Sua foto aparecerá no carrossel abaixo e no álbum dos noivos!</p>
+
+      <div class="mb-8 monobloco-card p-5 md:p-6 rounded-2xl max-w-lg mx-auto text-left space-y-3">
         <input type="text" id="nomeUsuarioInput" placeholder="Seu Nome (Opcional)" class="w-full p-2.5 border rounded-xl text-xs font-medium">
         <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border rounded-xl text-xs">
         
@@ -346,47 +414,52 @@
           <p id="txtStatusUpload" class="text-[11px] font-bold text-center opacity-80">Enviando fotos...</p>
         </div>
 
-        <button onclick="enviarFotosMultiplas()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase">📸 Enviar Fotos para o Álbum</button>
+        <button onclick="enviarFotosMultiplas()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm">📸 Enviar Fotos para os Noivos</button>
       </div>
 
-      <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border min-h-[250px] bg-stone-100 flex items-center justify-center">
+      <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border min-h-[250px] bg-stone-100 dark:bg-stone-800 flex items-center justify-center">
         <div id="carrosselFotos" class="flex transition-transform duration-700 w-full">
-          <p class="text-center text-xs opacity-70 p-8 w-full">Carregando álbum de fotos...</p>
+          <p class="text-center text-xs opacity-70 p-8 w-full">Carregando fotos do álbum...</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- RECADOS -->
-  <section id="recados" class="py-12 px-4 max-w-3xl mx-auto text-center">
+  <section id="recados" class="py-10 md:py-14 px-4 max-w-3xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
-      <h2 class="font-serif-custom text-3xl font-bold mb-1">Deixe seu Recado</h2>
-      <form onsubmit="enviarRecado(event)" class="monobloco-card p-6 rounded-2xl max-w-lg mx-auto space-y-3 text-left text-xs mb-8">
-        <input type="text" id="recadoNome" placeholder="Seu Nome *" required class="w-full p-2.5 border rounded-lg">
-        <textarea id="recadoTexto" rows="3" placeholder="Sua Mensagem *" required class="w-full p-2.5 border rounded-lg"></textarea>
-        <button type="submit" id="btnRecado" class="w-full btn-casar py-3 rounded-xl font-bold uppercase text-xs">Publicar Recado</button>
+      <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-1">Deixe seu Recado</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80">Escreva uma mensagem carinhosa para os noivos</p>
+
+      <form onsubmit="enviarRecado(event)" class="monobloco-card p-5 md:p-6 rounded-2xl max-w-lg mx-auto space-y-3 text-left text-xs mb-8">
+        <input type="text" id="recadoNome" placeholder="Seu Nome *" required class="w-full p-2.5 border rounded-lg font-medium">
+        <textarea id="recadoTexto" rows="3" placeholder="Sua Mensagem *" required class="w-full p-2.5 border rounded-lg font-medium"></textarea>
+        <button type="submit" id="btnRecado" class="w-full btn-casar py-3 rounded-xl font-bold uppercase text-xs tracking-wider shadow-sm">Publicar Recado</button>
       </form>
       <div id="containerRecados" class="min-h-[120px] monobloco-card p-6 rounded-2xl max-w-lg mx-auto flex items-center justify-center"></div>
     </div>
   </section>
 
-  <!-- RSVP -->
-  <section id="rsvp" class="py-12 px-4 max-w-xl mx-auto text-center">
+  <!-- CONFIRME SUA RESERVA (RSVP) -->
+  <section id="rsvp" class="py-10 md:py-14 px-4 max-w-xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
-      <h2 class="font-serif-custom text-3xl font-bold mb-2">Confirmação de Presença</h2>
-      <div id="stepBusca" class="monobloco-card p-6 rounded-2xl space-y-3">
-        <div class="flex gap-2">
-          <input type="text" id="inputBusca" placeholder="Nome, Sobrenome ou Telefone" class="w-full p-2.5 border rounded-lg text-sm">
-          <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-5 rounded-lg text-xs font-bold uppercase">Buscar</button>
+      <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-2">Confirme sua Reserva</h2>
+      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80">Localize seu convite para confirmar a presença de sua família</p>
+
+      <div id="stepBusca" class="monobloco-card p-5 md:p-6 rounded-2xl space-y-3">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <input type="text" id="inputBusca" placeholder="Nome, Sobrenome ou Telefone" class="w-full p-2.5 border rounded-lg text-sm font-medium">
+          <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-6 py-2.5 rounded-lg text-xs font-bold uppercase whitespace-nowrap shadow-sm">Buscar</button>
         </div>
-        <p class="text-[11px] opacity-75">Digite o seu nome, o do responsável ou o telefone cadastrado para trazer toda a sua família.</p>
+        <p class="text-[11px] opacity-75 text-left">Digite seu nome ou telefone para trazer os integrantes da sua família cadastrados.</p>
       </div>
-      <div id="stepSelecao" class="hidden monobloco-card p-6 rounded-2xl text-left space-y-4">
+
+      <div id="stepSelecao" class="hidden monobloco-card p-5 md:p-6 rounded-2xl text-left space-y-4">
         <h3 id="txtResponsavel" class="font-serif-custom text-2xl font-bold"></h3>
         <p id="txtTelefone" class="text-xs opacity-75"></p>
         <form id="formMembros" onsubmit="salvarConfirmacoes(event)" class="space-y-3">
           <div id="containerMembros" class="space-y-2"></div>
-          <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-3 rounded-xl font-bold uppercase text-xs">Confirmar Presença da Família</button>
+          <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-3.5 rounded-xl font-bold uppercase text-xs tracking-wider shadow-sm">Enviar Confirmações da Família</button>
         </form>
       </div>
     </div>
@@ -440,26 +513,26 @@
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden text-xs">
       
-      <div class="p-4 border-b border-casar bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
+      <div class="p-4 border-b border-stone-200 bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
         <div>
-          <h2 class="font-serif-custom text-2xl font-bold">Painel Administrativo dos Noivos</h2>
-          <p class="opacity-75">Gerencie convidados, fotos, cores e a playlist do YouTube.</p>
+          <h2 class="font-serif-custom text-2xl font-bold text-stone-900">Painel Administrativo dos Noivos</h2>
+          <p class="opacity-75 text-stone-700">Gerencie convidados, fotos e a playlist do YouTube.</p>
         </div>
 
+        <!-- MENU ADMIN COM CORES CORRIGIDAS NO HOVER -->
         <div class="flex flex-wrap items-center gap-1.5 bg-stone-200 p-1.5 rounded-xl font-bold border border-stone-300">
-          <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="tab-nav-admin px-3.5 py-2 rounded-lg transition bg-stone-900 text-white shadow-sm">👥 Convidados</button>
-          <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">📸 Fotos</button>
-          <button onclick="alternarAbaAdmin('recadosAdm')" id="tabBtnRecados" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">💌 Recados</button>
-          <button onclick="alternarAbaAdmin('design')" id="tabBtnDesign" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">🎨 Design & Cores</button>
-          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">🎵 Músicas</button>
-          <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">🔑 Admins</button>
+          <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="tab-admin-btn active-tab px-3 py-2 rounded-lg transition font-bold text-xs">👥 Convidados</button>
+          <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="tab-admin-btn px-3 py-2 rounded-lg transition font-bold text-xs">📸 Fotos</button>
+          <button onclick="alternarAbaAdmin('recadosAdm')" id="tabBtnRecados" class="tab-admin-btn px-3 py-2 rounded-lg transition font-bold text-xs">💌 Recados</button>
+          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="tab-admin-btn px-3 py-2 rounded-lg transition font-bold text-xs">🎵 Músicas</button>
+          <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="tab-admin-btn px-3 py-2 rounded-lg transition font-bold text-xs">🔑 Admins</button>
         </div>
 
-        <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">✕</button>
+        <button onclick="fecharModalAdmin()" class="bg-stone-300 hover:bg-stone-400 text-stone-900 w-8 h-8 rounded-full flex items-center justify-center font-bold">✕</button>
       </div>
 
       <!-- TRANSPARÊNCIA DE FUNDO -->
-      <div class="p-3 bg-amber-50/80 border-b border-casar flex items-center justify-between px-6 text-xs">
+      <div class="p-3 bg-stone-100 border-b border-stone-200 flex items-center justify-between px-6 text-xs">
         <span class="font-bold text-stone-800">✨ Transparência da Foto de Fundo:</span>
         <div class="flex items-center gap-3">
           <span class="text-[10px] text-stone-600 font-bold">Mais Foto</span>
@@ -471,23 +544,23 @@
 
       <!-- ABA 1: CONVIDADOS -->
       <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden bg-white">
-        <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center cursor-pointer select-none">
-          <div onclick="filtrarStatusRsvp('')" class="bg-white p-2 rounded-lg border shadow-sm hover:border-amber-500 transition"><p class="text-[10px] uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-lg font-bold">0</span></div>
-          <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Adultos/Crianças</p><span id="statTipos" class="text-xs font-bold">0 / 0</span></div>
-          <div onclick="filtrarStatusRsvp('confirmado')" class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm hover:border-emerald-600 transition"><p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span></div>
-          <div onclick="filtrarStatusRsvp('nao')" class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm hover:border-rose-600 transition"><p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-lg font-bold text-rose-900">0</span></div>
-          <div onclick="filtrarStatusRsvp('pendente')" class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm hover:border-amber-600 transition"><p class="text-[10px] text-amber-700 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-lg font-bold text-amber-900">0</span></div>
-          <div class="bg-stone-100 p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Faltam</p><span id="statFaltam" class="text-lg font-bold">0</span></div>
+        <div class="p-3 bg-stone-50 border-b border-stone-200 grid grid-cols-2 md:grid-cols-6 gap-2 text-center select-none">
+          <div onclick="filtrarStatusRsvp('')" class="bg-white p-2 rounded-lg border shadow-sm hover:border-amber-500 cursor-pointer transition"><p class="text-[10px] uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-lg font-bold text-stone-900">0</span></div>
+          <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Adultos/Crianças</p><span id="statTipos" class="text-xs font-bold text-stone-900">0 / 0</span></div>
+          <div onclick="filtrarStatusRsvp('confirmado')" class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm hover:border-emerald-600 cursor-pointer transition"><p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span></div>
+          <div onclick="filtrarStatusRsvp('nao')" class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm hover:border-rose-600 cursor-pointer transition"><p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-lg font-bold text-rose-900">0</span></div>
+          <div onclick="filtrarStatusRsvp('pendente')" class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm hover:border-amber-600 cursor-pointer transition"><p class="text-[10px] text-amber-700 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-lg font-bold text-amber-900">0</span></div>
+          <div class="bg-stone-100 p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Faltam</p><span id="statFaltam" class="text-lg font-bold text-stone-900">0</span></div>
         </div>
 
-        <div class="p-4 bg-stone-50/50 border-b border-casar space-y-3">
+        <div class="p-4 bg-stone-50/50 border-b border-stone-200 space-y-3">
           <div class="flex flex-col md:flex-row gap-2 items-center justify-between">
             <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome ou Telefone..." class="w-full md:w-1/2 p-2.5 border rounded-lg font-medium focus:outline-none">
-            <button onclick="carregarAdminLista()" class="bg-amber-100 text-amber-900 px-3 py-2 rounded-lg font-bold">🔄 Atualizar Lista</button>
+            <button onclick="carregarAdminLista()" class="bg-amber-100 text-amber-900 px-3 py-2 rounded-lg font-bold hover:bg-amber-200 transition">🔄 Atualizar Lista</button>
           </div>
 
-          <div class="pt-2 border-t border-casar">
-            <h3 class="font-bold mb-2 uppercase tracking-wider text-[10px]">➕ Adicionar Convidado</h3>
+          <div class="pt-2 border-t border-stone-200">
+            <h3 class="font-bold mb-2 uppercase tracking-wider text-[10px] text-stone-900">➕ Adicionar Convidado</h3>
             <div class="grid md:grid-cols-4 gap-2">
               <input type="text" id="addResp" placeholder="Responsável / Família *" class="p-2 border rounded font-medium">
               <input type="text" id="addNome" placeholder="Nome *" class="p-2 border rounded font-medium">
@@ -503,7 +576,7 @@
         <div id="containerTabelaAdmin" class="p-4 overflow-y-auto flex-1 bg-white">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-stone-200/80 border-b border-casar font-bold uppercase text-[10px] tracking-wider select-none">
+              <tr class="bg-stone-200 border-b font-bold uppercase text-[10px] tracking-wider text-stone-900 select-none">
                 <th onclick="ordenarPor('responsavel')" class="p-3 cursor-pointer">Responsável ⇳</th>
                 <th onclick="ordenarPor('nome')" class="p-3 cursor-pointer">Nome ⇳</th>
                 <th class="p-3">Tipo</th>
@@ -513,67 +586,28 @@
                 <th class="p-3 text-center">Ações</th>
               </tr>
             </thead>
-            <tbody id="tabelaAdminBody"></tbody>
+            <tbody id="tabelaAdminBody" class="text-stone-900"></tbody>
           </table>
         </div>
       </div>
 
       <!-- ABA 2: FOTOS DO CARROSSEL -->
-      <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white">
+      <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white text-stone-900">
         <h3 class="font-serif-custom text-xl font-bold">📸 Gerenciar Fotos do Carrossel</h3>
         <p class="opacity-75">Você pode desativar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
         <div id="containerFotosAdmin" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </div>
 
       <!-- ABA 3: RECADOS -->
-      <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white">
+      <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white text-stone-900">
         <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
         <p class="opacity-75">Você pode ocultar recados sem apagá-los da planilha para que não apareçam no site nem no rodapé ao vivo.</p>
         <div id="containerRecadosAdmin" class="space-y-3"></div>
       </div>
 
-      <!-- ABA 4: DESIGN E CORES -->
-      <div id="abaDesign" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
-        <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎨 Personalização Visual e Contorno dos Textos</h3>
-          
-          <div class="p-4 bg-white rounded-xl border space-y-3">
-            <div class="flex items-center justify-between">
-              <div>
-                <h4 class="font-bold text-sm">Contorno nas Letras (Text Outline)</h4>
-                <p class="opacity-75 text-[11px]">Adiciona um contorno fino de contraste ao redor das letras para facilitar a leitura em cima do fundo.</p>
-              </div>
-              <button onclick="alternarContornoTexto()" id="btnToggleContorno" class="px-4 py-2 rounded-lg font-bold uppercase btn-casar">Ativar Contorno</button>
-            </div>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-4 rounded-xl border space-y-2">
-              <label class="block font-bold">Cor das Letras (Tema Claro):</label>
-              <input type="color" id="pickerCorTextoClaro" value="#2c251e" onchange="salvarCorPersonalizada('texto_claro', this.value)" class="w-full h-10 rounded cursor-pointer border">
-            </div>
-
-            <div class="bg-white p-4 rounded-xl border space-y-2">
-              <label class="block font-bold">Cor das Letras (Tema Escuro):</label>
-              <input type="color" id="pickerCorTextoEscuro" value="#ffffff" onchange="salvarCorPersonalizada('texto_escuro', this.value)" class="w-full h-10 rounded cursor-pointer border">
-            </div>
-
-            <div class="bg-white p-4 rounded-xl border space-y-2">
-              <label class="block font-bold">Cor dos Títulos (W & L):</label>
-              <input type="color" id="pickerCorTitulos" value="#111827" onchange="salvarCorPersonalizada('titulos', this.value)" class="w-full h-10 rounded cursor-pointer border">
-            </div>
-          </div>
-
-          <div class="pt-4 border-t border-casar flex items-center justify-between">
-            <span class="opacity-75 text-xs">Deseja restaurar as cores padrões?</span>
-            <button onclick="restaurarCoresPadrao()" class="bg-stone-600 text-white px-4 py-2 rounded-lg font-bold text-xs uppercase">Restaurar Padrão</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- ABA 5: MÚSICAS YOUTUBE -->
-      <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
-        <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
+      <!-- ABA 4: MÚSICAS YOUTUBE -->
+      <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white text-stone-900">
+        <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 space-y-4">
           <h3 class="font-serif-custom text-xl font-bold">🎵 Adicionar Música do YouTube</h3>
           <p class="opacity-75 text-xs">Cole o link completo ou ID do vídeo do YouTube abaixo (Ex: https://www.youtube.com/watch?v=2Vv-BfVoq4g).</p>
           
@@ -589,9 +623,9 @@
         </div>
       </div>
 
-      <!-- ABA 6: ADMINS -->
-      <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
-        <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
+      <!-- ABA 5: ADMINS -->
+      <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white text-stone-900">
+        <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 space-y-4">
           <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores</h3>
           <div class="grid md:grid-cols-3 gap-2">
             <input type="text" id="novoAdminUser" placeholder="Usuário *" class="p-2.5 border rounded-lg font-medium">
@@ -609,7 +643,7 @@
         </div>
       </div>
 
-      <div class="p-3 bg-stone-50 border-t border-casar flex justify-between items-center">
+      <div class="p-3 bg-stone-100 border-t border-stone-200 flex justify-between items-center text-stone-900">
         <span class="font-medium text-[10px] opacity-75">Logado como: <strong id="lblAdminLogado">adm</strong></span>
         <button onclick="fecharModalAdmin()" class="bg-stone-700 text-white px-5 py-2 rounded-lg font-bold uppercase">Sair / Fechar</button>
       </div>
@@ -704,63 +738,6 @@
         icone.innerText = "☀️";
         localStorage.setItem("casamento_tema", "escuro");
       }
-      aplicarCoresCustomizadas();
-      atualizarCorContornoPeloTema();
-    }
-
-    function alternarContornoTexto() {
-      const ativo = localStorage.getItem("casamento_contorno_ativo") === "sim";
-      localStorage.setItem("casamento_contorno_ativo", ativo ? "nao" : "sim");
-      atualizarCorContornoPeloTema();
-    }
-
-    function atualizarCorContornoPeloTema() {
-      const ativo = localStorage.getItem("casamento_contorno_ativo") === "sim";
-      const isDark = document.getElementById("htmlRoot").classList.contains("dark-mode");
-      const btn = document.getElementById("btnToggleContorno");
-
-      if (btn) btn.innerText = ativo ? "Desativar Contorno" : "Ativar Contorno";
-
-      if (ativo) {
-        document.documentElement.style.setProperty('--text-stroke-width', '0.5px');
-        document.documentElement.style.setProperty('--text-stroke-color', isDark ? '#ffffff' : '#000000');
-      } else {
-        document.documentElement.style.setProperty('--text-stroke-width', '0px');
-        document.documentElement.style.setProperty('--text-stroke-color', 'transparent');
-      }
-    }
-
-    function salvarCorPersonalizada(chave, valor) {
-      localStorage.setItem("casamento_cor_" + chave, valor);
-      aplicarCoresCustomizadas();
-    }
-
-    function aplicarCoresCustomizadas() {
-      const isDark = document.getElementById("htmlRoot").classList.contains("dark-mode");
-      const corClaro = localStorage.getItem("casamento_cor_texto_claro") || "#2c251e";
-      const corEscuro = localStorage.getItem("casamento_cor_texto_escuro") || "#ffffff";
-      const corTitulos = localStorage.getItem("casamento_cor_titulos") || (isDark ? "#fbbf24" : "#111827");
-
-      if (isDark) {
-        document.documentElement.style.setProperty('--casar-texto', corEscuro);
-      } else {
-        document.documentElement.style.setProperty('--casar-texto', corClaro);
-      }
-      document.documentElement.style.setProperty('--casar-titulos', corTitulos);
-
-      if (document.getElementById("pickerCorTextoClaro")) document.getElementById("pickerCorTextoClaro").value = corClaro;
-      if (document.getElementById("pickerCorTextoEscuro")) document.getElementById("pickerCorTextoEscuro").value = corEscuro;
-      if (document.getElementById("pickerCorTitulos")) document.getElementById("pickerCorTitulos").value = corTitulos;
-    }
-
-    function restaurarCoresPadrao() {
-      localStorage.removeItem("casamento_cor_texto_claro");
-      localStorage.removeItem("casamento_cor_texto_escuro");
-      localStorage.removeItem("casamento_cor_titulos");
-      document.documentElement.style.removeProperty('--casar-texto');
-      document.documentElement.style.removeProperty('--casar-titulos');
-      aplicarCoresCustomizadas();
-      alert("Cores restauradas para o padrão.");
     }
 
     window.addEventListener("DOMContentLoaded", function() {
@@ -776,9 +753,6 @@
         document.getElementById("htmlRoot").classList.add("dark-mode");
         document.getElementById("iconeTema").innerText = "☀️";
       }
-
-      aplicarCoresCustomizadas();
-      atualizarCorContornoPeloTema();
 
       const userSalvo = localStorage.getItem("casamento_saved_user");
       const passSalva = localStorage.getItem("casamento_saved_pass");
@@ -1192,7 +1166,6 @@
       document.getElementById("abaConvidados").classList.toggle("hidden", aba !== 'convidados');
       document.getElementById("abaFotosAdm").classList.toggle("hidden", aba !== 'fotosAdm');
       document.getElementById("abaRecadosAdm").classList.toggle("hidden", aba !== 'recadosAdm');
-      document.getElementById("abaDesign").classList.toggle("hidden", aba !== 'design');
       document.getElementById("abaConfig").classList.toggle("hidden", aba !== 'config');
       document.getElementById("abaAdmins").classList.toggle("hidden", aba !== 'admins');
 
@@ -1200,20 +1173,17 @@
         'convidados': 'tabBtnConvidados',
         'fotosAdm': 'tabBtnFotos',
         'recadosAdm': 'tabBtnRecados',
-        'design': 'tabBtnDesign',
         'config': 'tabBtnConfig',
         'admins': 'tabBtnAdmins'
       };
 
-      document.querySelectorAll('.tab-nav-admin').forEach(btn => {
-        btn.classList.remove('bg-stone-900', 'text-white', 'shadow-sm');
-        btn.classList.add('opacity-75');
+      document.querySelectorAll('.tab-admin-btn').forEach(btn => {
+        btn.classList.remove('active-tab');
       });
 
       const btnAtivo = document.getElementById(mapaBotoes[aba]);
       if (btnAtivo) {
-        btnAtivo.classList.add('bg-stone-900', 'text-white', 'shadow-sm');
-        btnAtivo.classList.remove('opacity-75');
+        btnAtivo.classList.add('active-tab');
       }
 
       if (aba === 'admins') carregarListaAdmins();
