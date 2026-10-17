@@ -12,10 +12,10 @@
     :root {
       --casar-texto: #2c251e;
       --casar-titulos: #111827;
-      --casar-borda: rgba(200, 180, 160, 0.6);
-      --bg-transparency: 0.65;
+      --casar-borda: rgba(200, 180, 160, 0.8);
+      --bg-transparency: 0.50;
       --bg-site: #f7f2ed;
-      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.98); /* MONOBLOCO QUASE SÓLIDO PARA O TEMA CLARO */
       --nav-bg: rgba(255, 255, 255, 0.98);
       --player-bg: #eae3db;
       --input-bg: #ffffff;
@@ -29,13 +29,22 @@
       --casar-borda: rgba(75, 85, 99, 0.8);
       --bg-transparency: 0.85;
       --bg-site: #111827;
-      --card-bg: rgba(31, 41, 55, 0.95);
+      --card-bg: rgba(31, 41, 55, 0.96);
       --nav-bg: rgba(17, 24, 39, 0.98);
       --player-bg: #374151;
       --input-bg: #1f2937;
     }
 
-    /* GARANTE APLICAÇÃO DE CORES GLOBAIS EM TODOS OS ELEMENTOS DO SITE */
+    /* ESTILIZAÇÃO DOS BLOCOS / MONOBLOCOS COM SOMBRA E BORDA DESTACADA */
+    .monobloco-card {
+      background-color: var(--card-bg) !important;
+      border: 1px solid var(--casar-borda) !important;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* APLICAÇÃO GLOBAL DA COR DAS FONTES EM TODOS OS ELEMENTOS DE TEXTO */
     body, p, span, div, li, label, strong, em, b, i, a {
       color: var(--casar-texto) !important;
       -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
@@ -102,10 +111,6 @@
       background-color: var(--nav-bg) !important;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-    }
-
-    .bg-white, .bg-white\/95, .bg-stone-50 { 
-      background-color: var(--card-bg) !important; 
     }
 
     .player-container {
@@ -214,20 +219,20 @@
     </div>
   </nav>
 
-  <!-- CAPA PRINCIPAL -->
-  <header id="home" class="py-16 md:py-20 px-4 text-center border-b border-casar">
-    <div class="max-w-2xl mx-auto">
-      <p class="text-xs uppercase tracking-[0.3em] font-semibold mb-3 opacity-80">Com a graça de Deus e com o coração cheio de alegria</p>
+  <!-- CAPA PRINCIPAL (BLOCO MONOBLOCO) -->
+  <header id="home" class="py-12 md:py-16 px-4 text-center">
+    <div class="max-w-2xl mx-auto monobloco-card p-6 md:p-10 rounded-3xl">
+      <p class="text-xs uppercase tracking-[0.3em] font-semibold mb-3 opacity-90">Com a graça de Deus e com o coração cheio de alegria</p>
       <h1 class="font-serif-custom text-5xl md:text-7xl font-normal mb-2">Wagner & Larissa</h1>
       <p class="font-serif-custom italic text-2xl font-medium mb-8 opacity-90">Sexta-feira, 11 de Dezembro de 2026</p>
 
       <div class="my-6 max-w-lg mx-auto">
-        <div class="relative overflow-hidden w-full rounded-2xl shadow-lg border-4 border-white/50">
+        <div class="relative overflow-hidden w-full rounded-2xl shadow-md border-2 border-stone-200">
           <div id="carrosselTopo" class="flex transition-transform duration-700 ease-in-out"></div>
         </div>
       </div>
 
-      <div class="mt-8 bg-white p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
+      <div class="mt-8 monobloco-card p-6 rounded-2xl max-w-md mx-auto">
         <p class="text-xs uppercase tracking-widest font-bold mb-4">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
           <div><span id="days" class="block font-serif-custom text-3xl font-bold">00</span><span class="text-[10px] uppercase font-semibold opacity-75">Dias</span></div>
@@ -239,56 +244,58 @@
     </div>
   </header>
 
-  <!-- MENSAGEM -->
-  <section id="historia" class="py-16 px-4 max-w-3xl mx-auto text-center">
-    <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
-    <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
-    <div class="leading-relaxed font-medium text-sm md:text-base space-y-4 text-justify md:text-center opacity-90">
-      <p>Criamos esse espaço com muito carinho para compartilhar com vocês todos os detalhes do nosso casamento. Estamos muito felizes e contamos com a presença de cada um de vocês no nosso grande dia — <strong>11 de Dezembro de 2026</strong>!</p>
-      <div class="bg-white p-6 rounded-2xl border border-casar text-left space-y-3 my-6 shadow-sm">
-        <p class="font-bold text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
-        <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "Confirme Presença" e preencha os dados.</p>
-        <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade!</p>
-      </div>
-      <div class="pt-4">
-        <p class="text-xs uppercase tracking-widest font-bold opacity-80">Com carinho,</p>
-        <p class="font-cursive text-4xl mt-1">Wagner & Larissa</p>
+  <!-- MENSAGEM (BLOCO MONOBLOCO) -->
+  <section id="historia" class="py-12 px-4 max-w-3xl mx-auto text-center">
+    <div class="monobloco-card p-6 md:p-10 rounded-3xl">
+      <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
+      <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
+      <div class="leading-relaxed font-medium text-sm md:text-base space-y-4 text-justify md:text-center">
+        <p>Criamos esse espaço com muito carinho para compartilhar com vocês todos os detalhes do nosso casamento. Estamos muito felizes e contamos com a presença de cada um de vocês no nosso grande dia — <strong>11 de Dezembro de 2026</strong>!</p>
+        <div class="monobloco-card p-6 rounded-2xl text-left space-y-3 my-6">
+          <p class="font-bold text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
+          <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "Confirme Presença" e preencha os dados.</p>
+          <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade!</p>
+        </div>
+        <div class="pt-4">
+          <p class="text-xs uppercase tracking-widest font-bold opacity-90">Com carinho,</p>
+          <p class="font-cursive text-4xl mt-1">Wagner & Larissa</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- TRAJES -->
-  <section id="trajes" class="py-16 bg-white border-t border-casar px-4">
-    <div class="max-w-4xl mx-auto text-center">
+  <!-- TRAJES (BLOCO MONOBLOCO) -->
+  <section id="trajes" class="py-12 px-4 max-w-4xl mx-auto text-center">
+    <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
       <p class="text-xs uppercase tracking-widest font-bold mb-4">Traje: Social</p>
-      <div class="grid md:grid-cols-2 gap-8 text-left my-8">
-        <div class="p-6 bg-stone-50 rounded-2xl border border-casar shadow-sm space-y-2">
+      <div class="grid md:grid-cols-2 gap-6 text-left my-6">
+        <div class="p-6 monobloco-card rounded-2xl space-y-2">
           <div class="text-3xl">👗</div>
           <h3 class="font-serif-custom text-2xl font-bold">Para as Mulheres</h3>
-          <p class="text-xs font-medium opacity-90">Sugerimos vestidos midi ou longos.</p>
+          <p class="text-xs font-medium">Sugerimos vestidos midi ou longos.</p>
         </div>
-        <div class="p-6 bg-stone-50 rounded-2xl border border-casar shadow-sm space-y-2">
+        <div class="p-6 monobloco-card rounded-2xl space-y-2">
           <div class="text-3xl">👔</div>
           <h3 class="font-serif-custom text-2xl font-bold">Para os Homens</h3>
-          <p class="text-xs font-medium opacity-90">Terno e gravata ou calça social com camisa.</p>
+          <p class="text-xs font-medium">Terno e gravata ou calça social com camisa.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LOCAL -->
-  <section id="local" class="py-16 bg-stone-50 border-y border-casar px-4">
-    <div class="max-w-4xl mx-auto text-center">
+  <!-- LOCAL (BLOCO MONOBLOCO) -->
+  <section id="local" class="py-12 px-4 max-w-4xl mx-auto text-center">
+    <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-2">Programação do Dia</h2>
-      <div class="grid md:grid-cols-2 gap-8 text-left mt-8">
-        <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm">
+      <div class="grid md:grid-cols-2 gap-6 text-left mt-6">
+        <div class="p-6 monobloco-card rounded-2xl">
           <h3 class="font-serif-custom text-2xl font-bold mb-2">⛪ Cerimônia</h3>
           <p class="text-xs font-semibold">11/12/2026 às 16h00</p>
           <p class="text-xs mb-4 opacity-80">Paróquia Nossa Senhora Rainha da Paz</p>
           <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz" target="_blank" class="inline-flex items-center justify-center w-full btn-casar py-2.5 rounded-xl text-xs font-bold uppercase">📍 Abrir no Google Maps</a>
         </div>
-        <div class="p-6 bg-white rounded-2xl border border-casar shadow-sm">
+        <div class="p-6 monobloco-card rounded-2xl">
           <h3 class="font-serif-custom text-2xl font-bold mb-2">🥂 Recepção</h3>
           <p class="text-xs font-semibold">11/12/2026 às 17h30</p>
           <p class="text-xs mb-4 opacity-80">Chácara Luz da Mata</p>
@@ -298,13 +305,13 @@
     </div>
   </section>
 
-  <!-- GALERIA DE FOTOS -->
-  <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
-    <div class="max-w-4xl mx-auto text-center">
+  <!-- GALERIA DE FOTOS (BLOCO MONOBLOCO) -->
+  <section id="galeria" class="py-12 px-4 max-w-4xl mx-auto text-center">
+    <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
-      <div class="mb-8 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto text-left space-y-3">
-        <input type="text" id="nomeUsuarioInput" placeholder="Seu Nome (Opcional)" class="w-full p-2.5 border border-casar rounded-xl text-xs font-medium">
-        <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border border-casar rounded-xl text-xs">
+      <div class="mb-8 monobloco-card p-6 rounded-2xl max-w-lg mx-auto text-left space-y-3">
+        <input type="text" id="nomeUsuarioInput" placeholder="Seu Nome (Opcional)" class="w-full p-2.5 border rounded-xl text-xs font-medium">
+        <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border rounded-xl text-xs">
         
         <div id="progressoUploadContainer" class="hidden space-y-2 pt-2">
           <div class="w-full bg-stone-200 rounded-full h-2.5 overflow-hidden">
@@ -316,7 +323,7 @@
         <button onclick="enviarFotosMultiplas()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase">📸 Enviar Fotos</button>
       </div>
 
-      <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border border-casar min-h-[250px] bg-stone-100 flex items-center justify-center">
+      <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border min-h-[250px] bg-stone-100 flex items-center justify-center">
         <div id="carrosselFotos" class="flex transition-transform duration-700 w-full">
           <p class="text-center text-xs opacity-70 p-8 w-full">Carregando fotos do álbum...</p>
         </div>
@@ -324,30 +331,30 @@
     </div>
   </section>
 
-  <!-- RECADOS -->
-  <section id="recados" class="py-16 bg-stone-50 border-t border-casar px-4">
-    <div class="max-w-3xl mx-auto text-center">
+  <!-- RECADOS (BLOCO MONOBLOCO) -->
+  <section id="recados" class="py-12 px-4 max-w-3xl mx-auto text-center">
+    <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Deixe seu Recado</h2>
-      <form onsubmit="enviarRecado(event)" class="bg-white p-6 rounded-2xl border border-casar max-w-lg mx-auto space-y-3 text-left text-xs mb-8">
-        <input type="text" id="recadoNome" placeholder="Seu Nome *" required class="w-full p-2.5 border border-casar rounded-lg">
-        <textarea id="recadoTexto" rows="3" placeholder="Sua Mensagem *" required class="w-full p-2.5 border border-casar rounded-lg"></textarea>
+      <form onsubmit="enviarRecado(event)" class="monobloco-card p-6 rounded-2xl max-w-lg mx-auto space-y-3 text-left text-xs mb-8">
+        <input type="text" id="recadoNome" placeholder="Seu Nome *" required class="w-full p-2.5 border rounded-lg">
+        <textarea id="recadoTexto" rows="3" placeholder="Sua Mensagem *" required class="w-full p-2.5 border rounded-lg"></textarea>
         <button type="submit" id="btnRecado" class="w-full btn-casar py-3 rounded-xl font-bold uppercase text-xs">Publicar Recado</button>
       </form>
-      <div id="containerRecados" class="min-h-[120px] bg-white p-6 rounded-2xl border border-casar max-w-lg mx-auto flex items-center justify-center"></div>
+      <div id="containerRecados" class="min-h-[120px] monobloco-card p-6 rounded-2xl max-w-lg mx-auto flex items-center justify-center"></div>
     </div>
   </section>
 
-  <!-- RSVP -->
-  <section id="rsvp" class="py-16 bg-white border-t border-casar px-4">
-    <div class="max-w-xl mx-auto text-center">
+  <!-- RSVP (BLOCO MONOBLOCO) -->
+  <section id="rsvp" class="py-12 px-4 max-w-xl mx-auto text-center">
+    <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-2">Confirme sua Presença</h2>
-      <div id="stepBusca" class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-3">
+      <div id="stepBusca" class="monobloco-card p-6 rounded-2xl space-y-3">
         <div class="flex gap-2">
-          <input type="text" id="inputBusca" placeholder="Nome, Sobrenome ou Telefone" class="w-full p-2.5 border border-casar rounded-lg text-sm">
+          <input type="text" id="inputBusca" placeholder="Nome, Sobrenome ou Telefone" class="w-full p-2.5 border rounded-lg text-sm">
           <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-5 rounded-lg text-xs font-bold uppercase">Buscar</button>
         </div>
       </div>
-      <div id="stepSelecao" class="hidden bg-stone-50 p-6 rounded-2xl border border-casar text-left space-y-4">
+      <div id="stepSelecao" class="hidden monobloco-card p-6 rounded-2xl text-left space-y-4">
         <h3 id="txtResponsavel" class="font-serif-custom text-2xl font-bold"></h3>
         <form id="formMembros" onsubmit="salvarConfirmacoes(event)" class="space-y-3">
           <div id="containerMembros" class="space-y-2"></div>
