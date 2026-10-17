@@ -24,8 +24,8 @@
     }
 
     .dark-mode {
-      --casar-texto: #f3f4f6;
-      --casar-titulos: #fbbf24;
+      --casar-texto: #ffffff !important;
+      --casar-titulos: #fbbf24 !important;
       --casar-borda: rgba(75, 85, 99, 0.8);
       --bg-transparency: 0.85;
       --bg-site: #111827;
@@ -35,8 +35,15 @@
       --input-bg: #1f2937;
     }
 
-    /* APLICAÇÃO DO CONTORNO DE TEXTO (TEXT STROKE) */
-    p, span, h1, h2, h3, a, label, div {
+    /* FORÇA A APLICAÇÃO DA COR DAS FONTES BASEADO NAS VARIÁVEIS DO TEMA */
+    body, p, span, div, li, label, input, textarea, select {
+      color: var(--casar-texto);
+      -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
+    }
+
+    h1, h2, h3, h4, .font-serif-custom { 
+      font-family: 'Cormorant Garamond', serif; 
+      color: var(--casar-titulos) !important;
       -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
     }
 
@@ -51,19 +58,13 @@
       min-height: 100vh;
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      color: var(--casar-texto);
       background: var(--bg-site) !important;
       padding-bottom: 50px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
-
-    .font-serif-custom { 
-      font-family: 'Cormorant Garamond', serif; 
-      color: var(--casar-titulos) !important;
-    }
     
     .font-cursive { font-family: 'Great Vibes', cursive; }
-    .btn-casar { background-color: #a38573; color: #ffffff; }
+    .btn-casar { background-color: #a38573; color: #ffffff !important; }
     .btn-casar:hover { background-color: #8c6e5c; }
     .text-casar-primary { color: #8c6e5c; }
     .border-casar { border-color: var(--casar-borda); }
@@ -105,7 +106,6 @@
 
     .bg-white, .bg-white\/95, .bg-stone-50 { 
       background-color: var(--card-bg) !important; 
-      color: var(--casar-texto) !important;
     }
 
     .player-container {
@@ -115,7 +115,6 @@
     input, select, textarea {
       max-width: 100%;
       box-sizing: border-box;
-      color: var(--casar-texto) !important;
       background-color: var(--input-bg) !important;
       border-color: var(--casar-borda) !important;
     }
@@ -151,11 +150,11 @@
     .cnn-ticker-item {
       display: inline-flex; align-items: center;
       padding: 0 25px; font-size: 11px; font-weight: 500;
-      color: #ffffff;
+      color: #ffffff !important;
     }
 
     .cnn-ticker-item span.autor {
-      color: #d4b5a0; font-weight: 700; margin-right: 6px;
+      color: #d4b5a0 !important; font-weight: 700; margin-right: 6px;
     }
 
     @keyframes tickerAnimation {
@@ -179,9 +178,9 @@
         
         <div class="flex items-center gap-2">
           <div class="player-container flex items-center gap-1.5 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
-            <button onclick="musicaAnteriorPlaylist()" title="Anterior" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 text-stone-800 dark:text-stone-100 flex items-center justify-center font-bold">⏮</button>
+            <button onclick="musicaAnteriorPlaylist()" title="Anterior" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 font-bold">⏮</button>
             <button id="btnPlayPause" onclick="toggleAudioMusica()" title="Play/Pause" class="w-7 h-7 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold shadow">▶</button>
-            <button onclick="proximaMusicaPlaylist()" title="Próxima" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 text-stone-800 dark:text-stone-100 flex items-center justify-center font-bold">⏭</button>
+            <button onclick="proximaMusicaPlaylist()" title="Próxima" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 font-bold">⏭</button>
 
             <div class="flex flex-col w-28 md:w-36 ml-1">
               <div class="flex justify-between text-[9px] font-bold truncate">
@@ -298,7 +297,7 @@
     </div>
   </section>
 
-  <!-- GALERIA E ENVIO DE FOTOS MULTIPLAS COM TRATAMENTO DE ERRO -->
+  <!-- GALERIA DE FOTOS -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
@@ -306,7 +305,6 @@
         <input type="text" id="nomeUsuarioInput" placeholder="Seu Nome (Opcional)" class="w-full p-2.5 border border-casar rounded-xl text-xs font-medium">
         <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border border-casar rounded-xl text-xs">
         
-        <!-- Status e Progresso de Envio -->
         <div id="progressoUploadContainer" class="hidden space-y-2 pt-2">
           <div class="w-full bg-stone-200 rounded-full h-2.5 overflow-hidden">
             <div id="barraUpload" class="bg-amber-800 h-2.5 rounded-full w-0 transition-all duration-300"></div>
@@ -510,7 +508,7 @@
 
             <div class="bg-white p-4 rounded-xl border space-y-2">
               <label class="block font-bold">Cor das Letras (Tema Escuro):</label>
-              <input type="color" id="pickerCorTextoEscuro" value="#f3f4f6" onchange="salvarCorPersonalizada('texto_escuro', this.value)" class="w-full h-10 rounded cursor-pointer border">
+              <input type="color" id="pickerCorTextoEscuro" value="#ffffff" onchange="salvarCorPersonalizada('texto_escuro', this.value)" class="w-full h-10 rounded cursor-pointer border">
             </div>
 
             <div class="bg-white p-4 rounded-xl border space-y-2">
@@ -536,7 +534,6 @@
             <button onclick="pesquisarMusicaYoutube()" id="btnBuscarYT" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar no YouTube</button>
           </div>
 
-          <!-- LISTA DE SELEÇÃO COM RESULTADOS DO YOUTUBE -->
           <div id="containerResultadosYoutube" class="hidden space-y-2 p-3 bg-white border rounded-xl"></div>
 
           <div class="mt-6 border-t pt-4">
@@ -596,6 +593,10 @@
     let indiceMusicaAtual = 0;
     let dragSrcEl = null;
 
+    let indexCarrosselTopo = 0;
+    let indexCarrosselFotos = 0;
+    let timerCarrossel = null;
+
     function alternarVerSenha(idInput) {
       const el = document.getElementById(idInput);
       if (el) el.type = el.type === "password" ? "text" : "password";
@@ -613,17 +614,13 @@
         icone.innerText = "☀️";
         localStorage.setItem("casamento_tema", "escuro");
       }
+      aplicarCoresCustomizadas();
       atualizarCorContornoPeloTema();
     }
 
-    // CONTORNO DE TEXTO (TEXT STROKE)
     function alternarContornoTexto() {
       const ativo = localStorage.getItem("casamento_contorno_ativo") === "sim";
-      if (ativo) {
-        localStorage.setItem("casamento_contorno_ativo", "nao");
-      } else {
-        localStorage.setItem("casamento_contorno_ativo", "sim");
-      }
+      localStorage.setItem("casamento_contorno_ativo", ativo ? "nao" : "sim");
       atualizarCorContornoPeloTema();
     }
 
@@ -632,9 +629,7 @@
       const isDark = document.getElementById("htmlRoot").classList.contains("dark-mode");
       const btn = document.getElementById("btnToggleContorno");
 
-      if (btn) {
-        btn.innerText = ativo ? "Desativar Contorno" : "Ativar Contorno";
-      }
+      if (btn) btn.innerText = ativo ? "Desativar Contorno" : "Ativar Contorno";
 
       if (ativo) {
         document.documentElement.style.setProperty('--text-stroke-width', '0.5px');
@@ -651,20 +646,21 @@
     }
 
     function aplicarCoresCustomizadas() {
-      const corClaro = localStorage.getItem("casamento_cor_texto_claro");
-      const corEscuro = localStorage.getItem("casamento_cor_texto_escuro");
-      const corTitulos = localStorage.getItem("casamento_cor_titulos");
-
       const isDark = document.getElementById("htmlRoot").classList.contains("dark-mode");
+      const corClaro = localStorage.getItem("casamento_cor_texto_claro") || "#2c251e";
+      const corEscuro = localStorage.getItem("casamento_cor_texto_escuro") || "#ffffff";
+      const corTitulos = localStorage.getItem("casamento_cor_titulos") || (isDark ? "#fbbf24" : "#111827");
 
-      if (isDark && corEscuro) document.documentElement.style.setProperty('--casar-texto', corEscuro);
-      else if (!isDark && corClaro) document.documentElement.style.setProperty('--casar-texto', corClaro);
+      if (isDark) {
+        document.documentElement.style.setProperty('--casar-texto', corEscuro);
+      } else {
+        document.documentElement.style.setProperty('--casar-texto', corClaro);
+      }
+      document.documentElement.style.setProperty('--casar-titulos', corTitulos);
 
-      if (corTitulos) document.documentElement.style.setProperty('--casar-titulos', corTitulos);
-
-      if (document.getElementById("pickerCorTextoClaro") && corClaro) document.getElementById("pickerCorTextoClaro").value = corClaro;
-      if (document.getElementById("pickerCorTextoEscuro") && corEscuro) document.getElementById("pickerCorTextoEscuro").value = corEscuro;
-      if (document.getElementById("pickerCorTitulos") && corTitulos) document.getElementById("pickerCorTitulos").value = corTitulos;
+      if (document.getElementById("pickerCorTextoClaro")) document.getElementById("pickerCorTextoClaro").value = corClaro;
+      if (document.getElementById("pickerCorTextoEscuro")) document.getElementById("pickerCorTextoEscuro").value = corEscuro;
+      if (document.getElementById("pickerCorTitulos")) document.getElementById("pickerCorTitulos").value = corTitulos;
     }
 
     function restaurarCoresPadrao() {
@@ -678,14 +674,13 @@
     }
 
     window.addEventListener("DOMContentLoaded", function() {
-      aplicarCoresCustomizadas();
-
       const temaSalvo = localStorage.getItem("casamento_tema");
       if (temaSalvo === "escuro") {
         document.getElementById("htmlRoot").classList.add("dark-mode");
         document.getElementById("iconeTema").innerText = "☀️";
       }
 
+      aplicarCoresCustomizadas();
       atualizarCorContornoPeloTema();
 
       const userSalvo = localStorage.getItem("casamento_saved_user");
@@ -700,7 +695,27 @@
       carregarFotosDrive();
       carregarPlaylistPlanilha();
       iniciarContadorRegressivo();
+      iniciarAnimacaoCarrossel();
     });
+
+    // LÓGICA DE ROTACIONAR OS CARROSSEIS AUTOMATICAMENTE
+    function iniciarAnimacaoCarrossel() {
+      if (timerCarrossel) clearInterval(timerCarrossel);
+      timerCarrossel = setInterval(() => {
+        const topo = document.getElementById("carrosselTopo");
+        const fotos = document.getElementById("carrosselFotos");
+
+        if (topo && topo.children.length > 1) {
+          indexCarrosselTopo = (indexCarrosselTopo + 1) % topo.children.length;
+          topo.style.transform = `translateX(-${indexCarrosselTopo * 100}%)`;
+        }
+
+        if (fotos && fotos.children.length > 1) {
+          indexCarrosselFotos = (indexCarrosselFotos + 1) % fotos.children.length;
+          fotos.style.transform = `translateX(-${indexCarrosselFotos * 100}%)`;
+        }
+      }, 4000);
+    }
 
     function iniciarContadorRegressivo() {
       const targetDate = new Date("2026-12-11T16:00:00").getTime();
@@ -718,7 +733,6 @@
       update();
     }
 
-    // PESQUISA YOUTUBE COM LISTA DE SELEÇÃO E PREVIEW PLAYER
     function pesquisarMusicaYoutube() {
       const termo = document.getElementById("inputPesquisarMusica").value.trim();
       const btn = document.getElementById("btnBuscarYT");
@@ -859,7 +873,6 @@
       }
     }
 
-    // DRAG AND DROP
     function handleDragStart(e) {
       dragSrcEl = this;
       e.dataTransfer.effectAllowed = 'move';
@@ -917,7 +930,6 @@
       });
     }
 
-    // UPLOAD MULTIPLO DE FOTOS COM TRATAMENTO DE ERRO E STATUS
     async function enviarFotosMultiplas() {
       const input = document.getElementById("fotoInput");
       const nomeUser = document.getElementById("nomeUsuarioInput").value.trim();
@@ -941,7 +953,7 @@
         const file = files[i];
         const pct = Math.round(((i) / files.length) * 100);
         barra.style.width = pct + "%";
-        txtStatus.innerText = `Enviando foto ${i + 1} de ${files.length} (${file.name})...`;
+        txtStatus.innerText = `Enviando foto ${i + 1} de ${files.length}...`;
 
         try {
           const base64 = await lerArquivoBase64(file);
@@ -973,7 +985,7 @@
         alert(`Obrigado! Todas as ${enviadasSucesso} fotos foram enviadas com sucesso.`);
       } else {
         txtStatus.innerText = `⚠️ ${enviadasSucesso} enviadas, ${erros} falharam.`;
-        alert(`Concluído: ${enviadasSucesso} fotos subiram com sucesso e ${erros} apresentaram erro.`);
+        alert(`Concluído: ${enviadasSucesso} fotos subiram e ${erros} falharam.`);
       }
 
       input.value = "";
@@ -1080,6 +1092,9 @@
           <div class="min-w-full"><img src="${url}" class="w-full h-80 md:h-96 object-cover"></div>
         `).join('');
       }
+
+      indexCarrosselTopo = 0;
+      indexCarrosselFotos = 0;
     }
 
     function carregarFotosAdmin() {
