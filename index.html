@@ -43,7 +43,7 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* CORREÇÃO DO DARK MODE NO PAINEL ADMIN E MODAL */
+    /* FIX MODO ESCURO DENTRO DOS MODAIS DE LOGIN E ADMIN */
     #modalAdmin, #modalAdmin *, #modalLogin, #modalLogin * {
       color: #1c1917 !important;
       -webkit-text-stroke: 0px transparent !important;
@@ -186,7 +186,7 @@
 
   <div id="parallax-bg"><div id="parallax-image"></div></div>
   <div id="youtubePlayerContainer" style="display:none;"></div>
-  <div id="previewPlayerContainer" style="display:none;"></div>
+  <audio id="audioPreviewDeezer" style="display:none;"></audio>
 
   <!-- NAVEGAÇÃO -->
   <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
@@ -431,13 +431,14 @@
           <p class="opacity-75">Gerencie convidados, fotos, cores e a playlist das músicas.</p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2 bg-stone-200/80 p-1 rounded-xl font-bold">
-          <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="px-3 py-2 rounded-lg bg-white shadow-sm">👥 Convidados</button>
-          <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="px-3 py-2 rounded-lg opacity-75">📸 Fotos</button>
-          <button onclick="alternarAbaAdmin('recadosAdm')" id="tabBtnRecados" class="px-3 py-2 rounded-lg opacity-75">💌 Recados</button>
-          <button onclick="alternarAbaAdmin('design')" id="tabBtnDesign" class="px-3 py-2 rounded-lg opacity-75">🎨 Design & Cores</button>
-          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="px-3 py-2 rounded-lg opacity-75">🎵 Músicas</button>
-          <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="px-3 py-2 rounded-lg opacity-75">🔑 Admins</button>
+        <!-- NAVEGAÇÃO REESTILIZADA DO PAINEL ADMIN -->
+        <div class="flex flex-wrap items-center gap-1.5 bg-stone-200 p-1.5 rounded-xl font-bold border border-stone-300">
+          <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="tab-nav-admin px-3.5 py-2 rounded-lg transition bg-stone-900 text-white shadow-sm">👥 Convidados</button>
+          <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">📸 Fotos</button>
+          <button onclick="alternarAbaAdmin('recadosAdm')" id="tabBtnRecados" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">💌 Recados</button>
+          <button onclick="alternarAbaAdmin('design')" id="tabBtnDesign" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">🎨 Design & Cores</button>
+          <button onclick="alternarAbaAdmin('config')" id="tabBtnConfig" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">🎵 Músicas</button>
+          <button onclick="alternarAbaAdmin('admins')" id="tabBtnAdmins" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">🔑 Admins</button>
         </div>
 
         <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">✕</button>
@@ -499,10 +500,10 @@
         <div id="containerFotosAdmin" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </div>
 
-      <!-- ABA 3: RECADOS -->
+      <!-- ABA 3: RECADOS (COM OPÇÃO DE OCULTAR / ATIVAR) -->
       <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white">
         <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
-        <p class="opacity-75">Remova recados inadequados para que não passem no rodapé ao vivo do site.</p>
+        <p class="opacity-75">Você pode ocultar recados sem apagá-los da planilha para que não apareçam na página nem no rodapé ao vivo.</p>
         <div id="containerRecadosAdmin" class="space-y-3"></div>
       </div>
 
@@ -545,7 +546,7 @@
         </div>
       </div>
 
-      <!-- ABA 5: MÚSICAS COM PESQUISA VIA DEEZER -->
+      <!-- ABA 5: MÚSICAS COM PESQUISA E PREVIEW DIRETO DO DEEZER -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
           <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar Música no Deezer / YouTube</h3>
@@ -608,7 +609,6 @@
     let filtroRsvpAtivo = '';
 
     let playerYT = null;
-    let previewPlayer = null;
     let musicaTocando = false;
     let playlistMusicas = [];
     let indiceMusicaAtual = 0;
@@ -773,7 +773,7 @@
             <div class="flex items-center justify-between p-2 hover:bg-stone-100 rounded-lg border">
               <span class="font-bold text-xs truncate max-w-[220px] md:max-w-md">${m.titulo}</span>
               <div class="flex gap-2">
-                <button onclick="testarMusicaPreview('${m.id}')" class="bg-stone-200 hover:bg-stone-300 px-3 py-1 rounded font-bold text-[11px]">▶ Testar</button>
+                <button onclick="testarMusicaPreviewDirect('${m.previewUrl}')" class="bg-stone-200 hover:bg-stone-300 px-3 py-1 rounded font-bold text-[11px]">▶ Testar (Audio)</button>
                 <button onclick="adicionarMusicaDaBusca('${m.id}', '${m.titulo.replace(/'/g, "")}')" class="btn-casar px-3 py-1 rounded font-bold text-[11px]">➕ Adicionar</button>
               </div>
             </div>
@@ -784,16 +784,14 @@
       });
     }
 
-    function testarMusicaPreview(videoId) {
-      if (!previewPlayer) {
-        previewPlayer = new YT.Player('previewPlayerContainer', {
-          height: '0', width: '0', videoId: videoId,
-          events: { 'onReady': (e) => e.target.playVideo() }
-        });
-      } else {
-        previewPlayer.loadVideoById(videoId);
+    function testarMusicaPreviewDirect(previewUrl) {
+      const audioEl = document.getElementById("audioPreviewDeezer");
+      if (!previewUrl || previewUrl === "undefined") {
+        return alert("Preview de áudio não disponível para esta faixa.");
       }
       if (playerYT && musicaTocando) playerYT.pauseVideo();
+      audioEl.src = previewUrl;
+      audioEl.play();
     }
 
     function adicionarMusicaDaBusca(id, titulo) {
@@ -939,7 +937,6 @@
             <span class="font-bold truncate">🎵 ${m.titulo || m.id}</span>
           </div>
           <div class="flex gap-2">
-            <button onclick="testarMusicaPreview('${m.id}')" class="bg-stone-200 hover:bg-stone-300 px-2.5 py-1 rounded font-bold text-[11px]">▶ Ouvir</button>
             <button onclick="removerMusicaPlanilha('${m.id}')" class="text-rose-700 font-bold text-[11px] hover:underline">Remover</button>
           </div>
         `;
@@ -1079,6 +1076,27 @@
       document.getElementById("abaConfig").classList.toggle("hidden", aba !== 'config');
       document.getElementById("abaAdmins").classList.toggle("hidden", aba !== 'admins');
 
+      // ATUALIZA VISUALMENTE A ABA ATIVA NO MENU DO ADMIN
+      const mapaBotoes = {
+        'convidados': 'tabBtnConvidados',
+        'fotosAdm': 'tabBtnFotos',
+        'recadosAdm': 'tabBtnRecados',
+        'design': 'tabBtnDesign',
+        'config': 'tabBtnConfig',
+        'admins': 'tabBtnAdmins'
+      };
+
+      document.querySelectorAll('.tab-nav-admin').forEach(btn => {
+        btn.classList.remove('bg-stone-900', 'text-white', 'shadow-sm');
+        btn.classList.add('opacity-75');
+      });
+
+      const btnAtivo = document.getElementById(mapaBotoes[aba]);
+      if (btnAtivo) {
+        btnAtivo.classList.add('bg-stone-900', 'text-white', 'shadow-sm');
+        btnAtivo.classList.remove('opacity-75');
+      }
+
       if (aba === 'admins') carregarListaAdmins();
       if (aba === 'recadosAdm') carregarRecadosAdmin();
       if (aba === 'fotosAdm') carregarFotosAdmin();
@@ -1151,34 +1169,34 @@
     }
 
     function carregarRecadosAdmin() {
-      executarJSONP({ action: "listarRecados" }, function(res) {
+      executarJSONP({ action: "listarRecadosAdmin" }, function(res) {
         const container = document.getElementById("containerRecadosAdmin");
         if (!container) return;
         if (res.sucesso && res.recados && res.recados.length > 0) {
-          container.innerHTML = res.recados.map((r, i) => `
-            <div class="flex items-center justify-between p-3 bg-white border rounded-xl shadow-xs">
+          container.innerHTML = res.recados.map((r) => `
+            <div class="flex items-center justify-between p-3 bg-white border rounded-xl shadow-xs ${r.ativo ? '' : 'opacity-40 bg-stone-100'}">
               <div>
-                <p class="font-bold text-stone-900">${r.nome}</p>
+                <p class="font-bold text-stone-900">${r.nome} ${r.ativo ? '<span class="text-[10px] text-emerald-600 ml-2">🟢 Exibindo</span>' : '<span class="text-[10px] text-rose-600 ml-2">🔴 Ocultado</span>'}</p>
                 <p class="italic text-stone-700">"${r.mensagem}"</p>
               </div>
-              <button onclick="removerRecadoAdmin(${i})" class="bg-rose-700 text-white px-3 py-1 rounded text-xs font-bold hover:bg-rose-800">Remover</button>
+              <button onclick="alternarStatusRecado(${r.linha})" class="${r.ativo ? 'bg-rose-700 hover:bg-rose-800' : 'bg-emerald-700 hover:bg-emerald-800'} text-white px-3 py-1 rounded text-xs font-bold transition">
+                ${r.ativo ? '🚫 Ocultar' : '✅ Exibir'}
+              </button>
             </div>
           `).join('');
         } else {
-          container.innerHTML = `<p class="italic p-3 opacity-75">Nenhum recado publicado.</p>`;
+          container.innerHTML = `<p class="italic p-3 opacity-75">Nenhum recado cadastrado.</p>`;
         }
       });
     }
 
-    function removerRecadoAdmin(linha) {
-      if (confirm("Deseja remover este recado?")) {
-        executarJSONP({ action: "removerRecado", linha: linha }, function(res) {
-          if (res.sucesso) {
-            carregarRecadosAdmin();
-            carregarRecados();
-          }
-        });
-      }
+    function alternarStatusRecado(linha) {
+      executarJSONP({ action: "adminAlternarRecado", linha: linha }, function(res) {
+        if (res.sucesso) {
+          carregarRecadosAdmin();
+          carregarRecados();
+        }
+      });
     }
 
     function carregarListaAdmins() {
@@ -1318,16 +1336,19 @@
 
     function carregarRecados() {
       executarJSONP({ action: "listarRecados" }, function(res) {
-        if (res.sucesso && res.recados && res.recados.length > 0) {
-          const container = document.getElementById("containerRecados");
-          const track = document.getElementById("cnnTickerTrack");
+        const container = document.getElementById("containerRecados");
+        const track = document.getElementById("cnnTickerTrack");
 
+        if (res.sucesso && res.recados && res.recados.length > 0) {
           container.innerHTML = `<p class="font-serif-custom italic text-lg font-semibold">"${res.recados[0].mensagem}"</p>`;
 
           const recadosDuplicados = [...res.recados, ...res.recados];
           track.innerHTML = recadosDuplicados.map(r => `
             <div class="cnn-ticker-item"><span class="autor">${r.nome}:</span> "${r.mensagem}" &nbsp;&nbsp;&bull;&nbsp;&nbsp;</div>
           `).join('');
+        } else {
+          container.innerHTML = `<p class="italic text-xs opacity-70">Nenhum recado publicado no momento.</p>`;
+          track.innerHTML = `<div class="cnn-ticker-item"><span class="autor">Seja bem-vindo!</span> Deixe um recado para os noivos!</div>`;
         }
       });
     }
@@ -1335,7 +1356,10 @@
     function enviarRecado(e) {
       e.preventDefault();
       executarJSONP({ action: "salvarRecado", nome: document.getElementById("recadoNome").value, mensagem: document.getElementById("recadoTexto").value }, function() {
-        alert("Recado publicado!"); carregarRecados();
+        alert("Recado publicado!"); 
+        document.getElementById("recadoNome").value = "";
+        document.getElementById("recadoTexto").value = "";
+        carregarRecados();
       });
     }
 
