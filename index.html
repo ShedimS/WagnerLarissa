@@ -43,22 +43,29 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* PREVENÇÃO DE BUG DE CORES NO PAINEL ADMIN NO MODO ESCURO */
-    #modalAdmin, #modalAdmin * {
+    /* CORREÇÃO DO DARK MODE NO PAINEL ADMIN E MODAL */
+    #modalAdmin, #modalAdmin *, #modalLogin, #modalLogin * {
       color: #1c1917 !important;
+      -webkit-text-stroke: 0px transparent !important;
     }
-    #modalAdmin button {
+    #modalAdmin input, #modalAdmin select, #modalAdmin textarea,
+    #modalLogin input, #modalLogin select, #modalLogin textarea {
+      background-color: #ffffff !important;
+      color: #1c1917 !important;
+      border-color: #d6d3d1 !important;
+    }
+    #modalAdmin button, #modalLogin button {
       color: inherit;
     }
 
     body, p, span, div, li, label, strong, em, b, i, a {
-      color: var(--casar-texto) !important;
+      color: var(--casar-texto);
       -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
     }
 
     h1, h2, h3, h4, h5, h6, .font-serif-custom { 
       font-family: 'Cormorant Garamond', serif; 
-      color: var(--casar-titulos) !important;
+      color: var(--casar-titulos);
       -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
     }
 
@@ -126,9 +133,9 @@
     input, select, textarea {
       max-width: 100%;
       box-sizing: border-box;
-      background-color: var(--input-bg) !important;
-      border-color: var(--casar-borda) !important;
-      color: var(--casar-texto) !important;
+      background-color: var(--input-bg);
+      border-color: var(--casar-borda);
+      color: var(--casar-texto);
     }
 
     img { max-width: 100%; }
@@ -437,7 +444,7 @@
       </div>
 
       <!-- ABA 1: CONVIDADOS -->
-      <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden">
+      <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden bg-white">
         <div class="p-3 bg-stone-50 border-b border-casar grid grid-cols-2 md:grid-cols-6 gap-2 text-center cursor-pointer select-none">
           <div onclick="filtrarStatusRsvp('')" class="bg-white p-2 rounded-lg border shadow-sm hover:border-amber-500 transition"><p class="text-[10px] uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-lg font-bold">0</span></div>
           <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Adultos/Crianças</p><span id="statTipos" class="text-xs font-bold">0 / 0</span></div>
@@ -1366,7 +1373,8 @@
         callbackSuccess(res);
       };
       const query = Object.keys(params).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join("&");
-      const script.src = `${API_URL}?${query}&callback=${callbackName}`;
+      const script = document.createElement("script");
+      script.src = `${API_URL}?${query}&callback=${callbackName}`;
       document.body.appendChild(script);
     }
   </script>
