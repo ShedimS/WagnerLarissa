@@ -19,6 +19,8 @@
       --nav-bg: rgba(255, 255, 255, 0.98);
       --player-bg: #eae3db;
       --input-bg: #ffffff;
+      --text-stroke-color: transparent;
+      --text-stroke-width: 0px;
     }
 
     .dark-mode {
@@ -31,6 +33,11 @@
       --nav-bg: rgba(17, 24, 39, 0.98);
       --player-bg: #374151;
       --input-bg: #1f2937;
+    }
+
+    /* APLICAÇÃO DO CONTORNO DE TEXTO (TEXT STROKE) */
+    p, span, h1, h2, h3, a, label, div {
+      -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
     }
 
     html {
@@ -63,10 +70,7 @@
 
     #parallax-bg {
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      top: 0; right: 0; bottom: 0; left: 0;
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
@@ -75,8 +79,7 @@
 
     #parallax-image {
       position: absolute;
-      top: -100px;
-      left: 0;
+      top: -100px; left: 0;
       width: 100%;
       height: calc(100% + 200px);
       background-image: linear-gradient(
@@ -94,9 +97,7 @@
     }
 
     body > nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: sticky; top: 0; z-index: 50;
       background-color: var(--nav-bg) !important;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -120,90 +121,59 @@
     }
 
     img { max-width: 100%; }
-    #galeria img { object-fit: cover; }
-
-    a, button { transition: color .2s ease, background-color .2s ease, transform .2s ease; }
-    button:hover { transform: translateY(-1px); }
 
     .cnn-ticker-container {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 40px;
+      position: fixed; bottom: 0; left: 0;
+      width: 100%; height: 40px;
       background-color: rgba(44, 37, 30, 0.95);
-      color: #fff;
-      z-index: 99;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
+      color: #fff; z-index: 99;
+      display: flex; align-items: center; overflow: hidden;
       border-top: 2px solid #a38573;
       box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
     }
 
     .cnn-label {
-      background-color: #8c6e5c;
-      color: #fff;
-      padding: 0 12px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      white-space: nowrap;
-      z-index: 2;
+      background-color: #8c6e5c; color: #fff;
+      padding: 0 12px; height: 100%;
+      display: flex; align-items: center;
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      white-space: nowrap; z-index: 2;
     }
 
     .cnn-ticker-track {
-      display: flex;
-      white-space: nowrap;
+      display: flex; white-space: nowrap;
       animation: tickerAnimation 25s linear infinite;
     }
 
     .cnn-ticker-track:hover { animation-play-state: paused; }
 
     .cnn-ticker-item {
-      display: inline-flex;
-      align-items: center;
-      padding: 0 25px;
-      font-size: 11px;
-      font-weight: 500;
+      display: inline-flex; align-items: center;
+      padding: 0 25px; font-size: 11px; font-weight: 500;
       color: #ffffff;
     }
 
     .cnn-ticker-item span.autor {
-      color: #d4b5a0;
-      font-weight: 700;
-      margin-right: 6px;
+      color: #d4b5a0; font-weight: 700; margin-right: 6px;
     }
 
     @keyframes tickerAnimation {
       0% { transform: translate3d(0, 0, 0); }
       100% { transform: translate3d(-50%, 0, 0); }
     }
-
-    @media (max-width: 768px) {
-      html { scroll-padding-top: 125px; }
-      .cnn-label span.texto-label { display: none; }
-      .cnn-label::after { content: "💌"; font-size: 14px; }
-    }
   </style>
 </head>
 <body class="antialiased">
 
-  <div id="parallax-bg">
-    <div id="parallax-image"></div>
-  </div>
-
+  <div id="parallax-bg"><div id="parallax-image"></div></div>
   <div id="youtubePlayerContainer" style="display:none;"></div>
+  <div id="previewPlayerContainer" style="display:none;"></div>
 
-  <!-- NAVEGAÇÃO CENTRALIZADA NO PC E CELULAR -->
+  <!-- NAVEGAÇÃO -->
   <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
     <div class="max-w-4xl mx-auto w-full flex flex-col items-center gap-2">
       
-      <!-- LINHA 1: LOGO + PLAYER + TEMA CENTRALIZADOS -->
       <div class="w-full max-w-xl flex items-center justify-center gap-4 border-b border-casar/50 pb-2">
         <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
@@ -230,7 +200,6 @@
         </div>
       </div>
 
-      <!-- LINHA 2: LINKS DE NAVEGAÇÃO -->
       <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-semibold tracking-wider uppercase py-1 text-center">
         <a href="#home" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>🏠</span><span>Início</span></a>
         <a href="#historia" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>💌</span><span>Mensagem</span></a>
@@ -258,7 +227,6 @@
         </div>
       </div>
 
-      <!-- CONTADOR REGRESSIVO -->
       <div class="mt-8 bg-white p-6 rounded-xl border border-casar max-w-md mx-auto shadow-sm">
         <p class="text-xs uppercase tracking-widest font-bold mb-4">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
@@ -271,7 +239,7 @@
     </div>
   </header>
 
-  <!-- MENSAGEM DO CASAL -->
+  <!-- MENSAGEM -->
   <section id="historia" class="py-16 px-4 max-w-3xl mx-auto text-center">
     <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
     <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
@@ -289,7 +257,7 @@
     </div>
   </section>
 
-  <!-- GUIA DE TRAJES -->
+  <!-- TRAJES -->
   <section id="trajes" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
@@ -330,15 +298,25 @@
     </div>
   </section>
 
-  <!-- GALERIA DE FOTOS -->
+  <!-- GALERIA E ENVIO DE FOTOS MULTIPLAS COM TRATAMENTO DE ERRO -->
   <section id="galeria" class="py-16 bg-white border-t border-casar px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
       <div class="mb-8 bg-stone-50 p-6 rounded-2xl border border-casar max-w-lg mx-auto text-left space-y-3">
         <input type="text" id="nomeUsuarioInput" placeholder="Seu Nome (Opcional)" class="w-full p-2.5 border border-casar rounded-xl text-xs font-medium">
         <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border border-casar rounded-xl text-xs">
-        <button onclick="enviarFoto()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase">📸 Enviar Fotos</button>
+        
+        <!-- Status e Progresso de Envio -->
+        <div id="progressoUploadContainer" class="hidden space-y-2 pt-2">
+          <div class="w-full bg-stone-200 rounded-full h-2.5 overflow-hidden">
+            <div id="barraUpload" class="bg-amber-800 h-2.5 rounded-full w-0 transition-all duration-300"></div>
+          </div>
+          <p id="txtStatusUpload" class="text-[11px] font-bold text-center opacity-80">Enviando fotos...</p>
+        </div>
+
+        <button onclick="enviarFotosMultiplas()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase">📸 Enviar Fotos</button>
       </div>
+
       <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border border-casar min-h-[250px] bg-stone-100 flex items-center justify-center">
         <div id="carrosselFotos" class="flex transition-transform duration-700 w-full">
           <p class="text-center text-xs opacity-70 p-8 w-full">Carregando fotos do álbum...</p>
@@ -380,7 +358,7 @@
     </div>
   </section>
 
-  <!-- RODAPÉ ESTILO CNN -->
+  <!-- RODAPÉ CNN -->
   <div class="cnn-ticker-container">
     <div class="cnn-label"><span class="texto-label">Recados Ao Vivo</span></div>
     <div style="overflow: hidden; width: 100%;"><div id="cnnTickerTrack" class="cnn-ticker-track"></div></div>
@@ -408,7 +386,7 @@
           <label class="block font-bold uppercase mb-1 text-[10px]">Senha</label>
           <div class="relative">
             <input type="password" id="loginSenha" required placeholder="Ex: 1234" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none pr-10">
-            <button type="button" onclick="alternarVerSenha('loginSenha')" class="absolute right-2.5 top-2.5 text-base opacity-70 hover:opacity-100">👁️</button>
+            <button type="button" onclick="alternarVerSenha('loginSenha')" class="absolute right-2.5 top-2.5 text-base opacity-70">👁️</button>
           </div>
         </div>
 
@@ -424,7 +402,7 @@
     </div>
   </div>
 
-  <!-- MODAL ADMIN COM ABAS -->
+  <!-- MODAL ADMIN -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden text-xs">
       
@@ -495,10 +473,10 @@
         </div>
       </div>
 
-      <!-- ABA 2: GERENCIAMENTO DE FOTOS DO CARROSSEL -->
+      <!-- ABA 2: FOTOS DO CARROSSEL -->
       <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4">
         <h3 class="font-serif-custom text-xl font-bold">📸 Gerenciar Fotos do Carrossel</h3>
-        <p class="opacity-75">Você pode ocultar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
+        <p class="opacity-75">Você pode desativar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
         <div id="containerFotosAdmin" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </div>
 
@@ -509,20 +487,29 @@
         <div id="containerRecadosAdmin" class="space-y-3"></div>
       </div>
 
-      <!-- ABA 4: DESIGN & PERSONALIZAÇÃO DE CORES DA FONTE -->
+      <!-- ABA 4: DESIGN, CORES E CONTORNO DAS LETRAS -->
       <div id="abaDesign" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎨 Personalização Visual das Fontes e Letras</h3>
-          <p class="opacity-75">Ajuste as cores dos textos do site para cada tema (as escolhas são salvas para todos os visitantes):</p>
+          <h3 class="font-serif-custom text-xl font-bold">🎨 Personalização Visual e Contorno dos Textos</h3>
+          
+          <div class="p-4 bg-white rounded-xl border space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold text-sm">Contorno nas Letras (Text Outline)</h4>
+                <p class="opacity-75 text-[11px]">Adiciona um contorno escuro no tema claro e contorno claro no tema escuro para facilitar a leitura.</p>
+              </div>
+              <button onclick="alternarContornoTexto()" id="btnToggleContorno" class="px-4 py-2 rounded-lg font-bold uppercase btn-casar">Ativar Contorno</button>
+            </div>
+          </div>
 
           <div class="grid md:grid-cols-3 gap-6">
             <div class="bg-white p-4 rounded-xl border space-y-2">
-              <label class="block font-bold">Texto Principal (Tema Claro):</label>
+              <label class="block font-bold">Cor das Letras (Tema Claro):</label>
               <input type="color" id="pickerCorTextoClaro" value="#2c251e" onchange="salvarCorPersonalizada('texto_claro', this.value)" class="w-full h-10 rounded cursor-pointer border">
             </div>
 
             <div class="bg-white p-4 rounded-xl border space-y-2">
-              <label class="block font-bold">Texto Principal (Tema Escuro):</label>
+              <label class="block font-bold">Cor das Letras (Tema Escuro):</label>
               <input type="color" id="pickerCorTextoEscuro" value="#f3f4f6" onchange="salvarCorPersonalizada('texto_escuro', this.value)" class="w-full h-10 rounded cursor-pointer border">
             </div>
 
@@ -533,35 +520,27 @@
           </div>
 
           <div class="pt-4 border-t border-casar flex items-center justify-between">
-            <span class="opacity-75 text-xs">Deseja restaurar as cores originais?</span>
+            <span class="opacity-75 text-xs">Deseja restaurar as cores padrões?</span>
             <button onclick="restaurarCoresPadrao()" class="bg-stone-600 text-white px-4 py-2 rounded-lg font-bold text-xs uppercase">Restaurar Padrão</button>
           </div>
         </div>
       </div>
 
-      <!-- ABA 5: MÚSICAS & DRAG AND DROP (REORDENAR ARRASTANDO) -->
+      <!-- ABA 5: MÚSICAS COM PESQUISA YOUTUBE E PLAYER DE PREVIEW -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
-        <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-3">
-          <h3 class="font-serif-custom text-xl font-bold">✨ Transparência do Fundo</h3>
-          <div class="flex items-center gap-4">
-            <span class="font-bold">Escuro</span>
-            <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-full accent-amber-800">
-            <span class="font-bold">Claro</span>
-            <span id="valorTransparencia" class="font-bold text-amber-600 w-10 text-right text-sm">0.65</span>
-          </div>
-        </div>
-
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎵 Playlist e Reordenação (Segure e Arraste para Organizar)</h3>
-          <p class="opacity-75">Digite o nome da música para pesquisar no YouTube ou cole diretamente a URL:</p>
+          <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar Música no YouTube</h3>
           
           <div class="flex gap-2">
-            <input type="text" id="inputPesquisarMusica" placeholder="Ex: Ed Sheeran - Perfect" class="w-full p-3 border rounded-xl font-medium">
-            <button onclick="pesquisarEAdicionarMusica()" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar e Salvar</button>
+            <input type="text" id="inputPesquisarMusica" placeholder="Digite o nome da música ou artista..." class="w-full p-3 border rounded-xl font-medium">
+            <button onclick="pesquisarMusicaYoutube()" id="btnBuscarYT" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar no YouTube</button>
           </div>
 
-          <div class="mt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist (Arraste os itens abaixo para mudar a ordem):</h4>
+          <!-- LISTA DE SELEÇÃO COM RESULTADOS DO YOUTUBE -->
+          <div id="containerResultadosYoutube" class="hidden space-y-2 p-3 bg-white border rounded-xl"></div>
+
+          <div class="mt-6 border-t pt-4">
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva (Arraste para reordenar):</h4>
             <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100"></div>
           </div>
         </div>
@@ -611,6 +590,7 @@
     let filtroRsvpAtivo = '';
 
     let playerYT = null;
+    let previewPlayer = null;
     let musicaTocando = false;
     let playlistMusicas = [];
     let indiceMusicaAtual = 0;
@@ -633,9 +613,38 @@
         icone.innerText = "☀️";
         localStorage.setItem("casamento_tema", "escuro");
       }
+      atualizarCorContornoPeloTema();
     }
 
-    // APLICAR E SALVAR CORES PERSONALIZADAS DE FONTE
+    // CONTORNO DE TEXTO (TEXT STROKE)
+    function alternarContornoTexto() {
+      const ativo = localStorage.getItem("casamento_contorno_ativo") === "sim";
+      if (ativo) {
+        localStorage.setItem("casamento_contorno_ativo", "nao");
+      } else {
+        localStorage.setItem("casamento_contorno_ativo", "sim");
+      }
+      atualizarCorContornoPeloTema();
+    }
+
+    function atualizarCorContornoPeloTema() {
+      const ativo = localStorage.getItem("casamento_contorno_ativo") === "sim";
+      const isDark = document.getElementById("htmlRoot").classList.contains("dark-mode");
+      const btn = document.getElementById("btnToggleContorno");
+
+      if (btn) {
+        btn.innerText = ativo ? "Desativar Contorno" : "Ativar Contorno";
+      }
+
+      if (ativo) {
+        document.documentElement.style.setProperty('--text-stroke-width', '0.5px');
+        document.documentElement.style.setProperty('--text-stroke-color', isDark ? '#ffffff' : '#000000');
+      } else {
+        document.documentElement.style.setProperty('--text-stroke-width', '0px');
+        document.documentElement.style.setProperty('--text-stroke-color', 'transparent');
+      }
+    }
+
     function salvarCorPersonalizada(chave, valor) {
       localStorage.setItem("casamento_cor_" + chave, valor);
       aplicarCoresCustomizadas();
@@ -646,7 +655,11 @@
       const corEscuro = localStorage.getItem("casamento_cor_texto_escuro");
       const corTitulos = localStorage.getItem("casamento_cor_titulos");
 
-      if (corClaro) document.documentElement.style.setProperty('--casar-texto', corClaro);
+      const isDark = document.getElementById("htmlRoot").classList.contains("dark-mode");
+
+      if (isDark && corEscuro) document.documentElement.style.setProperty('--casar-texto', corEscuro);
+      else if (!isDark && corClaro) document.documentElement.style.setProperty('--casar-texto', corClaro);
+
       if (corTitulos) document.documentElement.style.setProperty('--casar-titulos', corTitulos);
 
       if (document.getElementById("pickerCorTextoClaro") && corClaro) document.getElementById("pickerCorTextoClaro").value = corClaro;
@@ -661,7 +674,7 @@
       document.documentElement.style.removeProperty('--casar-texto');
       document.documentElement.style.removeProperty('--casar-titulos');
       aplicarCoresCustomizadas();
-      alert("Cores restauradas para o padrão inicial.");
+      alert("Cores restauradas para o padrão.");
     }
 
     window.addEventListener("DOMContentLoaded", function() {
@@ -672,6 +685,8 @@
         document.getElementById("htmlRoot").classList.add("dark-mode");
         document.getElementById("iconeTema").innerText = "☀️";
       }
+
+      atualizarCorContornoPeloTema();
 
       const userSalvo = localStorage.getItem("casamento_saved_user");
       const passSalva = localStorage.getItem("casamento_saved_pass");
@@ -703,16 +718,59 @@
       update();
     }
 
-    function alterarTransparenciaFundo(valor) {
-      document.documentElement.style.setProperty('--bg-transparency', valor);
-      document.getElementById("valorTransparencia").innerText = parseFloat(valor).toFixed(2);
-      localStorage.setItem("casamento_transparencia", valor);
+    // PESQUISA YOUTUBE COM LISTA DE SELEÇÃO E PREVIEW PLAYER
+    function pesquisarMusicaYoutube() {
+      const termo = document.getElementById("inputPesquisarMusica").value.trim();
+      const btn = document.getElementById("btnBuscarYT");
+      const container = document.getElementById("containerResultadosYoutube");
+
+      if (!termo) return alert("Digite o nome de uma música.");
+
+      btn.innerText = "Buscando...";
+      btn.disabled = true;
+
+      executarJSONP({ action: "pesquisarYoutube", termo: termo }, function(res) {
+        btn.innerText = "Buscar no YouTube";
+        btn.disabled = false;
+        container.classList.remove("hidden");
+
+        if (res.sucesso && res.resultados && res.resultados.length > 0) {
+          container.innerHTML = res.resultados.map(m => `
+            <div class="flex items-center justify-between p-2 hover:bg-stone-100 rounded-lg border">
+              <span class="font-bold text-xs truncate max-w-[220px] md:max-w-md">${m.titulo}</span>
+              <div class="flex gap-2">
+                <button onclick="testarMusicaPreview('${m.id}')" class="bg-stone-200 hover:bg-stone-300 px-3 py-1 rounded font-bold text-[11px]">▶ Testar</button>
+                <button onclick="adicionarMusicaDaBusca('${m.id}', '${m.titulo.replace(/'/g, "")}')" class="btn-casar px-3 py-1 rounded font-bold text-[11px]">➕ Adicionar</button>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = `<p class="italic text-xs p-2 text-center opacity-70">Nenhuma música encontrada. Tente outro nome.</p>`;
+        }
+      });
     }
 
-    function extrairIDYoutube(url) {
-      if (!url) return null;
-      const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
-      return (match && match[2].length === 11) ? match[2] : null;
+    function testarMusicaPreview(videoId) {
+      if (!previewPlayer) {
+        previewPlayer = new YT.Player('previewPlayerContainer', {
+          height: '0', width: '0', videoId: videoId,
+          events: { 'onReady': (e) => e.target.playVideo() }
+        });
+      } else {
+        previewPlayer.loadVideoById(videoId);
+      }
+      if (playerYT && musicaTocando) playerYT.pauseVideo();
+    }
+
+    function adicionarMusicaDaBusca(id, titulo) {
+      executarJSONP({ action: "salvarMusica", videoId: id, titulo: titulo }, function(res) {
+        if (res.sucesso) {
+          document.getElementById("containerResultadosYoutube").classList.add("hidden");
+          document.getElementById("inputPesquisarMusica").value = "";
+          carregarPlaylistPlanilha();
+          alert("Música adicionada à playlist!");
+        }
+      });
     }
 
     function carregarPlaylistPlanilha() {
@@ -737,9 +795,7 @@
 
         const atual = playlistMusicas[indiceMusicaAtual];
         playerYT = new YT.Player('youtubePlayerContainer', {
-          height: '0',
-          width: '0',
-          videoId: atual.id,
+          height: '0', width: '0', videoId: atual.id,
           playerVars: { 'autoplay': 1, 'controls': 0 },
           events: {
             'onReady': (event) => {
@@ -795,36 +851,6 @@
       playerYT.seekTo(pct * playerYT.getDuration(), true);
     }
 
-    function pesquisarEAdicionarMusica() {
-      const termo = document.getElementById("inputPesquisarMusica").value.trim();
-      if (!termo) return alert("Digite o nome da música ou o link do YouTube.");
-
-      let videoId = extrairIDYoutube(termo);
-
-      if (videoId) {
-        salvarMusicaDireta(videoId, termo);
-      } else {
-        fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${termo}`)
-          .then(r => r.json())
-          .then(data => {
-            salvarMusicaDireta(termo, data.title || termo);
-          })
-          .catch(() => {
-            salvarMusicaDireta(termo, termo);
-          });
-      }
-    }
-
-    function salvarMusicaDireta(id, titulo) {
-      executarJSONP({ action: "salvarMusica", videoId: id, titulo: titulo }, function(res) {
-        if (res.sucesso) { 
-          document.getElementById("inputPesquisarMusica").value = ""; 
-          carregarPlaylistPlanilha(); 
-          alert("Música salva com sucesso!"); 
-        }
-      });
-    }
-
     function removerMusicaPlanilha(id) {
       if (confirm("Remover esta música da planilha?")) {
         executarJSONP({ action: "removerMusica", id: id }, function(res) {
@@ -833,11 +859,10 @@
       }
     }
 
-    // DRAG AND DROP (ARRASTAR E SOLTAR PARA REORDENAR PLAYLIST)
+    // DRAG AND DROP
     function handleDragStart(e) {
       dragSrcEl = this;
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/html', this.innerHTML);
       this.classList.add('opacity-40');
     }
 
@@ -852,18 +877,14 @@
       if (dragSrcEl !== this) {
         const srcIdx = Number(dragSrcEl.getAttribute('data-index'));
         const targetIdx = Number(this.getAttribute('data-index'));
-
         const itemMovido = playlistMusicas.splice(srcIdx, 1)[0];
         playlistMusicas.splice(targetIdx, 0, itemMovido);
-
         renderizarPlaylistAdmin();
       }
       return false;
     }
 
-    function handleDragEnd(e) {
-      this.classList.remove('opacity-40');
-    }
+    function handleDragEnd(e) { this.classList.remove('opacity-40'); }
 
     function renderizarPlaylistAdmin() {
       const container = document.getElementById("containerPlaylistAdmin");
@@ -893,6 +914,79 @@
         div.addEventListener('dragend', handleDragEnd, false);
 
         container.appendChild(div);
+      });
+    }
+
+    // UPLOAD MULTIPLO DE FOTOS COM TRATAMENTO DE ERRO E STATUS
+    async function enviarFotosMultiplas() {
+      const input = document.getElementById("fotoInput");
+      const nomeUser = document.getElementById("nomeUsuarioInput").value.trim();
+      const files = input.files;
+
+      if (!files || files.length === 0) return alert("Selecione pelo menos uma foto para enviar.");
+
+      const containerStatus = document.getElementById("progressoUploadContainer");
+      const barra = document.getElementById("barraUpload");
+      const txtStatus = document.getElementById("txtStatusUpload");
+      const btn = document.getElementById("btnUploadFoto");
+
+      containerStatus.classList.remove("hidden");
+      btn.disabled = true;
+      btn.classList.add("opacity-50");
+
+      let enviadasSucesso = 0;
+      let erros = 0;
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const pct = Math.round(((i) / files.length) * 100);
+        barra.style.width = pct + "%";
+        txtStatus.innerText = `Enviando foto ${i + 1} de ${files.length} (${file.name})...`;
+
+        try {
+          const base64 = await lerArquivoBase64(file);
+          const payload = {
+            action: "uploadFoto",
+            nomeUsuario: nomeUser,
+            mimeType: file.type,
+            base64: base64.split(",")[1]
+          };
+
+          const res = await fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(payload)
+          }).then(r => r.json());
+
+          if (res.sucesso) enviadasSucesso++;
+          else erros++;
+        } catch (err) {
+          erros++;
+        }
+      }
+
+      barra.style.width = "100%";
+      btn.disabled = false;
+      btn.classList.remove("opacity-50");
+
+      if (erros === 0) {
+        txtStatus.innerText = `✅ Sucesso! Todas as ${enviadasSucesso} fotos foram enviadas.`;
+        alert(`Obrigado! Todas as ${enviadasSucesso} fotos foram enviadas com sucesso.`);
+      } else {
+        txtStatus.innerText = `⚠️ ${enviadasSucesso} enviadas, ${erros} falharam.`;
+        alert(`Concluído: ${enviadasSucesso} fotos subiram com sucesso e ${erros} apresentaram erro.`);
+      }
+
+      input.value = "";
+      carregarFotosDrive();
+      setTimeout(() => containerStatus.classList.add("hidden"), 5000);
+    }
+
+    function lerArquivoBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
       });
     }
 
@@ -955,7 +1049,6 @@
       if (aba === 'fotosAdm') carregarFotosAdmin();
     }
 
-    // CARREGAR E RENDERIZAR FOTOS NO MURAL E CARROSSEL
     function carregarFotosDrive() {
       executarJSONP({ action: "listarFotos" }, function(res) {
         if (res.sucesso && res.fotos) {
@@ -1012,11 +1105,8 @@
     }
 
     function alternarStatusFoto(url) {
-      if (fotosDesativadasSet.has(url)) {
-        fotosDesativadasSet.delete(url);
-      } else {
-        fotosDesativadasSet.add(url);
-      }
+      if (fotosDesativadasSet.has(url)) fotosDesativadasSet.delete(url);
+      else fotosDesativadasSet.add(url);
       localStorage.setItem("casamento_fotos_desativadas", JSON.stringify(Array.from(fotosDesativadasSet)));
       carregarFotosAdmin();
       renderizarCarrosseis();
@@ -1080,7 +1170,7 @@
           document.getElementById("novoAdminUser").value = "";
           document.getElementById("novoAdminSenha").value = "";
           carregarListaAdmins();
-          alert("Administrador cadastrado na planilha!");
+          alert("Administrador cadastrado!");
         }
       });
     }
@@ -1235,10 +1325,6 @@
       alert("Presença confirmada!");
       document.getElementById("stepSelecao").classList.add("hidden");
       document.getElementById("stepBusca").classList.remove("hidden");
-    }
-
-    function enviarFoto() {
-      alert("Envio de fotos finalizado!");
     }
 
     function executarJSONP(params, callbackSuccess) {
