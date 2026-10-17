@@ -43,7 +43,7 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* FIX MODO ESCURO DENTRO DOS MODAIS DE LOGIN E ADMIN */
+    /* ISOLAMENTO MODO ESCURO PARA MODAIS DE LOGIN E ADMIN */
     #modalAdmin, #modalAdmin *, #modalLogin, #modalLogin * {
       color: #1c1917 !important;
       -webkit-text-stroke: 0px transparent !important;
@@ -196,12 +196,13 @@
         <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
         <div class="flex items-center gap-2">
+          <!-- PLAYER COM CONTROLE DE VOLUME -->
           <div class="player-container flex items-center gap-1.5 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
             <button onclick="musicaAnteriorPlaylist()" title="Anterior" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 font-bold">⏮</button>
             <button id="btnPlayPause" onclick="toggleAudioMusica()" title="Play/Pause" class="w-7 h-7 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold shadow">▶</button>
             <button onclick="proximaMusicaPlaylist()" title="Próxima" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 font-bold">⏭</button>
 
-            <div class="flex flex-col w-28 md:w-36 ml-1">
+            <div class="flex flex-col w-24 md:w-32 ml-1">
               <div class="flex justify-between text-[9px] font-bold truncate">
                 <span id="txtNomeMusica" class="truncate">Carregando...</span>
                 <span id="txtTempoMusica" class="ml-1">0:00</span>
@@ -209,6 +210,12 @@
               <div class="w-full bg-stone-400 dark:bg-stone-600 rounded-full h-1.5 overflow-hidden mt-0.5 cursor-pointer" onclick="pularParaProgresso(event)">
                 <div id="barraProgressoMusica" class="bg-amber-800 h-1.5 rounded-full w-0 transition-all"></div>
               </div>
+            </div>
+
+            <!-- CONTROLE DESLIZANTE DE VOLUME -->
+            <div class="flex items-center gap-1 ml-1 border-l border-casar/50 pl-1.5">
+              <span id="iconeVolume" class="cursor-pointer text-xs" onclick="alternarMute()">🔊</span>
+              <input type="range" id="sliderVolume" min="0" max="100" value="80" oninput="alterarVolume(this.value)" class="w-12 md:w-16 h-1 bg-stone-400 rounded-lg appearance-none cursor-pointer accent-amber-800">
             </div>
           </div>
 
@@ -431,7 +438,6 @@
           <p class="opacity-75">Gerencie convidados, fotos, cores e a playlist das músicas.</p>
         </div>
 
-        <!-- NAVEGAÇÃO REESTILIZADA DO PAINEL ADMIN -->
         <div class="flex flex-wrap items-center gap-1.5 bg-stone-200 p-1.5 rounded-xl font-bold border border-stone-300">
           <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="tab-nav-admin px-3.5 py-2 rounded-lg transition bg-stone-900 text-white shadow-sm">👥 Convidados</button>
           <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="tab-nav-admin px-3.5 py-2 rounded-lg transition opacity-75 hover:opacity-100">📸 Fotos</button>
@@ -500,7 +506,7 @@
         <div id="containerFotosAdmin" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </div>
 
-      <!-- ABA 3: RECADOS (COM OPÇÃO DE OCULTAR / ATIVAR) -->
+      <!-- ABA 3: RECADOS -->
       <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white">
         <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
         <p class="opacity-75">Você pode ocultar recados sem apagá-los da planilha para que não apareçam na página nem no rodapé ao vivo.</p>
@@ -546,7 +552,7 @@
         </div>
       </div>
 
-      <!-- ABA 5: MÚSICAS COM PESQUISA E PREVIEW DIRETO DO DEEZER -->
+      <!-- ABA 5: MÚSICAS -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
           <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar Música no Deezer / YouTube</h3>
@@ -612,11 +618,51 @@
     let musicaTocando = false;
     let playlistMusicas = [];
     let indiceMusicaAtual = 0;
+    let volumeAtual = 80;
     let dragSrcEl = null;
+    let interacaoIniciada = false;
 
     let indexCarrosselTopo = 0;
     let indexCarrosselFotos = 0;
     let timerCarrossel = null;
+
+    // DESMUTA O ÁUDIO NA PRIMEIRA INTERAÇÃO DO USUÁRIO
+    function habilitarAudioInteracao() {
+      if (!interacaoIniciada && playerYT) {
+        try {
+          playerYT.unMute();
+          playerYT.setVolume(volumeAtual);
+          interacaoIniciada = true;
+        } catch(e){}
+      }
+    }
+    window.addEventListener('click', habilitarAudioInteracao, { once: true });
+    window.addEventListener('touchstart', habilitarAudioInteracao, { once: true });
+
+    function alterArVolume(val) {
+      volumeAtual = parseInt(val);
+      if (playerYT && playerYT.setVolume) {
+        playerYT.setVolume(volumeAtual);
+        if (volumeAtual === 0) {
+          playerYT.mute();
+          document.getElementById("iconeVolume").innerText = "🔇";
+        } else {
+          playerYT.unMute();
+          document.getElementById("iconeVolume").innerText = "🔊";
+        }
+      }
+    }
+
+    function alternarMute() {
+      const slider = document.getElementById("sliderVolume");
+      if (volumeAtual > 0) {
+        alterarVolume(0);
+        slider.value = 0;
+      } else {
+        alterarVolume(80);
+        slider.value = 80;
+      }
+    }
 
     function alternarVerSenha(idInput) {
       const el = document.getElementById(idInput);
@@ -826,14 +872,18 @@
         renderizarPlaylistAdmin();
 
         const atual = playlistMusicas[indiceMusicaAtual];
+        document.getElementById("txtNomeMusica").innerText = atual.titulo || "Música de Fundo";
+
         playerYT = new YT.Player('youtubePlayerContainer', {
           height: '0', width: '0', videoId: atual.id,
-          playerVars: { 'autoplay': 1, 'controls': 0 },
+          playerVars: { 'autoplay': 1, 'controls': 0, 'enablejsapi': 1 },
           events: {
             'onReady': (event) => {
+              event.target.setVolume(volumeAtual);
               event.target.playVideo();
               musicaTocando = true;
               atualizarBotaoPlayPause();
+              iniciarAtualizacaoProgresso();
             },
             'onStateChange': (event) => {
               if (event.data === YT.PlayerState.ENDED) proximaMusicaPlaylist();
@@ -841,6 +891,23 @@
           }
         });
       });
+    }
+
+    function iniciarAtualizacaoProgresso() {
+      setInterval(() => {
+        if (playerYT && playerYT.getCurrentTime && playerYT.getDuration && musicaTocando) {
+          const cur = playerYT.getCurrentTime();
+          const dur = playerYT.getDuration();
+          if (dur > 0) {
+            const pct = (cur / dur) * 100;
+            document.getElementById("barraProgressoMusica").style.width = pct + "%";
+            
+            const min = Math.floor(cur / 60);
+            const seg = Math.floor(cur % 60).toString().padStart(2, '0');
+            document.getElementById("txtTempoMusica").innerText = `${min}:${seg}`;
+          }
+        }
+      }, 1000);
     }
 
     function proximaMusicaPlaylist() {
@@ -859,6 +926,8 @@
       const atual = playlistMusicas[indiceMusicaAtual];
       if (atual && playerYT) {
         playerYT.loadVideoById(atual.id);
+        playerYT.unMute();
+        playerYT.setVolume(volumeAtual);
         musicaTocando = true;
         atualizarBotaoPlayPause();
         document.getElementById("txtNomeMusica").innerText = atual.titulo || atual.id;
@@ -867,8 +936,15 @@
 
     function toggleAudioMusica() {
       if (!playerYT) return;
-      if (musicaTocando) { playerYT.pauseVideo(); musicaTocando = false; }
-      else { playerYT.playVideo(); musicaTocando = true; }
+      habilitarAudioInteracao();
+      if (musicaTocando) { 
+        playerYT.pauseVideo(); 
+        musicaTocando = false; 
+      } else { 
+        playerYT.playVideo(); 
+        playerYT.unMute();
+        musicaTocando = true; 
+      }
       atualizarBotaoPlayPause();
     }
 
@@ -1076,7 +1152,6 @@
       document.getElementById("abaConfig").classList.toggle("hidden", aba !== 'config');
       document.getElementById("abaAdmins").classList.toggle("hidden", aba !== 'admins');
 
-      // ATUALIZA VISUALMENTE A ABA ATIVA NO MENU DO ADMIN
       const mapaBotoes = {
         'convidados': 'tabBtnConvidados',
         'fotosAdm': 'tabBtnFotos',
