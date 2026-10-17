@@ -15,7 +15,7 @@
       --casar-borda: rgba(200, 180, 160, 0.8);
       --bg-transparency: 0.50;
       --bg-site: #f7f2ed;
-      --card-bg: rgba(255, 255, 255, 0.98); /* MONOBLOCO QUASE SÓLIDO PARA O TEMA CLARO */
+      --card-bg: rgba(255, 255, 255, 0.98);
       --nav-bg: rgba(255, 255, 255, 0.98);
       --player-bg: #eae3db;
       --input-bg: #ffffff;
@@ -35,7 +35,6 @@
       --input-bg: #1f2937;
     }
 
-    /* ESTILIZAÇÃO DOS BLOCOS / MONOBLOCOS COM SOMBRA E BORDA DESTACADA */
     .monobloco-card {
       background-color: var(--card-bg) !important;
       border: 1px solid var(--casar-borda) !important;
@@ -44,7 +43,14 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* APLICAÇÃO GLOBAL DA COR DAS FONTES EM TODOS OS ELEMENTOS DE TEXTO */
+    /* PREVENÇÃO DE BUG DE CORES NO PAINEL ADMIN NO MODO ESCURO */
+    #modalAdmin, #modalAdmin * {
+      color: #1c1917 !important;
+    }
+    #modalAdmin button {
+      color: inherit;
+    }
+
     body, p, span, div, li, label, strong, em, b, i, a {
       color: var(--casar-texto) !important;
       -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke-color);
@@ -219,7 +225,7 @@
     </div>
   </nav>
 
-  <!-- CAPA PRINCIPAL (BLOCO MONOBLOCO) -->
+  <!-- CAPA PRINCIPAL -->
   <header id="home" class="py-12 md:py-16 px-4 text-center">
     <div class="max-w-2xl mx-auto monobloco-card p-6 md:p-10 rounded-3xl">
       <p class="text-xs uppercase tracking-[0.3em] font-semibold mb-3 opacity-90">Com a graça de Deus e com o coração cheio de alegria</p>
@@ -244,7 +250,7 @@
     </div>
   </header>
 
-  <!-- MENSAGEM (BLOCO MONOBLOCO) -->
+  <!-- MENSAGEM -->
   <section id="historia" class="py-12 px-4 max-w-3xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
@@ -264,7 +270,7 @@
     </div>
   </section>
 
-  <!-- TRAJES (BLOCO MONOBLOCO) -->
+  <!-- TRAJES -->
   <section id="trajes" class="py-12 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
@@ -284,7 +290,7 @@
     </div>
   </section>
 
-  <!-- LOCAL (BLOCO MONOBLOCO) -->
+  <!-- LOCAL -->
   <section id="local" class="py-12 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-2">Programação do Dia</h2>
@@ -305,7 +311,7 @@
     </div>
   </section>
 
-  <!-- GALERIA DE FOTOS (BLOCO MONOBLOCO) -->
+  <!-- GALERIA DE FOTOS -->
   <section id="galeria" class="py-12 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
@@ -331,7 +337,7 @@
     </div>
   </section>
 
-  <!-- RECADOS (BLOCO MONOBLOCO) -->
+  <!-- RECADOS -->
   <section id="recados" class="py-12 px-4 max-w-3xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Deixe seu Recado</h2>
@@ -344,7 +350,7 @@
     </div>
   </section>
 
-  <!-- RSVP (BLOCO MONOBLOCO) -->
+  <!-- RSVP -->
   <section id="rsvp" class="py-12 px-4 max-w-xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-2">Confirme sua Presença</h2>
@@ -461,7 +467,7 @@
           </div>
         </div>
 
-        <div id="containerTabelaAdmin" class="p-4 overflow-y-auto flex-1">
+        <div id="containerTabelaAdmin" class="p-4 overflow-y-auto flex-1 bg-white">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-stone-200/80 border-b border-casar font-bold uppercase text-[10px] tracking-wider select-none">
@@ -480,21 +486,21 @@
       </div>
 
       <!-- ABA 2: FOTOS DO CARROSSEL -->
-      <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4">
+      <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white">
         <h3 class="font-serif-custom text-xl font-bold">📸 Gerenciar Fotos do Carrossel</h3>
         <p class="opacity-75">Você pode desativar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
         <div id="containerFotosAdmin" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </div>
 
       <!-- ABA 3: RECADOS -->
-      <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4">
+      <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white">
         <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
         <p class="opacity-75">Remova recados inadequados para que não passem no rodapé ao vivo do site.</p>
         <div id="containerRecadosAdmin" class="space-y-3"></div>
       </div>
 
       <!-- ABA 4: DESIGN, CORES E CONTORNO DAS LETRAS -->
-      <div id="abaDesign" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
+      <div id="abaDesign" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
           <h3 class="font-serif-custom text-xl font-bold">🎨 Personalização Visual e Contorno dos Textos</h3>
           
@@ -532,17 +538,17 @@
         </div>
       </div>
 
-      <!-- ABA 5: MÚSICAS COM PESQUISA YOUTUBE E PLAYER DE PREVIEW -->
-      <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
+      <!-- ABA 5: MÚSICAS COM PESQUISA VIA DEEZER -->
+      <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar Música no YouTube</h3>
+          <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar Música no Deezer / YouTube</h3>
           
           <div class="flex gap-2">
-            <input type="text" id="inputPesquisarMusica" placeholder="Digite o nome da música ou artista (Ex: perfet ed sheron)..." class="w-full p-3 border rounded-xl font-medium">
-            <button onclick="pesquisarMusicaYoutube()" id="btnBuscarYT" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar no YouTube</button>
+            <input type="text" id="inputPesquisarMusica" placeholder="Digite o nome da música (Ex: Black Pearl Jam, Perfect Ed Sheeran)..." class="w-full p-3 border rounded-xl font-medium">
+            <button onclick="pesquisarMusicaDeezer()" id="btnBuscarDeezer" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar Música</button>
           </div>
 
-          <div id="containerResultadosYoutube" class="hidden space-y-2 p-3 bg-white border rounded-xl"></div>
+          <div id="containerResultadosDeezer" class="hidden space-y-2 p-3 bg-white border rounded-xl"></div>
 
           <div class="mt-6 border-t pt-4">
             <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva (Arraste para reordenar):</h4>
@@ -552,7 +558,7 @@
       </div>
 
       <!-- ABA 6: ADMINS -->
-      <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6">
+      <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
           <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores</h3>
           <div class="grid md:grid-cols-3 gap-2">
@@ -740,18 +746,18 @@
       update();
     }
 
-    function pesquisarMusicaYoutube() {
+    function pesquisarMusicaDeezer() {
       const termo = document.getElementById("inputPesquisarMusica").value.trim();
-      const btn = document.getElementById("btnBuscarYT");
-      const container = document.getElementById("containerResultadosYoutube");
+      const btn = document.getElementById("btnBuscarDeezer");
+      const container = document.getElementById("containerResultadosDeezer");
 
       if (!termo) return alert("Digite o nome de uma música.");
 
       btn.innerText = "Buscando...";
       btn.disabled = true;
 
-      executarJSONP({ action: "pesquisarYoutube", termo: termo }, function(res) {
-        btn.innerText = "Buscar no YouTube";
+      executarJSONP({ action: "pesquisarDeezer", termo: termo }, function(res) {
+        btn.innerText = "Buscar Música";
         btn.disabled = false;
         container.classList.remove("hidden");
 
@@ -786,7 +792,7 @@
     function adicionarMusicaDaBusca(id, titulo) {
       executarJSONP({ action: "salvarMusica", videoId: id, titulo: titulo }, function(res) {
         if (res.sucesso) {
-          document.getElementById("containerResultadosYoutube").classList.add("hidden");
+          document.getElementById("containerResultadosDeezer").classList.add("hidden");
           document.getElementById("inputPesquisarMusica").value = "";
           carregarPlaylistPlanilha();
           alert("Música adicionada à playlist!");
@@ -1360,8 +1366,7 @@
         callbackSuccess(res);
       };
       const query = Object.keys(params).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join("&");
-      const script = document.createElement("script");
-      script.src = `${API_URL}?${query}&callback=${callbackName}`;
+      const script.src = `${API_URL}?${query}&callback=${callbackName}`;
       document.body.appendChild(script);
     }
   </script>
