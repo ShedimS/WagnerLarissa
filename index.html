@@ -13,7 +13,7 @@
       --casar-texto: #2c251e;
       --casar-titulos: #111827;
       --casar-borda: rgba(200, 180, 160, 0.8);
-      --bg-transparency: 0.50;
+      --bg-transparency: 0.65;
       --bg-site: #f7f2ed;
       --card-bg: rgba(255, 255, 255, 0.98);
       --nav-bg: rgba(255, 255, 255, 0.98);
@@ -52,9 +52,6 @@
       background-color: #ffffff !important;
       color: #1c1917 !important;
       border-color: #d6d3d1 !important;
-    }
-    #modalAdmin button, #modalLogin button {
-      color: inherit;
     }
 
     body, p, span, div, li, label, strong, em, b, i, a {
@@ -109,7 +106,7 @@
         rgba(30, 25, 20, var(--bg-transparency))
       ), url('foto.jpeg');
       background-size: cover;
-      background-position: center 25%;
+      background-position: center 20%;
       background-repeat: no-repeat;
     }
 
@@ -141,7 +138,7 @@
 
     .cnn-ticker-container {
       position: fixed; bottom: 0; left: 0;
-      width: 100%; height: 40px;
+      width: 100%; height: 44px;
       background-color: rgba(44, 37, 30, 0.95);
       color: #fff; z-index: 99;
       display: flex; align-items: center; overflow: hidden;
@@ -151,9 +148,9 @@
 
     .cnn-label {
       background-color: #8c6e5c; color: #fff !important;
-      padding: 0 12px; height: 100%;
+      padding: 0 16px; height: 100%;
       display: flex; align-items: center;
-      font-size: 10px; font-weight: 700;
+      font-size: 11px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.1em;
       white-space: nowrap; z-index: 2;
     }
@@ -167,7 +164,7 @@
 
     .cnn-ticker-item {
       display: inline-flex; align-items: center;
-      padding: 0 25px; font-size: 11px; font-weight: 500;
+      padding: 0 25px; font-size: 12px; font-weight: 500;
       color: #ffffff !important;
     }
 
@@ -186,7 +183,7 @@
   <div id="parallax-bg"><div id="parallax-image"></div></div>
   <div id="youtubePlayerContainer" style="display:none;"></div>
 
-  <!-- NAVEGAÇÃO -->
+  <!-- NAVEGAÇÃO E PLAYER -->
   <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
     <div class="max-w-4xl mx-auto w-full flex flex-col items-center gap-2">
       
@@ -194,7 +191,7 @@
         <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
         <div class="flex items-center gap-2">
-          <!-- PLAYER DE ÁUDIO -->
+          <!-- PLAYER DE MÚSICA YOUTUBE -->
           <div class="player-container flex items-center gap-1.5 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
             <button onclick="musicaAnteriorPlaylist()" title="Anterior" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 font-bold">⏮</button>
             <button id="btnPlayPause" onclick="toggleAudioMusica()" title="Play/Pause" class="w-7 h-7 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold shadow">▶</button>
@@ -217,6 +214,7 @@
             </div>
           </div>
 
+          <!-- MODO ESCURO -->
           <button onclick="alternarTemaVisual()" title="Alternar Modo Claro/Escuro" class="w-8 h-8 rounded-full border border-casar player-container flex items-center justify-center text-sm shadow-sm">
             <span id="iconeTema">🌙</span>
           </button>
@@ -229,9 +227,9 @@
         <a href="#trajes" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>👔</span><span>Trajes</span></a>
         <a href="#local" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>📍</span><span>Locais</span></a>
         <a href="https://loja.infinitepay.io/paczkowski" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>🎁</span><span>Presentes</span></a>
-        <a href="#galeria" class="flex flex-col items-center hover:text-casar-primary font-bold leading-tight py-1"><span>📸</span><span>Fotos & Envio</span></a>
+        <a href="#galeria" class="flex flex-col items-center hover:text-casar-primary font-bold leading-tight py-1"><span>📸</span><span>Fotos</span></a>
         <a href="#recados" class="flex flex-col items-center hover:text-casar-primary transition leading-tight py-1"><span>✍️</span><span>Recados</span></a>
-        <a href="#rsvp" class="flex flex-col items-center hover:text-casar-primary transition font-bold leading-tight py-1"><span>✅</span><span>Confirme Presença</span></a>
+        <a href="#rsvp" class="flex flex-col items-center hover:text-casar-primary transition font-bold leading-tight py-1"><span>✅</span><span>RSVP</span></a>
       </div>
 
     </div>
@@ -262,7 +260,7 @@
     </div>
   </header>
 
-  <!-- MENSAGEM -->
+  <!-- MENSAGEM DO CASAL -->
   <section id="historia" class="py-12 px-4 max-w-3xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-4">Bem-vindos ao nosso site!</h2>
@@ -271,8 +269,8 @@
         <p>Criamos esse espaço com muito carinho para compartilhar com vocês todos os detalhes do nosso casamento. Estamos muito felizes e contamos com a presença de cada um de vocês no nosso grande dia — <strong>11 de Dezembro de 2026</strong>!</p>
         <div class="monobloco-card p-6 rounded-2xl text-left space-y-3 my-6">
           <p class="font-bold text-xs uppercase tracking-wider">Dois recadinhos importantes:</p>
-          <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "Confirme Presença" e preencha os dados.</p>
-          <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade!</p>
+          <p class="text-xs"><strong>1. Confirme sua presença:</strong> É muito importante para nossa organização. Por favor, clique no menu "RSVP" e preencha os dados.</p>
+          <p class="text-xs"><strong>2. Lista de presentes:</strong> Se quiser nos presentear, fique à vontade! Acesse nossa Lista de Casamento.</p>
         </div>
         <div class="pt-4">
           <p class="text-xs uppercase tracking-widest font-bold opacity-90">Com carinho,</p>
@@ -282,7 +280,7 @@
     </div>
   </section>
 
-  <!-- TRAJES -->
+  <!-- GUIA DE TRAJES -->
   <section id="trajes" class="py-12 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Guia de Trajes</h2>
@@ -296,34 +294,44 @@
         <div class="p-6 monobloco-card rounded-2xl space-y-2">
           <div class="text-3xl">👔</div>
           <h3 class="font-serif-custom text-2xl font-bold">Para os Homens</h3>
-          <p class="text-xs font-medium">Terno e gravata ou calça social com camisa.</p>
+          <p class="text-xs font-medium">Terno e gravata ou calça social com camisa social.</p>
         </div>
+      </div>
+      <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs text-left space-y-2">
+        <div class="font-bold text-rose-950 uppercase text-[11px]">⚠️ Lembretes Importantes:</div>
+        <p class="text-stone-800">Por respeito à noiva, pedimos atenção especial para <strong>NÃO utilizar peças nas cores: Branco, Off-white, Azul Bebê</strong> ou tons muito próximos ao vestido da noiva.</p>
       </div>
     </div>
   </section>
 
-  <!-- LOCAL -->
+  <!-- PROGRAMAÇÃO DO DIA -->
   <section id="local" class="py-12 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-2">Programação do Dia</h2>
       <div class="grid md:grid-cols-2 gap-6 text-left mt-6">
-        <div class="p-6 monobloco-card rounded-2xl">
-          <h3 class="font-serif-custom text-2xl font-bold mb-2">⛪ Cerimônia</h3>
-          <p class="text-xs font-semibold">11/12/2026 às 16h00</p>
-          <p class="text-xs mb-4 opacity-80">Paróquia Nossa Senhora Rainha da Paz</p>
-          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz" target="_blank" class="inline-flex items-center justify-center w-full btn-casar py-2.5 rounded-xl text-xs font-bold uppercase">📍 Abrir no Google Maps</a>
+        <div class="p-6 monobloco-card rounded-2xl flex flex-col justify-between">
+          <div>
+            <h3 class="font-serif-custom text-2xl font-bold mb-2">⛪ Cerimônia</h3>
+            <p class="text-xs font-semibold">Sexta-feira, 11/12/2026 às 16h00</p>
+            <p class="text-xs mb-1 opacity-90">Paróquia Nossa Senhora Rainha da Paz</p>
+            <p class="text-[11px] opacity-75">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
+          </div>
+          <a href="https://maps.google.com/?q=Paróquia+Nossa+Senhora+Rainha+da+Paz" target="_blank" class="mt-4 inline-flex items-center justify-center w-full btn-casar py-2.5 rounded-xl text-xs font-bold uppercase">📍 Google Maps (Cerimônia)</a>
         </div>
-        <div class="p-6 monobloco-card rounded-2xl">
-          <h3 class="font-serif-custom text-2xl font-bold mb-2">🥂 Recepção</h3>
-          <p class="text-xs font-semibold">11/12/2026 às 17h30</p>
-          <p class="text-xs mb-4 opacity-80">Chácara Luz da Mata</p>
-          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata" target="_blank" class="inline-flex items-center justify-center w-full btn-casar py-2.5 rounded-xl text-xs font-bold uppercase">📍 Abrir no Google Maps</a>
+        <div class="p-6 monobloco-card rounded-2xl flex flex-col justify-between">
+          <div>
+            <h3 class="font-serif-custom text-2xl font-bold mb-2">🥂 Recepção</h3>
+            <p class="text-xs font-semibold">Sexta-feira, 11/12/2026 às 17h30</p>
+            <p class="text-xs mb-1 opacity-90">Chácara Luz da Mata</p>
+            <p class="text-[11px] opacity-75">Planta Laranjeiras, Piraquara - PR (Estacionamento no local)</p>
+          </div>
+          <a href="https://maps.google.com/?q=Chácara+Luz+da+Mata" target="_blank" class="mt-4 inline-flex items-center justify-center w-full btn-casar py-2.5 rounded-xl text-xs font-bold uppercase">📍 Google Maps (Recepção)</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GALERIA DE FOTOS -->
+  <!-- MURAL DE FOTOS -->
   <section id="galeria" class="py-12 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl font-bold mb-1">Mural de Fotos</h2>
@@ -338,12 +346,12 @@
           <p id="txtStatusUpload" class="text-[11px] font-bold text-center opacity-80">Enviando fotos...</p>
         </div>
 
-        <button onclick="enviarFotosMultiplas()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase">📸 Enviar Fotos</button>
+        <button onclick="enviarFotosMultiplas()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase">📸 Enviar Fotos para o Álbum</button>
       </div>
 
       <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border min-h-[250px] bg-stone-100 flex items-center justify-center">
         <div id="carrosselFotos" class="flex transition-transform duration-700 w-full">
-          <p class="text-center text-xs opacity-70 p-8 w-full">Carregando fotos do álbum...</p>
+          <p class="text-center text-xs opacity-70 p-8 w-full">Carregando álbum de fotos...</p>
         </div>
       </div>
     </div>
@@ -365,18 +373,20 @@
   <!-- RSVP -->
   <section id="rsvp" class="py-12 px-4 max-w-xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
-      <h2 class="font-serif-custom text-3xl font-bold mb-2">Confirme sua Presença</h2>
+      <h2 class="font-serif-custom text-3xl font-bold mb-2">Confirmação de Presença</h2>
       <div id="stepBusca" class="monobloco-card p-6 rounded-2xl space-y-3">
         <div class="flex gap-2">
           <input type="text" id="inputBusca" placeholder="Nome, Sobrenome ou Telefone" class="w-full p-2.5 border rounded-lg text-sm">
           <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-5 rounded-lg text-xs font-bold uppercase">Buscar</button>
         </div>
+        <p class="text-[11px] opacity-75">Digite o seu nome, o do responsável ou o telefone cadastrado para trazer toda a sua família.</p>
       </div>
       <div id="stepSelecao" class="hidden monobloco-card p-6 rounded-2xl text-left space-y-4">
         <h3 id="txtResponsavel" class="font-serif-custom text-2xl font-bold"></h3>
+        <p id="txtTelefone" class="text-xs opacity-75"></p>
         <form id="formMembros" onsubmit="salvarConfirmacoes(event)" class="space-y-3">
           <div id="containerMembros" class="space-y-2"></div>
-          <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-3 rounded-xl font-bold uppercase text-xs">Confirmar Família</button>
+          <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-3 rounded-xl font-bold uppercase text-xs">Confirmar Presença da Família</button>
         </form>
       </div>
     </div>
@@ -384,7 +394,7 @@
 
   <!-- RODAPÉ CNN -->
   <div class="cnn-ticker-container">
-    <div class="cnn-label"><span class="texto-label">Recados Ao Vivo</span></div>
+    <div class="cnn-label">Recados Ao Vivo</div>
     <div style="overflow: hidden; width: 100%;"><div id="cnnTickerTrack" class="cnn-ticker-track"></div></div>
   </div>
 
@@ -433,7 +443,7 @@
       <div class="p-4 border-b border-casar bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
         <div>
           <h2 class="font-serif-custom text-2xl font-bold">Painel Administrativo dos Noivos</h2>
-          <p class="opacity-75">Gerencie convidados, fotos, cores e a playlist das músicas.</p>
+          <p class="opacity-75">Gerencie convidados, fotos, cores e a playlist do YouTube.</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-1.5 bg-stone-200 p-1.5 rounded-xl font-bold border border-stone-300">
@@ -446,6 +456,17 @@
         </div>
 
         <button onclick="fecharModalAdmin()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">✕</button>
+      </div>
+
+      <!-- TRANSPARÊNCIA DE FUNDO -->
+      <div class="p-3 bg-amber-50/80 border-b border-casar flex items-center justify-between px-6 text-xs">
+        <span class="font-bold text-stone-800">✨ Transparência da Foto de Fundo:</span>
+        <div class="flex items-center gap-3">
+          <span class="text-[10px] text-stone-600 font-bold">Mais Foto</span>
+          <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-36 accent-amber-800 cursor-pointer">
+          <span class="text-[10px] text-stone-600 font-bold">Mais Claro</span>
+          <span id="valorTransparencia" class="font-bold text-amber-900 w-8 text-right">0.65</span>
+        </div>
       </div>
 
       <!-- ABA 1: CONVIDADOS -->
@@ -507,7 +528,7 @@
       <!-- ABA 3: RECADOS -->
       <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white">
         <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
-        <p class="opacity-75">Você pode ocultar recados sem apagá-los da planilha para que não apareçam na página nem no rodapé ao vivo.</p>
+        <p class="opacity-75">Você pode ocultar recados sem apagá-los da planilha para que não apareçam no site nem no rodapé ao vivo.</p>
         <div id="containerRecadosAdmin" class="space-y-3"></div>
       </div>
 
@@ -520,7 +541,7 @@
             <div class="flex items-center justify-between">
               <div>
                 <h4 class="font-bold text-sm">Contorno nas Letras (Text Outline)</h4>
-                <p class="opacity-75 text-[11px]">Adiciona um contorno escuro no tema claro e contorno claro no tema escuro para facilitar a leitura.</p>
+                <p class="opacity-75 text-[11px]">Adiciona um contorno fino de contraste ao redor das letras para facilitar a leitura em cima do fundo.</p>
               </div>
               <button onclick="alternarContornoTexto()" id="btnToggleContorno" class="px-4 py-2 rounded-lg font-bold uppercase btn-casar">Ativar Contorno</button>
             </div>
@@ -562,7 +583,7 @@
           </div>
 
           <div class="mt-6 border-t pt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva (Clique em "▶ Tocar Agora" para testar):</h4>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva (Arraste para reordenar ou clique para testar):</h4>
             <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100"></div>
           </div>
         </div>
@@ -622,6 +643,13 @@
     let indexCarrosselTopo = 0;
     let indexCarrosselFotos = 0;
     let timerCarrossel = null;
+
+    function alterarTransparenciaFundo(valor) {
+      document.documentElement.style.setProperty('--bg-transparency', valor);
+      const valEl = document.getElementById("valorTransparencia");
+      if (valEl) valEl.innerText = parseFloat(valor).toFixed(2);
+      localStorage.setItem("casamento_transparencia", valor);
+    }
 
     function habilitarAudioInteracao() {
       if (playerYT && playerPronto && playerYT.unMute) {
@@ -736,6 +764,13 @@
     }
 
     window.addEventListener("DOMContentLoaded", function() {
+      const salvaTransp = localStorage.getItem("casamento_transparencia");
+      if (salvaTransp) {
+        alterarTransparenciaFundo(salvaTransp);
+        const slider = document.getElementById("rangeTransparencia");
+        if (slider) slider.value = salvaTransp;
+      }
+
       const temaSalvo = localStorage.getItem("casamento_tema");
       if (temaSalvo === "escuro") {
         document.getElementById("htmlRoot").classList.add("dark-mode");
@@ -886,10 +921,7 @@
       console.warn("Erro no vídeo do YouTube:", event.data);
       const txt = document.getElementById("txtNomeMusica");
       if (txt) txt.innerText = "⚠️ Faixa indisponível - Pulando...";
-      
-      setTimeout(() => {
-        proximaMusicaPlaylist();
-      }, 1500);
+      setTimeout(() => { proximaMusicaPlaylist(); }, 1500);
     }
 
     function tocarMusicaIndex(idx) {
@@ -947,7 +979,6 @@
       habilitarAudioInteracao();
 
       const st = playerYT.getPlayerState();
-      
       if (st === YT.PlayerState.PLAYING) { 
         playerYT.pauseVideo(); 
         musicaTocando = false; 
