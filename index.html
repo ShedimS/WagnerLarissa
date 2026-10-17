@@ -185,7 +185,6 @@
 
   <div id="parallax-bg"><div id="parallax-image"></div></div>
   <div id="youtubePlayerContainer" style="display:none;"></div>
-  <audio id="audioPreviewDeezer" style="display:none;"></audio>
 
   <!-- NAVEGAÇÃO -->
   <nav class="sticky top-0 z-50 border-b border-casar shadow-sm py-2 px-3">
@@ -551,20 +550,19 @@
         </div>
       </div>
 
-      <!-- ABA 5: MÚSICAS -->
+      <!-- ABA 5: MÚSICAS YOUTUBE -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white">
         <div class="bg-stone-50 p-6 rounded-2xl border border-casar space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎵 Pesquisar Música no Deezer / YouTube</h3>
+          <h3 class="font-serif-custom text-xl font-bold">🎵 Adicionar Música do YouTube</h3>
+          <p class="opacity-75 text-xs">Cole o link completo ou ID do vídeo do YouTube abaixo (Ex: https://www.youtube.com/watch?v=2Vv-BfVoq4g).</p>
           
           <div class="flex gap-2">
-            <input type="text" id="inputPesquisarMusica" placeholder="Digite o nome da música (Ex: Ed Sheeran Perfect, Black Pearl Jam)..." class="w-full p-3 border rounded-xl font-medium">
-            <button onclick="pesquisarMusicaDeezer()" id="btnBuscarDeezer" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Buscar Música</button>
+            <input type="text" id="inputPesquisarMusica" placeholder="Cole aqui o link do vídeo do YouTube..." class="w-full p-3 border rounded-xl font-medium">
+            <button onclick="pesquisarMusicaDeezer()" id="btnBuscarDeezer" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Adicionar Link</button>
           </div>
 
-          <div id="containerResultadosDeezer" class="hidden space-y-2 p-3 bg-white border rounded-xl"></div>
-
           <div class="mt-6 border-t pt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva:</h4>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva (Clique em "▶ Tocar Agora" para testar):</h4>
             <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100"></div>
           </div>
         </div>
@@ -797,53 +795,25 @@
     }
 
     function pesquisarMusicaDeezer() {
-      const termo = document.getElementById("inputPesquisarMusica").value.trim();
+      const input = document.getElementById("inputPesquisarMusica");
+      const termo = input.value.trim();
       const btn = document.getElementById("btnBuscarDeezer");
-      const container = document.getElementById("containerResultadosDeezer");
 
-      if (!termo) return alert("Digite o nome de uma música.");
+      if (!termo) return alert("Cole o link ou ID do vídeo do YouTube.");
 
-      btn.innerText = "Buscando...";
+      btn.innerText = "Buscando e Salvando...";
       btn.disabled = true;
 
-      executarJSONP({ action: "pesquisarDeezer", termo: termo }, function(res) {
-        btn.innerText = "Buscar Música";
+      executarJSONP({ action: "salvarMusica", videoId: termo, titulo: "" }, function(res) {
+        btn.innerText = "Adicionar Link";
         btn.disabled = false;
-        container.classList.remove("hidden");
 
-        if (res.sucesso && res.resultados && res.resultados.length > 0) {
-          container.innerHTML = res.resultados.map(m => `
-            <div class="flex items-center justify-between p-2 hover:bg-stone-100 rounded-lg border">
-              <span class="font-bold text-xs truncate max-w-[220px] md:max-w-md">${m.titulo}</span>
-              <div class="flex gap-2">
-                <button onclick="testarMusicaPreviewDirect('${m.previewUrl}')" class="bg-stone-200 hover:bg-stone-300 px-3 py-1 rounded font-bold text-[11px]">▶ Preview 30s</button>
-                <button onclick="adicionarMusicaDaBusca('${m.id}', '${m.titulo.replace(/'/g, "")}')" class="btn-casar px-3 py-1 rounded font-bold text-[11px]">➕ Adicionar</button>
-              </div>
-            </div>
-          `).join('');
-        } else {
-          container.innerHTML = `<p class="italic text-xs p-2 text-center text-rose-700 font-bold">${res.mensagem || 'Nenhum resultado encontrado. Tente outro nome.'}</p>`;
-        }
-      });
-    }
-
-    function testarMusicaPreviewDirect(previewUrl) {
-      const audioEl = document.getElementById("audioPreviewDeezer");
-      if (!previewUrl || previewUrl === "undefined") {
-        return alert("Preview de áudio não disponível para esta faixa.");
-      }
-      if (playerYT && playerPronto && musicaTocando) playerYT.pauseVideo();
-      audioEl.src = previewUrl;
-      audioEl.play();
-    }
-
-    function adicionarMusicaDaBusca(id, titulo) {
-      executarJSONP({ action: "salvarMusica", videoId: id, titulo: titulo }, function(res) {
         if (res.sucesso) {
-          document.getElementById("containerResultadosDeezer").classList.add("hidden");
-          document.getElementById("inputPesquisarMusica").value = "";
+          input.value = "";
           carregarPlaylistPlanilha();
-          alert("Música adicionada à playlist!");
+          alert("✅ Música '" + res.titulo + "' adicionada com sucesso!");
+        } else {
+          alert("⚠️ Erro ao salvar a música. Verifique o link enviado.");
         }
       });
     }
@@ -912,11 +882,10 @@
       }
     }
 
-    // TRATAMENTO DE ERROS DO YOUTUBE (PULA ERROS 101, 150 OU ID INVÁLIDO)
     function onPlayerError(event) {
-      console.warn("Erro no player do YouTube ID:", event.data);
+      console.warn("Erro no vídeo do YouTube:", event.data);
       const txt = document.getElementById("txtNomeMusica");
-      if (txt) txt.innerText = "⚠️ Erro na faixa - Pulando...";
+      if (txt) txt.innerText = "⚠️ Faixa indisponível - Pulando...";
       
       setTimeout(() => {
         proximaMusicaPlaylist();
@@ -972,7 +941,6 @@
       }
     }
 
-    // AÇÃO CORRIGIDA DO BOTÃO PLAY/PAUSE
     function toggleAudioMusica() {
       if (!playerYT || !playerPronto) return;
 
