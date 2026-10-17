@@ -195,7 +195,7 @@
         <span class="font-serif-custom text-2xl font-bold tracking-normal whitespace-nowrap">W & L</span>
         
         <div class="flex items-center gap-2">
-          <!-- PLAYER COM NOME, PROGRESSO E SLIDER DE VOLUME -->
+          <!-- PLAYER DE ÁUDIO -->
           <div class="player-container flex items-center gap-1.5 border border-casar px-2.5 py-1 rounded-2xl shadow-inner text-[11px]">
             <button onclick="musicaAnteriorPlaylist()" title="Anterior" class="w-6 h-6 rounded-full bg-stone-300 dark:bg-stone-700 font-bold">⏮</button>
             <button id="btnPlayPause" onclick="toggleAudioMusica()" title="Play/Pause" class="w-7 h-7 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold shadow">▶</button>
@@ -564,7 +564,7 @@
           <div id="containerResultadosDeezer" class="hidden space-y-2 p-3 bg-white border rounded-xl"></div>
 
           <div class="mt-6 border-t pt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva (Com botões de tocar e remover):</h4>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva:</h4>
             <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100"></div>
           </div>
         </div>
@@ -614,24 +614,22 @@
     let filtroRsvpAtivo = '';
 
     let playerYT = null;
+    let playerPronto = false;
     let musicaTocando = false;
     let playlistMusicas = [];
     let indiceMusicaAtual = 0;
     let volumeAtual = 80;
     let dragSrcEl = null;
-    let interacaoIniciada = false;
 
     let indexCarrosselTopo = 0;
     let indexCarrosselFotos = 0;
     let timerCarrossel = null;
 
-    // DESMUTA E ATIVA O SOM NO PRIMEIRA INTERAÇÃO NA TELA
     function habilitarAudioInteracao() {
-      if (playerYT && playerYT.unMute) {
+      if (playerYT && playerPronto && playerYT.unMute) {
         try {
           playerYT.unMute();
           playerYT.setVolume(volumeAtual);
-          interacaoIniciada = true;
         } catch(e){}
       }
     }
@@ -640,7 +638,7 @@
 
     function alterarVolume(val) {
       volumeAtual = parseInt(val);
-      if (playerYT && playerYT.setVolume) {
+      if (playerYT && playerPronto && playerYT.setVolume) {
         playerYT.setVolume(volumeAtual);
         if (volumeAtual === 0) {
           playerYT.mute();
@@ -834,7 +832,7 @@
       if (!previewUrl || previewUrl === "undefined") {
         return alert("Preview de áudio não disponível para esta faixa.");
       }
-      if (playerYT && musicaTocando) playerYT.pauseVideo();
+      if (playerYT && playerPronto && musicaTocando) playerYT.pauseVideo();
       audioEl.src = previewUrl;
       audioEl.play();
     }
@@ -874,23 +872,55 @@
         document.getElementById("txtNomeMusica").innerText = atual.titulo || "Música de Fundo";
 
         playerYT = new YT.Player('youtubePlayerContainer', {
-          height: '0', width: '0', videoId: atual.id,
-          playerVars: { 'autoplay': 1, 'controls': 0, 'enablejsapi': 1 },
+          height: '0',
+          width: '0',
+          videoId: atual.id,
+          playerVars: { 
+            'autoplay': 1, 
+            'controls': 0, 
+            'enablejsapi': 1,
+            'origin': window.location.origin
+          },
           events: {
-            'onReady': (event) => {
-              event.target.unMute();
-              event.target.setVolume(volumeAtual);
-              event.target.playVideo();
-              musicaTocando = true;
-              atualizarBotaoPlayPause();
-              iniciarAtualizacaoProgresso();
-            },
-            'onStateChange': (event) => {
-              if (event.data === YT.PlayerState.ENDED) proximaMusicaPlaylist();
-            }
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError
           }
         });
       });
+    }
+
+    function onPlayerReady(event) {
+      playerPronto = true;
+      event.target.unMute();
+      event.target.setVolume(volumeAtual);
+      event.target.playVideo();
+      musicaTocando = true;
+      atualizarBotaoPlayPause();
+      iniciarAtualizacaoProgresso();
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.PLAYING) {
+        musicaTocando = true;
+        atualizarBotaoPlayPause();
+      } else if (event.data === YT.PlayerState.PAUSED) {
+        musicaTocando = false;
+        atualizarBotaoPlayPause();
+      } else if (event.data === YT.PlayerState.ENDED) {
+        proximaMusicaPlaylist();
+      }
+    }
+
+    // TRATAMENTO DE ERROS DO YOUTUBE (PULA ERROS 101, 150 OU ID INVÁLIDO)
+    function onPlayerError(event) {
+      console.warn("Erro no player do YouTube ID:", event.data);
+      const txt = document.getElementById("txtNomeMusica");
+      if (txt) txt.innerText = "⚠️ Erro na faixa - Pulando...";
+      
+      setTimeout(() => {
+        proximaMusicaPlaylist();
+      }, 1500);
     }
 
     function tocarMusicaIndex(idx) {
@@ -902,7 +932,7 @@
 
     function iniciarAtualizacaoProgresso() {
       setInterval(() => {
-        if (playerYT && playerYT.getCurrentTime && playerYT.getDuration && musicaTocando) {
+        if (playerYT && playerPronto && playerYT.getCurrentTime && playerYT.getDuration && musicaTocando) {
           const cur = playerYT.getCurrentTime();
           const dur = playerYT.getDuration();
           if (dur > 0) {
@@ -931,7 +961,7 @@
 
     function tocarMusicaAtualIndex() {
       const atual = playlistMusicas[indiceMusicaAtual];
-      if (atual && playerYT) {
+      if (atual && playerYT && playerPronto) {
         playerYT.loadVideoById(atual.id);
         playerYT.unMute();
         playerYT.setVolume(volumeAtual);
@@ -942,15 +972,21 @@
       }
     }
 
+    // AÇÃO CORRIGIDA DO BOTÃO PLAY/PAUSE
     function toggleAudioMusica() {
-      if (!playerYT) return;
+      if (!playerYT || !playerPronto) return;
+
       habilitarAudioInteracao();
-      if (musicaTocando) { 
+
+      const st = playerYT.getPlayerState();
+      
+      if (st === YT.PlayerState.PLAYING) { 
         playerYT.pauseVideo(); 
         musicaTocando = false; 
       } else { 
-        playerYT.playVideo(); 
         playerYT.unMute();
+        playerYT.setVolume(volumeAtual);
+        playerYT.playVideo(); 
         musicaTocando = true; 
       }
       atualizarBotaoPlayPause();
@@ -961,7 +997,7 @@
     }
 
     function pularParaProgresso(event) {
-      if (!playerYT || !playerYT.getDuration) return;
+      if (!playerYT || !playerPronto || !playerYT.getDuration) return;
       const rect = event.currentTarget.getBoundingClientRect();
       const pct = (event.clientX - rect.left) / rect.width;
       playerYT.seekTo(pct * playerYT.getDuration(), true);
