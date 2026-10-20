@@ -19,35 +19,41 @@
       --nav-bg: rgba(255, 255, 255, 0.98);
       --player-bg: #eae3db;
       --input-bg: #ffffff;
+      --card-text-color: #2c251e;
     }
 
     .dark-mode {
       --casar-texto: #ffffff !important;
       --casar-titulos: #fbbf24 !important;
-      --casar-borda: rgba(75, 85, 99, 0.8);
+      --casar-borda: rgba(100, 116, 139, 0.8);
       --bg-transparency: 0.85;
-      --bg-site: #111827;
-      --card-bg: rgba(31, 41, 55, 0.96);
-      --nav-bg: rgba(17, 24, 39, 0.98);
-      --player-bg: #374151;
-      --input-bg: #1f2937;
+      --bg-site: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.98);
+      --nav-bg: rgba(15, 23, 42, 0.98);
+      --player-bg: #1e293b;
+      --input-bg: #334155;
+      --card-text-color: #f8fafc;
     }
 
     .monobloco-card {
       background-color: var(--card-bg) !important;
       border: 1px solid var(--casar-borda) !important;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* Trava de cor dos modais admin para legibilidade absoluta */
-    #modalAdmin, #modalAdmin *, #modalLogin, #modalLogin * {
-      -webkit-text-stroke: 0px transparent !important;
+    /* Trava de cores no Modo Escuro para elementos do Admin */
+    .dark-mode #modalAdmin, .dark-mode #modalLogin {
+      color: #0f172a !important;
     }
-
+    
     body, p, span, div, li, label, strong, em, b, i, a {
       color: var(--casar-texto);
+    }
+
+    .card-txt {
+      color: var(--card-text-color) !important;
     }
 
     h1, h2, h3, h4, h5, h6, .font-serif-custom { 
@@ -131,7 +137,7 @@
     .cnn-ticker-container {
       position: fixed; bottom: 0; left: 0;
       width: 100%; height: 44px;
-      background-color: rgba(44, 37, 30, 0.95);
+      background-color: rgba(15, 23, 42, 0.95);
       color: #fff; z-index: 99;
       display: flex; align-items: center; overflow: hidden;
       border-top: 2px solid #a38573;
@@ -164,17 +170,16 @@
       color: #d4b5a0 !important; font-weight: 700; margin-right: 6px;
     }
 
-    /* Correção do hover das abas do admin para não sumir o texto */
     .tab-admin-btn {
-      color: #44403c !important;
-      background-color: #e7e5e4 !important;
+      color: #1e293b !important;
+      background-color: #f1f5f9 !important;
     }
     .tab-admin-btn:hover {
       background-color: #a38573 !important;
       color: #ffffff !important;
     }
     .tab-admin-btn.active-tab {
-      background-color: #1c1917 !important;
+      background-color: #0f172a !important;
       color: #ffffff !important;
     }
 
@@ -205,29 +210,26 @@
 
             <div class="flex flex-col w-24 md:w-32 ml-1">
               <div class="flex justify-between text-[9px] font-bold truncate">
-                <span id="txtNomeMusica" class="truncate">Carregando...</span>
-                <span id="txtTempoMusica" class="ml-1">0:00</span>
+                <span id="txtNomeMusica" class="truncate card-txt">Carregando...</span>
+                <span id="txtTempoMusica" class="ml-1 card-txt">0:00</span>
               </div>
               <div class="w-full bg-stone-400 dark:bg-stone-600 rounded-full h-1.5 overflow-hidden mt-0.5 cursor-pointer" onclick="pularParaProgresso(event)">
                 <div id="barraProgressoMusica" class="bg-amber-800 h-1.5 rounded-full w-0 transition-all"></div>
               </div>
             </div>
 
-            <!-- CONTROLE DE VOLUME -->
             <div class="flex items-center gap-1 ml-1 border-l border-casar/50 pl-1.5">
               <span id="iconeVolume" class="cursor-pointer text-xs" onclick="alternarMute()">🔊</span>
               <input type="range" id="sliderVolume" min="0" max="100" value="80" oninput="alterarVolume(this.value)" class="w-10 md:w-16 h-1 bg-stone-400 rounded-lg appearance-none cursor-pointer accent-amber-800">
             </div>
           </div>
 
-          <!-- MODO ESCURO -->
           <button onclick="alternarTemaVisual()" title="Alternar Modo Claro/Escuro" class="w-8 h-8 rounded-full border border-casar player-container flex items-center justify-center text-sm shadow-sm">
             <span id="iconeTema">🌙</span>
           </button>
         </div>
       </div>
 
-      <!-- MENU ATUALIZADO CONFORME SOLICITADO -->
       <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] md:text-[11px] font-semibold tracking-wider uppercase py-1 text-center w-full px-2">
         <a href="#home" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>🏠</span><span>Início</span></a>
         <a href="#historia" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>💌</span><span>Mensagem</span></a>
@@ -245,13 +247,13 @@
   <!-- CAPA PRINCIPAL -->
   <header id="home" class="py-8 md:py-16 px-4 text-center">
     <div class="max-w-2xl mx-auto monobloco-card p-5 md:p-10 rounded-3xl">
-      <p class="text-[11px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] font-semibold mb-3 opacity-90 leading-relaxed">
+      <p class="text-[11px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] font-semibold mb-3 opacity-90 leading-relaxed card-txt">
         Com a graça de Deus e com o coração cheio de alegria
       </p>
       <h1 class="font-serif-custom text-4xl sm:text-6xl md:text-7xl font-normal mb-2 leading-tight">
         Wagner & Larissa
       </h1>
-      <p class="font-serif-custom italic text-xl sm:text-2xl font-medium mb-6 md:mb-8 opacity-90">
+      <p class="font-serif-custom italic text-xl sm:text-2xl font-medium mb-6 md:mb-8 opacity-90 card-txt">
         Sexta-feira, 11 de Dezembro de 2026
       </p>
 
@@ -262,24 +264,24 @@
       </div>
 
       <div class="mt-6 md:mt-8 monobloco-card p-4 md:p-6 rounded-2xl max-w-md mx-auto">
-        <p class="text-xs uppercase tracking-widest font-bold mb-3 md:mb-4">Faltam apenas</p>
+        <p class="text-xs uppercase tracking-widest font-bold mb-3 md:mb-4 card-txt">Faltam apenas</p>
         <div id="countdown" class="grid grid-cols-4 gap-1 sm:gap-2 text-center">
-          <div><span id="days" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Dias</span></div>
-          <div><span id="hours" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Horas</span></div>
-          <div><span id="minutes" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Min</span></div>
-          <div><span id="seconds" class="block font-serif-custom text-2xl sm:text-3xl font-bold">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75">Seg</span></div>
+          <div><span id="days" class="block font-serif-custom text-2xl sm:text-3xl font-bold card-txt">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75 card-txt">Dias</span></div>
+          <div><span id="hours" class="block font-serif-custom text-2xl sm:text-3xl font-bold card-txt">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75 card-txt">Horas</span></div>
+          <div><span id="minutes" class="block font-serif-custom text-2xl sm:text-3xl font-bold card-txt">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75 card-txt">Min</span></div>
+          <div><span id="seconds" class="block font-serif-custom text-2xl sm:text-3xl font-bold card-txt">00</span><span class="text-[9px] sm:text-[10px] uppercase font-semibold opacity-75 card-txt">Seg</span></div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- MENSAGEM ENCORPADA -->
+  <!-- MENSAGEM DO CASAL -->
   <section id="historia" class="py-10 md:py-14 px-4 max-w-3xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-3 leading-snug">Bem-vindos ao nosso Sonho!</h2>
       <div class="w-16 h-0.5 bg-casar-primary mx-auto mb-6"></div>
       
-      <div class="leading-relaxed font-medium text-sm md:text-base space-y-4 text-justify md:text-center">
+      <div class="leading-relaxed font-medium text-sm md:text-base space-y-4 text-justify md:text-center card-txt">
         <p>
           É com o coração transbordando de felicidade que preparamos este cantinho especial para você. A nossa história até aqui foi construída com muito amor, cumplicidade e a bênção de Deus, e não conseguiríamos imaginar o nosso grande dia sem a presença das pessoas que mais amamos no mundo.
         </p>
@@ -288,27 +290,27 @@
         </p>
         
         <div class="monobloco-card p-5 md:p-6 rounded-2xl text-left space-y-3 my-6 border-l-4 border-l-amber-800">
-          <p class="font-bold text-xs uppercase tracking-wider text-amber-900 dark:text-amber-400">📌 Avisos Importantes para os Convidado:</p>
-          <p class="text-xs"><strong>1. Confirme sua Reserva:</strong> É indispensável para o nosso planejamento e organização do bufê. Por favor, acesse a aba "Confirme sua Reserva" no menu até 20 dias antes do evento.</p>
-          <p class="text-xs"><strong>2. Lista de Presentes:</strong> Caso deseje nos abençoar com um presente, disponibilizamos nossa lista virtual totalmente segura via Pix ou Cartão.</p>
+          <p class="font-bold text-xs uppercase tracking-wider text-amber-900 dark:text-amber-400">📌 Avisos Importantes para os Convidados:</p>
+          <p class="text-xs card-txt"><strong>1. Confirme sua Reserva:</strong> É indispensável para o nosso planejamento e organização do bufê. Por favor, acesse a aba "Confirme sua Reserva" no menu até 20 dias antes do evento.</p>
+          <p class="text-xs card-txt"><strong>2. Lista de Presentes:</strong> Caso deseje nos abençoar com um presente, disponibilizamos nossa lista virtual totalmente segura via Pix ou Cartão.</p>
         </div>
 
         <div class="pt-4 text-center">
-          <p class="text-xs uppercase tracking-widest font-bold opacity-90">Contamos com a sua presença!</p>
-          <p class="font-cursive text-4xl sm:text-5xl mt-2">Wagner & Larissa</p>
+          <p class="text-xs uppercase tracking-widest font-bold opacity-90 card-txt">Contamos com a sua presença!</p>
+          <p class="font-cursive text-4xl sm:text-5xl mt-2 card-txt">Wagner & Larissa</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GUIA DE TRAJES ENCORPADO -->
+  <!-- GUIA DE TRAJES -->
   <section id="trajes" class="py-10 md:py-14 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-1">Guia de Trajes</h2>
       <p class="text-xs uppercase tracking-widest font-bold mb-4 text-amber-900 dark:text-amber-400">Traje Sugerido: Social Completo / Passeio Fino</p>
       <div class="w-12 h-0.5 bg-casar-primary mx-auto mb-6"></div>
 
-      <p class="text-xs md:text-sm font-medium leading-relaxed max-w-2xl mx-auto mb-8">
+      <p class="text-xs md:text-sm font-medium leading-relaxed max-w-2xl mx-auto mb-8 card-txt">
         Queremos que todos se sintam elegantes e confortáveis para comemorar e dançar conosco a noite toda! Preparamos algumas dicas para ajudar na escolha do seu look:
       </p>
 
@@ -316,24 +318,24 @@
         <div class="p-6 monobloco-card rounded-2xl space-y-3">
           <div class="text-3xl">👗</div>
           <h3 class="font-serif-custom text-2xl font-bold">Para as Mulheres</h3>
-          <p class="text-xs font-medium leading-relaxed">
+          <p class="text-xs font-medium leading-relaxed card-txt">
             Sugerimos <strong>vestidos midi ou longos</strong>, macacões sociais finos ou conjuntos elegantes. Tecidos fluídos e leves combinam perfeitamente com a proposta da nossa celebração.
           </p>
         </div>
         <div class="p-6 monobloco-card rounded-2xl space-y-3">
           <div class="text-3xl">👔</div>
           <h3 class="font-serif-custom text-2xl font-bold">Para os Homens</h3>
-          <p class="text-xs font-medium leading-relaxed">
+          <p class="text-xs font-medium leading-relaxed card-txt">
             A orientação é <strong>terno e gravata</strong>, ou se preferir um visual um pouco mais leve, <strong>calça social com camisa de manga longa</strong> e sapato social. 
           </p>
         </div>
       </div>
 
-      <div class="p-5 bg-rose-50/90 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-2xl text-xs text-left space-y-2">
-        <div class="font-bold text-rose-950 dark:text-rose-300 uppercase text-[11px] tracking-wider flex items-center gap-1">
+      <div class="p-5 bg-rose-50/90 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 rounded-2xl text-xs text-left space-y-2">
+        <div class="font-bold text-rose-950 dark:text-rose-200 uppercase text-[11px] tracking-wider flex items-center gap-1">
           <span>⚠️</span> Lembretes de Etiqueta com Carinho:
         </div>
-        <ul class="list-disc list-inside space-y-1 text-stone-800 dark:text-stone-200 font-medium">
+        <ul class="list-disc list-inside space-y-1 text-stone-900 dark:text-stone-100 font-medium">
           <li>Pedimos que evitem roupas excessivamente informais (jeans, camisetas básicas ou tênis esportivos).</li>
           <li><strong>Cores Exclusivas da Noiva:</strong> Por gentileza, pedimos que não utilizem trajes nas cores <strong>Branco, Off-White, Bege Claro, Palha ou Azul Bebê</strong>.</li>
         </ul>
@@ -341,11 +343,11 @@
     </div>
   </section>
 
-  <!-- PROGRAMAÇÃO DO DIA COM MINI MAPAS -->
+  <!-- PROGRAMAÇÃO DO DIA COM MAPAS -->
   <section id="local" class="py-10 md:py-14 px-4 max-w-5xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-2">Programação do Dia & Locais</h2>
-      <p class="text-xs uppercase tracking-widest font-bold mb-8 opacity-80">Confira o cronograma completo para não perder nenhum momento</p>
+      <p class="text-xs uppercase tracking-widest font-bold mb-8 opacity-80 card-txt">Confira o cronograma completo para não perder nenhum momento</p>
 
       <div class="grid md:grid-cols-2 gap-8 text-left">
         
@@ -355,13 +357,12 @@
             <div class="text-3xl mb-2">⛪</div>
             <h3 class="font-serif-custom text-2xl font-bold mb-1">Cerimônia Religiosa</h3>
             <p class="text-xs font-semibold text-amber-900 dark:text-amber-400 mb-2">Sexta-feira, 11/12/2026 às 16h00 (Pontualmente)</p>
-            <p class="text-xs mb-1 font-bold">Paróquia Nossa Senhora Rainha da Paz</p>
-            <p class="text-[11px] opacity-80 mb-3">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
-            <p class="text-[11px] leading-relaxed opacity-90 mb-4">
+            <p class="text-xs mb-1 font-bold card-txt">Paróquia Nossa Senhora Rainha da Paz</p>
+            <p class="text-[11px] opacity-80 mb-3 card-txt">Rua Joana Percegona Zen, nº 78 - Borda do Campo, São José dos Pinhais - PR</p>
+            <p class="text-[11px] leading-relaxed opacity-90 mb-4 card-txt">
               A cerimônia abençoará nossa união em um ambiente acolhedor e cheio de fé. Recomendamos chegar com 20 minutos de antecedência.
             </p>
 
-            <!-- MINI MAPA CERIMÔNIA -->
             <div class="w-full h-44 rounded-xl overflow-hidden border border-stone-300 shadow-sm mb-4">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.8651817117185!2d-49.1235!3d-25.5428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDMyJzM0LjEiUyA0OcKwMDcnMjQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
@@ -377,13 +378,12 @@
             <div class="text-3xl mb-2">🥂</div>
             <h3 class="font-serif-custom text-2xl font-bold mb-1">Recepção & Festa</h3>
             <p class="text-xs font-semibold text-amber-900 dark:text-amber-400 mb-2">Sexta-feira, 11/12/2026 às 17h30</p>
-            <p class="text-xs mb-1 font-bold">Chácara Luz da Mata</p>
-            <p class="text-[11px] opacity-80 mb-3">Planta Laranjeiras, Piraquara - PR (Estacionamento amplo e gratuito no local)</p>
-            <p class="text-[11px] leading-relaxed opacity-90 mb-4">
+            <p class="text-xs mb-1 font-bold card-txt">Chácara Luz da Mata</p>
+            <p class="text-[11px] opacity-80 mb-3 card-txt">Planta Laranjeiras, Piraquara - PR (Estacionamento amplo no local)</p>
+            <p class="text-[11px] leading-relaxed opacity-90 mb-4 card-txt">
               Logo após a celebração, iremos nos reunir para um jantar especial, bebidas e muita dança em um espaço arborizado encantador!
             </p>
 
-            <!-- MINI MAPA RECEPÇÃO -->
             <div class="w-full h-44 rounded-xl overflow-hidden border border-stone-300 shadow-sm mb-4">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.123456789!2d-49.0600!3d-25.4800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI4JzA4LjAiUyA0OcKwMDMnMzYuMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
@@ -401,17 +401,17 @@
   <section id="galeria" class="py-10 md:py-14 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-1">Mural de Fotos</h2>
-      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80">Sua foto aparecerá no carrossel abaixo e no álbum dos noivos!</p>
+      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80 card-txt">Sua foto aparecerá no carrossel abaixo e no álbum dos noivos!</p>
 
       <div class="mb-8 monobloco-card p-5 md:p-6 rounded-2xl max-w-lg mx-auto text-left space-y-3">
-        <input type="text" id="nomeUsuarioInput" placeholder="Seu Nome (Opcional)" class="w-full p-2.5 border rounded-xl text-xs font-medium">
-        <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border rounded-xl text-xs">
+        <input type="text" id="nomeUsuarioInput" placeholder="Seu Nome (Opcional)" class="w-full p-2.5 border rounded-xl text-xs font-medium card-txt">
+        <input type="file" id="fotoInput" accept="image/*" multiple class="w-full p-2 border rounded-xl text-xs card-txt">
         
         <div id="progressoUploadContainer" class="hidden space-y-2 pt-2">
           <div class="w-full bg-stone-200 rounded-full h-2.5 overflow-hidden">
             <div id="barraUpload" class="bg-amber-800 h-2.5 rounded-full w-0 transition-all duration-300"></div>
           </div>
-          <p id="txtStatusUpload" class="text-[11px] font-bold text-center opacity-80">Enviando fotos...</p>
+          <p id="txtStatusUpload" class="text-[11px] font-bold text-center opacity-80 card-txt">Enviando fotos...</p>
         </div>
 
         <button onclick="enviarFotosMultiplas()" id="btnUploadFoto" class="w-full btn-casar py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm">📸 Enviar Fotos para os Noivos</button>
@@ -419,7 +419,7 @@
 
       <div class="max-w-xl mx-auto relative overflow-hidden rounded-2xl border min-h-[250px] bg-stone-100 dark:bg-stone-800 flex items-center justify-center">
         <div id="carrosselFotos" class="flex transition-transform duration-700 w-full">
-          <p class="text-center text-xs opacity-70 p-8 w-full">Carregando fotos do álbum...</p>
+          <p class="text-center text-xs opacity-70 p-8 w-full card-txt">Carregando fotos do álbum...</p>
         </div>
       </div>
     </div>
@@ -429,11 +429,11 @@
   <section id="recados" class="py-10 md:py-14 px-4 max-w-3xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-1">Deixe seu Recado</h2>
-      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80">Escreva uma mensagem carinhosa para os noivos</p>
+      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80 card-txt">Escreva uma mensagem carinhosa para os noivos</p>
 
       <form onsubmit="enviarRecado(event)" class="monobloco-card p-5 md:p-6 rounded-2xl max-w-lg mx-auto space-y-3 text-left text-xs mb-8">
-        <input type="text" id="recadoNome" placeholder="Seu Nome *" required class="w-full p-2.5 border rounded-lg font-medium">
-        <textarea id="recadoTexto" rows="3" placeholder="Sua Mensagem *" required class="w-full p-2.5 border rounded-lg font-medium"></textarea>
+        <input type="text" id="recadoNome" placeholder="Seu Nome *" required class="w-full p-2.5 border rounded-lg font-medium card-txt">
+        <textarea id="recadoTexto" rows="3" placeholder="Sua Mensagem *" required class="w-full p-2.5 border rounded-lg font-medium card-txt"></textarea>
         <button type="submit" id="btnRecado" class="w-full btn-casar py-3 rounded-xl font-bold uppercase text-xs tracking-wider shadow-sm">Publicar Recado</button>
       </form>
       <div id="containerRecados" class="min-h-[120px] monobloco-card p-6 rounded-2xl max-w-lg mx-auto flex items-center justify-center"></div>
@@ -444,19 +444,19 @@
   <section id="rsvp" class="py-10 md:py-14 px-4 max-w-xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
       <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-2">Confirme sua Reserva</h2>
-      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80">Localize seu convite para confirmar a presença de sua família</p>
+      <p class="text-xs uppercase tracking-widest font-bold mb-6 opacity-80 card-txt">Localize seu convite para confirmar a presença de sua família</p>
 
       <div id="stepBusca" class="monobloco-card p-5 md:p-6 rounded-2xl space-y-3">
         <div class="flex flex-col sm:flex-row gap-2">
-          <input type="text" id="inputBusca" placeholder="Nome, Sobrenome ou Telefone" class="w-full p-2.5 border rounded-lg text-sm font-medium">
+          <input type="text" id="inputBusca" placeholder="Digite seu Nome, Sobrenome ou Telefone" class="w-full p-2.5 border rounded-lg text-sm font-medium card-txt">
           <button onclick="buscarConvite()" id="btnBuscar" class="btn-casar px-6 py-2.5 rounded-lg text-xs font-bold uppercase whitespace-nowrap shadow-sm">Buscar</button>
         </div>
-        <p class="text-[11px] opacity-75 text-left">Digite seu nome ou telefone para trazer os integrantes da sua família cadastrados.</p>
+        <p class="text-[11px] opacity-75 text-left card-txt">Digite o seu nome ou telefone para trazer os membros da sua família cadastrados.</p>
       </div>
 
       <div id="stepSelecao" class="hidden monobloco-card p-5 md:p-6 rounded-2xl text-left space-y-4">
         <h3 id="txtResponsavel" class="font-serif-custom text-2xl font-bold"></h3>
-        <p id="txtTelefone" class="text-xs opacity-75"></p>
+        <p id="txtTelefone" class="text-xs opacity-75 card-txt"></p>
         <form id="formMembros" onsubmit="salvarConfirmacoes(event)" class="space-y-3">
           <div id="containerMembros" class="space-y-2"></div>
           <button type="submit" id="btnSalvarRSVP" class="w-full btn-casar py-3.5 rounded-xl font-bold uppercase text-xs tracking-wider shadow-sm">Enviar Confirmações da Família</button>
@@ -477,29 +477,29 @@
 
   <!-- MODAL DE LOGIN -->
   <div id="modalLogin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4 text-xs">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4 text-xs text-stone-900">
       <div class="text-center">
-        <h3 class="font-serif-custom text-2xl font-bold">Área Restrita dos Noivos</h3>
-        <p class="opacity-75">Digite seu usuário e senha de acesso</p>
+        <h3 class="font-serif-custom text-2xl font-bold text-stone-900">Área Restrita dos Noivos</h3>
+        <p class="text-stone-600">Digite seu usuário e senha de acesso</p>
       </div>
 
       <form onsubmit="realizarLoginAdmin(event)" class="space-y-3">
         <div>
-          <label class="block font-bold uppercase mb-1 text-[10px]">Usuário</label>
-          <input type="text" id="loginUsuario" required placeholder="Ex: adm" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none">
+          <label class="block font-bold uppercase mb-1 text-[10px] text-stone-700">Usuário</label>
+          <input type="text" id="loginUsuario" required placeholder="Ex: adm" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none bg-white text-stone-900">
         </div>
 
         <div>
-          <label class="block font-bold uppercase mb-1 text-[10px]">Senha</label>
+          <label class="block font-bold uppercase mb-1 text-[10px] text-stone-700">Senha</label>
           <div class="relative">
-            <input type="password" id="loginSenha" required placeholder="Ex: 1234" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none pr-10">
-            <button type="button" onclick="alternarVerSenha('loginSenha')" class="absolute right-2.5 top-2.5 text-base opacity-70">👁️</button>
+            <input type="password" id="loginSenha" required placeholder="Ex: 1234" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none pr-10 bg-white text-stone-900">
+            <button type="button" onclick="alternarVerSenha('loginSenha')" class="absolute right-2.5 top-2.5 text-base opacity-70 text-stone-900">👁️</button>
           </div>
         </div>
 
         <div class="flex items-center gap-2 pt-1">
           <input type="checkbox" id="chkSalvarCredenciais" class="rounded border">
-          <label for="chkSalvarCredenciais" class="font-bold opacity-80 cursor-pointer">Lembrar senha neste navegador</label>
+          <label for="chkSalvarCredenciais" class="font-bold opacity-80 cursor-pointer text-stone-800">Lembrar senha neste navegador</label>
         </div>
 
         <button type="submit" id="btnLoginSubmit" class="w-full btn-casar py-3 rounded-xl font-bold uppercase tracking-wider text-xs shadow-sm">Entrar no Painel</button>
@@ -511,15 +511,14 @@
 
   <!-- MODAL ADMIN -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden text-xs">
+    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden text-xs text-stone-900">
       
       <div class="p-4 border-b border-stone-200 bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
         <div>
           <h2 class="font-serif-custom text-2xl font-bold text-stone-900">Painel Administrativo dos Noivos</h2>
-          <p class="opacity-75 text-stone-700">Gerencie convidados, fotos e a playlist do YouTube.</p>
+          <p class="text-stone-600">Gerencie convidados, fotos e a playlist do YouTube.</p>
         </div>
 
-        <!-- MENU ADMIN COM CORES CORRIGIDAS NO HOVER -->
         <div class="flex flex-wrap items-center gap-1.5 bg-stone-200 p-1.5 rounded-xl font-bold border border-stone-300">
           <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="tab-admin-btn active-tab px-3 py-2 rounded-lg transition font-bold text-xs">👥 Convidados</button>
           <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="tab-admin-btn px-3 py-2 rounded-lg transition font-bold text-xs">📸 Fotos</button>
@@ -532,7 +531,7 @@
       </div>
 
       <!-- TRANSPARÊNCIA DE FUNDO -->
-      <div class="p-3 bg-stone-100 border-b border-stone-200 flex items-center justify-between px-6 text-xs">
+      <div class="p-3 bg-stone-100 border-b border-stone-200 flex items-center justify-between px-6 text-xs text-stone-900">
         <span class="font-bold text-stone-800">✨ Transparência da Foto de Fundo:</span>
         <div class="flex items-center gap-3">
           <span class="text-[10px] text-stone-600 font-bold">Mais Foto</span>
@@ -543,29 +542,29 @@
       </div>
 
       <!-- ABA 1: CONVIDADOS -->
-      <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden bg-white">
+      <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden bg-white text-stone-900">
         <div class="p-3 bg-stone-50 border-b border-stone-200 grid grid-cols-2 md:grid-cols-6 gap-2 text-center select-none">
-          <div onclick="filtrarStatusRsvp('')" class="bg-white p-2 rounded-lg border shadow-sm hover:border-amber-500 cursor-pointer transition"><p class="text-[10px] uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-lg font-bold text-stone-900">0</span></div>
-          <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Adultos/Crianças</p><span id="statTipos" class="text-xs font-bold text-stone-900">0 / 0</span></div>
+          <div onclick="filtrarStatusRsvp('')" class="bg-white p-2 rounded-lg border shadow-sm hover:border-amber-500 cursor-pointer transition"><p class="text-[10px] uppercase font-bold opacity-75 text-stone-700">Total</p><span id="statTotal" class="text-lg font-bold text-stone-900">0</span></div>
+          <div class="bg-white p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75 text-stone-700">Adultos/Crianças</p><span id="statTipos" class="text-xs font-bold text-stone-900">0 / 0</span></div>
           <div onclick="filtrarStatusRsvp('confirmado')" class="bg-emerald-50 p-2 rounded-lg border border-emerald-200 shadow-sm hover:border-emerald-600 cursor-pointer transition"><p class="text-[10px] text-emerald-700 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-lg font-bold text-emerald-900">0</span></div>
           <div onclick="filtrarStatusRsvp('nao')" class="bg-rose-50 p-2 rounded-lg border border-rose-200 shadow-sm hover:border-rose-600 cursor-pointer transition"><p class="text-[10px] text-rose-700 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-lg font-bold text-rose-900">0</span></div>
           <div onclick="filtrarStatusRsvp('pendente')" class="bg-amber-50 p-2 rounded-lg border border-amber-200 shadow-sm hover:border-amber-600 cursor-pointer transition"><p class="text-[10px] text-amber-700 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-lg font-bold text-amber-900">0</span></div>
-          <div class="bg-stone-100 p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75">Faltam</p><span id="statFaltam" class="text-lg font-bold text-stone-900">0</span></div>
+          <div class="bg-stone-100 p-2 rounded-lg border shadow-sm"><p class="text-[10px] uppercase font-bold opacity-75 text-stone-700">Faltam</p><span id="statFaltam" class="text-lg font-bold text-stone-900">0</span></div>
         </div>
 
         <div class="p-4 bg-stone-50/50 border-b border-stone-200 space-y-3">
           <div class="flex flex-col md:flex-row gap-2 items-center justify-between">
-            <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome ou Telefone..." class="w-full md:w-1/2 p-2.5 border rounded-lg font-medium focus:outline-none">
+            <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar por Nome ou Telefone..." class="w-full md:w-1/2 p-2.5 border rounded-lg font-medium focus:outline-none bg-white text-stone-900">
             <button onclick="carregarAdminLista()" class="bg-amber-100 text-amber-900 px-3 py-2 rounded-lg font-bold hover:bg-amber-200 transition">🔄 Atualizar Lista</button>
           </div>
 
           <div class="pt-2 border-t border-stone-200">
             <h3 class="font-bold mb-2 uppercase tracking-wider text-[10px] text-stone-900">➕ Adicionar Convidado</h3>
             <div class="grid md:grid-cols-4 gap-2">
-              <input type="text" id="addResp" placeholder="Responsável / Família *" class="p-2 border rounded font-medium">
-              <input type="text" id="addNome" placeholder="Nome *" class="p-2 border rounded font-medium">
-              <select id="addTipo" class="p-2 border rounded font-medium"><option value="Adulto">Adulto</option><option value="Criança">Criança</option></select>
-              <input type="text" id="addContato" placeholder="Telefone" class="p-2 border rounded font-medium">
+              <input type="text" id="addResp" placeholder="Responsável / Família *" class="p-2 border rounded font-medium bg-white text-stone-900">
+              <input type="text" id="addNome" placeholder="Nome *" class="p-2 border rounded font-medium bg-white text-stone-900">
+              <select id="addTipo" class="p-2 border rounded font-medium bg-white text-stone-900"><option value="Adulto">Adulto</option><option value="Criança">Criança</option></select>
+              <input type="text" id="addContato" placeholder="Telefone" class="p-2 border rounded font-medium bg-white text-stone-900">
             </div>
             <div class="mt-2 flex justify-end">
               <button onclick="adminAdicionarNovo()" class="btn-casar py-2 px-5 rounded-lg font-semibold uppercase">Adicionar</button>
@@ -593,32 +592,32 @@
 
       <!-- ABA 2: FOTOS DO CARROSSEL -->
       <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white text-stone-900">
-        <h3 class="font-serif-custom text-xl font-bold">📸 Gerenciar Fotos do Carrossel</h3>
-        <p class="opacity-75">Você pode desativar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
+        <h3 class="font-serif-custom text-xl font-bold text-stone-900">📸 Gerenciar Fotos do Carrossel</h3>
+        <p class="text-stone-600">Você pode desativar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
         <div id="containerFotosAdmin" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </div>
 
       <!-- ABA 3: RECADOS -->
       <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-6 space-y-4 bg-white text-stone-900">
-        <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados dos Convidados</h3>
-        <p class="opacity-75">Você pode ocultar recados sem apagá-los da planilha para que não apareçam no site nem no rodapé ao vivo.</p>
+        <h3 class="font-serif-custom text-xl font-bold text-stone-900">💌 Gerenciar Recados dos Convidados</h3>
+        <p class="text-stone-600">Você pode ocultar recados sem apagá-los da planilha para que não apareçam no site nem no rodapé ao vivo.</p>
         <div id="containerRecadosAdmin" class="space-y-3"></div>
       </div>
 
       <!-- ABA 4: MÚSICAS YOUTUBE -->
       <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white text-stone-900">
         <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🎵 Adicionar Música do YouTube</h3>
-          <p class="opacity-75 text-xs">Cole o link completo ou ID do vídeo do YouTube abaixo (Ex: https://www.youtube.com/watch?v=2Vv-BfVoq4g).</p>
+          <h3 class="font-serif-custom text-xl font-bold text-stone-900">🎵 Adicionar Música do YouTube</h3>
+          <p class="text-stone-600 text-xs">Cole o link completo ou ID do vídeo do YouTube abaixo (Ex: https://www.youtube.com/watch?v=2Vv-BfVoq4g).</p>
           
           <div class="flex gap-2">
-            <input type="text" id="inputPesquisarMusica" placeholder="Cole aqui o link do vídeo do YouTube..." class="w-full p-3 border rounded-xl font-medium">
+            <input type="text" id="inputPesquisarMusica" placeholder="Cole aqui o link do vídeo do YouTube..." class="w-full p-3 border rounded-xl font-medium bg-white text-stone-900">
             <button onclick="pesquisarMusicaDeezer()" id="btnBuscarDeezer" class="btn-casar px-6 rounded-xl font-bold uppercase whitespace-nowrap">Adicionar Link</button>
           </div>
 
           <div class="mt-6 border-t pt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Playlist Salva (Arraste para reordenar ou clique para testar):</h4>
-            <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100"></div>
+            <h4 class="font-bold uppercase text-[10px] mb-2 text-stone-700">Playlist Salva (Arraste para reordenar ou clique para testar):</h4>
+            <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100 text-stone-900"></div>
           </div>
         </div>
       </div>
@@ -626,25 +625,25 @@
       <!-- ABA 5: ADMINS -->
       <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-6 space-y-6 bg-white text-stone-900">
         <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 space-y-4">
-          <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores</h3>
+          <h3 class="font-serif-custom text-xl font-bold text-stone-900">🔑 Gerenciar Administradores</h3>
           <div class="grid md:grid-cols-3 gap-2">
-            <input type="text" id="novoAdminUser" placeholder="Usuário *" class="p-2.5 border rounded-lg font-medium">
+            <input type="text" id="novoAdminUser" placeholder="Usuário *" class="p-2.5 border rounded-lg font-medium bg-white text-stone-900">
             <div class="relative">
-              <input type="password" id="novoAdminSenha" placeholder="Senha *" class="w-full p-2.5 border rounded-lg font-medium pr-10">
-              <button type="button" onclick="alternarVerSenha('novoAdminSenha')" class="absolute right-2.5 top-2.5 text-base opacity-70">👁️</button>
+              <input type="password" id="novoAdminSenha" placeholder="Senha *" class="w-full p-2.5 border rounded-lg font-medium pr-10 bg-white text-stone-900">
+              <button type="button" onclick="alternarVerSenha('novoAdminSenha')" class="absolute right-2.5 top-2.5 text-base text-stone-900">👁️</button>
             </div>
             <button onclick="cadastrarNovoAdmin()" class="btn-casar py-2 px-4 rounded-lg font-bold uppercase">Cadastrar Admin</button>
           </div>
 
           <div class="mt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-75">Administradores Registrados:</h4>
+            <h4 class="font-bold uppercase text-[10px] mb-2 text-stone-700">Administradores Registrados:</h4>
             <div id="listaAdminsContainer" class="space-y-2"></div>
           </div>
         </div>
       </div>
 
       <div class="p-3 bg-stone-100 border-t border-stone-200 flex justify-between items-center text-stone-900">
-        <span class="font-medium text-[10px] opacity-75">Logado como: <strong id="lblAdminLogado">adm</strong></span>
+        <span class="font-medium text-[10px] text-stone-700">Logado como: <strong id="lblAdminLogado" class="text-stone-900">adm</strong></span>
         <button onclick="fecharModalAdmin()" class="bg-stone-700 text-white px-5 py-2 rounded-lg font-bold uppercase">Sair / Fechar</button>
       </div>
 
@@ -858,6 +857,9 @@
             'autoplay': 1, 
             'controls': 0, 
             'enablejsapi': 1,
+            'rel': 0,
+            'modestbranding': 1,
+            'iv_load_policy': 3,
             'origin': window.location.origin
           },
           events: {
@@ -1014,20 +1016,20 @@
       const container = document.getElementById("containerPlaylistAdmin");
       if (!container) return;
       if (playlistMusicas.length === 0) {
-        container.innerHTML = `<p class="italic p-3 opacity-75">Nenhuma música cadastrada.</p>`;
+        container.innerHTML = `<p class="italic p-3 text-stone-600">Nenhuma música cadastrada.</p>`;
         return;
       }
       container.innerHTML = "";
       playlistMusicas.forEach((m, idx) => {
         const div = document.createElement("div");
-        div.className = "flex items-center justify-between p-2.5 bg-white rounded-xl border cursor-move shadow-xs hover:bg-stone-50 transition";
+        div.className = "flex items-center justify-between p-2.5 bg-white text-stone-900 rounded-xl border cursor-move shadow-xs hover:bg-stone-50 transition";
         div.setAttribute("draggable", "true");
         div.setAttribute("data-index", idx);
 
         div.innerHTML = `
           <div class="flex items-center gap-2 truncate max-w-[200px] md:max-w-xs">
             <span class="text-stone-400 font-bold">☰</span>
-            <span class="font-bold truncate">🎵 ${m.titulo || m.id}</span>
+            <span class="font-bold truncate text-stone-900">🎵 ${m.titulo || m.id}</span>
           </div>
           <div class="flex items-center gap-2">
             <button onclick="tocarMusicaIndex(${idx})" class="bg-amber-800 text-white px-2.5 py-1 rounded text-[11px] font-bold shadow hover:bg-amber-900">▶ Tocar Agora</button>
@@ -1207,7 +1209,7 @@
       const fotosAtivas = fotosDriveCache.filter(url => !fotosDesativadasSet.has(url));
 
       if (fotosAtivas.length === 0) {
-        if (cBaixo) cBaixo.innerHTML = `<p class="text-center text-xs opacity-70 p-8 w-full">Nenhuma foto disponível no momento.</p>`;
+        if (cBaixo) cBaixo.innerHTML = `<p class="text-center text-xs p-8 w-full card-txt">Nenhuma foto disponível no momento.</p>`;
         return;
       }
 
@@ -1232,14 +1234,14 @@
       if (!container) return;
 
       if (fotosDriveCache.length === 0) {
-        container.innerHTML = `<p class="col-span-4 text-center italic p-4 opacity-75">Nenhuma foto no Google Drive.</p>`;
+        container.innerHTML = `<p class="col-span-4 text-center italic p-4 text-stone-600">Nenhuma foto no Google Drive.</p>`;
         return;
       }
 
       container.innerHTML = fotosDriveCache.map(url => {
         const desativada = fotosDesativadasSet.has(url);
         return `
-          <div class="bg-white p-2 rounded-xl border shadow-xs text-center space-y-2">
+          <div class="bg-white p-2 rounded-xl border shadow-xs text-center space-y-2 text-stone-900">
             <img src="${url}" class="w-full h-32 object-cover rounded-lg ${desativada ? 'opacity-30 grayscale' : ''}">
             <button onclick="alternarStatusFoto('${url}')" class="w-full py-1.5 rounded text-[10px] font-bold uppercase transition ${desativada ? 'bg-emerald-700 text-white' : 'bg-rose-700 text-white'}">
               ${desativada ? '✅ Ativar no Carrossel' : '🚫 Ocultar do Carrossel'}
@@ -1263,7 +1265,7 @@
         if (!container) return;
         if (res.sucesso && res.recados && res.recados.length > 0) {
           container.innerHTML = res.recados.map((r) => `
-            <div class="flex items-center justify-between p-3 bg-white border rounded-xl shadow-xs ${r.ativo ? '' : 'opacity-40 bg-stone-100'}">
+            <div class="flex items-center justify-between p-3 bg-white border rounded-xl shadow-xs text-stone-900 ${r.ativo ? '' : 'opacity-40 bg-stone-100'}">
               <div>
                 <p class="font-bold text-stone-900">${r.nome} ${r.ativo ? '<span class="text-[10px] text-emerald-600 ml-2">🟢 Exibindo</span>' : '<span class="text-[10px] text-rose-600 ml-2">🔴 Ocultado</span>'}</p>
                 <p class="italic text-stone-700">"${r.mensagem}"</p>
@@ -1274,7 +1276,7 @@
             </div>
           `).join('');
         } else {
-          container.innerHTML = `<p class="italic p-3 opacity-75">Nenhum recado cadastrado.</p>`;
+          container.innerHTML = `<p class="italic p-3 text-stone-600">Nenhum recado cadastrado.</p>`;
         }
       });
     }
@@ -1292,15 +1294,18 @@
       executarJSONP({ action: "listarAdmins" }, function(res) {
         const container = document.getElementById("listaAdminsContainer");
         if (container && res.sucesso && res.admins) {
-          container.innerHTML = res.admins.map(adm => `
-            <div class="flex items-center justify-between p-2.5 bg-white border rounded-xl">
-              <span class="font-bold">👤 ${adm.usuario}</span>
-              <div class="flex gap-2">
-                <input type="password" id="pass_${adm.usuario}" placeholder="Nova senha" class="p-1 border rounded text-xs w-28">
-                <button onclick="adminTrocarSenha('${adm.usuario}')" class="bg-stone-700 text-white px-3 py-1 rounded text-xs font-bold">Alterar Senha</button>
+          container.innerHTML = res.admins.map(adm => {
+            const ehRoot = (adm.usuario.toLowerCase() === "adm");
+            return `
+              <div class="flex items-center justify-between p-2.5 bg-white border rounded-xl text-stone-900">
+                <span class="font-bold">👤 ${adm.usuario} ${ehRoot ? '<span class="text-[9px] bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded font-bold ml-1">Principal (Protegido)</span>' : ''}</span>
+                <div class="flex gap-2">
+                  <input type="password" id="pass_${adm.usuario}" placeholder="Nova senha" class="p-1 border rounded text-xs w-28 bg-white text-stone-900" ${ehRoot && adminLogadoUser !== "adm" ? 'disabled' : ''}>
+                  <button onclick="adminTrocarSenha('${adm.usuario}')" class="bg-stone-700 text-white px-3 py-1 rounded text-xs font-bold hover:bg-stone-800" ${ehRoot && adminLogadoUser !== "adm" ? 'disabled' : ''}>Alterar Senha</button>
+                </div>
               </div>
-            </div>
-          `).join('');
+            `;
+          }).join('');
         }
       });
     }
@@ -1315,16 +1320,19 @@
           document.getElementById("novoAdminUser").value = "";
           document.getElementById("novoAdminSenha").value = "";
           carregarListaAdmins();
-          alert("Administrador cadastrado!");
+          alert("Administrador cadastrado com sucesso!");
         }
       });
     }
 
     function adminTrocarSenha(usuario) {
+      if (usuario.toLowerCase() === "adm" && adminLogadoUser.toLowerCase() !== "adm") {
+        return alert("❌ Permissão negada: Apenas o usuário principal (adm) pode alterar suas próprias credenciais.");
+      }
       const novaSenha = document.getElementById(`pass_${usuario}`).value.trim();
       if (!novaSenha) return alert("Digite a nova senha.");
       executarJSONP({ action: "salvarAdmin", usuario: usuario, senha: novaSenha }, function(res) {
-        if (res.sucesso) alert("Senha alterada!");
+        if (res.sucesso) alert("Senha alterada com sucesso!");
       });
     }
 
@@ -1393,17 +1401,17 @@
       const tbody = document.getElementById("tabelaAdminBody");
       tbody.innerHTML = lista.map(c => `
         <tr class="border-b ${c.ativo ? '' : 'opacity-40 bg-stone-100'}" id="linha_${c.linha}">
-          <td class="p-3 font-bold">${c.responsavel}</td>
-          <td class="p-3 font-medium">${c.nome}</td>
-          <td class="p-3 font-medium">${c.tipo}</td>
-          <td class="p-3 font-medium">${c.contato || '-'}</td>
+          <td class="p-3 font-bold text-stone-900">${c.responsavel}</td>
+          <td class="p-3 font-medium text-stone-900">${c.nome}</td>
+          <td class="p-3 font-medium text-stone-900">${c.tipo}</td>
+          <td class="p-3 font-medium text-stone-900">${c.contato || '-'}</td>
           <td class="p-3">${(c.rsvpStatus||'').toLowerCase().includes('sim') ? '✅ Confirmado' : '⏳ Pendente'}</td>
-          <td class="p-3 font-bold">${c.ativo ? '🟢 Ativo' : '🔴 Desativado'}</td>
+          <td class="p-3 font-bold text-stone-900">${c.ativo ? '🟢 Ativo' : '🔴 Desativado'}</td>
           <td class="p-3 text-center space-x-2">
-            <button onclick="adminRemover(${c.linha})" class="text-rose-600 font-bold">Remover</button>
+            <button onclick="adminRemover(${c.linha})" class="text-rose-600 font-bold hover:underline">Remover</button>
           </td>
         </tr>
-      `).join('') || `<tr><td colspan="7" class="p-4 text-center italic">Nenhum registro.</td></tr>`;
+      `).join('') || `<tr><td colspan="7" class="p-4 text-center italic text-stone-600">Nenhum registro localizado.</td></tr>`;
     }
 
     function adminAdicionarNovo() {
@@ -1418,7 +1426,7 @@
     }
 
     function adminRemover(linha) {
-      if (confirm("Remover convidado?")) {
+      if (confirm("Deseja remover este convidado da lista?")) {
         executarJSONP({ action: "adminDesativar", linha: linha }, function() { carregarAdminLista(); });
       }
     }
@@ -1429,14 +1437,14 @@
         const track = document.getElementById("cnnTickerTrack");
 
         if (res.sucesso && res.recados && res.recados.length > 0) {
-          container.innerHTML = `<p class="font-serif-custom italic text-lg font-semibold">"${res.recados[0].mensagem}"</p>`;
+          container.innerHTML = `<p class="font-serif-custom italic text-lg font-semibold card-txt">"${res.recados[0].mensagem}"</p>`;
 
           const recadosDuplicados = [...res.recados, ...res.recados];
           track.innerHTML = recadosDuplicados.map(r => `
             <div class="cnn-ticker-item"><span class="autor">${r.nome}:</span> "${r.mensagem}" &nbsp;&nbsp;&bull;&nbsp;&nbsp;</div>
           `).join('');
         } else {
-          container.innerHTML = `<p class="italic text-xs opacity-70">Nenhum recado publicado no momento.</p>`;
+          container.innerHTML = `<p class="italic text-xs opacity-70 card-txt">Nenhum recado publicado no momento.</p>`;
           track.innerHTML = `<div class="cnn-ticker-item"><span class="autor">Seja bem-vindo!</span> Deixe um recado para os noivos!</div>`;
         }
       });
@@ -1445,7 +1453,7 @@
     function enviarRecado(e) {
       e.preventDefault();
       executarJSONP({ action: "salvarRecado", nome: document.getElementById("recadoNome").value, mensagem: document.getElementById("recadoTexto").value }, function() {
-        alert("Recado publicado!"); 
+        alert("Recado publicado com sucesso!"); 
         document.getElementById("recadoNome").value = "";
         document.getElementById("recadoTexto").value = "";
         carregarRecados();
@@ -1453,29 +1461,40 @@
     }
 
     function buscarConvite() {
-      executarJSONP({ action: "buscarConvite", termo: document.getElementById("inputBusca").value }, function(res) {
+      const termo = document.getElementById("inputBusca").value.trim();
+      if (!termo) return alert("Digite seu nome ou telefone para buscar.");
+
+      executarJSONP({ action: "buscarConvite", termo: termo }, function(res) {
         if (res.sucesso) {
           document.getElementById("stepBusca").classList.add("hidden");
           document.getElementById("stepSelecao").classList.remove("hidden");
-          document.getElementById("txtResponsavel").innerText = res.responsavel;
+          document.getElementById("txtResponsavel").innerText = "Família / Convite: " + res.responsavel;
+          document.getElementById("txtTelefone").innerText = "Contato Cadastrado: " + (res.telefoneMascarado || "Não informado");
+
           document.getElementById("containerMembros").innerHTML = res.membros.map((m, i) => `
-            <div class="flex justify-between items-center p-2 border rounded-lg bg-white">
-              <span>${m.nome}</span>
-              <select id="membro_${i}" data-nome="${m.nome}" class="p-1 border rounded text-xs">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 border rounded-xl bg-white text-stone-900 gap-2 shadow-xs">
+              <div>
+                <p class="font-bold text-sm text-stone-900">${m.nome} ${normalizar(m.nome) === normalizar(termo) ? '<span class="text-[10px] bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded ml-1 font-bold">Você</span>' : ''}</p>
+                <span class="text-[10px] uppercase text-stone-500 font-semibold">${m.tipo || 'Convidado'}</span>
+              </div>
+              <select id="membro_${i}" data-nome="${m.nome}" class="p-2 border rounded-lg text-xs bg-stone-50 text-stone-900 font-semibold focus:outline-none w-full sm:w-auto">
                 <option value="Sim, estarei presente">Estarei presente</option>
                 <option value="Não poderei ir">Não poderei ir</option>
               </select>
             </div>
           `).join('');
+        } else {
+          alert("Nenhum convite localizado com o termo informado. Verifique a grafia do nome.");
         }
       });
     }
 
     function salvarConfirmacoes(e) {
       e.preventDefault();
-      alert("Presença confirmada!");
+      alert("Presenças confirmadas com sucesso! Obrigado.");
       document.getElementById("stepSelecao").classList.add("hidden");
       document.getElementById("stepBusca").classList.remove("hidden");
+      document.getElementById("inputBusca").value = "";
     }
 
     function executarJSONP(params, callbackSuccess) {
