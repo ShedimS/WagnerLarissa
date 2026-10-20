@@ -19,6 +19,10 @@
       --nav-bg: rgba(255, 255, 255, 0.98);
       --player-bg: #eae3db;
       --input-bg: #ffffff;
+      --modal-bg: #ffffff;
+      --modal-text: #0f172a;
+      --modal-header-bg: #f8fafc;
+      --modal-border: #e2e8f0;
       --card-text-color: #2c251e;
     }
 
@@ -32,6 +36,10 @@
       --nav-bg: rgba(15, 23, 42, 0.98);
       --player-bg: #1e293b;
       --input-bg: #334155;
+      --modal-bg: #1e293b;
+      --modal-text: #f8fafc;
+      --modal-header-bg: #0f172a;
+      --modal-border: #334155;
       --card-text-color: #f8fafc;
     }
 
@@ -43,7 +51,17 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* Garantia de legibilidade de texto no Dark Mode */
+    .modal-content-theme {
+      background-color: var(--modal-bg) !important;
+      color: var(--modal-text) !important;
+      border-color: var(--modal-border) !important;
+    }
+
+    .modal-header-theme {
+      background-color: var(--modal-header-bg) !important;
+      border-color: var(--modal-border) !important;
+    }
+
     body, p, span, div, li, label, strong, em, b, i, a {
       color: var(--casar-texto);
     }
@@ -52,17 +70,12 @@
       color: var(--card-text-color) !important;
     }
 
-    /* Correção específica para formulários e tabelas dentro do modal Admin e formulários gerais */
-    .admin-form-text, #modalAdmin input, #modalAdmin select, #modalAdmin textarea,
-    #modalLogin input, #modalLogin select, #modalLogin textarea,
-    input[type="text"], input[type="password"], textarea, select {
-      color: #0f172a !important;
-      background-color: #ffffff !important;
-    }
-
-    .dark-mode input[type="text"], .dark-mode textarea, .dark-mode select {
-      color: #f8fafc !important;
-      background-color: #334155 !important;
+    input, select, textarea {
+      max-width: 100%;
+      box-sizing: border-box;
+      background-color: var(--input-bg) !important;
+      border-color: var(--casar-borda) !important;
+      color: var(--casar-texto) !important;
     }
 
     h1, h2, h3, h4, h5, h6, .font-serif-custom { 
@@ -135,7 +148,6 @@
 
     img { max-width: 100%; }
 
-    /* Barra CNN Ao Vivo adaptável para mobile */
     .cnn-ticker-container {
       position: fixed; bottom: 0; left: 0;
       width: 100%; height: 44px;
@@ -153,6 +165,10 @@
       font-size: 11px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.1em;
       white-space: nowrap; z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .cnn-label { padding: 0 10px; font-size: 16px; }
     }
 
     .cnn-ticker-track {
@@ -173,15 +189,16 @@
     }
 
     .tab-admin-btn {
-      color: #1e293b !important;
-      background-color: #f1f5f9 !important;
+      color: var(--casar-texto) !important;
+      background-color: var(--player-bg) !important;
+      border: 1px solid var(--casar-borda);
     }
     .tab-admin-btn:hover {
       background-color: #a38573 !important;
       color: #ffffff !important;
     }
     .tab-admin-btn.active-tab {
-      background-color: #0f172a !important;
+      background-color: #a38573 !important;
       color: #ffffff !important;
     }
 
@@ -237,7 +254,7 @@
         <a href="#historia" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>💌</span><span>Mensagem</span></a>
         <a href="#trajes" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>👔</span><span>Trajes</span></a>
         <a href="#local" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>📍</span><span>Locais</span></a>
-        <a href="https://loja.infinitepay.io/wagner_larissa2026" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>🎁</span><span>Presentes</span></a>
+        <a href="#presentes" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>🎁</span><span>Presentes</span></a>
         <a href="#galeria" class="flex items-center gap-1 hover:text-casar-primary font-bold py-1"><span>📸</span><span>Envie sua Foto</span></a>
         <a href="#recados" class="flex items-center gap-1 hover:text-casar-primary transition py-1"><span>✍️</span><span>Deixe seu Recado</span></a>
         <a href="#rsvp" class="flex items-center gap-1 hover:text-casar-primary transition font-bold py-1 text-amber-800 dark:text-amber-400"><span>✅</span><span>Confirme sua Reserva</span></a>
@@ -305,6 +322,30 @@
     </div>
   </section>
 
+  <!-- SEÇÃO DE PRESENTES -->
+  <section id="presentes" class="py-10 md:py-14 px-4 max-w-4xl mx-auto text-center">
+    <div class="monobloco-card p-6 md:p-10 rounded-3xl space-y-6">
+      <div class="text-4xl">🎁</div>
+      <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold mb-1">Lista de Presentes</h2>
+      <div class="w-16 h-0.5 bg-casar-primary mx-auto mb-4"></div>
+      
+      <p class="text-xs sm:text-sm font-medium leading-relaxed max-w-2xl mx-auto card-txt">
+        A sua presença no nosso grande dia é o maior presente que poderíamos receber! Porém, para aqueles que desejarem nos abençoar com um carinho especial na construção do nosso novo lar e da nossa lua de mel, disponibilizamos nossa lista de presentes online.
+      </p>
+
+      <div class="p-6 monobloco-card rounded-2xl max-w-xl mx-auto space-y-4 shadow-sm">
+        <p class="text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-400">💳 Facilidade e Segurança</p>
+        <p class="text-xs leading-relaxed card-txt">
+          Você pode escolher uma cota ou presente simbólico diretamente na nossa plataforma de presentes digitais, com opção de pagamento instantâneo via **PIX** ou **Cartão de Crédito**.
+        </p>
+
+        <a href="https://loja.infinitepay.io/wagner_larissa2026" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full btn-casar py-3.5 px-6 rounded-xl font-bold uppercase text-xs tracking-wider shadow-md hover:scale-[1.02] transition-transform">
+          🎁 Acessar Lista de Presentes dos Noivos
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- GUIA DE TRAJES -->
   <section id="trajes" class="py-10 md:py-14 px-4 max-w-4xl mx-auto text-center">
     <div class="monobloco-card p-6 md:p-10 rounded-3xl">
@@ -337,7 +378,7 @@
         <div class="font-bold text-rose-950 dark:text-rose-200 uppercase text-[11px] tracking-wider flex items-center gap-1">
           <span>⚠️</span> Lembretes de Etiqueta com Carinho:
         </div>
-        <ul class="list-disc list-inside space-y-1 text-stone-900 dark:text-stone-100 font-medium">
+        <ul class="list-disc list-inside space-y-1 card-txt font-medium">
           <li>Pedimos que evitem roupas excessivamente informais (jeans, camisetas básicas ou tênis esportivos).</li>
           <li><strong>Cores Exclusivas da Noiva:</strong> Por gentileza, pedimos que não utilizem trajes nas cores <strong>Branco, Off-White, Bege Claro, Palha ou Azul Bebê</strong>.</li>
         </ul>
@@ -388,7 +429,7 @@
 
             <div class="w-full h-44 rounded-xl overflow-hidden border border-stone-300 shadow-sm mb-4">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.123456789!2d-49.0600!3d-25.4800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI8JzA4LjAiUyA0OcKwMDMnMzYuMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.123456789!2d-49.0600!3d-25.4800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI4JzA4LjAiUyA0OcKwMDMnMzYuMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
           </div>
@@ -467,11 +508,11 @@
     </div>
   </section>
 
-  <!-- RODAPÉ CNN ADAPTADO PARA MOBILE -->
+  <!-- RODAPÉ CNN COM ÍCONE EM MOBILE -->
   <div class="cnn-ticker-container">
     <div class="cnn-label">
       <span class="hidden md:inline">Recados Ao Vivo</span>
-      <span class="inline md:hidden">💌 Ao Vivo</span>
+      <span class="inline md:hidden">💌</span>
     </div>
     <div style="overflow: hidden; width: 100%;"><div id="cnnTickerTrack" class="cnn-ticker-track"></div></div>
   </div>
@@ -482,55 +523,54 @@
 
   <!-- MODAL DE LOGIN -->
   <div id="modalLogin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4 text-xs text-stone-900">
+    <div class="modal-content-theme rounded-2xl max-w-sm w-full p-6 shadow-2xl relative space-y-4 text-xs border">
       <div class="text-center">
-        <h3 class="font-serif-custom text-2xl font-bold text-stone-900">Área Restrita dos Noivos</h3>
-        <p class="text-stone-600">Digite seu usuário e senha de acesso</p>
+        <h3 class="font-serif-custom text-2xl font-bold">Área Restrita dos Noivos</h3>
+        <p class="opacity-75">Digite seu usuário e senha de acesso</p>
       </div>
 
       <form onsubmit="realizarLoginAdmin(event)" class="space-y-3">
         <div>
-          <label class="block font-bold uppercase mb-1 text-[10px] text-stone-700">Usuário</label>
-          <input type="text" id="loginUsuario" required placeholder="Ex: adm" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none bg-white text-stone-900">
+          <label class="block font-bold uppercase mb-1 text-[10px]">Usuário</label>
+          <input type="text" id="loginUsuario" required placeholder="Ex: adm" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none">
         </div>
 
         <div>
-          <label class="block font-bold uppercase mb-1 text-[10px] text-stone-700">Senha</label>
+          <label class="block font-bold uppercase mb-1 text-[10px]">Senha</label>
           <div class="relative">
-            <input type="password" id="loginSenha" required placeholder="Ex: 1234" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none pr-10 bg-white text-stone-900">
-            <button type="button" onclick="alternarVerSenha('loginSenha')" class="absolute right-2.5 top-2.5 text-base text-stone-900">👁️</button>
+            <input type="password" id="loginSenha" required placeholder="Ex: 1234" class="w-full p-2.5 border rounded-lg font-medium focus:outline-none pr-10">
+            <button type="button" onclick="alternarVerSenha('loginSenha')" class="absolute right-2.5 top-2.5 text-base opacity-70">👁️</button>
           </div>
         </div>
 
         <div class="flex items-center gap-2 pt-1">
           <input type="checkbox" id="chkSalvarCredenciais" class="rounded border">
-          <label for="chkSalvarCredenciais" class="font-bold opacity-80 cursor-pointer text-stone-800">Lembrar senha neste navegador</label>
+          <label for="chkSalvarCredenciais" class="font-bold opacity-80 cursor-pointer">Lembrar senha neste navegador</label>
         </div>
 
         <button type="submit" id="btnLoginSubmit" class="w-full btn-casar py-3 rounded-xl font-bold uppercase tracking-wider text-xs shadow-sm">Entrar no Painel</button>
       </form>
 
-      <button onclick="fecharModalLogin()" class="w-full text-center text-stone-500 font-bold hover:underline">Cancelar</button>
+      <button onclick="fecharModalLogin()" class="w-full text-center font-bold hover:underline opacity-70">Cancelar</button>
     </div>
   </div>
 
-  <!-- MODAL ADMIN ADAPTADO PARA MOBILE -->
+  <!-- MODAL ADMIN COM DARK MODE TOTAL -->
   <div id="modalAdmin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 sm:p-4">
-    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[95vh] flex flex-col shadow-2xl relative overflow-hidden text-xs text-stone-900">
+    <div class="modal-content-theme rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl relative overflow-hidden text-xs border">
       
-      <div class="p-3 sm:p-4 border-b border-stone-200 bg-stone-50 flex flex-col md:flex-row justify-between items-center gap-3">
+      <div class="p-3 sm:p-4 modal-header-theme border-b flex flex-col md:flex-row justify-between items-center gap-3">
         <div class="w-full flex justify-between items-center md:w-auto">
           <div>
-            <h2 class="font-serif-custom text-xl sm:text-2xl font-bold text-stone-900">Painel Administrativo</h2>
-            <p class="text-stone-600 text-[11px]">Gerencie convidados, fotos e músicas.</p>
+            <h2 class="font-serif-custom text-xl sm:text-2xl font-bold">Painel Administrativo</h2>
+            <p class="opacity-75 text-[11px]">Gerencie convidados, fotos e playlist de músicas.</p>
           </div>
-          <!-- BOTÃO MODO ESCURO DENTRO DO ADMIN -->
-          <button onclick="alternarTemaVisual()" title="Alternar Tema" class="md:hidden p-2 rounded-lg bg-stone-200 text-stone-800 font-bold text-sm">
+          <button onclick="alternarTemaVisual()" title="Alternar Tema" class="md:hidden p-2 rounded-lg border font-bold text-sm">
             🌙/☀️
           </button>
         </div>
 
-        <div class="flex flex-wrap items-center justify-center gap-1 bg-stone-200 p-1.5 rounded-xl font-bold border border-stone-300 w-full md:w-auto">
+        <div class="flex flex-wrap items-center justify-center gap-1 p-1.5 rounded-xl font-bold w-full md:w-auto">
           <button onclick="alternarAbaAdmin('convidados')" id="tabBtnConvidados" class="tab-admin-btn active-tab px-2.5 py-1.5 rounded-lg transition font-bold text-[10px] sm:text-xs">👥 Convidados</button>
           <button onclick="alternarAbaAdmin('fotosAdm')" id="tabBtnFotos" class="tab-admin-btn px-2.5 py-1.5 rounded-lg transition font-bold text-[10px] sm:text-xs">📸 Fotos</button>
           <button onclick="alternarAbaAdmin('recadosAdm')" id="tabBtnRecados" class="tab-admin-btn px-2.5 py-1.5 rounded-lg transition font-bold text-[10px] sm:text-xs">💌 Recados</button>
@@ -539,60 +579,65 @@
         </div>
 
         <div class="hidden md:flex items-center gap-2">
-          <button onclick="alternarTemaVisual()" title="Alternar Tema" class="p-2 rounded-lg bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold text-xs">
+          <button onclick="alternarTemaVisual()" title="Alternar Tema" class="p-2 rounded-lg border font-bold text-xs">
             🌙/☀️ Tema
           </button>
-          <button onclick="fecharModalAdmin()" class="bg-stone-300 hover:bg-stone-400 text-stone-900 w-8 h-8 rounded-full flex items-center justify-center font-bold">✕</button>
+          <button onclick="fecharModalAdmin()" class="border w-8 h-8 rounded-full flex items-center justify-center font-bold hover:bg-rose-700 hover:text-white transition">✕</button>
         </div>
       </div>
 
       <!-- TRANSPARÊNCIA DE FUNDO -->
-      <div class="p-2.5 bg-stone-100 border-b border-stone-200 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 text-xs text-stone-900 gap-1">
-        <span class="font-bold text-stone-800 text-[11px]">✨ Opacidade da Imagem de Fundo:</span>
+      <div class="p-2.5 border-b flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 text-xs gap-1">
+        <span class="font-bold text-[11px]">✨ Opacidade da Imagem de Fundo:</span>
         <div class="flex items-center gap-2">
-          <span class="text-[10px] text-stone-600 font-bold">Foto</span>
+          <span class="text-[10px] font-bold opacity-70">Foto</span>
           <input type="range" id="rangeTransparencia" min="0.2" max="0.9" step="0.05" value="0.65" oninput="alterarTransparenciaFundo(this.value)" class="w-28 sm:w-36 accent-amber-800 cursor-pointer">
-          <span class="text-[10px] text-stone-600 font-bold">Claro</span>
-          <span id="valorTransparencia" class="font-bold text-amber-900 w-6 text-right text-[11px]">0.65</span>
+          <span class="text-[10px] font-bold opacity-70">Claro</span>
+          <span id="valorTransparencia" class="font-bold text-amber-800 w-6 text-right text-[11px]">0.65</span>
         </div>
       </div>
 
-      <!-- ABA 1: CONVIDADOS COM ROLAGEM ADAPTADA PARA CELULAR -->
-      <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden bg-white text-stone-900">
-        <div class="p-2.5 bg-stone-50 border-b border-stone-200 grid grid-cols-3 sm:grid-cols-6 gap-1.5 text-center select-none text-[10px] sm:text-xs">
-          <div onclick="filtrarStatusRsvp('')" class="bg-white p-1.5 rounded-lg border shadow-sm hover:border-amber-500 cursor-pointer transition"><p class="uppercase font-bold opacity-75 text-stone-700">Total</p><span id="statTotal" class="text-sm sm:text-lg font-bold text-stone-900">0</span></div>
-          <div class="bg-white p-1.5 rounded-lg border shadow-sm"><p class="uppercase font-bold opacity-75 text-stone-700">Ad/Cri</p><span id="statTipos" class="text-[11px] sm:text-xs font-bold text-stone-900">0 / 0</span></div>
-          <div onclick="filtrarStatusRsvp('confirmado')" class="bg-emerald-50 p-1.5 rounded-lg border border-emerald-200 shadow-sm hover:border-emerald-600 cursor-pointer transition"><p class="text-emerald-700 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-sm sm:text-lg font-bold text-emerald-900">0</span></div>
-          <div onclick="filtrarStatusRsvp('nao')" class="bg-rose-50 p-1.5 rounded-lg border border-rose-200 shadow-sm hover:border-rose-600 cursor-pointer transition"><p class="text-rose-700 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-sm sm:text-lg font-bold text-rose-900">0</span></div>
-          <div onclick="filtrarStatusRsvp('pendente')" class="bg-amber-50 p-1.5 rounded-lg border border-amber-200 shadow-sm hover:border-amber-600 cursor-pointer transition"><p class="text-amber-700 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-sm sm:text-lg font-bold text-amber-900">0</span></div>
-          <div class="bg-stone-100 p-1.5 rounded-lg border shadow-sm"><p class="uppercase font-bold opacity-75 text-stone-700">Faltam</p><span id="statFaltam" class="text-sm sm:text-lg font-bold text-stone-900">0</span></div>
+      <!-- ABA 1: CONVIDADOS COM RETRÁTIL SANFONA -->
+      <div id="abaConvidados" class="flex-1 flex flex-col overflow-hidden">
+        <div class="p-2.5 border-b grid grid-cols-3 sm:grid-cols-6 gap-1.5 text-center select-none text-[10px] sm:text-xs">
+          <div onclick="filtrarStatusRsvp('')" class="p-1.5 rounded-lg border shadow-sm cursor-pointer hover:opacity-80 transition"><p class="uppercase font-bold opacity-75">Total</p><span id="statTotal" class="text-sm sm:text-lg font-bold">0</span></div>
+          <div class="p-1.5 rounded-lg border shadow-sm"><p class="uppercase font-bold opacity-75">Ad/Cri</p><span id="statTipos" class="text-[11px] sm:text-xs font-bold">0 / 0</span></div>
+          <div onclick="filtrarStatusRsvp('confirmado')" class="p-1.5 rounded-lg border border-emerald-500/40 bg-emerald-500/10 shadow-sm cursor-pointer hover:opacity-80 transition"><p class="text-emerald-600 dark:text-emerald-400 uppercase font-bold">Confirmados</p><span id="statConfirmados" class="text-sm sm:text-lg font-bold text-emerald-600 dark:text-emerald-400">0</span></div>
+          <div onclick="filtrarStatusRsvp('nao')" class="p-1.5 rounded-lg border border-rose-500/40 bg-rose-500/10 shadow-sm cursor-pointer hover:opacity-80 transition"><p class="text-rose-600 dark:text-rose-400 uppercase font-bold">Não Irão</p><span id="statAusentes" class="text-sm sm:text-lg font-bold text-rose-600 dark:text-rose-400">0</span></div>
+          <div onclick="filtrarStatusRsvp('pendente')" class="p-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 shadow-sm cursor-pointer hover:opacity-80 transition"><p class="text-amber-600 dark:text-amber-400 uppercase font-bold">Pendente</p><span id="statPendentes" class="text-sm sm:text-lg font-bold text-amber-600 dark:text-amber-400">0</span></div>
+          <div class="p-1.5 rounded-lg border shadow-sm"><p class="uppercase font-bold opacity-75">Faltam</p><span id="statFaltam" class="text-sm sm:text-lg font-bold">0</span></div>
         </div>
 
-        <div class="p-3 bg-stone-50/50 border-b border-stone-200 space-y-2">
+        <div class="p-3 border-b space-y-2">
           <div class="flex flex-col sm:flex-row gap-2 items-center justify-between">
-            <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar convidado..." class="w-full sm:w-1/2 p-2 border rounded-lg font-medium focus:outline-none bg-white text-stone-900 text-xs">
-            <button onclick="carregarAdminLista()" class="w-full sm:w-auto bg-amber-100 text-amber-900 px-3 py-2 rounded-lg font-bold hover:bg-amber-200 transition text-xs">🔄 Atualizar Lista</button>
+            <input type="text" id="inputPesquisaAdmin" oninput="filtrarETabelaAdmin()" placeholder="🔍 Pesquisar convidado..." class="w-full sm:w-1/2 p-2 border rounded-lg font-medium focus:outline-none text-xs">
+            <div class="flex gap-2 w-full sm:w-auto">
+              <button onclick="toggleFormNovoConvidado()" class="flex-1 sm:flex-none btn-casar px-3 py-2 rounded-lg font-bold text-xs">➕ Novo Convidado</button>
+              <button onclick="carregarAdminLista()" class="bg-stone-300 dark:bg-stone-700 px-3 py-2 rounded-lg font-bold hover:opacity-80 transition text-xs">🔄 Atualizar</button>
+            </div>
           </div>
 
-          <div class="pt-2 border-t border-stone-200">
-            <h3 class="font-bold mb-1 uppercase tracking-wider text-[10px] text-stone-900">➕ Cadastrar Convidado</h3>
+          <!-- FORMULÁRIO COMPACTO SANFONA -->
+          <div id="boxFormAdicionarConvidado" class="hidden pt-2 border-t space-y-2">
+            <h3 class="font-bold uppercase tracking-wider text-[10px]">➕ Cadastrar Novo Convidado</h3>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-1.5">
-              <input type="text" id="addResp" placeholder="Responsável *" class="p-1.5 border rounded font-medium bg-white text-stone-900 text-xs">
-              <input type="text" id="addNome" placeholder="Nome *" class="p-1.5 border rounded font-medium bg-white text-stone-900 text-xs">
-              <select id="addTipo" class="p-1.5 border rounded font-medium bg-white text-stone-900 text-xs"><option value="Adulto">Adulto</option><option value="Criança">Criança</option></select>
-              <input type="text" id="addContato" placeholder="Telefone" class="p-1.5 border rounded font-medium bg-white text-stone-900 text-xs">
+              <input type="text" id="addResp" placeholder="Responsável *" class="p-1.5 border rounded font-medium text-xs">
+              <input type="text" id="addNome" placeholder="Nome *" class="p-1.5 border rounded font-medium text-xs">
+              <select id="addTipo" class="p-1.5 border rounded font-medium text-xs"><option value="Adulto">Adulto</option><option value="Criança">Criança</option></select>
+              <input type="text" id="addContato" placeholder="Telefone" class="p-1.5 border rounded font-medium text-xs">
             </div>
-            <div class="mt-2 flex justify-end">
-              <button onclick="adminAdicionarNovo()" class="btn-casar py-1.5 px-4 rounded-lg font-semibold uppercase text-xs">Adicionar</button>
+            <div class="flex justify-end gap-2">
+              <button onclick="toggleFormNovoConvidado()" class="px-3 py-1.5 border rounded text-xs">Cancelar</button>
+              <button onclick="adminAdicionarNovo()" class="btn-casar py-1.5 px-4 rounded-lg font-semibold uppercase text-xs">Salvar Convidado</button>
             </div>
           </div>
         </div>
 
-        <!-- TABELA COM ROLAGEM HORIZONTAL PARA CELULAR -->
-        <div id="containerTabelaAdmin" class="p-2 sm:p-4 overflow-x-auto overflow-y-auto flex-1 bg-white">
+        <!-- TABELA COM ROLAGEM DEDICADA -->
+        <div id="containerTabelaAdmin" class="p-2 sm:p-4 overflow-x-auto overflow-y-auto flex-1">
           <table class="w-full text-left border-collapse min-w-[600px]">
             <thead>
-              <tr class="bg-stone-200 border-b font-bold uppercase text-[10px] tracking-wider text-stone-900 select-none">
+              <tr class="border-b font-bold uppercase text-[10px] tracking-wider select-none">
                 <th onclick="ordenarPor('responsavel')" class="p-2 sm:p-3 cursor-pointer">Responsável ⇳</th>
                 <th onclick="ordenarPor('nome')" class="p-2 sm:p-3 cursor-pointer">Nome ⇳</th>
                 <th class="p-2 sm:p-3">Tipo</th>
@@ -602,64 +647,64 @@
                 <th class="p-2 sm:p-3 text-center">Ações</th>
               </tr>
             </thead>
-            <tbody id="tabelaAdminBody" class="text-stone-900 text-xs"></tbody>
+            <tbody id="tabelaAdminBody" class="text-xs"></tbody>
           </table>
         </div>
       </div>
 
       <!-- ABA 2: FOTOS -->
-      <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-white text-stone-900">
-        <h3 class="font-serif-custom text-xl font-bold text-stone-900">📸 Gerenciar Fotos do Carrossel</h3>
-        <p class="text-stone-600">Você pode desativar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
+      <div id="abaFotosAdm" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+        <h3 class="font-serif-custom text-xl font-bold">📸 Gerenciar Fotos do Carrossel</h3>
+        <p class="opacity-75">Você pode desativar fotos do carrossel do site sem precisar apagá-las do seu Google Drive.</p>
         <div id="containerFotosAdmin" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
       </div>
 
       <!-- ABA 3: RECADOS -->
-      <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-white text-stone-900">
-        <h3 class="font-serif-custom text-xl font-bold text-stone-900">💌 Gerenciar Recados</h3>
+      <div id="abaRecadosAdm" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+        <h3 class="font-serif-custom text-xl font-bold">💌 Gerenciar Recados</h3>
         <div id="containerRecadosAdmin" class="space-y-2"></div>
       </div>
 
       <!-- ABA 4: MÚSICAS YOUTUBE -->
-      <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-white text-stone-900">
-        <div class="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-3">
-          <h3 class="font-serif-custom text-xl font-bold text-stone-900">🎵 Adicionar Música do YouTube</h3>
-          <p class="text-stone-600 text-xs">Cole o link do vídeo do YouTube (Ex: https://www.youtube.com/watch?v=2Vv-BfVoq4g).</p>
+      <div id="abaConfig" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+        <div class="p-4 rounded-2xl border space-y-3">
+          <h3 class="font-serif-custom text-xl font-bold">🎵 Adicionar Música do YouTube</h3>
+          <p class="opacity-75 text-xs">Cole o link completo do vídeo do YouTube abaixo (Ex: https://www.youtube.com/watch?v=2Vv-BfVoq4g).</p>
           
           <div class="flex flex-col sm:flex-row gap-2">
-            <input type="text" id="inputPesquisarMusica" placeholder="Cole o link do YouTube aqui..." class="w-full p-2.5 border rounded-xl font-medium bg-white text-stone-900 text-xs">
-            <button onclick="pesquisarMusicaDeezer()" id="btnBuscarDeezer" class="btn-casar px-5 py-2.5 rounded-xl font-bold uppercase whitespace-nowrap text-xs">Adicionar Link</button>
+            <input type="text" id="inputPesquisarMusica" placeholder="Cole o link do YouTube aqui..." class="w-full p-2.5 border rounded-xl font-medium text-xs">
+            <button onclick="adicionarMusicaYouTubeLink()" id="btnBuscarDeezer" class="btn-casar px-5 py-2.5 rounded-xl font-bold uppercase whitespace-nowrap text-xs">Adicionar Link</button>
           </div>
 
           <div class="mt-4 border-t pt-3">
-            <h4 class="font-bold uppercase text-[10px] mb-2 text-stone-700">Playlist Salva (Toque para testar ou remova):</h4>
-            <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl bg-stone-100 text-stone-900"></div>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-80">Playlist Salva (Toque para testar ou remova):</h4>
+            <div id="containerPlaylistAdmin" class="space-y-2 max-h-60 overflow-y-auto p-2 border rounded-xl"></div>
           </div>
         </div>
       </div>
 
       <!-- ABA 5: ADMINS -->
-      <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-white text-stone-900">
-        <div class="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-3">
-          <h3 class="font-serif-custom text-xl font-bold text-stone-900">🔑 Gerenciar Administradores</h3>
+      <div id="abaAdmins" class="hidden flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+        <div class="p-4 rounded-2xl border space-y-3">
+          <h3 class="font-serif-custom text-xl font-bold">🔑 Gerenciar Administradores</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <input type="text" id="novoAdminUser" placeholder="Usuário *" class="p-2 border rounded-lg font-medium bg-white text-stone-900 text-xs">
+            <input type="text" id="novoAdminUser" placeholder="Usuário *" class="p-2 border rounded-lg font-medium text-xs">
             <div class="relative">
-              <input type="password" id="novoAdminSenha" placeholder="Senha *" class="w-full p-2 border rounded-lg font-medium pr-10 bg-white text-stone-900 text-xs">
-              <button type="button" onclick="alternarVerSenha('novoAdminSenha')" class="absolute right-2.5 top-2 text-base text-stone-900">👁️</button>
+              <input type="password" id="novoAdminSenha" placeholder="Senha *" class="w-full p-2 border rounded-lg font-medium pr-10 text-xs">
+              <button type="button" onclick="alternarVerSenha('novoAdminSenha')" class="absolute right-2.5 top-2 text-base opacity-70">👁️</button>
             </div>
             <button onclick="cadastrarNovoAdmin()" class="btn-casar py-2 px-4 rounded-lg font-bold uppercase text-xs">Cadastrar Admin</button>
           </div>
 
           <div class="mt-4">
-            <h4 class="font-bold uppercase text-[10px] mb-2 text-stone-700">Administradores Registrados:</h4>
+            <h4 class="font-bold uppercase text-[10px] mb-2 opacity-80">Administradores Registrados:</h4>
             <div id="listaAdminsContainer" class="space-y-2"></div>
           </div>
         </div>
       </div>
 
-      <div class="p-3 bg-stone-100 border-t border-stone-200 flex justify-between items-center text-stone-900">
-        <span class="font-medium text-[10px] text-stone-700">Logado: <strong id="lblAdminLogado" class="text-stone-900">adm</strong></span>
+      <div class="p-3 border-t flex justify-between items-center">
+        <span class="font-medium text-[10px] opacity-75">Logado: <strong id="lblAdminLogado">adm</strong></span>
         <button onclick="fecharModalAdmin()" class="bg-stone-700 text-white px-4 py-1.5 rounded-lg font-bold uppercase text-xs">Sair</button>
       </div>
 
@@ -687,11 +732,15 @@
     let playlistMusicas = [];
     let indiceMusicaAtual = 0;
     let volumeAtual = 80;
-    let dragSrcEl = null;
 
     let indexCarrosselTopo = 0;
     let indexCarrosselFotos = 0;
     let timerCarrossel = null;
+
+    function toggleFormNovoConvidado() {
+      const box = document.getElementById("boxFormAdicionarConvidado");
+      if (box) box.classList.toggle("hidden");
+    }
 
     function alterarTransparenciaFundo(valor) {
       document.documentElement.style.setProperty('--bg-transparency', valor);
@@ -818,26 +867,49 @@
       update();
     }
 
-    function pesquisarMusicaDeezer() {
+    // EXTRAÇÃO DE ID E NOME REAL DO VÍDEO DO YOUTUBE
+    function extrairIdYouTube(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : url;
+    }
+
+    async function obterTituloYouTube(id) {
+      try {
+        const res = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`);
+        if (res.ok) {
+          const data = await res.json();
+          return data.title;
+        }
+      } catch (e) {}
+      return "Música de Fundo";
+    }
+
+    async function adicionarMusicaYouTubeLink() {
       const input = document.getElementById("inputPesquisarMusica");
-      const termo = input.value.trim();
+      const url = input.value.trim();
       const btn = document.getElementById("btnBuscarDeezer");
 
-      if (!termo) return alert("Cole o link do vídeo do YouTube.");
+      if (!url) return alert("Cole o link do vídeo do YouTube.");
 
-      btn.innerText = "Salvando...";
+      const videoId = extrairIdYouTube(url);
+      btn.innerText = "Buscando Título...";
       btn.disabled = true;
 
-      executarJSONP({ action: "salvarMusica", videoId: termo, titulo: "" }, function(res) {
+      const tituloReal = await obterTituloYouTube(videoId);
+
+      btn.innerText = "Salvando...";
+
+      executarJSONP({ action: "salvarMusica", videoId: videoId, titulo: tituloReal }, function(res) {
         btn.innerText = "Adicionar Link";
         btn.disabled = false;
 
         if (res.sucesso) {
           input.value = "";
           carregarPlaylistPlanilha();
-          alert("✅ Música adicionada com sucesso!");
+          alert("✅ Música '" + tituloReal + "' adicionada!");
         } else {
-          alert("⚠️ Erro ao salvar a música. Verifique o link.");
+          alert("⚠️ Erro ao salvar a música.");
         }
       });
     }
@@ -911,7 +983,6 @@
     function onPlayerStateChange(event) {
       const display = document.getElementById("txtNomeMusica");
       
-      // Detecção básica de Ad / Comercial inserido pelo YouTube
       if (event.data === 108 || event.data === 109 || (playerYT && playerYT.getVideoData && playerYT.getVideoData().isAd)) {
         if (display) display.innerText = "📢 Propaganda do YouTube...";
       } else if (event.data === YT.PlayerState.PLAYING) {
@@ -929,7 +1000,7 @@
     function onPlayerError(event) {
       console.warn("Erro no áudio do YouTube:", event.data);
       const txt = document.getElementById("txtNomeMusica");
-      if (txt) txt.innerText = "⚠️ Pulando faixa indisponível...";
+      if (txt) txt.innerText = "⚠️ Pulando faixa...";
       setTimeout(() => { proximaMusicaPlaylist(); }, 1200);
     }
 
@@ -1023,21 +1094,21 @@
       const container = document.getElementById("containerPlaylistAdmin");
       if (!container) return;
       if (playlistMusicas.length === 0) {
-        container.innerHTML = `<p class="italic p-3 text-stone-600">Nenhuma música cadastrada.</p>`;
+        container.innerHTML = `<p class="italic p-3 opacity-70">Nenhuma música cadastrada.</p>`;
         return;
       }
       container.innerHTML = "";
       playlistMusicas.forEach((m, idx) => {
         const div = document.createElement("div");
-        div.className = "flex items-center justify-between p-2.5 bg-white text-stone-900 rounded-xl border shadow-xs hover:bg-stone-50 transition";
+        div.className = "flex items-center justify-between p-2.5 rounded-xl border shadow-xs hover:opacity-90 transition";
 
         div.innerHTML = `
           <div class="flex items-center gap-2 truncate max-w-[180px] sm:max-w-xs">
-            <span class="font-bold truncate text-stone-900">🎵 ${m.titulo || m.id}</span>
+            <span class="font-bold truncate">🎵 ${m.titulo || m.id}</span>
           </div>
           <div class="flex items-center gap-1.5">
             <button onclick="tocarMusicaIndex(${idx})" class="bg-amber-800 text-white px-2 py-1 rounded text-[10px] font-bold shadow hover:bg-amber-900">▶ Tocar</button>
-            <button onclick="removerMusicaPlanilha('${m.id}')" class="text-rose-700 font-bold text-[10px] hover:underline">Remover</button>
+            <button onclick="removerMusicaPlanilha('${m.id}')" class="text-rose-600 font-bold text-[10px] hover:underline">Remover</button>
           </div>
         `;
         container.appendChild(div);
@@ -1232,14 +1303,14 @@
       if (!container) return;
 
       if (fotosDriveCache.length === 0) {
-        container.innerHTML = `<p class="col-span-4 text-center italic p-4 text-stone-600">Nenhuma foto no Google Drive.</p>`;
+        container.innerHTML = `<p class="col-span-4 text-center italic p-4 opacity-70">Nenhuma foto no Google Drive.</p>`;
         return;
       }
 
       container.innerHTML = fotosDriveCache.map(url => {
         const desativada = fotosDesativadasSet.has(url);
         return `
-          <div class="bg-white p-2 rounded-xl border shadow-xs text-center space-y-2 text-stone-900">
+          <div class="p-2 rounded-xl border shadow-xs text-center space-y-2">
             <img src="${url}" class="w-full h-32 object-cover rounded-lg ${desativada ? 'opacity-30 grayscale' : ''}">
             <button onclick="alternarStatusFoto('${url}')" class="w-full py-1.5 rounded text-[10px] font-bold uppercase transition ${desativada ? 'bg-emerald-700 text-white' : 'bg-rose-700 text-white'}">
               ${desativada ? '✅ Ativar no Carrossel' : '🚫 Ocultar do Carrossel'}
@@ -1263,10 +1334,10 @@
         if (!container) return;
         if (res.sucesso && res.recados && res.recados.length > 0) {
           container.innerHTML = res.recados.map((r) => `
-            <div class="flex items-center justify-between p-3 bg-white border rounded-xl shadow-xs text-stone-900 ${r.ativo ? '' : 'opacity-40 bg-stone-100'}">
+            <div class="flex items-center justify-between p-3 border rounded-xl shadow-xs ${r.ativo ? '' : 'opacity-40'}">
               <div>
-                <p class="font-bold text-stone-900">${r.nome} ${r.ativo ? '<span class="text-[10px] text-emerald-600 ml-2">🟢 Exibindo</span>' : '<span class="text-[10px] text-rose-600 ml-2">🔴 Ocultado</span>'}</p>
-                <p class="italic text-stone-700">"${r.mensagem}"</p>
+                <p class="font-bold">${r.nome} ${r.ativo ? '<span class="text-[10px] text-emerald-600 ml-2">🟢 Exibindo</span>' : '<span class="text-[10px] text-rose-600 ml-2">🔴 Ocultado</span>'}</p>
+                <p class="italic">"${r.mensagem}"</p>
               </div>
               <button onclick="alternarStatusRecado(${r.linha})" class="${r.ativo ? 'bg-rose-700 hover:bg-rose-800' : 'bg-emerald-700 hover:bg-emerald-800'} text-white px-3 py-1 rounded text-xs font-bold transition">
                 ${r.ativo ? '🚫 Ocultar' : '✅ Exibir'}
@@ -1274,7 +1345,7 @@
             </div>
           `).join('');
         } else {
-          container.innerHTML = `<p class="italic p-3 text-stone-600">Nenhum recado cadastrado.</p>`;
+          container.innerHTML = `<p class="italic p-3 opacity-70">Nenhum recado cadastrado.</p>`;
         }
       });
     }
@@ -1295,10 +1366,10 @@
           container.innerHTML = res.admins.map(adm => {
             const ehRoot = (adm.usuario.toLowerCase() === "adm");
             return `
-              <div class="flex items-center justify-between p-2.5 bg-white border rounded-xl text-stone-900">
-                <span class="font-bold text-stone-900">👤 ${adm.usuario} ${ehRoot ? '<span class="text-[9px] bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded font-bold ml-1">Principal</span>' : ''}</span>
+              <div class="flex items-center justify-between p-2.5 border rounded-xl">
+                <span class="font-bold">👤 ${adm.usuario} ${ehRoot ? '<span class="text-[9px] bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded font-bold ml-1">Principal</span>' : ''}</span>
                 <div class="flex gap-2">
-                  <input type="password" id="pass_${adm.usuario}" placeholder="Nova senha" class="p-1 border rounded text-xs w-28 bg-white text-stone-900" ${ehRoot && adminLogadoUser.toLowerCase() !== "adm" ? 'disabled' : ''}>
+                  <input type="password" id="pass_${adm.usuario}" placeholder="Nova senha" class="p-1 border rounded text-xs w-28" ${ehRoot && adminLogadoUser.toLowerCase() !== "adm" ? 'disabled' : ''}>
                   <button onclick="adminTrocarSenha('${adm.usuario}')" class="bg-stone-700 text-white px-3 py-1 rounded text-xs font-bold hover:bg-stone-800" ${ehRoot && adminLogadoUser.toLowerCase() !== "adm" ? 'disabled' : ''}>Alterar Senha</button>
                 </div>
               </div>
@@ -1398,29 +1469,40 @@
     function renderizarTabelaAdmin(lista) {
       const tbody = document.getElementById("tabelaAdminBody");
       tbody.innerHTML = lista.map(c => `
-        <tr class="border-b ${c.ativo ? '' : 'opacity-40 bg-stone-100'}" id="linha_${c.linha}">
-          <td class="p-2 sm:p-3 font-bold text-stone-900">${c.responsavel}</td>
-          <td class="p-2 sm:p-3 font-medium text-stone-900">${c.nome}</td>
-          <td class="p-2 sm:p-3 font-medium text-stone-900">${c.tipo}</td>
-          <td class="p-2 sm:p-3 font-medium text-stone-900">${c.contato || '-'}</td>
+        <tr class="border-b ${c.ativo ? '' : 'opacity-40'}" id="linha_${c.linha}">
+          <td class="p-2 sm:p-3 font-bold">${c.responsavel}</td>
+          <td class="p-2 sm:p-3 font-medium">${c.nome}</td>
+          <td class="p-2 sm:p-3 font-medium">${c.tipo}</td>
+          <td class="p-2 sm:p-3 font-medium">${c.contato || '-'}</td>
           <td class="p-2 sm:p-3">${(c.rsvpStatus||'').toLowerCase().includes('sim') ? '✅ Confirmado' : '⏳ Pendente'}</td>
-          <td class="p-2 sm:p-3 font-bold text-stone-900">${c.ativo ? '🟢 Ativo' : '🔴 Desativado'}</td>
+          <td class="p-2 sm:p-3 font-bold">${c.ativo ? '🟢 Ativo' : '🔴 Desativado'}</td>
           <td class="p-2 sm:p-3 text-center space-x-2">
             <button onclick="adminRemover(${c.linha})" class="text-rose-600 font-bold hover:underline">Remover</button>
           </td>
         </tr>
-      `).join('') || `<tr><td colspan="7" class="p-4 text-center italic text-stone-600">Nenhum registro localizado.</td></tr>`;
+      `).join('') || `<tr><td colspan="7" class="p-4 text-center italic opacity-70">Nenhum registro localizado.</td></tr>`;
     }
 
     function adminAdicionarNovo() {
+      const resp = document.getElementById("addResp").value;
+      const nome = document.getElementById("addNome").value;
+
+      if (!resp || !nome) return alert("Preencha o Responsável e o Nome.");
+
       executarJSONP({
         action: "adminSalvar",
         linha: 0,
-        responsavel: document.getElementById("addResp").value,
-        nome: document.getElementById("addNome").value,
+        responsavel: resp,
+        nome: nome,
         tipo: document.getElementById("addTipo").value,
         contato: document.getElementById("addContato").value
-      }, function() { carregarAdminLista(); });
+      }, function() { 
+        toggleFormNovoConvidado();
+        document.getElementById("addResp").value = "";
+        document.getElementById("addNome").value = "";
+        document.getElementById("addContato").value = "";
+        carregarAdminLista(); 
+      });
     }
 
     function adminRemover(linha) {
