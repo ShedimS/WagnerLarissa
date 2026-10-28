@@ -719,6 +719,8 @@
     let adminAutenticado = false;
 
     let convidadosCache = [];
+    let conviteAtual = null;
+    let adminListaRefreshTimer = null;
     let fotosDriveCache = [];
     let fotosDesativadasSet = new Set(JSON.parse(localStorage.getItem("casamento_fotos_desativadas") || "[]"));
 
@@ -1194,6 +1196,15 @@
       }
       document.getElementById("modalAdmin").classList.remove("hidden");
       carregarAdminLista();
+      if (adminListaRefreshTimer) clearInterval(adminListaRefreshTimer);
+      adminListaRefreshTimer = setInterval(() => {
+        if (!document.getElementById("modalAdmin") || document.getElementById("modalAdmin").classList.contains("hidden")) {
+          clearInterval(adminListaRefreshTimer);
+          adminListaRefreshTimer = null;
+          return;
+        }
+        carregarAdminLista();
+      }, 15000);
     }
 
     function fecharModalLogin() {
@@ -1231,6 +1242,10 @@
 
     function fecharModalAdmin() {
       document.getElementById("modalAdmin").classList.add("hidden");
+      if (adminListaRefreshTimer) {
+        clearInterval(adminListaRefreshTimer);
+        adminListaRefreshTimer = null;
+      }
     }
 
     function alternarAbaAdmin(aba) {
@@ -1546,6 +1561,11 @@
 
       executarJSONP({ action: "buscarConvite", termo: termo }, function(res) {
         if (res.sucesso) {
+          conviteAtual = {
+            responsavel: res.responsavel,
+            telefone: res.telefone || ""
+          };
+
           document.getElementById("stepBusca").classList.add("hidden");
           document.getElementById("stepSelecao").classList.remove("hidden");
           document.getElementById("txtResponsavel").innerText = "Família / Convite: " + res.responsavel;
@@ -1571,10 +1591,33 @@
 
     function salvarConfirmacoes(e) {
       e.preventDefault();
-      alert("Presenças confirmadas com sucesso! Obrigado.");
-      document.getElementById("stepSelecao").classList.add("hidden");
-      document.getElementById("stepBusca").classList.remove("hidden");
-      document.getElementById("inputBusca").value = "";
+
+      if (!conviteAtual) {
+        return alert("Busque um convite antes de confirmar.");
+      }
+
+      const payload = Array.from(document.querySelectorAll("#containerMembros select")).map(select => ({
+        nome: select.dataset.nome,
+        status: select.value
+      }));
+
+      executarJSONP({
+        action: "confirmarPresenca",
+        responsavel: conviteAtual.responsavel,
+        telefone: conviteAtual.telefone,
+        payload: JSON.stringify(payload)
+      }, function(res) {
+        if (res && res.sucesso) {
+          alert("Presenças confirmadas com sucesso! Obrigado.");
+          document.getElementById("stepSelecao").classList.add("hidden");
+          document.getElementById("stepBusca").classList.remove("hidden");
+          document.getElementById("inputBusca").value = "";
+          conviteAtual = null;
+          document.getElementById("containerMembros").innerHTML = "";
+        } else {
+          alert((res && res.mensagem) || "Não foi possível gravar a confirmação.");
+        }
+      });
     }
 
     function executarJSONP(params, callbackSuccess) {
